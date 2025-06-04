@@ -1,0 +1,8008 @@
+{
+  "AMAZONAS": {
+    "CHACHAPOYAS": [
+      {
+        "NOMBDIST": "CHACHAPOYAS",
+        "IDDIST": 10101.0
+      },
+      {
+        "NOMBDIST": "ASUNCION",
+        "IDDIST": 10102.0
+      },
+      {
+        "NOMBDIST": "BALSAS",
+        "IDDIST": 10103.0
+      },
+      {
+        "NOMBDIST": "CHETO",
+        "IDDIST": 10104.0
+      },
+      {
+        "NOMBDIST": "CHILIQUIN",
+        "IDDIST": 10105.0
+      },
+      {
+        "NOMBDIST": "CHUQUIBAMBA",
+        "IDDIST": 10106.0
+      },
+      {
+        "NOMBDIST": "GRANADA",
+        "IDDIST": 10107.0
+      },
+      {
+        "NOMBDIST": "HUANCAS",
+        "IDDIST": 10108.0
+      },
+      {
+        "NOMBDIST": "LA JALCA",
+        "IDDIST": 10109.0
+      },
+      {
+        "NOMBDIST": "LEIMEBAMBA",
+        "IDDIST": 10110.0
+      },
+      {
+        "NOMBDIST": "LEVANTO",
+        "IDDIST": 10111.0
+      },
+      {
+        "NOMBDIST": "MAGDALENA",
+        "IDDIST": 10112.0
+      },
+      {
+        "NOMBDIST": "MARISCAL CASTILLA",
+        "IDDIST": 10113.0
+      },
+      {
+        "NOMBDIST": "MOLINOPAMPA",
+        "IDDIST": 10114.0
+      },
+      {
+        "NOMBDIST": "MONTEVIDEO",
+        "IDDIST": 10115.0
+      },
+      {
+        "NOMBDIST": "OLLEROS",
+        "IDDIST": 10116.0
+      },
+      {
+        "NOMBDIST": "QUINJALCA",
+        "IDDIST": 10117.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE DAGUAS",
+        "IDDIST": 10118.0
+      },
+      {
+        "NOMBDIST": "SAN ISIDRO DE MAINO",
+        "IDDIST": 10119.0
+      },
+      {
+        "NOMBDIST": "SOLOCO",
+        "IDDIST": 10120.0
+      },
+      {
+        "NOMBDIST": "SONCHE",
+        "IDDIST": 10121.0
+      }
+    ],
+    "BAGUA": [
+      {
+        "NOMBDIST": "BAGUA",
+        "IDDIST": 10201.0
+      },
+      {
+        "NOMBDIST": "ARAMANGO",
+        "IDDIST": 10202.0
+      },
+      {
+        "NOMBDIST": "COPALLIN",
+        "IDDIST": 10203.0
+      },
+      {
+        "NOMBDIST": "EL PARCO",
+        "IDDIST": 10204.0
+      },
+      {
+        "NOMBDIST": "IMAZA",
+        "IDDIST": 10205.0
+      },
+      {
+        "NOMBDIST": "LA PECA",
+        "IDDIST": 10206.0
+      }
+    ],
+    "BONGARA": [
+      {
+        "NOMBDIST": "JUMBILLA",
+        "IDDIST": 10301.0
+      },
+      {
+        "NOMBDIST": "CHISQUILLA",
+        "IDDIST": 10302.0
+      },
+      {
+        "NOMBDIST": "CHURUJA",
+        "IDDIST": 10303.0
+      },
+      {
+        "NOMBDIST": "COROSHA",
+        "IDDIST": 10304.0
+      },
+      {
+        "NOMBDIST": "CUISPES",
+        "IDDIST": 10305.0
+      },
+      {
+        "NOMBDIST": "FLORIDA",
+        "IDDIST": 10306.0
+      },
+      {
+        "NOMBDIST": "JAZAN",
+        "IDDIST": 10307.0
+      },
+      {
+        "NOMBDIST": "RECTA",
+        "IDDIST": 10308.0
+      },
+      {
+        "NOMBDIST": "SAN CARLOS",
+        "IDDIST": 10309.0
+      },
+      {
+        "NOMBDIST": "SHIPASBAMBA",
+        "IDDIST": 10310.0
+      },
+      {
+        "NOMBDIST": "VALERA",
+        "IDDIST": 10311.0
+      },
+      {
+        "NOMBDIST": "YAMBRASBAMBA",
+        "IDDIST": 10312.0
+      }
+    ],
+    "CONDORCANQUI": [
+      {
+        "NOMBDIST": "NIEVA",
+        "IDDIST": 10401.0
+      },
+      {
+        "NOMBDIST": "EL CENEPA",
+        "IDDIST": 10402.0
+      },
+      {
+        "NOMBDIST": "RIO SANTIAGO",
+        "IDDIST": 10403.0
+      }
+    ],
+    "LUYA": [
+      {
+        "NOMBDIST": "LAMUD",
+        "IDDIST": 10501.0
+      },
+      {
+        "NOMBDIST": "CAMPORREDONDO",
+        "IDDIST": 10502.0
+      },
+      {
+        "NOMBDIST": "COCABAMBA",
+        "IDDIST": 10503.0
+      },
+      {
+        "NOMBDIST": "COLCAMAR",
+        "IDDIST": 10504.0
+      },
+      {
+        "NOMBDIST": "CONILA",
+        "IDDIST": 10505.0
+      },
+      {
+        "NOMBDIST": "INGUILPATA",
+        "IDDIST": 10506.0
+      },
+      {
+        "NOMBDIST": "LONGUITA",
+        "IDDIST": 10507.0
+      },
+      {
+        "NOMBDIST": "LONYA CHICO",
+        "IDDIST": 10508.0
+      },
+      {
+        "NOMBDIST": "LUYA",
+        "IDDIST": 10509.0
+      },
+      {
+        "NOMBDIST": "LUYA VIEJO",
+        "IDDIST": 10510.0
+      },
+      {
+        "NOMBDIST": "MARIA",
+        "IDDIST": 10511.0
+      },
+      {
+        "NOMBDIST": "OCALLI",
+        "IDDIST": 10512.0
+      },
+      {
+        "NOMBDIST": "OCUMAL",
+        "IDDIST": 10513.0
+      },
+      {
+        "NOMBDIST": "PISUQUIA",
+        "IDDIST": 10514.0
+      },
+      {
+        "NOMBDIST": "PROVIDENCIA",
+        "IDDIST": 10515.0
+      },
+      {
+        "NOMBDIST": "SAN CRISTOBAL",
+        "IDDIST": 10516.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DEL YESO",
+        "IDDIST": 10517.0
+      },
+      {
+        "NOMBDIST": "SAN JERONIMO",
+        "IDDIST": 10518.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE LOPECANCHA",
+        "IDDIST": 10519.0
+      },
+      {
+        "NOMBDIST": "SANTA CATALINA",
+        "IDDIST": 10520.0
+      },
+      {
+        "NOMBDIST": "SANTO TOMAS",
+        "IDDIST": 10521.0
+      },
+      {
+        "NOMBDIST": "TINGO",
+        "IDDIST": 10522.0
+      },
+      {
+        "NOMBDIST": "TRITA",
+        "IDDIST": 10523.0
+      }
+    ],
+    "RODRIGUEZ DE MENDOZA": [
+      {
+        "NOMBDIST": "SAN NICOLAS",
+        "IDDIST": 10601.0
+      },
+      {
+        "NOMBDIST": "CHIRIMOTO",
+        "IDDIST": 10602.0
+      },
+      {
+        "NOMBDIST": "COCHAMAL",
+        "IDDIST": 10603.0
+      },
+      {
+        "NOMBDIST": "HUAMBO",
+        "IDDIST": 10604.0
+      },
+      {
+        "NOMBDIST": "LIMABAMBA",
+        "IDDIST": 10605.0
+      },
+      {
+        "NOMBDIST": "LONGAR",
+        "IDDIST": 10606.0
+      },
+      {
+        "NOMBDIST": "MARISCAL BENAVIDES",
+        "IDDIST": 10607.0
+      },
+      {
+        "NOMBDIST": "MILPUC",
+        "IDDIST": 10608.0
+      },
+      {
+        "NOMBDIST": "OMIA",
+        "IDDIST": 10609.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 10610.0
+      },
+      {
+        "NOMBDIST": "TOTORA",
+        "IDDIST": 10611.0
+      },
+      {
+        "NOMBDIST": "VISTA ALEGRE",
+        "IDDIST": 10612.0
+      }
+    ],
+    "UTCUBAMBA": [
+      {
+        "NOMBDIST": "BAGUA GRANDE",
+        "IDDIST": 10701.0
+      },
+      {
+        "NOMBDIST": "CAJARURO",
+        "IDDIST": 10702.0
+      },
+      {
+        "NOMBDIST": "CUMBA",
+        "IDDIST": 10703.0
+      },
+      {
+        "NOMBDIST": "EL MILAGRO",
+        "IDDIST": 10704.0
+      },
+      {
+        "NOMBDIST": "JAMALCA",
+        "IDDIST": 10705.0
+      },
+      {
+        "NOMBDIST": "LONYA GRANDE",
+        "IDDIST": 10706.0
+      },
+      {
+        "NOMBDIST": "YAMON",
+        "IDDIST": 10707.0
+      }
+    ]
+  },
+  "ANCASH": {
+    "HUARAZ": [
+      {
+        "NOMBDIST": "HUARAZ",
+        "IDDIST": 20101.0
+      },
+      {
+        "NOMBDIST": "COCHABAMBA",
+        "IDDIST": 20102.0
+      },
+      {
+        "NOMBDIST": "COLCABAMBA",
+        "IDDIST": 20103.0
+      },
+      {
+        "NOMBDIST": "HUANCHAY",
+        "IDDIST": 20104.0
+      },
+      {
+        "NOMBDIST": "INDEPENDENCIA",
+        "IDDIST": 20105.0
+      },
+      {
+        "NOMBDIST": "JANGAS",
+        "IDDIST": 20106.0
+      },
+      {
+        "NOMBDIST": "LA LIBERTAD",
+        "IDDIST": 20107.0
+      },
+      {
+        "NOMBDIST": "OLLEROS",
+        "IDDIST": 20108.0
+      },
+      {
+        "NOMBDIST": "PAMPAS GRANDE",
+        "IDDIST": 20109.0
+      },
+      {
+        "NOMBDIST": "PARIACOTO",
+        "IDDIST": 20110.0
+      },
+      {
+        "NOMBDIST": "PIRA",
+        "IDDIST": 20111.0
+      },
+      {
+        "NOMBDIST": "TARICA",
+        "IDDIST": 20112.0
+      }
+    ],
+    "AIJA": [
+      {
+        "NOMBDIST": "AIJA",
+        "IDDIST": 20201.0
+      },
+      {
+        "NOMBDIST": "CORIS",
+        "IDDIST": 20202.0
+      },
+      {
+        "NOMBDIST": "HUACLLAN",
+        "IDDIST": 20203.0
+      },
+      {
+        "NOMBDIST": "LA MERCED",
+        "IDDIST": 20204.0
+      },
+      {
+        "NOMBDIST": "SUCCHA",
+        "IDDIST": 20205.0
+      }
+    ],
+    "ANTONIO RAYMONDI": [
+      {
+        "NOMBDIST": "LLAMELLIN",
+        "IDDIST": 20301.0
+      },
+      {
+        "NOMBDIST": "ACZO",
+        "IDDIST": 20302.0
+      },
+      {
+        "NOMBDIST": "CHACCHO",
+        "IDDIST": 20303.0
+      },
+      {
+        "NOMBDIST": "CHINGAS",
+        "IDDIST": 20304.0
+      },
+      {
+        "NOMBDIST": "MIRGAS",
+        "IDDIST": 20305.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE RONTOY",
+        "IDDIST": 20306.0
+      }
+    ],
+    "ASUNCION": [
+      {
+        "NOMBDIST": "CHACAS",
+        "IDDIST": 20401.0
+      },
+      {
+        "NOMBDIST": "ACOCHACA",
+        "IDDIST": 20402.0
+      }
+    ],
+    "BOLOGNESI": [
+      {
+        "NOMBDIST": "CHIQUIAN",
+        "IDDIST": 20501.0
+      },
+      {
+        "NOMBDIST": "ABELARDO PARDO LEZAMETA",
+        "IDDIST": 20502.0
+      },
+      {
+        "NOMBDIST": "ANTONIO RAYMONDI",
+        "IDDIST": 20503.0
+      },
+      {
+        "NOMBDIST": "AQUIA",
+        "IDDIST": 20504.0
+      },
+      {
+        "NOMBDIST": "CAJACAY",
+        "IDDIST": 20505.0
+      },
+      {
+        "NOMBDIST": "CANIS",
+        "IDDIST": 20506.0
+      },
+      {
+        "NOMBDIST": "COLQUIOC",
+        "IDDIST": 20507.0
+      },
+      {
+        "NOMBDIST": "HUALLANCA",
+        "IDDIST": 20508.0
+      },
+      {
+        "NOMBDIST": "HUASTA",
+        "IDDIST": 20509.0
+      },
+      {
+        "NOMBDIST": "HUAYLLACAYAN",
+        "IDDIST": 20510.0
+      },
+      {
+        "NOMBDIST": "LA PRIMAVERA",
+        "IDDIST": 20511.0
+      },
+      {
+        "NOMBDIST": "MANGAS",
+        "IDDIST": 20512.0
+      },
+      {
+        "NOMBDIST": "PACLLON",
+        "IDDIST": 20513.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE CORPANQUI",
+        "IDDIST": 20514.0
+      },
+      {
+        "NOMBDIST": "TICLLOS",
+        "IDDIST": 20515.0
+      }
+    ],
+    "CARHUAZ": [
+      {
+        "NOMBDIST": "CARHUAZ",
+        "IDDIST": 20601.0
+      },
+      {
+        "NOMBDIST": "ACOPAMPA",
+        "IDDIST": 20602.0
+      },
+      {
+        "NOMBDIST": "AMASHCA",
+        "IDDIST": 20603.0
+      },
+      {
+        "NOMBDIST": "ANTA",
+        "IDDIST": 20604.0
+      },
+      {
+        "NOMBDIST": "ATAQUERO",
+        "IDDIST": 20605.0
+      },
+      {
+        "NOMBDIST": "MARCARA",
+        "IDDIST": 20606.0
+      },
+      {
+        "NOMBDIST": "PARIAHUANCA",
+        "IDDIST": 20607.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE ACO",
+        "IDDIST": 20608.0
+      },
+      {
+        "NOMBDIST": "SHILLA",
+        "IDDIST": 20609.0
+      },
+      {
+        "NOMBDIST": "TINCO",
+        "IDDIST": 20610.0
+      },
+      {
+        "NOMBDIST": "YUNGAR",
+        "IDDIST": 20611.0
+      }
+    ],
+    "CARLOS FERMIN FITZCARRALD": [
+      {
+        "NOMBDIST": "SAN LUIS",
+        "IDDIST": 20701.0
+      },
+      {
+        "NOMBDIST": "SAN NICOLAS",
+        "IDDIST": 20702.0
+      },
+      {
+        "NOMBDIST": "YAUYA",
+        "IDDIST": 20703.0
+      }
+    ],
+    "CASMA": [
+      {
+        "NOMBDIST": "CASMA",
+        "IDDIST": 20801.0
+      },
+      {
+        "NOMBDIST": "BUENA VISTA ALTA",
+        "IDDIST": 20802.0
+      },
+      {
+        "NOMBDIST": "COMANDANTE NOEL",
+        "IDDIST": 20803.0
+      },
+      {
+        "NOMBDIST": "YAUTAN",
+        "IDDIST": 20804.0
+      }
+    ],
+    "CORONGO": [
+      {
+        "NOMBDIST": "CORONGO",
+        "IDDIST": 20901.0
+      },
+      {
+        "NOMBDIST": "ACO",
+        "IDDIST": 20902.0
+      },
+      {
+        "NOMBDIST": "BAMBAS",
+        "IDDIST": 20903.0
+      },
+      {
+        "NOMBDIST": "CUSCA",
+        "IDDIST": 20904.0
+      },
+      {
+        "NOMBDIST": "LA PAMPA",
+        "IDDIST": 20905.0
+      },
+      {
+        "NOMBDIST": "YANAC",
+        "IDDIST": 20906.0
+      },
+      {
+        "NOMBDIST": "YUPAN",
+        "IDDIST": 20907.0
+      }
+    ],
+    "HUARI": [
+      {
+        "NOMBDIST": "HUARI",
+        "IDDIST": 21001.0
+      },
+      {
+        "NOMBDIST": "ANRA",
+        "IDDIST": 21002.0
+      },
+      {
+        "NOMBDIST": "CAJAY",
+        "IDDIST": 21003.0
+      },
+      {
+        "NOMBDIST": "CHAVIN DE HUANTAR",
+        "IDDIST": 21004.0
+      },
+      {
+        "NOMBDIST": "HUACACHI",
+        "IDDIST": 21005.0
+      },
+      {
+        "NOMBDIST": "HUACCHIS",
+        "IDDIST": 21006.0
+      },
+      {
+        "NOMBDIST": "HUACHIS",
+        "IDDIST": 21007.0
+      },
+      {
+        "NOMBDIST": "HUANTAR",
+        "IDDIST": 21008.0
+      },
+      {
+        "NOMBDIST": "MASIN",
+        "IDDIST": 21009.0
+      },
+      {
+        "NOMBDIST": "PAUCAS",
+        "IDDIST": 21010.0
+      },
+      {
+        "NOMBDIST": "PONTO",
+        "IDDIST": 21011.0
+      },
+      {
+        "NOMBDIST": "RAHUAPAMPA",
+        "IDDIST": 21012.0
+      },
+      {
+        "NOMBDIST": "RAPAYAN",
+        "IDDIST": 21013.0
+      },
+      {
+        "NOMBDIST": "SAN MARCOS",
+        "IDDIST": 21014.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CHANA",
+        "IDDIST": 21015.0
+      },
+      {
+        "NOMBDIST": "UCO",
+        "IDDIST": 21016.0
+      }
+    ],
+    "HUARMEY": [
+      {
+        "NOMBDIST": "HUARMEY",
+        "IDDIST": 21101.0
+      },
+      {
+        "NOMBDIST": "COCHAPETI",
+        "IDDIST": 21102.0
+      },
+      {
+        "NOMBDIST": "CULEBRAS",
+        "IDDIST": 21103.0
+      },
+      {
+        "NOMBDIST": "HUAYAN",
+        "IDDIST": 21104.0
+      },
+      {
+        "NOMBDIST": "MALVAS",
+        "IDDIST": 21105.0
+      }
+    ],
+    "HUAYLAS": [
+      {
+        "NOMBDIST": "CARAZ",
+        "IDDIST": 21201.0
+      },
+      {
+        "NOMBDIST": "HUALLANCA",
+        "IDDIST": 21202.0
+      },
+      {
+        "NOMBDIST": "HUATA",
+        "IDDIST": 21203.0
+      },
+      {
+        "NOMBDIST": "HUAYLAS",
+        "IDDIST": 21204.0
+      },
+      {
+        "NOMBDIST": "MATO",
+        "IDDIST": 21205.0
+      },
+      {
+        "NOMBDIST": "PAMPAROMAS",
+        "IDDIST": 21206.0
+      },
+      {
+        "NOMBDIST": "PUEBLO LIBRE",
+        "IDDIST": 21207.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ",
+        "IDDIST": 21208.0
+      },
+      {
+        "NOMBDIST": "SANTO TORIBIO",
+        "IDDIST": 21209.0
+      },
+      {
+        "NOMBDIST": "YURACMARCA",
+        "IDDIST": 21210.0
+      }
+    ],
+    "MARISCAL LUZURIAGA": [
+      {
+        "NOMBDIST": "PISCOBAMBA",
+        "IDDIST": 21301.0
+      },
+      {
+        "NOMBDIST": "CASCA",
+        "IDDIST": 21302.0
+      },
+      {
+        "NOMBDIST": "ELEAZAR GUZMAN BARRON",
+        "IDDIST": 21303.0
+      },
+      {
+        "NOMBDIST": "FIDEL OLIVAS ESCUDERO",
+        "IDDIST": 21304.0
+      },
+      {
+        "NOMBDIST": "LLAMA",
+        "IDDIST": 21305.0
+      },
+      {
+        "NOMBDIST": "LLUMPA",
+        "IDDIST": 21306.0
+      },
+      {
+        "NOMBDIST": "LUCMA",
+        "IDDIST": 21307.0
+      },
+      {
+        "NOMBDIST": "MUSGA",
+        "IDDIST": 21308.0
+      }
+    ],
+    "OCROS": [
+      {
+        "NOMBDIST": "OCROS",
+        "IDDIST": 21401.0
+      },
+      {
+        "NOMBDIST": "ACAS",
+        "IDDIST": 21402.0
+      },
+      {
+        "NOMBDIST": "CAJAMARQUILLA",
+        "IDDIST": 21403.0
+      },
+      {
+        "NOMBDIST": "CARHUAPAMPA",
+        "IDDIST": 21404.0
+      },
+      {
+        "NOMBDIST": "COCHAS",
+        "IDDIST": 21405.0
+      },
+      {
+        "NOMBDIST": "CONGAS",
+        "IDDIST": 21406.0
+      },
+      {
+        "NOMBDIST": "LLIPA",
+        "IDDIST": 21407.0
+      },
+      {
+        "NOMBDIST": "SAN CRISTOBAL DE RAJAN",
+        "IDDIST": 21408.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO",
+        "IDDIST": 21409.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE CHILCAS",
+        "IDDIST": 21410.0
+      }
+    ],
+    "PALLASCA": [
+      {
+        "NOMBDIST": "CABANA",
+        "IDDIST": 21501.0
+      },
+      {
+        "NOMBDIST": "BOLOGNESI",
+        "IDDIST": 21502.0
+      },
+      {
+        "NOMBDIST": "CONCHUCOS",
+        "IDDIST": 21503.0
+      },
+      {
+        "NOMBDIST": "HUACASCHUQUE",
+        "IDDIST": 21504.0
+      },
+      {
+        "NOMBDIST": "HUANDOVAL",
+        "IDDIST": 21505.0
+      },
+      {
+        "NOMBDIST": "LACABAMBA",
+        "IDDIST": 21506.0
+      },
+      {
+        "NOMBDIST": "LLAPO",
+        "IDDIST": 21507.0
+      },
+      {
+        "NOMBDIST": "PALLASCA",
+        "IDDIST": 21508.0
+      },
+      {
+        "NOMBDIST": "PAMPAS",
+        "IDDIST": 21509.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 21510.0
+      },
+      {
+        "NOMBDIST": "TAUCA",
+        "IDDIST": 21511.0
+      }
+    ],
+    "POMABAMBA": [
+      {
+        "NOMBDIST": "POMABAMBA",
+        "IDDIST": 21601.0
+      },
+      {
+        "NOMBDIST": "HUAYLLAN",
+        "IDDIST": 21602.0
+      },
+      {
+        "NOMBDIST": "PAROBAMBA",
+        "IDDIST": 21603.0
+      },
+      {
+        "NOMBDIST": "QUINUABAMBA",
+        "IDDIST": 21604.0
+      }
+    ],
+    "RECUAY": [
+      {
+        "NOMBDIST": "RECUAY",
+        "IDDIST": 21701.0
+      },
+      {
+        "NOMBDIST": "CATAC",
+        "IDDIST": 21702.0
+      },
+      {
+        "NOMBDIST": "COTAPARACO",
+        "IDDIST": 21703.0
+      },
+      {
+        "NOMBDIST": "HUAYLLAPAMPA",
+        "IDDIST": 21704.0
+      },
+      {
+        "NOMBDIST": "LLACLLIN",
+        "IDDIST": 21705.0
+      },
+      {
+        "NOMBDIST": "MARCA",
+        "IDDIST": 21706.0
+      },
+      {
+        "NOMBDIST": "PAMPAS CHICO",
+        "IDDIST": 21707.0
+      },
+      {
+        "NOMBDIST": "PARARIN",
+        "IDDIST": 21708.0
+      },
+      {
+        "NOMBDIST": "TAPACOCHA",
+        "IDDIST": 21709.0
+      },
+      {
+        "NOMBDIST": "TICAPAMPA",
+        "IDDIST": 21710.0
+      }
+    ],
+    "SANTA": [
+      {
+        "NOMBDIST": "CHIMBOTE",
+        "IDDIST": 21801.0
+      },
+      {
+        "NOMBDIST": "CACERES DEL PERU",
+        "IDDIST": 21802.0
+      },
+      {
+        "NOMBDIST": "COISHCO",
+        "IDDIST": 21803.0
+      },
+      {
+        "NOMBDIST": "MACATE",
+        "IDDIST": 21804.0
+      },
+      {
+        "NOMBDIST": "MORO",
+        "IDDIST": 21805.0
+      },
+      {
+        "NOMBDIST": "NEPEÑA",
+        "IDDIST": 21806.0
+      },
+      {
+        "NOMBDIST": "SAMANCO",
+        "IDDIST": 21807.0
+      },
+      {
+        "NOMBDIST": "SANTA",
+        "IDDIST": 21808.0
+      },
+      {
+        "NOMBDIST": "NUEVO CHIMBOTE",
+        "IDDIST": 21809.0
+      }
+    ],
+    "SIHUAS": [
+      {
+        "NOMBDIST": "SIHUAS",
+        "IDDIST": 21901.0
+      },
+      {
+        "NOMBDIST": "ACOBAMBA",
+        "IDDIST": 21902.0
+      },
+      {
+        "NOMBDIST": "ALFONSO UGARTE",
+        "IDDIST": 21903.0
+      },
+      {
+        "NOMBDIST": "CASHAPAMPA",
+        "IDDIST": 21904.0
+      },
+      {
+        "NOMBDIST": "CHINGALPO",
+        "IDDIST": 21905.0
+      },
+      {
+        "NOMBDIST": "HUAYLLABAMBA",
+        "IDDIST": 21906.0
+      },
+      {
+        "NOMBDIST": "QUICHES",
+        "IDDIST": 21907.0
+      },
+      {
+        "NOMBDIST": "RAGASH",
+        "IDDIST": 21908.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN",
+        "IDDIST": 21909.0
+      },
+      {
+        "NOMBDIST": "SICSIBAMBA",
+        "IDDIST": 21910.0
+      }
+    ],
+    "YUNGAY": [
+      {
+        "NOMBDIST": "YUNGAY",
+        "IDDIST": 22001.0
+      },
+      {
+        "NOMBDIST": "CASCAPARA",
+        "IDDIST": 22002.0
+      },
+      {
+        "NOMBDIST": "MANCOS",
+        "IDDIST": 22003.0
+      },
+      {
+        "NOMBDIST": "MATACOTO",
+        "IDDIST": 22004.0
+      },
+      {
+        "NOMBDIST": "QUILLO",
+        "IDDIST": 22005.0
+      },
+      {
+        "NOMBDIST": "RANRAHIRCA",
+        "IDDIST": 22006.0
+      },
+      {
+        "NOMBDIST": "SHUPLUY",
+        "IDDIST": 22007.0
+      },
+      {
+        "NOMBDIST": "YANAMA",
+        "IDDIST": 22008.0
+      }
+    ]
+  },
+  "APURIMAC": {
+    "ABANCAY": [
+      {
+        "NOMBDIST": "ABANCAY",
+        "IDDIST": 30101.0
+      },
+      {
+        "NOMBDIST": "CHACOCHE",
+        "IDDIST": 30102.0
+      },
+      {
+        "NOMBDIST": "CIRCA",
+        "IDDIST": 30103.0
+      },
+      {
+        "NOMBDIST": "CURAHUASI",
+        "IDDIST": 30104.0
+      },
+      {
+        "NOMBDIST": "HUANIPACA",
+        "IDDIST": 30105.0
+      },
+      {
+        "NOMBDIST": "LAMBRAMA",
+        "IDDIST": 30106.0
+      },
+      {
+        "NOMBDIST": "PICHIRHUA",
+        "IDDIST": 30107.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CACHORA",
+        "IDDIST": 30108.0
+      },
+      {
+        "NOMBDIST": "TAMBURCO",
+        "IDDIST": 30109.0
+      }
+    ],
+    "ANDAHUAYLAS": [
+      {
+        "NOMBDIST": "ANDAHUAYLAS",
+        "IDDIST": 30201.0
+      },
+      {
+        "NOMBDIST": "ANDARAPA",
+        "IDDIST": 30202.0
+      },
+      {
+        "NOMBDIST": "CHIARA",
+        "IDDIST": 30203.0
+      },
+      {
+        "NOMBDIST": "HUANCARAMA",
+        "IDDIST": 30204.0
+      },
+      {
+        "NOMBDIST": "HUANCARAY",
+        "IDDIST": 30205.0
+      },
+      {
+        "NOMBDIST": "HUAYANA",
+        "IDDIST": 30206.0
+      },
+      {
+        "NOMBDIST": "KISHUARA",
+        "IDDIST": 30207.0
+      },
+      {
+        "NOMBDIST": "PACOBAMBA",
+        "IDDIST": 30208.0
+      },
+      {
+        "NOMBDIST": "PACUCHA",
+        "IDDIST": 30209.0
+      },
+      {
+        "NOMBDIST": "PAMPACHIRI",
+        "IDDIST": 30210.0
+      },
+      {
+        "NOMBDIST": "POMACOCHA",
+        "IDDIST": 30211.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO DE CACHI",
+        "IDDIST": 30212.0
+      },
+      {
+        "NOMBDIST": "SAN JERONIMO",
+        "IDDIST": 30213.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE CHACCRAMPA",
+        "IDDIST": 30214.0
+      },
+      {
+        "NOMBDIST": "SANTA MARIA DE CHICMO",
+        "IDDIST": 30215.0
+      },
+      {
+        "NOMBDIST": "TALAVERA",
+        "IDDIST": 30216.0
+      },
+      {
+        "NOMBDIST": "TUMAY HUARACA",
+        "IDDIST": 30217.0
+      },
+      {
+        "NOMBDIST": "TURPO",
+        "IDDIST": 30218.0
+      },
+      {
+        "NOMBDIST": "KAQUIABAMBA",
+        "IDDIST": 30219.0
+      },
+      {
+        "NOMBDIST": "JOSE MARIA ARGUEDAS",
+        "IDDIST": 30220.0
+      }
+    ],
+    "ANTABAMBA": [
+      {
+        "NOMBDIST": "ANTABAMBA",
+        "IDDIST": 30301.0
+      },
+      {
+        "NOMBDIST": "EL ORO",
+        "IDDIST": 30302.0
+      },
+      {
+        "NOMBDIST": "HUAQUIRCA",
+        "IDDIST": 30303.0
+      },
+      {
+        "NOMBDIST": "JUAN ESPINOZA MEDRANO",
+        "IDDIST": 30304.0
+      },
+      {
+        "NOMBDIST": "OROPESA",
+        "IDDIST": 30305.0
+      },
+      {
+        "NOMBDIST": "PACHACONAS",
+        "IDDIST": 30306.0
+      },
+      {
+        "NOMBDIST": "SABAINO",
+        "IDDIST": 30307.0
+      }
+    ],
+    "AYMARAES": [
+      {
+        "NOMBDIST": "CHALHUANCA",
+        "IDDIST": 30401.0
+      },
+      {
+        "NOMBDIST": "CAPAYA",
+        "IDDIST": 30402.0
+      },
+      {
+        "NOMBDIST": "CARAYBAMBA",
+        "IDDIST": 30403.0
+      },
+      {
+        "NOMBDIST": "CHAPIMARCA",
+        "IDDIST": 30404.0
+      },
+      {
+        "NOMBDIST": "COLCABAMBA",
+        "IDDIST": 30405.0
+      },
+      {
+        "NOMBDIST": "COTARUSE",
+        "IDDIST": 30406.0
+      },
+      {
+        "NOMBDIST": "IHUAYLLO",
+        "IDDIST": 30407.0
+      },
+      {
+        "NOMBDIST": "JUSTO APU SAHUARAURA",
+        "IDDIST": 30408.0
+      },
+      {
+        "NOMBDIST": "LUCRE",
+        "IDDIST": 30409.0
+      },
+      {
+        "NOMBDIST": "POCOHUANCA",
+        "IDDIST": 30410.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE CHACÑA",
+        "IDDIST": 30411.0
+      },
+      {
+        "NOMBDIST": "SAÑAYCA",
+        "IDDIST": 30412.0
+      },
+      {
+        "NOMBDIST": "SORAYA",
+        "IDDIST": 30413.0
+      },
+      {
+        "NOMBDIST": "TAPAIRIHUA",
+        "IDDIST": 30414.0
+      },
+      {
+        "NOMBDIST": "TINTAY",
+        "IDDIST": 30415.0
+      },
+      {
+        "NOMBDIST": "TORAYA",
+        "IDDIST": 30416.0
+      },
+      {
+        "NOMBDIST": "YANACA",
+        "IDDIST": 30417.0
+      }
+    ],
+    "COTABAMBAS": [
+      {
+        "NOMBDIST": "TAMBOBAMBA",
+        "IDDIST": 30501.0
+      },
+      {
+        "NOMBDIST": "COTABAMBAS",
+        "IDDIST": 30502.0
+      },
+      {
+        "NOMBDIST": "COYLLURQUI",
+        "IDDIST": 30503.0
+      },
+      {
+        "NOMBDIST": "HAQUIRA",
+        "IDDIST": 30504.0
+      },
+      {
+        "NOMBDIST": "MARA",
+        "IDDIST": 30505.0
+      },
+      {
+        "NOMBDIST": "CHALLHUAHUACHO",
+        "IDDIST": 30506.0
+      }
+    ],
+    "CHINCHEROS": [
+      {
+        "NOMBDIST": "CHINCHEROS",
+        "IDDIST": 30601.0
+      },
+      {
+        "NOMBDIST": "ANCO_HUALLO",
+        "IDDIST": 30602.0
+      },
+      {
+        "NOMBDIST": "COCHARCAS",
+        "IDDIST": 30603.0
+      },
+      {
+        "NOMBDIST": "HUACCANA",
+        "IDDIST": 30604.0
+      },
+      {
+        "NOMBDIST": "OCOBAMBA",
+        "IDDIST": 30605.0
+      },
+      {
+        "NOMBDIST": "ONGOY",
+        "IDDIST": 30606.0
+      },
+      {
+        "NOMBDIST": "URANMARCA",
+        "IDDIST": 30607.0
+      },
+      {
+        "NOMBDIST": "RANRACANCHA",
+        "IDDIST": 30608.0
+      },
+      {
+        "NOMBDIST": "ROCCHACC",
+        "IDDIST": 30609.0
+      },
+      {
+        "NOMBDIST": "EL PORVENIR",
+        "IDDIST": 30610.0
+      },
+      {
+        "NOMBDIST": "LOS CHANKAS",
+        "IDDIST": 30611.0
+      },
+      {
+        "NOMBDIST": "AHUAYRO",
+        "IDDIST": 30612.0
+      }
+    ],
+    "GRAU": [
+      {
+        "NOMBDIST": "CHUQUIBAMBILLA",
+        "IDDIST": 30701.0
+      },
+      {
+        "NOMBDIST": "CURPAHUASI",
+        "IDDIST": 30702.0
+      },
+      {
+        "NOMBDIST": "GAMARRA",
+        "IDDIST": 30703.0
+      },
+      {
+        "NOMBDIST": "HUAYLLATI",
+        "IDDIST": 30704.0
+      },
+      {
+        "NOMBDIST": "MAMARA",
+        "IDDIST": 30705.0
+      },
+      {
+        "NOMBDIST": "MICAELA BASTIDAS",
+        "IDDIST": 30706.0
+      },
+      {
+        "NOMBDIST": "PATAYPAMPA",
+        "IDDIST": 30707.0
+      },
+      {
+        "NOMBDIST": "PROGRESO",
+        "IDDIST": 30708.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 30709.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 30710.0
+      },
+      {
+        "NOMBDIST": "TURPAY",
+        "IDDIST": 30711.0
+      },
+      {
+        "NOMBDIST": "VILCABAMBA",
+        "IDDIST": 30712.0
+      },
+      {
+        "NOMBDIST": "VIRUNDO",
+        "IDDIST": 30713.0
+      },
+      {
+        "NOMBDIST": "CURASCO",
+        "IDDIST": 30714.0
+      }
+    ]
+  },
+  "AREQUIPA": {
+    "AREQUIPA": [
+      {
+        "NOMBDIST": "AREQUIPA",
+        "IDDIST": 40101.0
+      },
+      {
+        "NOMBDIST": "ALTO SELVA ALEGRE",
+        "IDDIST": 40102.0
+      },
+      {
+        "NOMBDIST": "CAYMA",
+        "IDDIST": 40103.0
+      },
+      {
+        "NOMBDIST": "CERRO COLORADO",
+        "IDDIST": 40104.0
+      },
+      {
+        "NOMBDIST": "CHARACATO",
+        "IDDIST": 40105.0
+      },
+      {
+        "NOMBDIST": "CHIGUATA",
+        "IDDIST": 40106.0
+      },
+      {
+        "NOMBDIST": "JACOBO HUNTER",
+        "IDDIST": 40107.0
+      },
+      {
+        "NOMBDIST": "LA JOYA",
+        "IDDIST": 40108.0
+      },
+      {
+        "NOMBDIST": "MARIANO MELGAR",
+        "IDDIST": 40109.0
+      },
+      {
+        "NOMBDIST": "MIRAFLORES",
+        "IDDIST": 40110.0
+      },
+      {
+        "NOMBDIST": "MOLLEBAYA",
+        "IDDIST": 40111.0
+      },
+      {
+        "NOMBDIST": "PAUCARPATA",
+        "IDDIST": 40112.0
+      },
+      {
+        "NOMBDIST": "POCSI",
+        "IDDIST": 40113.0
+      },
+      {
+        "NOMBDIST": "POLOBAYA",
+        "IDDIST": 40114.0
+      },
+      {
+        "NOMBDIST": "QUEQUEÑA",
+        "IDDIST": 40115.0
+      },
+      {
+        "NOMBDIST": "SABANDIA",
+        "IDDIST": 40116.0
+      },
+      {
+        "NOMBDIST": "SACHACA",
+        "IDDIST": 40117.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE SIGUAS",
+        "IDDIST": 40118.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE TARUCANI",
+        "IDDIST": 40119.0
+      },
+      {
+        "NOMBDIST": "SANTA ISABEL DE SIGUAS",
+        "IDDIST": 40120.0
+      },
+      {
+        "NOMBDIST": "SANTA RITA DE SIGUAS",
+        "IDDIST": 40121.0
+      },
+      {
+        "NOMBDIST": "SOCABAYA",
+        "IDDIST": 40122.0
+      },
+      {
+        "NOMBDIST": "TIABAYA",
+        "IDDIST": 40123.0
+      },
+      {
+        "NOMBDIST": "UCHUMAYO",
+        "IDDIST": 40124.0
+      },
+      {
+        "NOMBDIST": "VITOR",
+        "IDDIST": 40125.0
+      },
+      {
+        "NOMBDIST": "YANAHUARA",
+        "IDDIST": 40126.0
+      },
+      {
+        "NOMBDIST": "YARABAMBA",
+        "IDDIST": 40127.0
+      },
+      {
+        "NOMBDIST": "YURA",
+        "IDDIST": 40128.0
+      },
+      {
+        "NOMBDIST": "JOSE LUIS BUSTAMANTE Y RIVERO",
+        "IDDIST": 40129.0
+      }
+    ],
+    "CAMANA": [
+      {
+        "NOMBDIST": "CAMANA",
+        "IDDIST": 40201.0
+      },
+      {
+        "NOMBDIST": "JOSE MARIA QUIMPER",
+        "IDDIST": 40202.0
+      },
+      {
+        "NOMBDIST": "MARIANO NICOLAS VALCARCEL",
+        "IDDIST": 40203.0
+      },
+      {
+        "NOMBDIST": "MARISCAL CACERES",
+        "IDDIST": 40204.0
+      },
+      {
+        "NOMBDIST": "NICOLAS DE PIEROLA",
+        "IDDIST": 40205.0
+      },
+      {
+        "NOMBDIST": "OCOÑA",
+        "IDDIST": 40206.0
+      },
+      {
+        "NOMBDIST": "QUILCA",
+        "IDDIST": 40207.0
+      },
+      {
+        "NOMBDIST": "SAMUEL PASTOR",
+        "IDDIST": 40208.0
+      }
+    ],
+    "CARAVELI": [
+      {
+        "NOMBDIST": "CARAVELI",
+        "IDDIST": 40301.0
+      },
+      {
+        "NOMBDIST": "ACARI",
+        "IDDIST": 40302.0
+      },
+      {
+        "NOMBDIST": "ATICO",
+        "IDDIST": 40303.0
+      },
+      {
+        "NOMBDIST": "ATIQUIPA",
+        "IDDIST": 40304.0
+      },
+      {
+        "NOMBDIST": "BELLA UNION",
+        "IDDIST": 40305.0
+      },
+      {
+        "NOMBDIST": "CAHUACHO",
+        "IDDIST": 40306.0
+      },
+      {
+        "NOMBDIST": "CHALA",
+        "IDDIST": 40307.0
+      },
+      {
+        "NOMBDIST": "CHAPARRA",
+        "IDDIST": 40308.0
+      },
+      {
+        "NOMBDIST": "HUANUHUANU",
+        "IDDIST": 40309.0
+      },
+      {
+        "NOMBDIST": "JAQUI",
+        "IDDIST": 40310.0
+      },
+      {
+        "NOMBDIST": "LOMAS",
+        "IDDIST": 40311.0
+      },
+      {
+        "NOMBDIST": "QUICACHA",
+        "IDDIST": 40312.0
+      },
+      {
+        "NOMBDIST": "YAUCA",
+        "IDDIST": 40313.0
+      }
+    ],
+    "CASTILLA": [
+      {
+        "NOMBDIST": "APLAO",
+        "IDDIST": 40401.0
+      },
+      {
+        "NOMBDIST": "ANDAGUA",
+        "IDDIST": 40402.0
+      },
+      {
+        "NOMBDIST": "AYO",
+        "IDDIST": 40403.0
+      },
+      {
+        "NOMBDIST": "CHACHAS",
+        "IDDIST": 40404.0
+      },
+      {
+        "NOMBDIST": "CHILCAYMARCA",
+        "IDDIST": 40405.0
+      },
+      {
+        "NOMBDIST": "CHOCO",
+        "IDDIST": 40406.0
+      },
+      {
+        "NOMBDIST": "HUANCARQUI",
+        "IDDIST": 40407.0
+      },
+      {
+        "NOMBDIST": "MACHAGUAY",
+        "IDDIST": 40408.0
+      },
+      {
+        "NOMBDIST": "ORCOPAMPA",
+        "IDDIST": 40409.0
+      },
+      {
+        "NOMBDIST": "PAMPACOLCA",
+        "IDDIST": 40410.0
+      },
+      {
+        "NOMBDIST": "TIPAN",
+        "IDDIST": 40411.0
+      },
+      {
+        "NOMBDIST": "UÑON",
+        "IDDIST": 40412.0
+      },
+      {
+        "NOMBDIST": "URACA",
+        "IDDIST": 40413.0
+      },
+      {
+        "NOMBDIST": "VIRACO",
+        "IDDIST": 40414.0
+      }
+    ],
+    "CAYLLOMA": [
+      {
+        "NOMBDIST": "CHIVAY",
+        "IDDIST": 40501.0
+      },
+      {
+        "NOMBDIST": "ACHOMA",
+        "IDDIST": 40502.0
+      },
+      {
+        "NOMBDIST": "CABANACONDE",
+        "IDDIST": 40503.0
+      },
+      {
+        "NOMBDIST": "CALLALLI",
+        "IDDIST": 40504.0
+      },
+      {
+        "NOMBDIST": "CAYLLOMA",
+        "IDDIST": 40505.0
+      },
+      {
+        "NOMBDIST": "COPORAQUE",
+        "IDDIST": 40506.0
+      },
+      {
+        "NOMBDIST": "HUAMBO",
+        "IDDIST": 40507.0
+      },
+      {
+        "NOMBDIST": "HUANCA",
+        "IDDIST": 40508.0
+      },
+      {
+        "NOMBDIST": "ICHUPAMPA",
+        "IDDIST": 40509.0
+      },
+      {
+        "NOMBDIST": "LARI",
+        "IDDIST": 40510.0
+      },
+      {
+        "NOMBDIST": "LLUTA",
+        "IDDIST": 40511.0
+      },
+      {
+        "NOMBDIST": "MACA",
+        "IDDIST": 40512.0
+      },
+      {
+        "NOMBDIST": "MADRIGAL",
+        "IDDIST": 40513.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO DE CHUCA",
+        "IDDIST": 40514.0
+      },
+      {
+        "NOMBDIST": "SIBAYO",
+        "IDDIST": 40515.0
+      },
+      {
+        "NOMBDIST": "TAPAY",
+        "IDDIST": 40516.0
+      },
+      {
+        "NOMBDIST": "TISCO",
+        "IDDIST": 40517.0
+      },
+      {
+        "NOMBDIST": "TUTI",
+        "IDDIST": 40518.0
+      },
+      {
+        "NOMBDIST": "YANQUE",
+        "IDDIST": 40519.0
+      },
+      {
+        "NOMBDIST": "MAJES",
+        "IDDIST": 40520.0
+      }
+    ],
+    "CONDESUYOS": [
+      {
+        "NOMBDIST": "CHUQUIBAMBA",
+        "IDDIST": 40601.0
+      },
+      {
+        "NOMBDIST": "ANDARAY",
+        "IDDIST": 40602.0
+      },
+      {
+        "NOMBDIST": "CAYARANI",
+        "IDDIST": 40603.0
+      },
+      {
+        "NOMBDIST": "CHICHAS",
+        "IDDIST": 40604.0
+      },
+      {
+        "NOMBDIST": "IRAY",
+        "IDDIST": 40605.0
+      },
+      {
+        "NOMBDIST": "RIO GRANDE",
+        "IDDIST": 40606.0
+      },
+      {
+        "NOMBDIST": "SALAMANCA",
+        "IDDIST": 40607.0
+      },
+      {
+        "NOMBDIST": "YANAQUIHUA",
+        "IDDIST": 40608.0
+      }
+    ],
+    "ISLAY": [
+      {
+        "NOMBDIST": "MOLLENDO",
+        "IDDIST": 40701.0
+      },
+      {
+        "NOMBDIST": "COCACHACRA",
+        "IDDIST": 40702.0
+      },
+      {
+        "NOMBDIST": "DEAN VALDIVIA",
+        "IDDIST": 40703.0
+      },
+      {
+        "NOMBDIST": "ISLAY",
+        "IDDIST": 40704.0
+      },
+      {
+        "NOMBDIST": "MEJIA",
+        "IDDIST": 40705.0
+      },
+      {
+        "NOMBDIST": "PUNTA DE BOMBON",
+        "IDDIST": 40706.0
+      }
+    ],
+    "LA UNION": [
+      {
+        "NOMBDIST": "COTAHUASI",
+        "IDDIST": 40801.0
+      },
+      {
+        "NOMBDIST": "ALCA",
+        "IDDIST": 40802.0
+      },
+      {
+        "NOMBDIST": "CHARCANA",
+        "IDDIST": 40803.0
+      },
+      {
+        "NOMBDIST": "HUAYNACOTAS",
+        "IDDIST": 40804.0
+      },
+      {
+        "NOMBDIST": "PAMPAMARCA",
+        "IDDIST": 40805.0
+      },
+      {
+        "NOMBDIST": "PUYCA",
+        "IDDIST": 40806.0
+      },
+      {
+        "NOMBDIST": "QUECHUALLA",
+        "IDDIST": 40807.0
+      },
+      {
+        "NOMBDIST": "SAYLA",
+        "IDDIST": 40808.0
+      },
+      {
+        "NOMBDIST": "TAURIA",
+        "IDDIST": 40809.0
+      },
+      {
+        "NOMBDIST": "TOMEPAMPA",
+        "IDDIST": 40810.0
+      },
+      {
+        "NOMBDIST": "TORO",
+        "IDDIST": 40811.0
+      }
+    ]
+  },
+  "AYACUCHO": {
+    "HUAMANGA": [
+      {
+        "NOMBDIST": "AYACUCHO",
+        "IDDIST": 50101.0
+      },
+      {
+        "NOMBDIST": "ACOCRO",
+        "IDDIST": 50102.0
+      },
+      {
+        "NOMBDIST": "ACOS VINCHOS",
+        "IDDIST": 50103.0
+      },
+      {
+        "NOMBDIST": "CARMEN ALTO",
+        "IDDIST": 50104.0
+      },
+      {
+        "NOMBDIST": "CHIARA",
+        "IDDIST": 50105.0
+      },
+      {
+        "NOMBDIST": "OCROS",
+        "IDDIST": 50106.0
+      },
+      {
+        "NOMBDIST": "PACAYCASA",
+        "IDDIST": 50107.0
+      },
+      {
+        "NOMBDIST": "QUINUA",
+        "IDDIST": 50108.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DE TICLLAS",
+        "IDDIST": 50109.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN BAUTISTA",
+        "IDDIST": 50110.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE PISCHA",
+        "IDDIST": 50111.0
+      },
+      {
+        "NOMBDIST": "SOCOS",
+        "IDDIST": 50112.0
+      },
+      {
+        "NOMBDIST": "TAMBILLO",
+        "IDDIST": 50113.0
+      },
+      {
+        "NOMBDIST": "VINCHOS",
+        "IDDIST": 50114.0
+      },
+      {
+        "NOMBDIST": "JESUS NAZARENO",
+        "IDDIST": 50115.0
+      },
+      {
+        "NOMBDIST": "ANDRES AVELINO CACERES DORREGARAY",
+        "IDDIST": 50116.0
+      }
+    ],
+    "CANGALLO": [
+      {
+        "NOMBDIST": "CANGALLO",
+        "IDDIST": 50201.0
+      },
+      {
+        "NOMBDIST": "CHUSCHI",
+        "IDDIST": 50202.0
+      },
+      {
+        "NOMBDIST": "LOS MOROCHUCOS",
+        "IDDIST": 50203.0
+      },
+      {
+        "NOMBDIST": "MARIA PARADO DE BELLIDO",
+        "IDDIST": 50204.0
+      },
+      {
+        "NOMBDIST": "PARAS",
+        "IDDIST": 50205.0
+      },
+      {
+        "NOMBDIST": "TOTOS",
+        "IDDIST": 50206.0
+      }
+    ],
+    "HUANCA SANCOS": [
+      {
+        "NOMBDIST": "SANCOS",
+        "IDDIST": 50301.0
+      },
+      {
+        "NOMBDIST": "CARAPO",
+        "IDDIST": 50302.0
+      },
+      {
+        "NOMBDIST": "SACSAMARCA",
+        "IDDIST": 50303.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE LUCANAMARCA",
+        "IDDIST": 50304.0
+      }
+    ],
+    "HUANTA": [
+      {
+        "NOMBDIST": "HUANTA",
+        "IDDIST": 50401.0
+      },
+      {
+        "NOMBDIST": "AYAHUANCO",
+        "IDDIST": 50402.0
+      },
+      {
+        "NOMBDIST": "HUAMANGUILLA",
+        "IDDIST": 50403.0
+      },
+      {
+        "NOMBDIST": "IGUAIN",
+        "IDDIST": 50404.0
+      },
+      {
+        "NOMBDIST": "LURICOCHA",
+        "IDDIST": 50405.0
+      },
+      {
+        "NOMBDIST": "SANTILLANA",
+        "IDDIST": 50406.0
+      },
+      {
+        "NOMBDIST": "SIVIA",
+        "IDDIST": 50407.0
+      },
+      {
+        "NOMBDIST": "LLOCHEGUA",
+        "IDDIST": 50408.0
+      },
+      {
+        "NOMBDIST": "CANAYRE",
+        "IDDIST": 50409.0
+      },
+      {
+        "NOMBDIST": "UCHURACCAY",
+        "IDDIST": 50410.0
+      },
+      {
+        "NOMBDIST": "PUCACOLPA",
+        "IDDIST": 50411.0
+      },
+      {
+        "NOMBDIST": "CHACA",
+        "IDDIST": 50412.0
+      },
+      {
+        "NOMBDIST": "PUTIS",
+        "IDDIST": 50413.0
+      }
+    ],
+    "LA MAR": [
+      {
+        "NOMBDIST": "SAN MIGUEL",
+        "IDDIST": 50501.0
+      },
+      {
+        "NOMBDIST": "ANCO",
+        "IDDIST": 50502.0
+      },
+      {
+        "NOMBDIST": "AYNA",
+        "IDDIST": 50503.0
+      },
+      {
+        "NOMBDIST": "CHILCAS",
+        "IDDIST": 50504.0
+      },
+      {
+        "NOMBDIST": "CHUNGUI",
+        "IDDIST": 50505.0
+      },
+      {
+        "NOMBDIST": "LUIS CARRANZA",
+        "IDDIST": 50506.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 50507.0
+      },
+      {
+        "NOMBDIST": "TAMBO",
+        "IDDIST": 50508.0
+      },
+      {
+        "NOMBDIST": "SAMUGARI",
+        "IDDIST": 50509.0
+      },
+      {
+        "NOMBDIST": "ANCHIHUAY",
+        "IDDIST": 50510.0
+      },
+      {
+        "NOMBDIST": "ORONCCOY",
+        "IDDIST": 50511.0
+      },
+      {
+        "NOMBDIST": "UNION PROGRESO",
+        "IDDIST": 50512.0
+      },
+      {
+        "NOMBDIST": "RIO MAGDALENA",
+        "IDDIST": 50513.0
+      },
+      {
+        "NOMBDIST": "NINABAMBA",
+        "IDDIST": 50514.0
+      },
+      {
+        "NOMBDIST": "PATIBAMBA",
+        "IDDIST": 50515.0
+      }
+    ],
+    "LUCANAS": [
+      {
+        "NOMBDIST": "PUQUIO",
+        "IDDIST": 50601.0
+      },
+      {
+        "NOMBDIST": "AUCARA",
+        "IDDIST": 50602.0
+      },
+      {
+        "NOMBDIST": "CABANA",
+        "IDDIST": 50603.0
+      },
+      {
+        "NOMBDIST": "CARMEN SALCEDO",
+        "IDDIST": 50604.0
+      },
+      {
+        "NOMBDIST": "CHAVIÑA",
+        "IDDIST": 50605.0
+      },
+      {
+        "NOMBDIST": "CHIPAO",
+        "IDDIST": 50606.0
+      },
+      {
+        "NOMBDIST": "HUAC-HUAS",
+        "IDDIST": 50607.0
+      },
+      {
+        "NOMBDIST": "LARAMATE",
+        "IDDIST": 50608.0
+      },
+      {
+        "NOMBDIST": "LEONCIO PRADO",
+        "IDDIST": 50609.0
+      },
+      {
+        "NOMBDIST": "LLAUTA",
+        "IDDIST": 50610.0
+      },
+      {
+        "NOMBDIST": "LUCANAS",
+        "IDDIST": 50611.0
+      },
+      {
+        "NOMBDIST": "OCAÑA",
+        "IDDIST": 50612.0
+      },
+      {
+        "NOMBDIST": "OTOCA",
+        "IDDIST": 50613.0
+      },
+      {
+        "NOMBDIST": "SAISA",
+        "IDDIST": 50614.0
+      },
+      {
+        "NOMBDIST": "SAN CRISTOBAL",
+        "IDDIST": 50615.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN",
+        "IDDIST": 50616.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO",
+        "IDDIST": 50617.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE PALCO",
+        "IDDIST": 50618.0
+      },
+      {
+        "NOMBDIST": "SANCOS",
+        "IDDIST": 50619.0
+      },
+      {
+        "NOMBDIST": "SANTA ANA DE HUAYCAHUACHO",
+        "IDDIST": 50620.0
+      },
+      {
+        "NOMBDIST": "SANTA LUCIA",
+        "IDDIST": 50621.0
+      }
+    ],
+    "PARINACOCHAS": [
+      {
+        "NOMBDIST": "CORACORA",
+        "IDDIST": 50701.0
+      },
+      {
+        "NOMBDIST": "CHUMPI",
+        "IDDIST": 50702.0
+      },
+      {
+        "NOMBDIST": "CORONEL CASTAÑEDA",
+        "IDDIST": 50703.0
+      },
+      {
+        "NOMBDIST": "PACAPAUSA",
+        "IDDIST": 50704.0
+      },
+      {
+        "NOMBDIST": "PULLO",
+        "IDDIST": 50705.0
+      },
+      {
+        "NOMBDIST": "PUYUSCA",
+        "IDDIST": 50706.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE RIVACAYCO",
+        "IDDIST": 50707.0
+      },
+      {
+        "NOMBDIST": "UPAHUACHO",
+        "IDDIST": 50708.0
+      }
+    ],
+    "PAUCAR DEL SARA SARA": [
+      {
+        "NOMBDIST": "PAUSA",
+        "IDDIST": 50801.0
+      },
+      {
+        "NOMBDIST": "COLTA",
+        "IDDIST": 50802.0
+      },
+      {
+        "NOMBDIST": "CORCULLA",
+        "IDDIST": 50803.0
+      },
+      {
+        "NOMBDIST": "LAMPA",
+        "IDDIST": 50804.0
+      },
+      {
+        "NOMBDIST": "MARCABAMBA",
+        "IDDIST": 50805.0
+      },
+      {
+        "NOMBDIST": "OYOLO",
+        "IDDIST": 50806.0
+      },
+      {
+        "NOMBDIST": "PARARCA",
+        "IDDIST": 50807.0
+      },
+      {
+        "NOMBDIST": "SAN JAVIER DE ALPABAMBA",
+        "IDDIST": 50808.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DE USHUA",
+        "IDDIST": 50809.0
+      },
+      {
+        "NOMBDIST": "SARA SARA",
+        "IDDIST": 50810.0
+      }
+    ],
+    "SUCRE": [
+      {
+        "NOMBDIST": "QUEROBAMBA",
+        "IDDIST": 50901.0
+      },
+      {
+        "NOMBDIST": "BELEN",
+        "IDDIST": 50902.0
+      },
+      {
+        "NOMBDIST": "CHALCOS",
+        "IDDIST": 50903.0
+      },
+      {
+        "NOMBDIST": "CHILCAYOC",
+        "IDDIST": 50904.0
+      },
+      {
+        "NOMBDIST": "HUACAÑA",
+        "IDDIST": 50905.0
+      },
+      {
+        "NOMBDIST": "MORCOLLA",
+        "IDDIST": 50906.0
+      },
+      {
+        "NOMBDIST": "PAICO",
+        "IDDIST": 50907.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE LARCAY",
+        "IDDIST": 50908.0
+      },
+      {
+        "NOMBDIST": "SAN SALVADOR DE QUIJE",
+        "IDDIST": 50909.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE PAUCARAY",
+        "IDDIST": 50910.0
+      },
+      {
+        "NOMBDIST": "SORAS",
+        "IDDIST": 50911.0
+      }
+    ],
+    "VICTOR FAJARDO": [
+      {
+        "NOMBDIST": "HUANCAPI",
+        "IDDIST": 51001.0
+      },
+      {
+        "NOMBDIST": "ALCAMENCA",
+        "IDDIST": 51002.0
+      },
+      {
+        "NOMBDIST": "APONGO",
+        "IDDIST": 51003.0
+      },
+      {
+        "NOMBDIST": "ASQUIPATA",
+        "IDDIST": 51004.0
+      },
+      {
+        "NOMBDIST": "CANARIA",
+        "IDDIST": 51005.0
+      },
+      {
+        "NOMBDIST": "CAYARA",
+        "IDDIST": 51006.0
+      },
+      {
+        "NOMBDIST": "COLCA",
+        "IDDIST": 51007.0
+      },
+      {
+        "NOMBDIST": "HUAMANQUIQUIA",
+        "IDDIST": 51008.0
+      },
+      {
+        "NOMBDIST": "HUANCARAYLLA",
+        "IDDIST": 51009.0
+      },
+      {
+        "NOMBDIST": "HUALLA",
+        "IDDIST": 51010.0
+      },
+      {
+        "NOMBDIST": "SARHUA",
+        "IDDIST": 51011.0
+      },
+      {
+        "NOMBDIST": "VILCANCHOS",
+        "IDDIST": 51012.0
+      }
+    ],
+    "VILCAS HUAMAN": [
+      {
+        "NOMBDIST": "VILCAS HUAMAN",
+        "IDDIST": 51101.0
+      },
+      {
+        "NOMBDIST": "ACCOMARCA",
+        "IDDIST": 51102.0
+      },
+      {
+        "NOMBDIST": "CARHUANCA",
+        "IDDIST": 51103.0
+      },
+      {
+        "NOMBDIST": "CONCEPCION",
+        "IDDIST": 51104.0
+      },
+      {
+        "NOMBDIST": "HUAMBALPA",
+        "IDDIST": 51105.0
+      },
+      {
+        "NOMBDIST": "INDEPENDENCIA",
+        "IDDIST": 51106.0
+      },
+      {
+        "NOMBDIST": "SAURAMA",
+        "IDDIST": 51107.0
+      },
+      {
+        "NOMBDIST": "VISCHONGO",
+        "IDDIST": 51108.0
+      }
+    ]
+  },
+  "CAJAMARCA": {
+    "CAJAMARCA": [
+      {
+        "NOMBDIST": "CAJAMARCA",
+        "IDDIST": 60101.0
+      },
+      {
+        "NOMBDIST": "ASUNCION",
+        "IDDIST": 60102.0
+      },
+      {
+        "NOMBDIST": "CHETILLA",
+        "IDDIST": 60103.0
+      },
+      {
+        "NOMBDIST": "COSPAN",
+        "IDDIST": 60104.0
+      },
+      {
+        "NOMBDIST": "ENCAÑADA",
+        "IDDIST": 60105.0
+      },
+      {
+        "NOMBDIST": "JESUS",
+        "IDDIST": 60106.0
+      },
+      {
+        "NOMBDIST": "LLACANORA",
+        "IDDIST": 60107.0
+      },
+      {
+        "NOMBDIST": "LOS BAÑOS DEL INCA",
+        "IDDIST": 60108.0
+      },
+      {
+        "NOMBDIST": "MAGDALENA",
+        "IDDIST": 60109.0
+      },
+      {
+        "NOMBDIST": "MATARA",
+        "IDDIST": 60110.0
+      },
+      {
+        "NOMBDIST": "NAMORA",
+        "IDDIST": 60111.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN",
+        "IDDIST": 60112.0
+      }
+    ],
+    "CAJABAMBA": [
+      {
+        "NOMBDIST": "CAJABAMBA",
+        "IDDIST": 60201.0
+      },
+      {
+        "NOMBDIST": "CACHACHI",
+        "IDDIST": 60202.0
+      },
+      {
+        "NOMBDIST": "CONDEBAMBA",
+        "IDDIST": 60203.0
+      },
+      {
+        "NOMBDIST": "SITACOCHA",
+        "IDDIST": 60204.0
+      }
+    ],
+    "CELENDIN": [
+      {
+        "NOMBDIST": "CELENDIN",
+        "IDDIST": 60301.0
+      },
+      {
+        "NOMBDIST": "CHUMUCH",
+        "IDDIST": 60302.0
+      },
+      {
+        "NOMBDIST": "CORTEGANA",
+        "IDDIST": 60303.0
+      },
+      {
+        "NOMBDIST": "HUASMIN",
+        "IDDIST": 60304.0
+      },
+      {
+        "NOMBDIST": "JORGE CHAVEZ",
+        "IDDIST": 60305.0
+      },
+      {
+        "NOMBDIST": "JOSE GALVEZ",
+        "IDDIST": 60306.0
+      },
+      {
+        "NOMBDIST": "MIGUEL IGLESIAS",
+        "IDDIST": 60307.0
+      },
+      {
+        "NOMBDIST": "OXAMARCA",
+        "IDDIST": 60308.0
+      },
+      {
+        "NOMBDIST": "SOROCHUCO",
+        "IDDIST": 60309.0
+      },
+      {
+        "NOMBDIST": "SUCRE",
+        "IDDIST": 60310.0
+      },
+      {
+        "NOMBDIST": "UTCO",
+        "IDDIST": 60311.0
+      },
+      {
+        "NOMBDIST": "LA LIBERTAD DE PALLAN",
+        "IDDIST": 60312.0
+      }
+    ],
+    "CHOTA": [
+      {
+        "NOMBDIST": "CHOTA",
+        "IDDIST": 60401.0
+      },
+      {
+        "NOMBDIST": "ANGUIA",
+        "IDDIST": 60402.0
+      },
+      {
+        "NOMBDIST": "CHADIN",
+        "IDDIST": 60403.0
+      },
+      {
+        "NOMBDIST": "CHIGUIRIP",
+        "IDDIST": 60404.0
+      },
+      {
+        "NOMBDIST": "CHIMBAN",
+        "IDDIST": 60405.0
+      },
+      {
+        "NOMBDIST": "CHOROPAMPA",
+        "IDDIST": 60406.0
+      },
+      {
+        "NOMBDIST": "COCHABAMBA",
+        "IDDIST": 60407.0
+      },
+      {
+        "NOMBDIST": "CONCHAN",
+        "IDDIST": 60408.0
+      },
+      {
+        "NOMBDIST": "HUAMBOS",
+        "IDDIST": 60409.0
+      },
+      {
+        "NOMBDIST": "LAJAS",
+        "IDDIST": 60410.0
+      },
+      {
+        "NOMBDIST": "LLAMA",
+        "IDDIST": 60411.0
+      },
+      {
+        "NOMBDIST": "MIRACOSTA",
+        "IDDIST": 60412.0
+      },
+      {
+        "NOMBDIST": "PACCHA",
+        "IDDIST": 60413.0
+      },
+      {
+        "NOMBDIST": "PION",
+        "IDDIST": 60414.0
+      },
+      {
+        "NOMBDIST": "QUEROCOTO",
+        "IDDIST": 60415.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE LICUPIS",
+        "IDDIST": 60416.0
+      },
+      {
+        "NOMBDIST": "TACABAMBA",
+        "IDDIST": 60417.0
+      },
+      {
+        "NOMBDIST": "TOCMOCHE",
+        "IDDIST": 60418.0
+      },
+      {
+        "NOMBDIST": "CHALAMARCA",
+        "IDDIST": 60419.0
+      }
+    ],
+    "CONTUMAZA": [
+      {
+        "NOMBDIST": "CONTUMAZA",
+        "IDDIST": 60501.0
+      },
+      {
+        "NOMBDIST": "CHILETE",
+        "IDDIST": 60502.0
+      },
+      {
+        "NOMBDIST": "CUPISNIQUE",
+        "IDDIST": 60503.0
+      },
+      {
+        "NOMBDIST": "GUZMANGO",
+        "IDDIST": 60504.0
+      },
+      {
+        "NOMBDIST": "SAN BENITO",
+        "IDDIST": 60505.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ DE TOLED",
+        "IDDIST": 60506.0
+      },
+      {
+        "NOMBDIST": "TANTARICA",
+        "IDDIST": 60507.0
+      },
+      {
+        "NOMBDIST": "YONAN",
+        "IDDIST": 60508.0
+      }
+    ],
+    "CUTERVO": [
+      {
+        "NOMBDIST": "CUTERVO",
+        "IDDIST": 60601.0
+      },
+      {
+        "NOMBDIST": "CALLAYUC",
+        "IDDIST": 60602.0
+      },
+      {
+        "NOMBDIST": "CHOROS",
+        "IDDIST": 60603.0
+      },
+      {
+        "NOMBDIST": "CUJILLO",
+        "IDDIST": 60604.0
+      },
+      {
+        "NOMBDIST": "LA RAMADA",
+        "IDDIST": 60605.0
+      },
+      {
+        "NOMBDIST": "PIMPINGOS",
+        "IDDIST": 60606.0
+      },
+      {
+        "NOMBDIST": "QUEROCOTILLO",
+        "IDDIST": 60607.0
+      },
+      {
+        "NOMBDIST": "SAN ANDRES DE CUTERVO",
+        "IDDIST": 60608.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE CUTERVO",
+        "IDDIST": 60609.0
+      },
+      {
+        "NOMBDIST": "SAN LUIS DE LUCMA",
+        "IDDIST": 60610.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ",
+        "IDDIST": 60611.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO DE LA CAPILLA",
+        "IDDIST": 60612.0
+      },
+      {
+        "NOMBDIST": "SANTO TOMAS",
+        "IDDIST": 60613.0
+      },
+      {
+        "NOMBDIST": "SOCOTA",
+        "IDDIST": 60614.0
+      },
+      {
+        "NOMBDIST": "TORIBIO CASANOVA",
+        "IDDIST": 60615.0
+      }
+    ],
+    "HUALGAYOC": [
+      {
+        "NOMBDIST": "BAMBAMARCA",
+        "IDDIST": 60701.0
+      },
+      {
+        "NOMBDIST": "CHUGUR",
+        "IDDIST": 60702.0
+      },
+      {
+        "NOMBDIST": "HUALGAYOC",
+        "IDDIST": 60703.0
+      }
+    ],
+    "JAEN": [
+      {
+        "NOMBDIST": "JAEN",
+        "IDDIST": 60801.0
+      },
+      {
+        "NOMBDIST": "BELLAVISTA",
+        "IDDIST": 60802.0
+      },
+      {
+        "NOMBDIST": "CHONTALI",
+        "IDDIST": 60803.0
+      },
+      {
+        "NOMBDIST": "COLASAY",
+        "IDDIST": 60804.0
+      },
+      {
+        "NOMBDIST": "HUABAL",
+        "IDDIST": 60805.0
+      },
+      {
+        "NOMBDIST": "LAS PIRIAS",
+        "IDDIST": 60806.0
+      },
+      {
+        "NOMBDIST": "POMAHUACA",
+        "IDDIST": 60807.0
+      },
+      {
+        "NOMBDIST": "PUCARA",
+        "IDDIST": 60808.0
+      },
+      {
+        "NOMBDIST": "SALLIQUE",
+        "IDDIST": 60809.0
+      },
+      {
+        "NOMBDIST": "SAN FELIPE",
+        "IDDIST": 60810.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DEL ALTO",
+        "IDDIST": 60811.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 60812.0
+      }
+    ],
+    "SAN IGNACIO": [
+      {
+        "NOMBDIST": "SAN IGNACIO",
+        "IDDIST": 60901.0
+      },
+      {
+        "NOMBDIST": "CHIRINOS",
+        "IDDIST": 60902.0
+      },
+      {
+        "NOMBDIST": "HUARANGO",
+        "IDDIST": 60903.0
+      },
+      {
+        "NOMBDIST": "LA COIPA",
+        "IDDIST": 60904.0
+      },
+      {
+        "NOMBDIST": "NAMBALLE",
+        "IDDIST": 60905.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DE LOURDES",
+        "IDDIST": 60906.0
+      },
+      {
+        "NOMBDIST": "TABACONAS",
+        "IDDIST": 60907.0
+      }
+    ],
+    "SAN MARCOS": [
+      {
+        "NOMBDIST": "PEDRO GALVEZ",
+        "IDDIST": 61001.0
+      },
+      {
+        "NOMBDIST": "CHANCAY",
+        "IDDIST": 61002.0
+      },
+      {
+        "NOMBDIST": "EDUARDO VILLANUEVA",
+        "IDDIST": 61003.0
+      },
+      {
+        "NOMBDIST": "GREGORIO PITA",
+        "IDDIST": 61004.0
+      },
+      {
+        "NOMBDIST": "ICHOCAN",
+        "IDDIST": 61005.0
+      },
+      {
+        "NOMBDIST": "JOSE MANUEL QUIROZ",
+        "IDDIST": 61006.0
+      },
+      {
+        "NOMBDIST": "JOSE SABOGAL",
+        "IDDIST": 61007.0
+      }
+    ],
+    "SAN MIGUEL": [
+      {
+        "NOMBDIST": "SAN MIGUEL",
+        "IDDIST": 61101.0
+      },
+      {
+        "NOMBDIST": "BOLIVAR",
+        "IDDIST": 61102.0
+      },
+      {
+        "NOMBDIST": "CALQUIS",
+        "IDDIST": 61103.0
+      },
+      {
+        "NOMBDIST": "CATILLUC",
+        "IDDIST": 61104.0
+      },
+      {
+        "NOMBDIST": "EL PRADO",
+        "IDDIST": 61105.0
+      },
+      {
+        "NOMBDIST": "LA FLORIDA",
+        "IDDIST": 61106.0
+      },
+      {
+        "NOMBDIST": "LLAPA",
+        "IDDIST": 61107.0
+      },
+      {
+        "NOMBDIST": "NANCHOC",
+        "IDDIST": 61108.0
+      },
+      {
+        "NOMBDIST": "NIEPOS",
+        "IDDIST": 61109.0
+      },
+      {
+        "NOMBDIST": "SAN GREGORIO",
+        "IDDIST": 61110.0
+      },
+      {
+        "NOMBDIST": "SAN SILVESTRE DE COCHAN",
+        "IDDIST": 61111.0
+      },
+      {
+        "NOMBDIST": "TONGOD",
+        "IDDIST": 61112.0
+      },
+      {
+        "NOMBDIST": "UNION AGUA BLANCA",
+        "IDDIST": 61113.0
+      }
+    ],
+    "SAN PABLO": [
+      {
+        "NOMBDIST": "SAN PABLO",
+        "IDDIST": 61201.0
+      },
+      {
+        "NOMBDIST": "SAN BERNARDINO",
+        "IDDIST": 61202.0
+      },
+      {
+        "NOMBDIST": "SAN LUIS",
+        "IDDIST": 61203.0
+      },
+      {
+        "NOMBDIST": "TUMBADEN",
+        "IDDIST": 61204.0
+      }
+    ],
+    "SANTA CRUZ": [
+      {
+        "NOMBDIST": "SANTA CRUZ",
+        "IDDIST": 61301.0
+      },
+      {
+        "NOMBDIST": "ANDABAMBA",
+        "IDDIST": 61302.0
+      },
+      {
+        "NOMBDIST": "CATACHE",
+        "IDDIST": 61303.0
+      },
+      {
+        "NOMBDIST": "CHANCAYBAÑOS",
+        "IDDIST": 61304.0
+      },
+      {
+        "NOMBDIST": "LA ESPERANZA",
+        "IDDIST": 61305.0
+      },
+      {
+        "NOMBDIST": "NINABAMBA",
+        "IDDIST": 61306.0
+      },
+      {
+        "NOMBDIST": "PULAN",
+        "IDDIST": 61307.0
+      },
+      {
+        "NOMBDIST": "SAUCEPAMPA",
+        "IDDIST": 61308.0
+      },
+      {
+        "NOMBDIST": "SEXI",
+        "IDDIST": 61309.0
+      },
+      {
+        "NOMBDIST": "UTICYACU",
+        "IDDIST": 61310.0
+      },
+      {
+        "NOMBDIST": "YAUYUCAN",
+        "IDDIST": 61311.0
+      }
+    ]
+  },
+  "CALLAO": {
+    "CALLAO": [
+      {
+        "NOMBDIST": "CALLAO",
+        "IDDIST": 70101.0
+      },
+      {
+        "NOMBDIST": "BELLAVISTA",
+        "IDDIST": 70102.0
+      },
+      {
+        "NOMBDIST": "CARMEN DE LA LEGUA REYNOSO",
+        "IDDIST": 70103.0
+      },
+      {
+        "NOMBDIST": "LA PERLA",
+        "IDDIST": 70104.0
+      },
+      {
+        "NOMBDIST": "LA PUNTA",
+        "IDDIST": 70105.0
+      },
+      {
+        "NOMBDIST": "VENTANILLA",
+        "IDDIST": 70106.0
+      },
+      {
+        "NOMBDIST": "MI PERU",
+        "IDDIST": 70107.0
+      }
+    ]
+  },
+  "CUSCO": {
+    "CUSCO": [
+      {
+        "NOMBDIST": "CUSCO",
+        "IDDIST": 80101.0
+      },
+      {
+        "NOMBDIST": "CCORCA",
+        "IDDIST": 80102.0
+      },
+      {
+        "NOMBDIST": "POROY",
+        "IDDIST": 80103.0
+      },
+      {
+        "NOMBDIST": "SAN JERONIMO",
+        "IDDIST": 80104.0
+      },
+      {
+        "NOMBDIST": "SAN SEBASTIAN",
+        "IDDIST": 80105.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO",
+        "IDDIST": 80106.0
+      },
+      {
+        "NOMBDIST": "SAYLLA",
+        "IDDIST": 80107.0
+      },
+      {
+        "NOMBDIST": "WANCHAQ",
+        "IDDIST": 80108.0
+      }
+    ],
+    "ACOMAYO": [
+      {
+        "NOMBDIST": "ACOMAYO",
+        "IDDIST": 80201.0
+      },
+      {
+        "NOMBDIST": "ACOPIA",
+        "IDDIST": 80202.0
+      },
+      {
+        "NOMBDIST": "ACOS",
+        "IDDIST": 80203.0
+      },
+      {
+        "NOMBDIST": "MOSOC LLACTA",
+        "IDDIST": 80204.0
+      },
+      {
+        "NOMBDIST": "POMACANCHI",
+        "IDDIST": 80205.0
+      },
+      {
+        "NOMBDIST": "RONDOCAN",
+        "IDDIST": 80206.0
+      },
+      {
+        "NOMBDIST": "SANGARARA",
+        "IDDIST": 80207.0
+      }
+    ],
+    "ANTA": [
+      {
+        "NOMBDIST": "ANTA",
+        "IDDIST": 80301.0
+      },
+      {
+        "NOMBDIST": "ANCAHUASI",
+        "IDDIST": 80302.0
+      },
+      {
+        "NOMBDIST": "CACHIMAYO",
+        "IDDIST": 80303.0
+      },
+      {
+        "NOMBDIST": "CHINCHAYPUJIO",
+        "IDDIST": 80304.0
+      },
+      {
+        "NOMBDIST": "HUAROCONDO",
+        "IDDIST": 80305.0
+      },
+      {
+        "NOMBDIST": "LIMATAMBO",
+        "IDDIST": 80306.0
+      },
+      {
+        "NOMBDIST": "MOLLEPATA",
+        "IDDIST": 80307.0
+      },
+      {
+        "NOMBDIST": "PUCYURA",
+        "IDDIST": 80308.0
+      },
+      {
+        "NOMBDIST": "ZURITE",
+        "IDDIST": 80309.0
+      }
+    ],
+    "CALCA": [
+      {
+        "NOMBDIST": "CALCA",
+        "IDDIST": 80401.0
+      },
+      {
+        "NOMBDIST": "COYA",
+        "IDDIST": 80402.0
+      },
+      {
+        "NOMBDIST": "LAMAY",
+        "IDDIST": 80403.0
+      },
+      {
+        "NOMBDIST": "LARES",
+        "IDDIST": 80404.0
+      },
+      {
+        "NOMBDIST": "PISAC",
+        "IDDIST": 80405.0
+      },
+      {
+        "NOMBDIST": "SAN SALVADOR",
+        "IDDIST": 80406.0
+      },
+      {
+        "NOMBDIST": "TARAY",
+        "IDDIST": 80407.0
+      },
+      {
+        "NOMBDIST": "YANATILE",
+        "IDDIST": 80408.0
+      }
+    ],
+    "CANAS": [
+      {
+        "NOMBDIST": "YANAOCA",
+        "IDDIST": 80501.0
+      },
+      {
+        "NOMBDIST": "CHECCA",
+        "IDDIST": 80502.0
+      },
+      {
+        "NOMBDIST": "KUNTURKANKI",
+        "IDDIST": 80503.0
+      },
+      {
+        "NOMBDIST": "LANGUI",
+        "IDDIST": 80504.0
+      },
+      {
+        "NOMBDIST": "LAYO",
+        "IDDIST": 80505.0
+      },
+      {
+        "NOMBDIST": "PAMPAMARCA",
+        "IDDIST": 80506.0
+      },
+      {
+        "NOMBDIST": "QUEHUE",
+        "IDDIST": 80507.0
+      },
+      {
+        "NOMBDIST": "TUPAC AMARU",
+        "IDDIST": 80508.0
+      }
+    ],
+    "CANCHIS": [
+      {
+        "NOMBDIST": "SICUANI",
+        "IDDIST": 80601.0
+      },
+      {
+        "NOMBDIST": "CHECACUPE",
+        "IDDIST": 80602.0
+      },
+      {
+        "NOMBDIST": "COMBAPATA",
+        "IDDIST": 80603.0
+      },
+      {
+        "NOMBDIST": "MARANGANI",
+        "IDDIST": 80604.0
+      },
+      {
+        "NOMBDIST": "PITUMARCA",
+        "IDDIST": 80605.0
+      },
+      {
+        "NOMBDIST": "SAN PABLO",
+        "IDDIST": 80606.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO",
+        "IDDIST": 80607.0
+      },
+      {
+        "NOMBDIST": "TINTA",
+        "IDDIST": 80608.0
+      }
+    ],
+    "CHUMBIVILCAS": [
+      {
+        "NOMBDIST": "SANTO TOMAS",
+        "IDDIST": 80701.0
+      },
+      {
+        "NOMBDIST": "CAPACMARCA",
+        "IDDIST": 80702.0
+      },
+      {
+        "NOMBDIST": "CHAMACA",
+        "IDDIST": 80703.0
+      },
+      {
+        "NOMBDIST": "COLQUEMARCA",
+        "IDDIST": 80704.0
+      },
+      {
+        "NOMBDIST": "LIVITACA",
+        "IDDIST": 80705.0
+      },
+      {
+        "NOMBDIST": "LLUSCO",
+        "IDDIST": 80706.0
+      },
+      {
+        "NOMBDIST": "QUIÑOTA",
+        "IDDIST": 80707.0
+      },
+      {
+        "NOMBDIST": "VELILLE",
+        "IDDIST": 80708.0
+      }
+    ],
+    "ESPINAR": [
+      {
+        "NOMBDIST": "ESPINAR",
+        "IDDIST": 80801.0
+      },
+      {
+        "NOMBDIST": "CONDOROMA",
+        "IDDIST": 80802.0
+      },
+      {
+        "NOMBDIST": "COPORAQUE",
+        "IDDIST": 80803.0
+      },
+      {
+        "NOMBDIST": "OCORURO",
+        "IDDIST": 80804.0
+      },
+      {
+        "NOMBDIST": "PALLPATA",
+        "IDDIST": 80805.0
+      },
+      {
+        "NOMBDIST": "PICHIGUA",
+        "IDDIST": 80806.0
+      },
+      {
+        "NOMBDIST": "SUYCKUTAMBO",
+        "IDDIST": 80807.0
+      },
+      {
+        "NOMBDIST": "ALTO PICHIGUA",
+        "IDDIST": 80808.0
+      }
+    ],
+    "LA CONVENCION": [
+      {
+        "NOMBDIST": "SANTA ANA",
+        "IDDIST": 80901.0
+      },
+      {
+        "NOMBDIST": "ECHARATE",
+        "IDDIST": 80902.0
+      },
+      {
+        "NOMBDIST": "HUAYOPATA",
+        "IDDIST": 80903.0
+      },
+      {
+        "NOMBDIST": "MARANURA",
+        "IDDIST": 80904.0
+      },
+      {
+        "NOMBDIST": "OCOBAMBA",
+        "IDDIST": 80905.0
+      },
+      {
+        "NOMBDIST": "QUELLOUNO",
+        "IDDIST": 80906.0
+      },
+      {
+        "NOMBDIST": "KIMBIRI",
+        "IDDIST": 80907.0
+      },
+      {
+        "NOMBDIST": "SANTA TERESA",
+        "IDDIST": 80908.0
+      },
+      {
+        "NOMBDIST": "VILCABAMBA",
+        "IDDIST": 80909.0
+      },
+      {
+        "NOMBDIST": "PICHARI",
+        "IDDIST": 80910.0
+      },
+      {
+        "NOMBDIST": "INKAWASI",
+        "IDDIST": 80911.0
+      },
+      {
+        "NOMBDIST": "VILLA VIRGEN",
+        "IDDIST": 80912.0
+      },
+      {
+        "NOMBDIST": "VILLA KINTIARINA",
+        "IDDIST": 80913.0
+      },
+      {
+        "NOMBDIST": "MEGANTONI",
+        "IDDIST": 80914.0
+      },
+      {
+        "NOMBDIST": "KUMPIRUSHIATO",
+        "IDDIST": 80915.0
+      },
+      {
+        "NOMBDIST": "CIELO PUNCO",
+        "IDDIST": 80916.0
+      },
+      {
+        "NOMBDIST": "MANITEA",
+        "IDDIST": 80917.0
+      },
+      {
+        "NOMBDIST": "UNION ASHANINKA",
+        "IDDIST": 80918.0
+      }
+    ],
+    "PARURO": [
+      {
+        "NOMBDIST": "PARURO",
+        "IDDIST": 81001.0
+      },
+      {
+        "NOMBDIST": "ACCHA",
+        "IDDIST": 81002.0
+      },
+      {
+        "NOMBDIST": "CCAPI",
+        "IDDIST": 81003.0
+      },
+      {
+        "NOMBDIST": "COLCHA",
+        "IDDIST": 81004.0
+      },
+      {
+        "NOMBDIST": "HUANOQUITE",
+        "IDDIST": 81005.0
+      },
+      {
+        "NOMBDIST": "OMACHA",
+        "IDDIST": 81006.0
+      },
+      {
+        "NOMBDIST": "PACCARITAMBO",
+        "IDDIST": 81007.0
+      },
+      {
+        "NOMBDIST": "PILLPINTO",
+        "IDDIST": 81008.0
+      },
+      {
+        "NOMBDIST": "YAURISQUE",
+        "IDDIST": 81009.0
+      }
+    ],
+    "PAUCARTAMBO": [
+      {
+        "NOMBDIST": "PAUCARTAMBO",
+        "IDDIST": 81101.0
+      },
+      {
+        "NOMBDIST": "CAICAY",
+        "IDDIST": 81102.0
+      },
+      {
+        "NOMBDIST": "CHALLABAMBA",
+        "IDDIST": 81103.0
+      },
+      {
+        "NOMBDIST": "COLQUEPATA",
+        "IDDIST": 81104.0
+      },
+      {
+        "NOMBDIST": "HUANCARANI",
+        "IDDIST": 81105.0
+      },
+      {
+        "NOMBDIST": "KOSÑIPATA",
+        "IDDIST": 81106.0
+      }
+    ],
+    "QUISPICANCHI": [
+      {
+        "NOMBDIST": "URCOS",
+        "IDDIST": 81201.0
+      },
+      {
+        "NOMBDIST": "ANDAHUAYLILLAS",
+        "IDDIST": 81202.0
+      },
+      {
+        "NOMBDIST": "CAMANTI",
+        "IDDIST": 81203.0
+      },
+      {
+        "NOMBDIST": "CCARHUAYO",
+        "IDDIST": 81204.0
+      },
+      {
+        "NOMBDIST": "CCATCA",
+        "IDDIST": 81205.0
+      },
+      {
+        "NOMBDIST": "CUSIPATA",
+        "IDDIST": 81206.0
+      },
+      {
+        "NOMBDIST": "HUARO",
+        "IDDIST": 81207.0
+      },
+      {
+        "NOMBDIST": "LUCRE",
+        "IDDIST": 81208.0
+      },
+      {
+        "NOMBDIST": "MARCAPATA",
+        "IDDIST": 81209.0
+      },
+      {
+        "NOMBDIST": "OCONGATE",
+        "IDDIST": 81210.0
+      },
+      {
+        "NOMBDIST": "OROPESA",
+        "IDDIST": 81211.0
+      },
+      {
+        "NOMBDIST": "QUIQUIJANA",
+        "IDDIST": 81212.0
+      }
+    ],
+    "URUBAMBA": [
+      {
+        "NOMBDIST": "URUBAMBA",
+        "IDDIST": 81301.0
+      },
+      {
+        "NOMBDIST": "CHINCHERO",
+        "IDDIST": 81302.0
+      },
+      {
+        "NOMBDIST": "HUAYLLABAMBA",
+        "IDDIST": 81303.0
+      },
+      {
+        "NOMBDIST": "MACHUPICCHU",
+        "IDDIST": 81304.0
+      },
+      {
+        "NOMBDIST": "MARAS",
+        "IDDIST": 81305.0
+      },
+      {
+        "NOMBDIST": "OLLANTAYTAMBO",
+        "IDDIST": 81306.0
+      },
+      {
+        "NOMBDIST": "YUCAY",
+        "IDDIST": 81307.0
+      }
+    ]
+  },
+  "HUANCAVELICA": {
+    "HUANCAVELICA": [
+      {
+        "NOMBDIST": "HUANCAVELICA",
+        "IDDIST": 90101.0
+      },
+      {
+        "NOMBDIST": "ACOBAMBILLA",
+        "IDDIST": 90102.0
+      },
+      {
+        "NOMBDIST": "ACORIA",
+        "IDDIST": 90103.0
+      },
+      {
+        "NOMBDIST": "CONAYCA",
+        "IDDIST": 90104.0
+      },
+      {
+        "NOMBDIST": "CUENCA",
+        "IDDIST": 90105.0
+      },
+      {
+        "NOMBDIST": "HUACHOCOLPA",
+        "IDDIST": 90106.0
+      },
+      {
+        "NOMBDIST": "HUAYLLAHUARA",
+        "IDDIST": 90107.0
+      },
+      {
+        "NOMBDIST": "IZCUCHACA",
+        "IDDIST": 90108.0
+      },
+      {
+        "NOMBDIST": "LARIA",
+        "IDDIST": 90109.0
+      },
+      {
+        "NOMBDIST": "MANTA",
+        "IDDIST": 90110.0
+      },
+      {
+        "NOMBDIST": "MARISCAL CACERES",
+        "IDDIST": 90111.0
+      },
+      {
+        "NOMBDIST": "MOYA",
+        "IDDIST": 90112.0
+      },
+      {
+        "NOMBDIST": "NUEVO OCCORO",
+        "IDDIST": 90113.0
+      },
+      {
+        "NOMBDIST": "PALCA",
+        "IDDIST": 90114.0
+      },
+      {
+        "NOMBDIST": "PILCHACA",
+        "IDDIST": 90115.0
+      },
+      {
+        "NOMBDIST": "VILCA",
+        "IDDIST": 90116.0
+      },
+      {
+        "NOMBDIST": "YAULI",
+        "IDDIST": 90117.0
+      },
+      {
+        "NOMBDIST": "ASCENSION",
+        "IDDIST": 90118.0
+      },
+      {
+        "NOMBDIST": "HUANDO",
+        "IDDIST": 90119.0
+      }
+    ],
+    "ACOBAMBA": [
+      {
+        "NOMBDIST": "ACOBAMBA",
+        "IDDIST": 90201.0
+      },
+      {
+        "NOMBDIST": "ANDABAMBA",
+        "IDDIST": 90202.0
+      },
+      {
+        "NOMBDIST": "ANTA",
+        "IDDIST": 90203.0
+      },
+      {
+        "NOMBDIST": "CAJA",
+        "IDDIST": 90204.0
+      },
+      {
+        "NOMBDIST": "MARCAS",
+        "IDDIST": 90205.0
+      },
+      {
+        "NOMBDIST": "PAUCARA",
+        "IDDIST": 90206.0
+      },
+      {
+        "NOMBDIST": "POMACOCHA",
+        "IDDIST": 90207.0
+      },
+      {
+        "NOMBDIST": "ROSARIO",
+        "IDDIST": 90208.0
+      }
+    ],
+    "ANGARAES": [
+      {
+        "NOMBDIST": "LIRCAY",
+        "IDDIST": 90301.0
+      },
+      {
+        "NOMBDIST": "ANCHONGA",
+        "IDDIST": 90302.0
+      },
+      {
+        "NOMBDIST": "CALLANMARCA",
+        "IDDIST": 90303.0
+      },
+      {
+        "NOMBDIST": "CCOCHACCASA",
+        "IDDIST": 90304.0
+      },
+      {
+        "NOMBDIST": "CHINCHO",
+        "IDDIST": 90305.0
+      },
+      {
+        "NOMBDIST": "CONGALLA",
+        "IDDIST": 90306.0
+      },
+      {
+        "NOMBDIST": "HUANCA-HUANCA",
+        "IDDIST": 90307.0
+      },
+      {
+        "NOMBDIST": "HUAYLLAY GRANDE",
+        "IDDIST": 90308.0
+      },
+      {
+        "NOMBDIST": "JULCAMARCA",
+        "IDDIST": 90309.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO DE ANTAPARCO",
+        "IDDIST": 90310.0
+      },
+      {
+        "NOMBDIST": "SANTO TOMAS DE PATA",
+        "IDDIST": 90311.0
+      },
+      {
+        "NOMBDIST": "SECCLLA",
+        "IDDIST": 90312.0
+      }
+    ],
+    "CASTROVIRREYNA": [
+      {
+        "NOMBDIST": "CASTROVIRREYNA",
+        "IDDIST": 90401.0
+      },
+      {
+        "NOMBDIST": "ARMA",
+        "IDDIST": 90402.0
+      },
+      {
+        "NOMBDIST": "AURAHUA",
+        "IDDIST": 90403.0
+      },
+      {
+        "NOMBDIST": "CAPILLAS",
+        "IDDIST": 90404.0
+      },
+      {
+        "NOMBDIST": "CHUPAMARCA",
+        "IDDIST": 90405.0
+      },
+      {
+        "NOMBDIST": "COCAS",
+        "IDDIST": 90406.0
+      },
+      {
+        "NOMBDIST": "HUACHOS",
+        "IDDIST": 90407.0
+      },
+      {
+        "NOMBDIST": "HUAMATAMBO",
+        "IDDIST": 90408.0
+      },
+      {
+        "NOMBDIST": "MOLLEPAMPA",
+        "IDDIST": 90409.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN",
+        "IDDIST": 90410.0
+      },
+      {
+        "NOMBDIST": "SANTA ANA",
+        "IDDIST": 90411.0
+      },
+      {
+        "NOMBDIST": "TANTARA",
+        "IDDIST": 90412.0
+      },
+      {
+        "NOMBDIST": "TICRAPO",
+        "IDDIST": 90413.0
+      }
+    ],
+    "CHURCAMPA": [
+      {
+        "NOMBDIST": "CHURCAMPA",
+        "IDDIST": 90501.0
+      },
+      {
+        "NOMBDIST": "ANCO",
+        "IDDIST": 90502.0
+      },
+      {
+        "NOMBDIST": "CHINCHIHUASI",
+        "IDDIST": 90503.0
+      },
+      {
+        "NOMBDIST": "EL CARMEN",
+        "IDDIST": 90504.0
+      },
+      {
+        "NOMBDIST": "LA MERCED",
+        "IDDIST": 90505.0
+      },
+      {
+        "NOMBDIST": "LOCROJA",
+        "IDDIST": 90506.0
+      },
+      {
+        "NOMBDIST": "PAUCARBAMBA",
+        "IDDIST": 90507.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE MAYOCC",
+        "IDDIST": 90508.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CORIS",
+        "IDDIST": 90509.0
+      },
+      {
+        "NOMBDIST": "PACHAMARCA",
+        "IDDIST": 90510.0
+      },
+      {
+        "NOMBDIST": "COSME",
+        "IDDIST": 90511.0
+      }
+    ],
+    "HUAYTARA": [
+      {
+        "NOMBDIST": "HUAYTARA",
+        "IDDIST": 90601.0
+      },
+      {
+        "NOMBDIST": "AYAVI",
+        "IDDIST": 90602.0
+      },
+      {
+        "NOMBDIST": "CORDOVA",
+        "IDDIST": 90603.0
+      },
+      {
+        "NOMBDIST": "HUAYACUNDO ARMA",
+        "IDDIST": 90604.0
+      },
+      {
+        "NOMBDIST": "LARAMARCA",
+        "IDDIST": 90605.0
+      },
+      {
+        "NOMBDIST": "OCOYO",
+        "IDDIST": 90606.0
+      },
+      {
+        "NOMBDIST": "PILPICHACA",
+        "IDDIST": 90607.0
+      },
+      {
+        "NOMBDIST": "QUERCO",
+        "IDDIST": 90608.0
+      },
+      {
+        "NOMBDIST": "QUITO-ARMA",
+        "IDDIST": 90609.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO DE CUSICANCHA",
+        "IDDIST": 90610.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE SANGAYAICO",
+        "IDDIST": 90611.0
+      },
+      {
+        "NOMBDIST": "SAN ISIDRO",
+        "IDDIST": 90612.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE CHOCORVOS",
+        "IDDIST": 90613.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE QUIRAHUARA",
+        "IDDIST": 90614.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO DE CAPILLAS",
+        "IDDIST": 90615.0
+      },
+      {
+        "NOMBDIST": "TAMBO",
+        "IDDIST": 90616.0
+      }
+    ],
+    "TAYACAJA": [
+      {
+        "NOMBDIST": "PAMPAS",
+        "IDDIST": 90701.0
+      },
+      {
+        "NOMBDIST": "ACOSTAMBO",
+        "IDDIST": 90702.0
+      },
+      {
+        "NOMBDIST": "ACRAQUIA",
+        "IDDIST": 90703.0
+      },
+      {
+        "NOMBDIST": "AHUAYCHA",
+        "IDDIST": 90704.0
+      },
+      {
+        "NOMBDIST": "COLCABAMBA",
+        "IDDIST": 90705.0
+      },
+      {
+        "NOMBDIST": "DANIEL HERNANDEZ",
+        "IDDIST": 90706.0
+      },
+      {
+        "NOMBDIST": "HUACHOCOLPA",
+        "IDDIST": 90707.0
+      },
+      {
+        "NOMBDIST": "HUARIBAMBA",
+        "IDDIST": 90709.0
+      },
+      {
+        "NOMBDIST": "ÑAHUIMPUQUIO",
+        "IDDIST": 90710.0
+      },
+      {
+        "NOMBDIST": "PAZOS",
+        "IDDIST": 90711.0
+      },
+      {
+        "NOMBDIST": "QUISHUAR",
+        "IDDIST": 90713.0
+      },
+      {
+        "NOMBDIST": "SALCABAMBA",
+        "IDDIST": 90714.0
+      },
+      {
+        "NOMBDIST": "SALCAHUASI",
+        "IDDIST": 90715.0
+      },
+      {
+        "NOMBDIST": "SAN MARCOS DE ROCCHAC",
+        "IDDIST": 90716.0
+      },
+      {
+        "NOMBDIST": "SURCUBAMBA",
+        "IDDIST": 90717.0
+      },
+      {
+        "NOMBDIST": "TINTAY PUNCU",
+        "IDDIST": 90718.0
+      },
+      {
+        "NOMBDIST": "QUICHUAS",
+        "IDDIST": 90719.0
+      },
+      {
+        "NOMBDIST": "ANDAYMARCA",
+        "IDDIST": 90720.0
+      },
+      {
+        "NOMBDIST": "ROBLE",
+        "IDDIST": 90721.0
+      },
+      {
+        "NOMBDIST": "PICHOS",
+        "IDDIST": 90722.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE TUCUMA",
+        "IDDIST": 90723.0
+      },
+      {
+        "NOMBDIST": "LAMBRAS",
+        "IDDIST": 90724.0
+      },
+      {
+        "NOMBDIST": "COCHABAMBA",
+        "IDDIST": 90725.0
+      }
+    ]
+  },
+  "HUANUCO": {
+    "HUANUCO": [
+      {
+        "NOMBDIST": "HUANUCO",
+        "IDDIST": 100101.0
+      },
+      {
+        "NOMBDIST": "AMARILIS",
+        "IDDIST": 100102.0
+      },
+      {
+        "NOMBDIST": "CHINCHAO",
+        "IDDIST": 100103.0
+      },
+      {
+        "NOMBDIST": "CHURUBAMBA",
+        "IDDIST": 100104.0
+      },
+      {
+        "NOMBDIST": "MARGOS",
+        "IDDIST": 100105.0
+      },
+      {
+        "NOMBDIST": "QUISQUI (KICHKI)",
+        "IDDIST": 100106.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE CAYRAN",
+        "IDDIST": 100107.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CHAULAN",
+        "IDDIST": 100108.0
+      },
+      {
+        "NOMBDIST": "SANTA MARIA DEL VALLE",
+        "IDDIST": 100109.0
+      },
+      {
+        "NOMBDIST": "YARUMAYO",
+        "IDDIST": 100110.0
+      },
+      {
+        "NOMBDIST": "PILLCO MARCA",
+        "IDDIST": 100111.0
+      },
+      {
+        "NOMBDIST": "YACUS",
+        "IDDIST": 100112.0
+      },
+      {
+        "NOMBDIST": "SAN PABLO DE PILLAO",
+        "IDDIST": 100113.0
+      }
+    ],
+    "AMBO": [
+      {
+        "NOMBDIST": "AMBO",
+        "IDDIST": 100201.0
+      },
+      {
+        "NOMBDIST": "CAYNA",
+        "IDDIST": 100202.0
+      },
+      {
+        "NOMBDIST": "COLPAS",
+        "IDDIST": 100203.0
+      },
+      {
+        "NOMBDIST": "CONCHAMARCA",
+        "IDDIST": 100204.0
+      },
+      {
+        "NOMBDIST": "HUACAR",
+        "IDDIST": 100205.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO",
+        "IDDIST": 100206.0
+      },
+      {
+        "NOMBDIST": "SAN RAFAEL",
+        "IDDIST": 100207.0
+      },
+      {
+        "NOMBDIST": "TOMAY KICHWA",
+        "IDDIST": 100208.0
+      }
+    ],
+    "DOS DE MAYO": [
+      {
+        "NOMBDIST": "LA UNION",
+        "IDDIST": 100301.0
+      },
+      {
+        "NOMBDIST": "CHUQUIS",
+        "IDDIST": 100307.0
+      },
+      {
+        "NOMBDIST": "MARIAS",
+        "IDDIST": 100311.0
+      },
+      {
+        "NOMBDIST": "PACHAS",
+        "IDDIST": 100313.0
+      },
+      {
+        "NOMBDIST": "QUIVILLA",
+        "IDDIST": 100316.0
+      },
+      {
+        "NOMBDIST": "RIPAN",
+        "IDDIST": 100317.0
+      },
+      {
+        "NOMBDIST": "SHUNQUI",
+        "IDDIST": 100321.0
+      },
+      {
+        "NOMBDIST": "SILLAPATA",
+        "IDDIST": 100322.0
+      },
+      {
+        "NOMBDIST": "YANAS",
+        "IDDIST": 100323.0
+      }
+    ],
+    "HUACAYBAMBA": [
+      {
+        "NOMBDIST": "HUACAYBAMBA",
+        "IDDIST": 100401.0
+      },
+      {
+        "NOMBDIST": "CANCHABAMBA",
+        "IDDIST": 100402.0
+      },
+      {
+        "NOMBDIST": "COCHABAMBA",
+        "IDDIST": 100403.0
+      },
+      {
+        "NOMBDIST": "PINRA",
+        "IDDIST": 100404.0
+      }
+    ],
+    "HUAMALIES": [
+      {
+        "NOMBDIST": "LLATA",
+        "IDDIST": 100501.0
+      },
+      {
+        "NOMBDIST": "ARANCAY",
+        "IDDIST": 100502.0
+      },
+      {
+        "NOMBDIST": "CHAVIN DE PARIARCA",
+        "IDDIST": 100503.0
+      },
+      {
+        "NOMBDIST": "JACAS GRANDE",
+        "IDDIST": 100504.0
+      },
+      {
+        "NOMBDIST": "JIRCAN",
+        "IDDIST": 100505.0
+      },
+      {
+        "NOMBDIST": "MIRAFLORES",
+        "IDDIST": 100506.0
+      },
+      {
+        "NOMBDIST": "MONZON",
+        "IDDIST": 100507.0
+      },
+      {
+        "NOMBDIST": "PUNCHAO",
+        "IDDIST": 100508.0
+      },
+      {
+        "NOMBDIST": "PUÑOS",
+        "IDDIST": 100509.0
+      },
+      {
+        "NOMBDIST": "SINGA",
+        "IDDIST": 100510.0
+      },
+      {
+        "NOMBDIST": "TANTAMAYO",
+        "IDDIST": 100511.0
+      }
+    ],
+    "LEONCIO PRADO": [
+      {
+        "NOMBDIST": "RUPA-RUPA",
+        "IDDIST": 100601.0
+      },
+      {
+        "NOMBDIST": "DANIEL ALOMIA ROBLES",
+        "IDDIST": 100602.0
+      },
+      {
+        "NOMBDIST": "HERMILIO VALDIZAN",
+        "IDDIST": 100603.0
+      },
+      {
+        "NOMBDIST": "JOSE CRESPO Y CASTILLO",
+        "IDDIST": 100604.0
+      },
+      {
+        "NOMBDIST": "LUYANDO",
+        "IDDIST": 100605.0
+      },
+      {
+        "NOMBDIST": "MARIANO DAMASO BERAUN",
+        "IDDIST": 100606.0
+      },
+      {
+        "NOMBDIST": "PUCAYACU",
+        "IDDIST": 100607.0
+      },
+      {
+        "NOMBDIST": "CASTILLO GRANDE",
+        "IDDIST": 100608.0
+      },
+      {
+        "NOMBDIST": "PUEBLO NUEVO",
+        "IDDIST": 100609.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO DE ANDA",
+        "IDDIST": 100610.0
+      }
+    ],
+    "MARAÑON": [
+      {
+        "NOMBDIST": "HUACRACHUCO",
+        "IDDIST": 100701.0
+      },
+      {
+        "NOMBDIST": "CHOLON",
+        "IDDIST": 100702.0
+      },
+      {
+        "NOMBDIST": "SAN BUENAVENTURA",
+        "IDDIST": 100703.0
+      },
+      {
+        "NOMBDIST": "LA MORADA",
+        "IDDIST": 100704.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA DE ALTO YANAJANCA",
+        "IDDIST": 100705.0
+      }
+    ],
+    "PACHITEA": [
+      {
+        "NOMBDIST": "PANAO",
+        "IDDIST": 100801.0
+      },
+      {
+        "NOMBDIST": "CHAGLLA",
+        "IDDIST": 100802.0
+      },
+      {
+        "NOMBDIST": "MOLINO",
+        "IDDIST": 100803.0
+      },
+      {
+        "NOMBDIST": "UMARI",
+        "IDDIST": 100804.0
+      }
+    ],
+    "PUERTO INCA": [
+      {
+        "NOMBDIST": "PUERTO INCA",
+        "IDDIST": 100901.0
+      },
+      {
+        "NOMBDIST": "CODO DEL POZUZO",
+        "IDDIST": 100902.0
+      },
+      {
+        "NOMBDIST": "HONORIA",
+        "IDDIST": 100903.0
+      },
+      {
+        "NOMBDIST": "TOURNAVISTA",
+        "IDDIST": 100904.0
+      },
+      {
+        "NOMBDIST": "YUYAPICHIS",
+        "IDDIST": 100905.0
+      }
+    ],
+    "LAURICOCHA": [
+      {
+        "NOMBDIST": "JESUS",
+        "IDDIST": 101001.0
+      },
+      {
+        "NOMBDIST": "BAÑOS",
+        "IDDIST": 101002.0
+      },
+      {
+        "NOMBDIST": "JIVIA",
+        "IDDIST": 101003.0
+      },
+      {
+        "NOMBDIST": "QUEROPALCA",
+        "IDDIST": 101004.0
+      },
+      {
+        "NOMBDIST": "RONDOS",
+        "IDDIST": 101005.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE ASIS",
+        "IDDIST": 101006.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE CAURI",
+        "IDDIST": 101007.0
+      }
+    ],
+    "YAROWILCA": [
+      {
+        "NOMBDIST": "CHAVINILLO",
+        "IDDIST": 101101.0
+      },
+      {
+        "NOMBDIST": "CAHUAC",
+        "IDDIST": 101102.0
+      },
+      {
+        "NOMBDIST": "CHACABAMBA",
+        "IDDIST": 101103.0
+      },
+      {
+        "NOMBDIST": "APARICIO POMARES",
+        "IDDIST": 101104.0
+      },
+      {
+        "NOMBDIST": "JACAS CHICO",
+        "IDDIST": 101105.0
+      },
+      {
+        "NOMBDIST": "OBAS",
+        "IDDIST": 101106.0
+      },
+      {
+        "NOMBDIST": "PAMPAMARCA",
+        "IDDIST": 101107.0
+      },
+      {
+        "NOMBDIST": "CHORAS",
+        "IDDIST": 101108.0
+      }
+    ]
+  },
+  "ICA": {
+    "ICA": [
+      {
+        "NOMBDIST": "ICA",
+        "IDDIST": 110101.0
+      },
+      {
+        "NOMBDIST": "LA TINGUIÑA",
+        "IDDIST": 110102.0
+      },
+      {
+        "NOMBDIST": "LOS AQUIJES",
+        "IDDIST": 110103.0
+      },
+      {
+        "NOMBDIST": "OCUCAJE",
+        "IDDIST": 110104.0
+      },
+      {
+        "NOMBDIST": "PACHACUTEC",
+        "IDDIST": 110105.0
+      },
+      {
+        "NOMBDIST": "PARCONA",
+        "IDDIST": 110106.0
+      },
+      {
+        "NOMBDIST": "PUEBLO NUEVO",
+        "IDDIST": 110107.0
+      },
+      {
+        "NOMBDIST": "SALAS",
+        "IDDIST": 110108.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DE LOS MOLINOS",
+        "IDDIST": 110109.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN BAUTISTA",
+        "IDDIST": 110110.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO",
+        "IDDIST": 110111.0
+      },
+      {
+        "NOMBDIST": "SUBTANJALLA",
+        "IDDIST": 110112.0
+      },
+      {
+        "NOMBDIST": "TATE",
+        "IDDIST": 110113.0
+      },
+      {
+        "NOMBDIST": "YAUCA DEL ROSARIO",
+        "IDDIST": 110114.0
+      }
+    ],
+    "CHINCHA": [
+      {
+        "NOMBDIST": "CHINCHA ALTA",
+        "IDDIST": 110201.0
+      },
+      {
+        "NOMBDIST": "ALTO LARAN",
+        "IDDIST": 110202.0
+      },
+      {
+        "NOMBDIST": "CHAVIN",
+        "IDDIST": 110203.0
+      },
+      {
+        "NOMBDIST": "CHINCHA BAJA",
+        "IDDIST": 110204.0
+      },
+      {
+        "NOMBDIST": "EL CARMEN",
+        "IDDIST": 110205.0
+      },
+      {
+        "NOMBDIST": "GROCIO PRADO",
+        "IDDIST": 110206.0
+      },
+      {
+        "NOMBDIST": "PUEBLO NUEVO",
+        "IDDIST": 110207.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE YANAC",
+        "IDDIST": 110208.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE HUACARPANA",
+        "IDDIST": 110209.0
+      },
+      {
+        "NOMBDIST": "SUNAMPE",
+        "IDDIST": 110210.0
+      },
+      {
+        "NOMBDIST": "TAMBO DE MORA",
+        "IDDIST": 110211.0
+      }
+    ],
+    "NASCA": [
+      {
+        "NOMBDIST": "NASCA",
+        "IDDIST": 110301.0
+      },
+      {
+        "NOMBDIST": "CHANGUILLO",
+        "IDDIST": 110302.0
+      },
+      {
+        "NOMBDIST": "EL INGENIO",
+        "IDDIST": 110303.0
+      },
+      {
+        "NOMBDIST": "MARCONA",
+        "IDDIST": 110304.0
+      },
+      {
+        "NOMBDIST": "VISTA ALEGRE",
+        "IDDIST": 110305.0
+      }
+    ],
+    "PALPA": [
+      {
+        "NOMBDIST": "PALPA",
+        "IDDIST": 110401.0
+      },
+      {
+        "NOMBDIST": "LLIPATA",
+        "IDDIST": 110402.0
+      },
+      {
+        "NOMBDIST": "RIO GRANDE",
+        "IDDIST": 110403.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ",
+        "IDDIST": 110404.0
+      },
+      {
+        "NOMBDIST": "TIBILLO",
+        "IDDIST": 110405.0
+      }
+    ],
+    "PISCO": [
+      {
+        "NOMBDIST": "PISCO",
+        "IDDIST": 110501.0
+      },
+      {
+        "NOMBDIST": "HUANCANO",
+        "IDDIST": 110502.0
+      },
+      {
+        "NOMBDIST": "HUMAY",
+        "IDDIST": 110503.0
+      },
+      {
+        "NOMBDIST": "INDEPENDENCIA",
+        "IDDIST": 110504.0
+      },
+      {
+        "NOMBDIST": "PARACAS",
+        "IDDIST": 110505.0
+      },
+      {
+        "NOMBDIST": "SAN ANDRES",
+        "IDDIST": 110506.0
+      },
+      {
+        "NOMBDIST": "SAN CLEMENTE",
+        "IDDIST": 110507.0
+      },
+      {
+        "NOMBDIST": "TUPAC AMARU INCA",
+        "IDDIST": 110508.0
+      }
+    ]
+  },
+  "JUNIN": {
+    "HUANCAYO": [
+      {
+        "NOMBDIST": "HUANCAYO",
+        "IDDIST": 120101.0
+      },
+      {
+        "NOMBDIST": "CARHUACALLANGA",
+        "IDDIST": 120104.0
+      },
+      {
+        "NOMBDIST": "CHACAPAMPA",
+        "IDDIST": 120105.0
+      },
+      {
+        "NOMBDIST": "CHICCHE",
+        "IDDIST": 120106.0
+      },
+      {
+        "NOMBDIST": "CHILCA",
+        "IDDIST": 120107.0
+      },
+      {
+        "NOMBDIST": "CHONGOS ALTO",
+        "IDDIST": 120108.0
+      },
+      {
+        "NOMBDIST": "CHUPURO",
+        "IDDIST": 120111.0
+      },
+      {
+        "NOMBDIST": "COLCA",
+        "IDDIST": 120112.0
+      },
+      {
+        "NOMBDIST": "CULLHUAS",
+        "IDDIST": 120113.0
+      },
+      {
+        "NOMBDIST": "EL TAMBO",
+        "IDDIST": 120114.0
+      },
+      {
+        "NOMBDIST": "HUACRAPUQUIO",
+        "IDDIST": 120116.0
+      },
+      {
+        "NOMBDIST": "HUALHUAS",
+        "IDDIST": 120117.0
+      },
+      {
+        "NOMBDIST": "HUANCAN",
+        "IDDIST": 120119.0
+      },
+      {
+        "NOMBDIST": "HUASICANCHA",
+        "IDDIST": 120120.0
+      },
+      {
+        "NOMBDIST": "HUAYUCACHI",
+        "IDDIST": 120121.0
+      },
+      {
+        "NOMBDIST": "INGENIO",
+        "IDDIST": 120122.0
+      },
+      {
+        "NOMBDIST": "PARIAHUANCA",
+        "IDDIST": 120124.0
+      },
+      {
+        "NOMBDIST": "PILCOMAYO",
+        "IDDIST": 120125.0
+      },
+      {
+        "NOMBDIST": "PUCARA",
+        "IDDIST": 120126.0
+      },
+      {
+        "NOMBDIST": "QUICHUAY",
+        "IDDIST": 120127.0
+      },
+      {
+        "NOMBDIST": "QUILCAS",
+        "IDDIST": 120128.0
+      },
+      {
+        "NOMBDIST": "SAN AGUSTIN",
+        "IDDIST": 120129.0
+      },
+      {
+        "NOMBDIST": "SAN JERONIMO DE TUNAN",
+        "IDDIST": 120130.0
+      },
+      {
+        "NOMBDIST": "SAÑO",
+        "IDDIST": 120132.0
+      },
+      {
+        "NOMBDIST": "SAPALLANGA",
+        "IDDIST": 120133.0
+      },
+      {
+        "NOMBDIST": "SICAYA",
+        "IDDIST": 120134.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO DE ACOBAMBA",
+        "IDDIST": 120135.0
+      },
+      {
+        "NOMBDIST": "VIQUES",
+        "IDDIST": 120136.0
+      }
+    ],
+    "CONCEPCION": [
+      {
+        "NOMBDIST": "CONCEPCION",
+        "IDDIST": 120201.0
+      },
+      {
+        "NOMBDIST": "ACO",
+        "IDDIST": 120202.0
+      },
+      {
+        "NOMBDIST": "ANDAMARCA",
+        "IDDIST": 120203.0
+      },
+      {
+        "NOMBDIST": "CHAMBARA",
+        "IDDIST": 120204.0
+      },
+      {
+        "NOMBDIST": "COCHAS",
+        "IDDIST": 120205.0
+      },
+      {
+        "NOMBDIST": "COMAS",
+        "IDDIST": 120206.0
+      },
+      {
+        "NOMBDIST": "HEROINAS TOLEDO",
+        "IDDIST": 120207.0
+      },
+      {
+        "NOMBDIST": "MANZANARES",
+        "IDDIST": 120208.0
+      },
+      {
+        "NOMBDIST": "MARISCAL CASTILLA",
+        "IDDIST": 120209.0
+      },
+      {
+        "NOMBDIST": "MATAHUASI",
+        "IDDIST": 120210.0
+      },
+      {
+        "NOMBDIST": "MITO",
+        "IDDIST": 120211.0
+      },
+      {
+        "NOMBDIST": "NUEVE DE JULIO",
+        "IDDIST": 120212.0
+      },
+      {
+        "NOMBDIST": "ORCOTUNA",
+        "IDDIST": 120213.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE DE QUERO",
+        "IDDIST": 120214.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA DE OCOPA",
+        "IDDIST": 120215.0
+      }
+    ],
+    "CHANCHAMAYO": [
+      {
+        "NOMBDIST": "CHANCHAMAYO",
+        "IDDIST": 120301.0
+      },
+      {
+        "NOMBDIST": "PERENE",
+        "IDDIST": 120302.0
+      },
+      {
+        "NOMBDIST": "PICHANAQUI",
+        "IDDIST": 120303.0
+      },
+      {
+        "NOMBDIST": "SAN LUIS DE SHUARO",
+        "IDDIST": 120304.0
+      },
+      {
+        "NOMBDIST": "SAN RAMON",
+        "IDDIST": 120305.0
+      },
+      {
+        "NOMBDIST": "VITOC",
+        "IDDIST": 120306.0
+      }
+    ],
+    "JAUJA": [
+      {
+        "NOMBDIST": "JAUJA",
+        "IDDIST": 120401.0
+      },
+      {
+        "NOMBDIST": "ACOLLA",
+        "IDDIST": 120402.0
+      },
+      {
+        "NOMBDIST": "APATA",
+        "IDDIST": 120403.0
+      },
+      {
+        "NOMBDIST": "ATAURA",
+        "IDDIST": 120404.0
+      },
+      {
+        "NOMBDIST": "CANCHAYLLO",
+        "IDDIST": 120405.0
+      },
+      {
+        "NOMBDIST": "CURICACA",
+        "IDDIST": 120406.0
+      },
+      {
+        "NOMBDIST": "EL MANTARO",
+        "IDDIST": 120407.0
+      },
+      {
+        "NOMBDIST": "HUAMALI",
+        "IDDIST": 120408.0
+      },
+      {
+        "NOMBDIST": "HUARIPAMPA",
+        "IDDIST": 120409.0
+      },
+      {
+        "NOMBDIST": "HUERTAS",
+        "IDDIST": 120410.0
+      },
+      {
+        "NOMBDIST": "JANJAILLO",
+        "IDDIST": 120411.0
+      },
+      {
+        "NOMBDIST": "JULCAN",
+        "IDDIST": 120412.0
+      },
+      {
+        "NOMBDIST": "LEONOR ORDOÑEZ",
+        "IDDIST": 120413.0
+      },
+      {
+        "NOMBDIST": "LLOCLLAPAMPA",
+        "IDDIST": 120414.0
+      },
+      {
+        "NOMBDIST": "MARCO",
+        "IDDIST": 120415.0
+      },
+      {
+        "NOMBDIST": "MASMA",
+        "IDDIST": 120416.0
+      },
+      {
+        "NOMBDIST": "MASMA CHICCHE",
+        "IDDIST": 120417.0
+      },
+      {
+        "NOMBDIST": "MOLINOS",
+        "IDDIST": 120418.0
+      },
+      {
+        "NOMBDIST": "MONOBAMBA",
+        "IDDIST": 120419.0
+      },
+      {
+        "NOMBDIST": "MUQUI",
+        "IDDIST": 120420.0
+      },
+      {
+        "NOMBDIST": "MUQUIYAUYO",
+        "IDDIST": 120421.0
+      },
+      {
+        "NOMBDIST": "PACA",
+        "IDDIST": 120422.0
+      },
+      {
+        "NOMBDIST": "PACCHA",
+        "IDDIST": 120423.0
+      },
+      {
+        "NOMBDIST": "PANCAN",
+        "IDDIST": 120424.0
+      },
+      {
+        "NOMBDIST": "PARCO",
+        "IDDIST": 120425.0
+      },
+      {
+        "NOMBDIST": "POMACANCHA",
+        "IDDIST": 120426.0
+      },
+      {
+        "NOMBDIST": "RICRAN",
+        "IDDIST": 120427.0
+      },
+      {
+        "NOMBDIST": "SAN LORENZO",
+        "IDDIST": 120428.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CHUNAN",
+        "IDDIST": 120429.0
+      },
+      {
+        "NOMBDIST": "SAUSA",
+        "IDDIST": 120430.0
+      },
+      {
+        "NOMBDIST": "SINCOS",
+        "IDDIST": 120431.0
+      },
+      {
+        "NOMBDIST": "TUNAN MARCA",
+        "IDDIST": 120432.0
+      },
+      {
+        "NOMBDIST": "YAULI",
+        "IDDIST": 120433.0
+      },
+      {
+        "NOMBDIST": "YAUYOS",
+        "IDDIST": 120434.0
+      }
+    ],
+    "JUNIN": [
+      {
+        "NOMBDIST": "JUNIN",
+        "IDDIST": 120501.0
+      },
+      {
+        "NOMBDIST": "CARHUAMAYO",
+        "IDDIST": 120502.0
+      },
+      {
+        "NOMBDIST": "ONDORES",
+        "IDDIST": 120503.0
+      },
+      {
+        "NOMBDIST": "ULCUMAYO",
+        "IDDIST": 120504.0
+      }
+    ],
+    "SATIPO": [
+      {
+        "NOMBDIST": "SATIPO",
+        "IDDIST": 120601.0
+      },
+      {
+        "NOMBDIST": "COVIRIALI",
+        "IDDIST": 120602.0
+      },
+      {
+        "NOMBDIST": "LLAYLLA",
+        "IDDIST": 120603.0
+      },
+      {
+        "NOMBDIST": "MAZAMARI",
+        "IDDIST": 120604.0
+      },
+      {
+        "NOMBDIST": "PAMPA HERMOSA",
+        "IDDIST": 120605.0
+      },
+      {
+        "NOMBDIST": "PANGOA",
+        "IDDIST": 120606.0
+      },
+      {
+        "NOMBDIST": "RIO NEGRO",
+        "IDDIST": 120607.0
+      },
+      {
+        "NOMBDIST": "RIO TAMBO",
+        "IDDIST": 120608.0
+      },
+      {
+        "NOMBDIST": "VIZCATÁN DEL ENE",
+        "IDDIST": 120609.0
+      }
+    ],
+    "TARMA": [
+      {
+        "NOMBDIST": "TARMA",
+        "IDDIST": 120701.0
+      },
+      {
+        "NOMBDIST": "ACOBAMBA",
+        "IDDIST": 120702.0
+      },
+      {
+        "NOMBDIST": "HUARICOLCA",
+        "IDDIST": 120703.0
+      },
+      {
+        "NOMBDIST": "HUASAHUASI",
+        "IDDIST": 120704.0
+      },
+      {
+        "NOMBDIST": "LA UNION",
+        "IDDIST": 120705.0
+      },
+      {
+        "NOMBDIST": "PALCA",
+        "IDDIST": 120706.0
+      },
+      {
+        "NOMBDIST": "PALCAMAYO",
+        "IDDIST": 120707.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CAJAS",
+        "IDDIST": 120708.0
+      },
+      {
+        "NOMBDIST": "TAPO",
+        "IDDIST": 120709.0
+      }
+    ],
+    "YAULI": [
+      {
+        "NOMBDIST": "LA OROYA",
+        "IDDIST": 120801.0
+      },
+      {
+        "NOMBDIST": "CHACAPALPA",
+        "IDDIST": 120802.0
+      },
+      {
+        "NOMBDIST": "HUAY-HUAY",
+        "IDDIST": 120803.0
+      },
+      {
+        "NOMBDIST": "MARCAPOMACOCHA",
+        "IDDIST": 120804.0
+      },
+      {
+        "NOMBDIST": "MOROCOCHA",
+        "IDDIST": 120805.0
+      },
+      {
+        "NOMBDIST": "PACCHA",
+        "IDDIST": 120806.0
+      },
+      {
+        "NOMBDIST": "SANTA BARBARA DE CARHUACAYAN",
+        "IDDIST": 120807.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA DE SACCO",
+        "IDDIST": 120808.0
+      },
+      {
+        "NOMBDIST": "SUITUCANCHA",
+        "IDDIST": 120809.0
+      },
+      {
+        "NOMBDIST": "YAULI",
+        "IDDIST": 120810.0
+      }
+    ],
+    "CHUPACA": [
+      {
+        "NOMBDIST": "CHUPACA",
+        "IDDIST": 120901.0
+      },
+      {
+        "NOMBDIST": "AHUAC",
+        "IDDIST": 120902.0
+      },
+      {
+        "NOMBDIST": "CHONGOS BAJO",
+        "IDDIST": 120903.0
+      },
+      {
+        "NOMBDIST": "HUACHAC",
+        "IDDIST": 120904.0
+      },
+      {
+        "NOMBDIST": "HUAMANCACA CHICO",
+        "IDDIST": 120905.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE ISCOS",
+        "IDDIST": 120906.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE JARPA",
+        "IDDIST": 120907.0
+      },
+      {
+        "NOMBDIST": "TRES DE DICIEMBRE",
+        "IDDIST": 120908.0
+      },
+      {
+        "NOMBDIST": "YANACANCHA",
+        "IDDIST": 120909.0
+      }
+    ]
+  },
+  "LA LIBERTAD": {
+    "TRUJILLO": [
+      {
+        "NOMBDIST": "TRUJILLO",
+        "IDDIST": 130101.0
+      },
+      {
+        "NOMBDIST": "EL PORVENIR",
+        "IDDIST": 130102.0
+      },
+      {
+        "NOMBDIST": "FLORENCIA DE MORA",
+        "IDDIST": 130103.0
+      },
+      {
+        "NOMBDIST": "HUANCHACO",
+        "IDDIST": 130104.0
+      },
+      {
+        "NOMBDIST": "LA ESPERANZA",
+        "IDDIST": 130105.0
+      },
+      {
+        "NOMBDIST": "LAREDO",
+        "IDDIST": 130106.0
+      },
+      {
+        "NOMBDIST": "MOCHE",
+        "IDDIST": 130107.0
+      },
+      {
+        "NOMBDIST": "POROTO",
+        "IDDIST": 130108.0
+      },
+      {
+        "NOMBDIST": "SALAVERRY",
+        "IDDIST": 130109.0
+      },
+      {
+        "NOMBDIST": "SIMBAL",
+        "IDDIST": 130110.0
+      },
+      {
+        "NOMBDIST": "VICTOR LARCO HERRERA",
+        "IDDIST": 130111.0
+      },
+      {
+        "NOMBDIST": "ALTO TRUJILLO",
+        "IDDIST": 130112.0
+      }
+    ],
+    "ASCOPE": [
+      {
+        "NOMBDIST": "ASCOPE",
+        "IDDIST": 130201.0
+      },
+      {
+        "NOMBDIST": "CHICAMA",
+        "IDDIST": 130202.0
+      },
+      {
+        "NOMBDIST": "CHOCOPE",
+        "IDDIST": 130203.0
+      },
+      {
+        "NOMBDIST": "MAGDALENA DE CAO",
+        "IDDIST": 130204.0
+      },
+      {
+        "NOMBDIST": "PAIJAN",
+        "IDDIST": 130205.0
+      },
+      {
+        "NOMBDIST": "RAZURI",
+        "IDDIST": 130206.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE CAO",
+        "IDDIST": 130207.0
+      },
+      {
+        "NOMBDIST": "CASA GRANDE",
+        "IDDIST": 130208.0
+      }
+    ],
+    "BOLIVAR": [
+      {
+        "NOMBDIST": "BOLIVAR",
+        "IDDIST": 130301.0
+      },
+      {
+        "NOMBDIST": "BAMBAMARCA",
+        "IDDIST": 130302.0
+      },
+      {
+        "NOMBDIST": "CONDORMARCA",
+        "IDDIST": 130303.0
+      },
+      {
+        "NOMBDIST": "LONGOTEA",
+        "IDDIST": 130304.0
+      },
+      {
+        "NOMBDIST": "UCHUMARCA",
+        "IDDIST": 130305.0
+      },
+      {
+        "NOMBDIST": "UCUNCHA",
+        "IDDIST": 130306.0
+      }
+    ],
+    "CHEPEN": [
+      {
+        "NOMBDIST": "CHEPEN",
+        "IDDIST": 130401.0
+      },
+      {
+        "NOMBDIST": "PACANGA",
+        "IDDIST": 130402.0
+      },
+      {
+        "NOMBDIST": "PUEBLO NUEVO",
+        "IDDIST": 130403.0
+      }
+    ],
+    "JULCAN": [
+      {
+        "NOMBDIST": "JULCAN",
+        "IDDIST": 130501.0
+      },
+      {
+        "NOMBDIST": "CALAMARCA",
+        "IDDIST": 130502.0
+      },
+      {
+        "NOMBDIST": "CARABAMBA",
+        "IDDIST": 130503.0
+      },
+      {
+        "NOMBDIST": "HUASO",
+        "IDDIST": 130504.0
+      }
+    ],
+    "OTUZCO": [
+      {
+        "NOMBDIST": "OTUZCO",
+        "IDDIST": 130601.0
+      },
+      {
+        "NOMBDIST": "AGALLPAMPA",
+        "IDDIST": 130602.0
+      },
+      {
+        "NOMBDIST": "CHARAT",
+        "IDDIST": 130604.0
+      },
+      {
+        "NOMBDIST": "HUARANCHAL",
+        "IDDIST": 130605.0
+      },
+      {
+        "NOMBDIST": "LA CUESTA",
+        "IDDIST": 130606.0
+      },
+      {
+        "NOMBDIST": "MACHE",
+        "IDDIST": 130608.0
+      },
+      {
+        "NOMBDIST": "PARANDAY",
+        "IDDIST": 130610.0
+      },
+      {
+        "NOMBDIST": "SALPO",
+        "IDDIST": 130611.0
+      },
+      {
+        "NOMBDIST": "SINSICAP",
+        "IDDIST": 130613.0
+      },
+      {
+        "NOMBDIST": "USQUIL",
+        "IDDIST": 130614.0
+      }
+    ],
+    "PACASMAYO": [
+      {
+        "NOMBDIST": "SAN PEDRO DE LLOC",
+        "IDDIST": 130701.0
+      },
+      {
+        "NOMBDIST": "GUADALUPE",
+        "IDDIST": 130702.0
+      },
+      {
+        "NOMBDIST": "JEQUETEPEQUE",
+        "IDDIST": 130703.0
+      },
+      {
+        "NOMBDIST": "PACASMAYO",
+        "IDDIST": 130704.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE",
+        "IDDIST": 130705.0
+      }
+    ],
+    "PATAZ": [
+      {
+        "NOMBDIST": "TAYABAMBA",
+        "IDDIST": 130801.0
+      },
+      {
+        "NOMBDIST": "BULDIBUYO",
+        "IDDIST": 130802.0
+      },
+      {
+        "NOMBDIST": "CHILLIA",
+        "IDDIST": 130803.0
+      },
+      {
+        "NOMBDIST": "HUANCASPATA",
+        "IDDIST": 130804.0
+      },
+      {
+        "NOMBDIST": "HUAYLILLAS",
+        "IDDIST": 130805.0
+      },
+      {
+        "NOMBDIST": "HUAYO",
+        "IDDIST": 130806.0
+      },
+      {
+        "NOMBDIST": "ONGON",
+        "IDDIST": 130807.0
+      },
+      {
+        "NOMBDIST": "PARCOY",
+        "IDDIST": 130808.0
+      },
+      {
+        "NOMBDIST": "PATAZ",
+        "IDDIST": 130809.0
+      },
+      {
+        "NOMBDIST": "PIAS",
+        "IDDIST": 130810.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE CHALLAS",
+        "IDDIST": 130811.0
+      },
+      {
+        "NOMBDIST": "TAURIJA",
+        "IDDIST": 130812.0
+      },
+      {
+        "NOMBDIST": "URPAY",
+        "IDDIST": 130813.0
+      }
+    ],
+    "SANCHEZ CARRION": [
+      {
+        "NOMBDIST": "HUAMACHUCO",
+        "IDDIST": 130901.0
+      },
+      {
+        "NOMBDIST": "CHUGAY",
+        "IDDIST": 130902.0
+      },
+      {
+        "NOMBDIST": "COCHORCO",
+        "IDDIST": 130903.0
+      },
+      {
+        "NOMBDIST": "CURGOS",
+        "IDDIST": 130904.0
+      },
+      {
+        "NOMBDIST": "MARCABAL",
+        "IDDIST": 130905.0
+      },
+      {
+        "NOMBDIST": "SANAGORAN",
+        "IDDIST": 130906.0
+      },
+      {
+        "NOMBDIST": "SARIN",
+        "IDDIST": 130907.0
+      },
+      {
+        "NOMBDIST": "SARTIMBAMBA",
+        "IDDIST": 130908.0
+      }
+    ],
+    "SANTIAGO DE CHUCO": [
+      {
+        "NOMBDIST": "SANTIAGO DE CHUCO",
+        "IDDIST": 131001.0
+      },
+      {
+        "NOMBDIST": "ANGASMARCA",
+        "IDDIST": 131002.0
+      },
+      {
+        "NOMBDIST": "CACHICADAN",
+        "IDDIST": 131003.0
+      },
+      {
+        "NOMBDIST": "MOLLEBAMBA",
+        "IDDIST": 131004.0
+      },
+      {
+        "NOMBDIST": "MOLLEPATA",
+        "IDDIST": 131005.0
+      },
+      {
+        "NOMBDIST": "QUIRUVILCA",
+        "IDDIST": 131006.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ DE CHUCA",
+        "IDDIST": 131007.0
+      },
+      {
+        "NOMBDIST": "SITABAMBA",
+        "IDDIST": 131008.0
+      }
+    ],
+    "GRAN CHIMU": [
+      {
+        "NOMBDIST": "CASCAS",
+        "IDDIST": 131101.0
+      },
+      {
+        "NOMBDIST": "LUCMA",
+        "IDDIST": 131102.0
+      },
+      {
+        "NOMBDIST": "MARMOT",
+        "IDDIST": 131103.0
+      },
+      {
+        "NOMBDIST": "SAYAPULLO",
+        "IDDIST": 131104.0
+      }
+    ],
+    "VIRU": [
+      {
+        "NOMBDIST": "VIRU",
+        "IDDIST": 131201.0
+      },
+      {
+        "NOMBDIST": "CHAO",
+        "IDDIST": 131202.0
+      },
+      {
+        "NOMBDIST": "GUADALUPITO",
+        "IDDIST": 131203.0
+      }
+    ]
+  },
+  "LAMBAYEQUE": {
+    "CHICLAYO": [
+      {
+        "NOMBDIST": "CHICLAYO",
+        "IDDIST": 140101.0
+      },
+      {
+        "NOMBDIST": "CHONGOYAPE",
+        "IDDIST": 140102.0
+      },
+      {
+        "NOMBDIST": "ETEN",
+        "IDDIST": 140103.0
+      },
+      {
+        "NOMBDIST": "ETEN PUERTO",
+        "IDDIST": 140104.0
+      },
+      {
+        "NOMBDIST": "JOSE LEONARDO ORTIZ",
+        "IDDIST": 140105.0
+      },
+      {
+        "NOMBDIST": "LA VICTORIA",
+        "IDDIST": 140106.0
+      },
+      {
+        "NOMBDIST": "LAGUNAS",
+        "IDDIST": 140107.0
+      },
+      {
+        "NOMBDIST": "MONSEFU",
+        "IDDIST": 140108.0
+      },
+      {
+        "NOMBDIST": "NUEVA ARICA",
+        "IDDIST": 140109.0
+      },
+      {
+        "NOMBDIST": "OYOTUN",
+        "IDDIST": 140110.0
+      },
+      {
+        "NOMBDIST": "PICSI",
+        "IDDIST": 140111.0
+      },
+      {
+        "NOMBDIST": "PIMENTEL",
+        "IDDIST": 140112.0
+      },
+      {
+        "NOMBDIST": "REQUE",
+        "IDDIST": 140113.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 140114.0
+      },
+      {
+        "NOMBDIST": "SAÑA",
+        "IDDIST": 140115.0
+      },
+      {
+        "NOMBDIST": "CAYALTI",
+        "IDDIST": 140116.0
+      },
+      {
+        "NOMBDIST": "PATAPO",
+        "IDDIST": 140117.0
+      },
+      {
+        "NOMBDIST": "POMALCA",
+        "IDDIST": 140118.0
+      },
+      {
+        "NOMBDIST": "PUCALA",
+        "IDDIST": 140119.0
+      },
+      {
+        "NOMBDIST": "TUMAN",
+        "IDDIST": 140120.0
+      }
+    ],
+    "FERREÑAFE": [
+      {
+        "NOMBDIST": "FERREÑAFE",
+        "IDDIST": 140201.0
+      },
+      {
+        "NOMBDIST": "CAÑARIS",
+        "IDDIST": 140202.0
+      },
+      {
+        "NOMBDIST": "INCAHUASI",
+        "IDDIST": 140203.0
+      },
+      {
+        "NOMBDIST": "MANUEL ANTONIO MESONES MURO",
+        "IDDIST": 140204.0
+      },
+      {
+        "NOMBDIST": "PITIPO",
+        "IDDIST": 140205.0
+      },
+      {
+        "NOMBDIST": "PUEBLO NUEVO",
+        "IDDIST": 140206.0
+      }
+    ],
+    "LAMBAYEQUE": [
+      {
+        "NOMBDIST": "LAMBAYEQUE",
+        "IDDIST": 140301.0
+      },
+      {
+        "NOMBDIST": "CHOCHOPE",
+        "IDDIST": 140302.0
+      },
+      {
+        "NOMBDIST": "ILLIMO",
+        "IDDIST": 140303.0
+      },
+      {
+        "NOMBDIST": "JAYANCA",
+        "IDDIST": 140304.0
+      },
+      {
+        "NOMBDIST": "MOCHUMI",
+        "IDDIST": 140305.0
+      },
+      {
+        "NOMBDIST": "MORROPE",
+        "IDDIST": 140306.0
+      },
+      {
+        "NOMBDIST": "MOTUPE",
+        "IDDIST": 140307.0
+      },
+      {
+        "NOMBDIST": "OLMOS",
+        "IDDIST": 140308.0
+      },
+      {
+        "NOMBDIST": "PACORA",
+        "IDDIST": 140309.0
+      },
+      {
+        "NOMBDIST": "SALAS",
+        "IDDIST": 140310.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE",
+        "IDDIST": 140311.0
+      },
+      {
+        "NOMBDIST": "TUCUME",
+        "IDDIST": 140312.0
+      }
+    ]
+  },
+  "LIMA": {
+    "LIMA": [
+      {
+        "NOMBDIST": "LIMA",
+        "IDDIST": 150101.0
+      },
+      {
+        "NOMBDIST": "ANCON",
+        "IDDIST": 150102.0
+      },
+      {
+        "NOMBDIST": "ATE",
+        "IDDIST": 150103.0
+      },
+      {
+        "NOMBDIST": "BARRANCO",
+        "IDDIST": 150104.0
+      },
+      {
+        "NOMBDIST": "BREÑA",
+        "IDDIST": 150105.0
+      },
+      {
+        "NOMBDIST": "CARABAYLLO",
+        "IDDIST": 150106.0
+      },
+      {
+        "NOMBDIST": "CHACLACAYO",
+        "IDDIST": 150107.0
+      },
+      {
+        "NOMBDIST": "CHORRILLOS",
+        "IDDIST": 150108.0
+      },
+      {
+        "NOMBDIST": "CIENEGUILLA",
+        "IDDIST": 150109.0
+      },
+      {
+        "NOMBDIST": "COMAS",
+        "IDDIST": 150110.0
+      },
+      {
+        "NOMBDIST": "EL AGUSTINO",
+        "IDDIST": 150111.0
+      },
+      {
+        "NOMBDIST": "INDEPENDENCIA",
+        "IDDIST": 150112.0
+      },
+      {
+        "NOMBDIST": "JESUS MARIA",
+        "IDDIST": 150113.0
+      },
+      {
+        "NOMBDIST": "LA MOLINA",
+        "IDDIST": 150114.0
+      },
+      {
+        "NOMBDIST": "LA VICTORIA",
+        "IDDIST": 150115.0
+      },
+      {
+        "NOMBDIST": "LINCE",
+        "IDDIST": 150116.0
+      },
+      {
+        "NOMBDIST": "LOS OLIVOS",
+        "IDDIST": 150117.0
+      },
+      {
+        "NOMBDIST": "LURIGANCHO",
+        "IDDIST": 150118.0
+      },
+      {
+        "NOMBDIST": "LURIN",
+        "IDDIST": 150119.0
+      },
+      {
+        "NOMBDIST": "MAGDALENA DEL MAR",
+        "IDDIST": 150120.0
+      },
+      {
+        "NOMBDIST": "PUEBLO LIBRE",
+        "IDDIST": 150121.0
+      },
+      {
+        "NOMBDIST": "MIRAFLORES",
+        "IDDIST": 150122.0
+      },
+      {
+        "NOMBDIST": "PACHACAMAC",
+        "IDDIST": 150123.0
+      },
+      {
+        "NOMBDIST": "PUCUSANA",
+        "IDDIST": 150124.0
+      },
+      {
+        "NOMBDIST": "PUENTE PIEDRA",
+        "IDDIST": 150125.0
+      },
+      {
+        "NOMBDIST": "PUNTA HERMOSA",
+        "IDDIST": 150126.0
+      },
+      {
+        "NOMBDIST": "PUNTA NEGRA",
+        "IDDIST": 150127.0
+      },
+      {
+        "NOMBDIST": "RIMAC",
+        "IDDIST": 150128.0
+      },
+      {
+        "NOMBDIST": "SAN BARTOLO",
+        "IDDIST": 150129.0
+      },
+      {
+        "NOMBDIST": "SAN BORJA",
+        "IDDIST": 150130.0
+      },
+      {
+        "NOMBDIST": "SAN ISIDRO",
+        "IDDIST": 150131.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE LURIGANCHO",
+        "IDDIST": 150132.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE MIRAFLORES",
+        "IDDIST": 150133.0
+      },
+      {
+        "NOMBDIST": "SAN LUIS",
+        "IDDIST": 150134.0
+      },
+      {
+        "NOMBDIST": "SAN MARTIN DE PORRES",
+        "IDDIST": 150135.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL",
+        "IDDIST": 150136.0
+      },
+      {
+        "NOMBDIST": "SANTA ANITA",
+        "IDDIST": 150137.0
+      },
+      {
+        "NOMBDIST": "SANTA MARIA DEL MAR",
+        "IDDIST": 150138.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 150139.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE SURCO",
+        "IDDIST": 150140.0
+      },
+      {
+        "NOMBDIST": "SURQUILLO",
+        "IDDIST": 150141.0
+      },
+      {
+        "NOMBDIST": "VILLA EL SALVADOR",
+        "IDDIST": 150142.0
+      },
+      {
+        "NOMBDIST": "VILLA MARIA DEL TRIUNFO",
+        "IDDIST": 150143.0
+      }
+    ],
+    "BARRANCA": [
+      {
+        "NOMBDIST": "BARRANCA",
+        "IDDIST": 150201.0
+      },
+      {
+        "NOMBDIST": "PARAMONGA",
+        "IDDIST": 150202.0
+      },
+      {
+        "NOMBDIST": "PATIVILCA",
+        "IDDIST": 150203.0
+      },
+      {
+        "NOMBDIST": "SUPE",
+        "IDDIST": 150204.0
+      },
+      {
+        "NOMBDIST": "SUPE PUERTO",
+        "IDDIST": 150205.0
+      }
+    ],
+    "CAJATAMBO": [
+      {
+        "NOMBDIST": "CAJATAMBO",
+        "IDDIST": 150301.0
+      },
+      {
+        "NOMBDIST": "COPA",
+        "IDDIST": 150302.0
+      },
+      {
+        "NOMBDIST": "GORGOR",
+        "IDDIST": 150303.0
+      },
+      {
+        "NOMBDIST": "HUANCAPON",
+        "IDDIST": 150304.0
+      },
+      {
+        "NOMBDIST": "MANAS",
+        "IDDIST": 150305.0
+      }
+    ],
+    "CANTA": [
+      {
+        "NOMBDIST": "CANTA",
+        "IDDIST": 150401.0
+      },
+      {
+        "NOMBDIST": "ARAHUAY",
+        "IDDIST": 150402.0
+      },
+      {
+        "NOMBDIST": "HUAMANTANGA",
+        "IDDIST": 150403.0
+      },
+      {
+        "NOMBDIST": "HUAROS",
+        "IDDIST": 150404.0
+      },
+      {
+        "NOMBDIST": "LACHAQUI",
+        "IDDIST": 150405.0
+      },
+      {
+        "NOMBDIST": "SAN BUENAVENTURA",
+        "IDDIST": 150406.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA DE QUIVES",
+        "IDDIST": 150407.0
+      }
+    ],
+    "CAÑETE": [
+      {
+        "NOMBDIST": "SAN VICENTE DE CAÑETE",
+        "IDDIST": 150501.0
+      },
+      {
+        "NOMBDIST": "ASIA",
+        "IDDIST": 150502.0
+      },
+      {
+        "NOMBDIST": "CALANGO",
+        "IDDIST": 150503.0
+      },
+      {
+        "NOMBDIST": "CERRO AZUL",
+        "IDDIST": 150504.0
+      },
+      {
+        "NOMBDIST": "CHILCA",
+        "IDDIST": 150505.0
+      },
+      {
+        "NOMBDIST": "COAYLLO",
+        "IDDIST": 150506.0
+      },
+      {
+        "NOMBDIST": "IMPERIAL",
+        "IDDIST": 150507.0
+      },
+      {
+        "NOMBDIST": "LUNAHUANA",
+        "IDDIST": 150508.0
+      },
+      {
+        "NOMBDIST": "MALA",
+        "IDDIST": 150509.0
+      },
+      {
+        "NOMBDIST": "NUEVO IMPERIAL",
+        "IDDIST": 150510.0
+      },
+      {
+        "NOMBDIST": "PACARAN",
+        "IDDIST": 150511.0
+      },
+      {
+        "NOMBDIST": "QUILMANA",
+        "IDDIST": 150512.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 150513.0
+      },
+      {
+        "NOMBDIST": "SAN LUIS",
+        "IDDIST": 150514.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ DE FLORES",
+        "IDDIST": 150515.0
+      },
+      {
+        "NOMBDIST": "ZUÑIGA",
+        "IDDIST": 150516.0
+      }
+    ],
+    "HUARAL": [
+      {
+        "NOMBDIST": "HUARAL",
+        "IDDIST": 150601.0
+      },
+      {
+        "NOMBDIST": "ATAVILLOS ALTO",
+        "IDDIST": 150602.0
+      },
+      {
+        "NOMBDIST": "ATAVILLOS BAJO",
+        "IDDIST": 150603.0
+      },
+      {
+        "NOMBDIST": "AUCALLAMA",
+        "IDDIST": 150604.0
+      },
+      {
+        "NOMBDIST": "CHANCAY",
+        "IDDIST": 150605.0
+      },
+      {
+        "NOMBDIST": "IHUARI",
+        "IDDIST": 150606.0
+      },
+      {
+        "NOMBDIST": "LAMPIAN",
+        "IDDIST": 150607.0
+      },
+      {
+        "NOMBDIST": "PACARAOS",
+        "IDDIST": 150608.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE ACOS",
+        "IDDIST": 150609.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ DE ANDAMARCA",
+        "IDDIST": 150610.0
+      },
+      {
+        "NOMBDIST": "SUMBILCA",
+        "IDDIST": 150611.0
+      },
+      {
+        "NOMBDIST": "VEINTISIETE DE NOVIEMBRE",
+        "IDDIST": 150612.0
+      }
+    ],
+    "HUAROCHIRI": [
+      {
+        "NOMBDIST": "MATUCANA",
+        "IDDIST": 150701.0
+      },
+      {
+        "NOMBDIST": "ANTIOQUIA",
+        "IDDIST": 150702.0
+      },
+      {
+        "NOMBDIST": "CALLAHUANCA",
+        "IDDIST": 150703.0
+      },
+      {
+        "NOMBDIST": "CARAMPOMA",
+        "IDDIST": 150704.0
+      },
+      {
+        "NOMBDIST": "CHICLA",
+        "IDDIST": 150705.0
+      },
+      {
+        "NOMBDIST": "CUENCA",
+        "IDDIST": 150706.0
+      },
+      {
+        "NOMBDIST": "HUACHUPAMPA",
+        "IDDIST": 150707.0
+      },
+      {
+        "NOMBDIST": "HUANZA",
+        "IDDIST": 150708.0
+      },
+      {
+        "NOMBDIST": "HUAROCHIRI",
+        "IDDIST": 150709.0
+      },
+      {
+        "NOMBDIST": "LAHUAYTAMBO",
+        "IDDIST": 150710.0
+      },
+      {
+        "NOMBDIST": "LANGA",
+        "IDDIST": 150711.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE LARAOS",
+        "IDDIST": 150712.0
+      },
+      {
+        "NOMBDIST": "MARIATANA",
+        "IDDIST": 150713.0
+      },
+      {
+        "NOMBDIST": "RICARDO PALMA",
+        "IDDIST": 150714.0
+      },
+      {
+        "NOMBDIST": "SAN ANDRES DE TUPICOCHA",
+        "IDDIST": 150715.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 150716.0
+      },
+      {
+        "NOMBDIST": "SAN BARTOLOME",
+        "IDDIST": 150717.0
+      },
+      {
+        "NOMBDIST": "SAN DAMIAN",
+        "IDDIST": 150718.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE IRIS",
+        "IDDIST": 150719.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE TANTARANCHE",
+        "IDDIST": 150720.0
+      },
+      {
+        "NOMBDIST": "SAN LORENZO DE QUINTI",
+        "IDDIST": 150721.0
+      },
+      {
+        "NOMBDIST": "SAN MATEO",
+        "IDDIST": 150722.0
+      },
+      {
+        "NOMBDIST": "SAN MATEO DE OTAO",
+        "IDDIST": 150723.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE CASTA",
+        "IDDIST": 150724.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE HUANCAYRE",
+        "IDDIST": 150725.0
+      },
+      {
+        "NOMBDIST": "SANGALLAYA",
+        "IDDIST": 150726.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ DE COCACHACRA",
+        "IDDIST": 150727.0
+      },
+      {
+        "NOMBDIST": "SANTA EULALIA",
+        "IDDIST": 150728.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE ANCHUCAYA",
+        "IDDIST": 150729.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE TUNA",
+        "IDDIST": 150730.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO DE LOS OLLEROS",
+        "IDDIST": 150731.0
+      },
+      {
+        "NOMBDIST": "SURCO",
+        "IDDIST": 150732.0
+      }
+    ],
+    "HUAURA": [
+      {
+        "NOMBDIST": "HUACHO",
+        "IDDIST": 150801.0
+      },
+      {
+        "NOMBDIST": "AMBAR",
+        "IDDIST": 150802.0
+      },
+      {
+        "NOMBDIST": "CALETA DE CARQUIN",
+        "IDDIST": 150803.0
+      },
+      {
+        "NOMBDIST": "CHECRAS",
+        "IDDIST": 150804.0
+      },
+      {
+        "NOMBDIST": "HUALMAY",
+        "IDDIST": 150805.0
+      },
+      {
+        "NOMBDIST": "HUAURA",
+        "IDDIST": 150806.0
+      },
+      {
+        "NOMBDIST": "LEONCIO PRADO",
+        "IDDIST": 150807.0
+      },
+      {
+        "NOMBDIST": "PACCHO",
+        "IDDIST": 150808.0
+      },
+      {
+        "NOMBDIST": "SANTA LEONOR",
+        "IDDIST": 150809.0
+      },
+      {
+        "NOMBDIST": "SANTA MARIA",
+        "IDDIST": 150810.0
+      },
+      {
+        "NOMBDIST": "SAYAN",
+        "IDDIST": 150811.0
+      },
+      {
+        "NOMBDIST": "VEGUETA",
+        "IDDIST": 150812.0
+      }
+    ],
+    "OYON": [
+      {
+        "NOMBDIST": "OYON",
+        "IDDIST": 150901.0
+      },
+      {
+        "NOMBDIST": "ANDAJES",
+        "IDDIST": 150902.0
+      },
+      {
+        "NOMBDIST": "CAUJUL",
+        "IDDIST": 150903.0
+      },
+      {
+        "NOMBDIST": "COCHAMARCA",
+        "IDDIST": 150904.0
+      },
+      {
+        "NOMBDIST": "NAVAN",
+        "IDDIST": 150905.0
+      },
+      {
+        "NOMBDIST": "PACHANGARA",
+        "IDDIST": 150906.0
+      }
+    ],
+    "YAUYOS": [
+      {
+        "NOMBDIST": "YAUYOS",
+        "IDDIST": 151001.0
+      },
+      {
+        "NOMBDIST": "ALIS",
+        "IDDIST": 151002.0
+      },
+      {
+        "NOMBDIST": "ALLAUCA",
+        "IDDIST": 151003.0
+      },
+      {
+        "NOMBDIST": "AYAVIRI",
+        "IDDIST": 151004.0
+      },
+      {
+        "NOMBDIST": "AZANGARO",
+        "IDDIST": 151005.0
+      },
+      {
+        "NOMBDIST": "CACRA",
+        "IDDIST": 151006.0
+      },
+      {
+        "NOMBDIST": "CARANIA",
+        "IDDIST": 151007.0
+      },
+      {
+        "NOMBDIST": "CATAHUASI",
+        "IDDIST": 151008.0
+      },
+      {
+        "NOMBDIST": "CHOCOS",
+        "IDDIST": 151009.0
+      },
+      {
+        "NOMBDIST": "COCHAS",
+        "IDDIST": 151010.0
+      },
+      {
+        "NOMBDIST": "COLONIA",
+        "IDDIST": 151011.0
+      },
+      {
+        "NOMBDIST": "HONGOS",
+        "IDDIST": 151012.0
+      },
+      {
+        "NOMBDIST": "HUAMPARA",
+        "IDDIST": 151013.0
+      },
+      {
+        "NOMBDIST": "HUANCAYA",
+        "IDDIST": 151014.0
+      },
+      {
+        "NOMBDIST": "HUANGASCAR",
+        "IDDIST": 151015.0
+      },
+      {
+        "NOMBDIST": "HUANTAN",
+        "IDDIST": 151016.0
+      },
+      {
+        "NOMBDIST": "HUAÑEC",
+        "IDDIST": 151017.0
+      },
+      {
+        "NOMBDIST": "LARAOS",
+        "IDDIST": 151018.0
+      },
+      {
+        "NOMBDIST": "LINCHA",
+        "IDDIST": 151019.0
+      },
+      {
+        "NOMBDIST": "MADEAN",
+        "IDDIST": 151020.0
+      },
+      {
+        "NOMBDIST": "MIRAFLORES",
+        "IDDIST": 151021.0
+      },
+      {
+        "NOMBDIST": "OMAS",
+        "IDDIST": 151022.0
+      },
+      {
+        "NOMBDIST": "PUTINZA",
+        "IDDIST": 151023.0
+      },
+      {
+        "NOMBDIST": "QUINCHES",
+        "IDDIST": 151024.0
+      },
+      {
+        "NOMBDIST": "QUINOCAY",
+        "IDDIST": 151025.0
+      },
+      {
+        "NOMBDIST": "SAN JOAQUIN",
+        "IDDIST": 151026.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE PILAS",
+        "IDDIST": 151027.0
+      },
+      {
+        "NOMBDIST": "TANTA",
+        "IDDIST": 151028.0
+      },
+      {
+        "NOMBDIST": "TAURIPAMPA",
+        "IDDIST": 151029.0
+      },
+      {
+        "NOMBDIST": "TOMAS",
+        "IDDIST": 151030.0
+      },
+      {
+        "NOMBDIST": "TUPE",
+        "IDDIST": 151031.0
+      },
+      {
+        "NOMBDIST": "VIÑAC",
+        "IDDIST": 151032.0
+      },
+      {
+        "NOMBDIST": "VITIS",
+        "IDDIST": 151033.0
+      }
+    ]
+  },
+  "LORETO": {
+    "MAYNAS": [
+      {
+        "NOMBDIST": "IQUITOS",
+        "IDDIST": 160101.0
+      },
+      {
+        "NOMBDIST": "ALTO NANAY",
+        "IDDIST": 160102.0
+      },
+      {
+        "NOMBDIST": "FERNANDO LORES",
+        "IDDIST": 160103.0
+      },
+      {
+        "NOMBDIST": "INDIANA",
+        "IDDIST": 160104.0
+      },
+      {
+        "NOMBDIST": "LAS AMAZONAS",
+        "IDDIST": 160105.0
+      },
+      {
+        "NOMBDIST": "MAZAN",
+        "IDDIST": 160106.0
+      },
+      {
+        "NOMBDIST": "NAPO",
+        "IDDIST": 160107.0
+      },
+      {
+        "NOMBDIST": "PUNCHANA",
+        "IDDIST": 160108.0
+      },
+      {
+        "NOMBDIST": "TORRES CAUSANA",
+        "IDDIST": 160110.0
+      },
+      {
+        "NOMBDIST": "BELEN",
+        "IDDIST": 160112.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN BAUTISTA",
+        "IDDIST": 160113.0
+      }
+    ],
+    "ALTO AMAZONAS": [
+      {
+        "NOMBDIST": "YURIMAGUAS",
+        "IDDIST": 160201.0
+      },
+      {
+        "NOMBDIST": "BALSAPUERTO",
+        "IDDIST": 160202.0
+      },
+      {
+        "NOMBDIST": "JEBEROS",
+        "IDDIST": 160205.0
+      },
+      {
+        "NOMBDIST": "LAGUNAS",
+        "IDDIST": 160206.0
+      },
+      {
+        "NOMBDIST": "SANTA CRUZ",
+        "IDDIST": 160210.0
+      },
+      {
+        "NOMBDIST": "TENIENTE CESAR LOPEZ ROJAS",
+        "IDDIST": 160211.0
+      }
+    ],
+    "LORETO": [
+      {
+        "NOMBDIST": "NAUTA",
+        "IDDIST": 160301.0
+      },
+      {
+        "NOMBDIST": "PARINARI",
+        "IDDIST": 160302.0
+      },
+      {
+        "NOMBDIST": "TIGRE",
+        "IDDIST": 160303.0
+      },
+      {
+        "NOMBDIST": "TROMPETEROS",
+        "IDDIST": 160304.0
+      },
+      {
+        "NOMBDIST": "URARINAS",
+        "IDDIST": 160305.0
+      }
+    ],
+    "MARISCAL RAMON CASTILLA": [
+      {
+        "NOMBDIST": "RAMON CASTILLA",
+        "IDDIST": 160401.0
+      },
+      {
+        "NOMBDIST": "PEBAS",
+        "IDDIST": 160402.0
+      },
+      {
+        "NOMBDIST": "YAVARI",
+        "IDDIST": 160403.0
+      },
+      {
+        "NOMBDIST": "SAN PABLO",
+        "IDDIST": 160404.0
+      }
+    ],
+    "REQUENA": [
+      {
+        "NOMBDIST": "REQUENA",
+        "IDDIST": 160501.0
+      },
+      {
+        "NOMBDIST": "ALTO TAPICHE",
+        "IDDIST": 160502.0
+      },
+      {
+        "NOMBDIST": "CAPELO",
+        "IDDIST": 160503.0
+      },
+      {
+        "NOMBDIST": "EMILIO SAN MARTIN",
+        "IDDIST": 160504.0
+      },
+      {
+        "NOMBDIST": "MAQUIA",
+        "IDDIST": 160505.0
+      },
+      {
+        "NOMBDIST": "PUINAHUA",
+        "IDDIST": 160506.0
+      },
+      {
+        "NOMBDIST": "SAQUENA",
+        "IDDIST": 160507.0
+      },
+      {
+        "NOMBDIST": "SOPLIN",
+        "IDDIST": 160508.0
+      },
+      {
+        "NOMBDIST": "TAPICHE",
+        "IDDIST": 160509.0
+      },
+      {
+        "NOMBDIST": "JENARO HERRERA",
+        "IDDIST": 160510.0
+      },
+      {
+        "NOMBDIST": "YAQUERANA",
+        "IDDIST": 160511.0
+      }
+    ],
+    "UCAYALI": [
+      {
+        "NOMBDIST": "CONTAMANA",
+        "IDDIST": 160601.0
+      },
+      {
+        "NOMBDIST": "INAHUAYA",
+        "IDDIST": 160602.0
+      },
+      {
+        "NOMBDIST": "PADRE MARQUEZ",
+        "IDDIST": 160603.0
+      },
+      {
+        "NOMBDIST": "PAMPA HERMOSA",
+        "IDDIST": 160604.0
+      },
+      {
+        "NOMBDIST": "SARAYACU",
+        "IDDIST": 160605.0
+      },
+      {
+        "NOMBDIST": "VARGAS GUERRA",
+        "IDDIST": 160606.0
+      }
+    ],
+    "DATEM DEL MARAÑON": [
+      {
+        "NOMBDIST": "BARRANCA",
+        "IDDIST": 160701.0
+      },
+      {
+        "NOMBDIST": "CAHUAPANAS",
+        "IDDIST": 160702.0
+      },
+      {
+        "NOMBDIST": "MANSERICHE",
+        "IDDIST": 160703.0
+      },
+      {
+        "NOMBDIST": "MORONA",
+        "IDDIST": 160704.0
+      },
+      {
+        "NOMBDIST": "PASTAZA",
+        "IDDIST": 160705.0
+      },
+      {
+        "NOMBDIST": "ANDOAS",
+        "IDDIST": 160706.0
+      }
+    ],
+    "PUTUMAYO": [
+      {
+        "NOMBDIST": "PUTUMAYO",
+        "IDDIST": 160801.0
+      },
+      {
+        "NOMBDIST": "ROSA PANDURO",
+        "IDDIST": 160802.0
+      },
+      {
+        "NOMBDIST": "TENIENTE MANUEL CLAVERO",
+        "IDDIST": 160803.0
+      },
+      {
+        "NOMBDIST": "YAGUAS",
+        "IDDIST": 160804.0
+      }
+    ]
+  },
+  "MADRE DE DIOS": {
+    "TAMBOPATA": [
+      {
+        "NOMBDIST": "TAMBOPATA",
+        "IDDIST": 170101.0
+      },
+      {
+        "NOMBDIST": "INAMBARI",
+        "IDDIST": 170102.0
+      },
+      {
+        "NOMBDIST": "LAS PIEDRAS",
+        "IDDIST": 170103.0
+      },
+      {
+        "NOMBDIST": "LABERINTO",
+        "IDDIST": 170104.0
+      }
+    ],
+    "MANU": [
+      {
+        "NOMBDIST": "MANU",
+        "IDDIST": 170201.0
+      },
+      {
+        "NOMBDIST": "FITZCARRALD",
+        "IDDIST": 170202.0
+      },
+      {
+        "NOMBDIST": "MADRE DE DIOS",
+        "IDDIST": 170203.0
+      },
+      {
+        "NOMBDIST": "HUEPETUHE",
+        "IDDIST": 170204.0
+      }
+    ],
+    "TAHUAMANU": [
+      {
+        "NOMBDIST": "IÑAPARI",
+        "IDDIST": 170301.0
+      },
+      {
+        "NOMBDIST": "IBERIA",
+        "IDDIST": 170302.0
+      },
+      {
+        "NOMBDIST": "TAHUAMANU",
+        "IDDIST": 170303.0
+      }
+    ]
+  },
+  "MOQUEGUA": {
+    "MARISCAL NIETO": [
+      {
+        "NOMBDIST": "MOQUEGUA",
+        "IDDIST": 180101.0
+      },
+      {
+        "NOMBDIST": "CARUMAS",
+        "IDDIST": 180102.0
+      },
+      {
+        "NOMBDIST": "CUCHUMBAYA",
+        "IDDIST": 180103.0
+      },
+      {
+        "NOMBDIST": "SAMEGUA",
+        "IDDIST": 180104.0
+      },
+      {
+        "NOMBDIST": "SAN CRISTOBAL",
+        "IDDIST": 180105.0
+      },
+      {
+        "NOMBDIST": "TORATA",
+        "IDDIST": 180106.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 180107.0
+      }
+    ],
+    "GENERAL SANCHEZ CERRO": [
+      {
+        "NOMBDIST": "OMATE",
+        "IDDIST": 180201.0
+      },
+      {
+        "NOMBDIST": "CHOJATA",
+        "IDDIST": 180202.0
+      },
+      {
+        "NOMBDIST": "COALAQUE",
+        "IDDIST": 180203.0
+      },
+      {
+        "NOMBDIST": "ICHUÑA",
+        "IDDIST": 180204.0
+      },
+      {
+        "NOMBDIST": "LA CAPILLA",
+        "IDDIST": 180205.0
+      },
+      {
+        "NOMBDIST": "LLOQUE",
+        "IDDIST": 180206.0
+      },
+      {
+        "NOMBDIST": "MATALAQUE",
+        "IDDIST": 180207.0
+      },
+      {
+        "NOMBDIST": "PUQUINA",
+        "IDDIST": 180208.0
+      },
+      {
+        "NOMBDIST": "QUINISTAQUILLAS",
+        "IDDIST": 180209.0
+      },
+      {
+        "NOMBDIST": "UBINAS",
+        "IDDIST": 180210.0
+      },
+      {
+        "NOMBDIST": "YUNGA",
+        "IDDIST": 180211.0
+      }
+    ],
+    "ILO": [
+      {
+        "NOMBDIST": "ILO",
+        "IDDIST": 180301.0
+      },
+      {
+        "NOMBDIST": "EL ALGARROBAL",
+        "IDDIST": 180302.0
+      },
+      {
+        "NOMBDIST": "PACOCHA",
+        "IDDIST": 180303.0
+      }
+    ]
+  },
+  "PASCO": {
+    "PASCO": [
+      {
+        "NOMBDIST": "CHAUPIMARCA",
+        "IDDIST": 190101.0
+      },
+      {
+        "NOMBDIST": "HUACHON",
+        "IDDIST": 190102.0
+      },
+      {
+        "NOMBDIST": "HUARIACA",
+        "IDDIST": 190103.0
+      },
+      {
+        "NOMBDIST": "HUAYLLAY",
+        "IDDIST": 190104.0
+      },
+      {
+        "NOMBDIST": "NINACACA",
+        "IDDIST": 190105.0
+      },
+      {
+        "NOMBDIST": "PALLANCHACRA",
+        "IDDIST": 190106.0
+      },
+      {
+        "NOMBDIST": "PAUCARTAMBO",
+        "IDDIST": 190107.0
+      },
+      {
+        "NOMBDIST": "SAN FRANCISCO DE ASIS DE YARUSYACAN",
+        "IDDIST": 190108.0
+      },
+      {
+        "NOMBDIST": "SIMON BOLIVAR",
+        "IDDIST": 190109.0
+      },
+      {
+        "NOMBDIST": "TICLACAYAN",
+        "IDDIST": 190110.0
+      },
+      {
+        "NOMBDIST": "TINYAHUARCO",
+        "IDDIST": 190111.0
+      },
+      {
+        "NOMBDIST": "VICCO",
+        "IDDIST": 190112.0
+      },
+      {
+        "NOMBDIST": "YANACANCHA",
+        "IDDIST": 190113.0
+      }
+    ],
+    "DANIEL ALCIDES CARRION": [
+      {
+        "NOMBDIST": "YANAHUANCA",
+        "IDDIST": 190201.0
+      },
+      {
+        "NOMBDIST": "CHACAYAN",
+        "IDDIST": 190202.0
+      },
+      {
+        "NOMBDIST": "GOYLLARISQUIZGA",
+        "IDDIST": 190203.0
+      },
+      {
+        "NOMBDIST": "PAUCAR",
+        "IDDIST": 190204.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE PILLAO",
+        "IDDIST": 190205.0
+      },
+      {
+        "NOMBDIST": "SANTA ANA DE TUSI",
+        "IDDIST": 190206.0
+      },
+      {
+        "NOMBDIST": "TAPUC",
+        "IDDIST": 190207.0
+      },
+      {
+        "NOMBDIST": "VILCABAMBA",
+        "IDDIST": 190208.0
+      }
+    ],
+    "OXAPAMPA": [
+      {
+        "NOMBDIST": "OXAPAMPA",
+        "IDDIST": 190301.0
+      },
+      {
+        "NOMBDIST": "CHONTABAMBA",
+        "IDDIST": 190302.0
+      },
+      {
+        "NOMBDIST": "HUANCABAMBA",
+        "IDDIST": 190303.0
+      },
+      {
+        "NOMBDIST": "PALCAZU",
+        "IDDIST": 190304.0
+      },
+      {
+        "NOMBDIST": "POZUZO",
+        "IDDIST": 190305.0
+      },
+      {
+        "NOMBDIST": "PUERTO BERMUDEZ",
+        "IDDIST": 190306.0
+      },
+      {
+        "NOMBDIST": "VILLA RICA",
+        "IDDIST": 190307.0
+      },
+      {
+        "NOMBDIST": "CONSTITUCION",
+        "IDDIST": 190308.0
+      }
+    ]
+  },
+  "PIURA": {
+    "PIURA": [
+      {
+        "NOMBDIST": "PIURA",
+        "IDDIST": 200101.0
+      },
+      {
+        "NOMBDIST": "CASTILLA",
+        "IDDIST": 200104.0
+      },
+      {
+        "NOMBDIST": "CATACAOS",
+        "IDDIST": 200105.0
+      },
+      {
+        "NOMBDIST": "CURA MORI",
+        "IDDIST": 200107.0
+      },
+      {
+        "NOMBDIST": "EL TALLAN",
+        "IDDIST": 200108.0
+      },
+      {
+        "NOMBDIST": "LA ARENA",
+        "IDDIST": 200109.0
+      },
+      {
+        "NOMBDIST": "LA UNION",
+        "IDDIST": 200110.0
+      },
+      {
+        "NOMBDIST": "LAS LOMAS",
+        "IDDIST": 200111.0
+      },
+      {
+        "NOMBDIST": "TAMBO GRANDE",
+        "IDDIST": 200114.0
+      },
+      {
+        "NOMBDIST": "VEINTISEIS DE OCTUBRE",
+        "IDDIST": 200115.0
+      }
+    ],
+    "AYABACA": [
+      {
+        "NOMBDIST": "AYABACA",
+        "IDDIST": 200201.0
+      },
+      {
+        "NOMBDIST": "FRIAS",
+        "IDDIST": 200202.0
+      },
+      {
+        "NOMBDIST": "JILILI",
+        "IDDIST": 200203.0
+      },
+      {
+        "NOMBDIST": "LAGUNAS",
+        "IDDIST": 200204.0
+      },
+      {
+        "NOMBDIST": "MONTERO",
+        "IDDIST": 200205.0
+      },
+      {
+        "NOMBDIST": "PACAIPAMPA",
+        "IDDIST": 200206.0
+      },
+      {
+        "NOMBDIST": "PAIMAS",
+        "IDDIST": 200207.0
+      },
+      {
+        "NOMBDIST": "SAPILLICA",
+        "IDDIST": 200208.0
+      },
+      {
+        "NOMBDIST": "SICCHEZ",
+        "IDDIST": 200209.0
+      },
+      {
+        "NOMBDIST": "SUYO",
+        "IDDIST": 200210.0
+      }
+    ],
+    "HUANCABAMBA": [
+      {
+        "NOMBDIST": "HUANCABAMBA",
+        "IDDIST": 200301.0
+      },
+      {
+        "NOMBDIST": "CANCHAQUE",
+        "IDDIST": 200302.0
+      },
+      {
+        "NOMBDIST": "EL CARMEN DE LA FRONTERA",
+        "IDDIST": 200303.0
+      },
+      {
+        "NOMBDIST": "HUARMACA",
+        "IDDIST": 200304.0
+      },
+      {
+        "NOMBDIST": "LALAQUIZ",
+        "IDDIST": 200305.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL DE EL FAIQUE",
+        "IDDIST": 200306.0
+      },
+      {
+        "NOMBDIST": "SONDOR",
+        "IDDIST": 200307.0
+      },
+      {
+        "NOMBDIST": "SONDORILLO",
+        "IDDIST": 200308.0
+      }
+    ],
+    "MORROPON": [
+      {
+        "NOMBDIST": "CHULUCANAS",
+        "IDDIST": 200401.0
+      },
+      {
+        "NOMBDIST": "BUENOS AIRES",
+        "IDDIST": 200402.0
+      },
+      {
+        "NOMBDIST": "CHALACO",
+        "IDDIST": 200403.0
+      },
+      {
+        "NOMBDIST": "LA MATANZA",
+        "IDDIST": 200404.0
+      },
+      {
+        "NOMBDIST": "MORROPON",
+        "IDDIST": 200405.0
+      },
+      {
+        "NOMBDIST": "SALITRAL",
+        "IDDIST": 200406.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE BIGOTE",
+        "IDDIST": 200407.0
+      },
+      {
+        "NOMBDIST": "SANTA CATALINA DE MOSSA",
+        "IDDIST": 200408.0
+      },
+      {
+        "NOMBDIST": "SANTO DOMINGO",
+        "IDDIST": 200409.0
+      },
+      {
+        "NOMBDIST": "YAMANGO",
+        "IDDIST": 200410.0
+      }
+    ],
+    "PAITA": [
+      {
+        "NOMBDIST": "PAITA",
+        "IDDIST": 200501.0
+      },
+      {
+        "NOMBDIST": "AMOTAPE",
+        "IDDIST": 200502.0
+      },
+      {
+        "NOMBDIST": "ARENAL",
+        "IDDIST": 200503.0
+      },
+      {
+        "NOMBDIST": "COLAN",
+        "IDDIST": 200504.0
+      },
+      {
+        "NOMBDIST": "LA HUACA",
+        "IDDIST": 200505.0
+      },
+      {
+        "NOMBDIST": "TAMARINDO",
+        "IDDIST": 200506.0
+      },
+      {
+        "NOMBDIST": "VICHAYAL",
+        "IDDIST": 200507.0
+      }
+    ],
+    "SULLANA": [
+      {
+        "NOMBDIST": "SULLANA",
+        "IDDIST": 200601.0
+      },
+      {
+        "NOMBDIST": "BELLAVISTA",
+        "IDDIST": 200602.0
+      },
+      {
+        "NOMBDIST": "IGNACIO ESCUDERO",
+        "IDDIST": 200603.0
+      },
+      {
+        "NOMBDIST": "LANCONES",
+        "IDDIST": 200604.0
+      },
+      {
+        "NOMBDIST": "MARCAVELICA",
+        "IDDIST": 200605.0
+      },
+      {
+        "NOMBDIST": "MIGUEL CHECA",
+        "IDDIST": 200606.0
+      },
+      {
+        "NOMBDIST": "QUERECOTILLO",
+        "IDDIST": 200607.0
+      },
+      {
+        "NOMBDIST": "SALITRAL",
+        "IDDIST": 200608.0
+      }
+    ],
+    "TALARA": [
+      {
+        "NOMBDIST": "PARIÑAS",
+        "IDDIST": 200701.0
+      },
+      {
+        "NOMBDIST": "EL ALTO",
+        "IDDIST": 200702.0
+      },
+      {
+        "NOMBDIST": "LA BREA",
+        "IDDIST": 200703.0
+      },
+      {
+        "NOMBDIST": "LOBITOS",
+        "IDDIST": 200704.0
+      },
+      {
+        "NOMBDIST": "LOS ORGANOS",
+        "IDDIST": 200705.0
+      },
+      {
+        "NOMBDIST": "MANCORA",
+        "IDDIST": 200706.0
+      }
+    ],
+    "SECHURA": [
+      {
+        "NOMBDIST": "SECHURA",
+        "IDDIST": 200801.0
+      },
+      {
+        "NOMBDIST": "BELLAVISTA DE LA UNION",
+        "IDDIST": 200802.0
+      },
+      {
+        "NOMBDIST": "BERNAL",
+        "IDDIST": 200803.0
+      },
+      {
+        "NOMBDIST": "CRISTO NOS VALGA",
+        "IDDIST": 200804.0
+      },
+      {
+        "NOMBDIST": "VICE",
+        "IDDIST": 200805.0
+      },
+      {
+        "NOMBDIST": "RINCONADA LLICUAR",
+        "IDDIST": 200806.0
+      }
+    ]
+  },
+  "PUNO": {
+    "PUNO": [
+      {
+        "NOMBDIST": "PUNO",
+        "IDDIST": 210101.0
+      },
+      {
+        "NOMBDIST": "ACORA",
+        "IDDIST": 210102.0
+      },
+      {
+        "NOMBDIST": "AMANTANI",
+        "IDDIST": 210103.0
+      },
+      {
+        "NOMBDIST": "ATUNCOLLA",
+        "IDDIST": 210104.0
+      },
+      {
+        "NOMBDIST": "CAPACHICA",
+        "IDDIST": 210105.0
+      },
+      {
+        "NOMBDIST": "CHUCUITO",
+        "IDDIST": 210106.0
+      },
+      {
+        "NOMBDIST": "COATA",
+        "IDDIST": 210107.0
+      },
+      {
+        "NOMBDIST": "HUATA",
+        "IDDIST": 210108.0
+      },
+      {
+        "NOMBDIST": "MAÑAZO",
+        "IDDIST": 210109.0
+      },
+      {
+        "NOMBDIST": "PAUCARCOLLA",
+        "IDDIST": 210110.0
+      },
+      {
+        "NOMBDIST": "PICHACANI",
+        "IDDIST": 210111.0
+      },
+      {
+        "NOMBDIST": "PLATERIA",
+        "IDDIST": 210112.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 210113.0
+      },
+      {
+        "NOMBDIST": "TIQUILLACA",
+        "IDDIST": 210114.0
+      },
+      {
+        "NOMBDIST": "VILQUE",
+        "IDDIST": 210115.0
+      }
+    ],
+    "AZANGARO": [
+      {
+        "NOMBDIST": "AZANGARO",
+        "IDDIST": 210201.0
+      },
+      {
+        "NOMBDIST": "ACHAYA",
+        "IDDIST": 210202.0
+      },
+      {
+        "NOMBDIST": "ARAPA",
+        "IDDIST": 210203.0
+      },
+      {
+        "NOMBDIST": "ASILLO",
+        "IDDIST": 210204.0
+      },
+      {
+        "NOMBDIST": "CAMINACA",
+        "IDDIST": 210205.0
+      },
+      {
+        "NOMBDIST": "CHUPA",
+        "IDDIST": 210206.0
+      },
+      {
+        "NOMBDIST": "JOSE DOMINGO CHOQUEHUANCA",
+        "IDDIST": 210207.0
+      },
+      {
+        "NOMBDIST": "MUÑANI",
+        "IDDIST": 210208.0
+      },
+      {
+        "NOMBDIST": "POTONI",
+        "IDDIST": 210209.0
+      },
+      {
+        "NOMBDIST": "SAMAN",
+        "IDDIST": 210210.0
+      },
+      {
+        "NOMBDIST": "SAN ANTON",
+        "IDDIST": 210211.0
+      },
+      {
+        "NOMBDIST": "SAN JOSE",
+        "IDDIST": 210212.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE SALINAS",
+        "IDDIST": 210213.0
+      },
+      {
+        "NOMBDIST": "SANTIAGO DE PUPUJA",
+        "IDDIST": 210214.0
+      },
+      {
+        "NOMBDIST": "TIRAPATA",
+        "IDDIST": 210215.0
+      }
+    ],
+    "CARABAYA": [
+      {
+        "NOMBDIST": "MACUSANI",
+        "IDDIST": 210301.0
+      },
+      {
+        "NOMBDIST": "AJOYANI",
+        "IDDIST": 210302.0
+      },
+      {
+        "NOMBDIST": "AYAPATA",
+        "IDDIST": 210303.0
+      },
+      {
+        "NOMBDIST": "COASA",
+        "IDDIST": 210304.0
+      },
+      {
+        "NOMBDIST": "CORANI",
+        "IDDIST": 210305.0
+      },
+      {
+        "NOMBDIST": "CRUCERO",
+        "IDDIST": 210306.0
+      },
+      {
+        "NOMBDIST": "ITUATA",
+        "IDDIST": 210307.0
+      },
+      {
+        "NOMBDIST": "OLLACHEA",
+        "IDDIST": 210308.0
+      },
+      {
+        "NOMBDIST": "SAN GABAN",
+        "IDDIST": 210309.0
+      },
+      {
+        "NOMBDIST": "USICAYOS",
+        "IDDIST": 210310.0
+      }
+    ],
+    "CHUCUITO": [
+      {
+        "NOMBDIST": "JULI",
+        "IDDIST": 210401.0
+      },
+      {
+        "NOMBDIST": "DESAGUADERO",
+        "IDDIST": 210402.0
+      },
+      {
+        "NOMBDIST": "HUACULLANI",
+        "IDDIST": 210403.0
+      },
+      {
+        "NOMBDIST": "KELLUYO",
+        "IDDIST": 210404.0
+      },
+      {
+        "NOMBDIST": "PISACOMA",
+        "IDDIST": 210405.0
+      },
+      {
+        "NOMBDIST": "POMATA",
+        "IDDIST": 210406.0
+      },
+      {
+        "NOMBDIST": "ZEPITA",
+        "IDDIST": 210407.0
+      }
+    ],
+    "EL COLLAO": [
+      {
+        "NOMBDIST": "ILAVE",
+        "IDDIST": 210501.0
+      },
+      {
+        "NOMBDIST": "CAPAZO",
+        "IDDIST": 210502.0
+      },
+      {
+        "NOMBDIST": "PILCUYO",
+        "IDDIST": 210503.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 210504.0
+      },
+      {
+        "NOMBDIST": "CONDURIRI",
+        "IDDIST": 210505.0
+      }
+    ],
+    "HUANCANE": [
+      {
+        "NOMBDIST": "HUANCANE",
+        "IDDIST": 210601.0
+      },
+      {
+        "NOMBDIST": "COJATA",
+        "IDDIST": 210602.0
+      },
+      {
+        "NOMBDIST": "HUATASANI",
+        "IDDIST": 210603.0
+      },
+      {
+        "NOMBDIST": "INCHUPALLA",
+        "IDDIST": 210604.0
+      },
+      {
+        "NOMBDIST": "PUSI",
+        "IDDIST": 210605.0
+      },
+      {
+        "NOMBDIST": "ROSASPATA",
+        "IDDIST": 210606.0
+      },
+      {
+        "NOMBDIST": "TARACO",
+        "IDDIST": 210607.0
+      },
+      {
+        "NOMBDIST": "VILQUE CHICO",
+        "IDDIST": 210608.0
+      }
+    ],
+    "LAMPA": [
+      {
+        "NOMBDIST": "LAMPA",
+        "IDDIST": 210701.0
+      },
+      {
+        "NOMBDIST": "CABANILLA",
+        "IDDIST": 210702.0
+      },
+      {
+        "NOMBDIST": "CALAPUJA",
+        "IDDIST": 210703.0
+      },
+      {
+        "NOMBDIST": "NICASIO",
+        "IDDIST": 210704.0
+      },
+      {
+        "NOMBDIST": "OCUVIRI",
+        "IDDIST": 210705.0
+      },
+      {
+        "NOMBDIST": "PALCA",
+        "IDDIST": 210706.0
+      },
+      {
+        "NOMBDIST": "PARATIA",
+        "IDDIST": 210707.0
+      },
+      {
+        "NOMBDIST": "PUCARA",
+        "IDDIST": 210708.0
+      },
+      {
+        "NOMBDIST": "SANTA LUCIA",
+        "IDDIST": 210709.0
+      },
+      {
+        "NOMBDIST": "VILAVILA",
+        "IDDIST": 210710.0
+      }
+    ],
+    "MELGAR": [
+      {
+        "NOMBDIST": "AYAVIRI",
+        "IDDIST": 210801.0
+      },
+      {
+        "NOMBDIST": "ANTAUTA",
+        "IDDIST": 210802.0
+      },
+      {
+        "NOMBDIST": "CUPI",
+        "IDDIST": 210803.0
+      },
+      {
+        "NOMBDIST": "LLALLI",
+        "IDDIST": 210804.0
+      },
+      {
+        "NOMBDIST": "MACARI",
+        "IDDIST": 210805.0
+      },
+      {
+        "NOMBDIST": "NUÑOA",
+        "IDDIST": 210806.0
+      },
+      {
+        "NOMBDIST": "ORURILLO",
+        "IDDIST": 210807.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 210808.0
+      },
+      {
+        "NOMBDIST": "UMACHIRI",
+        "IDDIST": 210809.0
+      }
+    ],
+    "MOHO": [
+      {
+        "NOMBDIST": "MOHO",
+        "IDDIST": 210901.0
+      },
+      {
+        "NOMBDIST": "CONIMA",
+        "IDDIST": 210902.0
+      },
+      {
+        "NOMBDIST": "HUAYRAPATA",
+        "IDDIST": 210903.0
+      },
+      {
+        "NOMBDIST": "TILALI",
+        "IDDIST": 210904.0
+      }
+    ],
+    "SAN ANTONIO DE PUTINA": [
+      {
+        "NOMBDIST": "PUTINA",
+        "IDDIST": 211001.0
+      },
+      {
+        "NOMBDIST": "ANANEA",
+        "IDDIST": 211002.0
+      },
+      {
+        "NOMBDIST": "PEDRO VILCA APAZA",
+        "IDDIST": 211003.0
+      },
+      {
+        "NOMBDIST": "QUILCAPUNCU",
+        "IDDIST": 211004.0
+      },
+      {
+        "NOMBDIST": "SINA",
+        "IDDIST": 211005.0
+      }
+    ],
+    "SAN ROMAN": [
+      {
+        "NOMBDIST": "JULIACA",
+        "IDDIST": 211101.0
+      },
+      {
+        "NOMBDIST": "CABANA",
+        "IDDIST": 211102.0
+      },
+      {
+        "NOMBDIST": "CABANILLAS",
+        "IDDIST": 211103.0
+      },
+      {
+        "NOMBDIST": "CARACOTO",
+        "IDDIST": 211104.0
+      },
+      {
+        "NOMBDIST": "SAN MIGUEL",
+        "IDDIST": 211105.0
+      }
+    ],
+    "SANDIA": [
+      {
+        "NOMBDIST": "SANDIA",
+        "IDDIST": 211201.0
+      },
+      {
+        "NOMBDIST": "CUYOCUYO",
+        "IDDIST": 211202.0
+      },
+      {
+        "NOMBDIST": "LIMBANI",
+        "IDDIST": 211203.0
+      },
+      {
+        "NOMBDIST": "PATAMBUCO",
+        "IDDIST": 211204.0
+      },
+      {
+        "NOMBDIST": "PHARA",
+        "IDDIST": 211205.0
+      },
+      {
+        "NOMBDIST": "QUIACA",
+        "IDDIST": 211206.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DEL ORO",
+        "IDDIST": 211207.0
+      },
+      {
+        "NOMBDIST": "YANAHUAYA",
+        "IDDIST": 211208.0
+      },
+      {
+        "NOMBDIST": "ALTO INAMBARI",
+        "IDDIST": 211209.0
+      },
+      {
+        "NOMBDIST": "SAN PEDRO DE PUTINA PUNCO",
+        "IDDIST": 211210.0
+      }
+    ],
+    "YUNGUYO": [
+      {
+        "NOMBDIST": "YUNGUYO",
+        "IDDIST": 211301.0
+      },
+      {
+        "NOMBDIST": "ANAPIA",
+        "IDDIST": 211302.0
+      },
+      {
+        "NOMBDIST": "COPANI",
+        "IDDIST": 211303.0
+      },
+      {
+        "NOMBDIST": "CUTURAPI",
+        "IDDIST": 211304.0
+      },
+      {
+        "NOMBDIST": "OLLARAYA",
+        "IDDIST": 211305.0
+      },
+      {
+        "NOMBDIST": "TINICACHI",
+        "IDDIST": 211306.0
+      },
+      {
+        "NOMBDIST": "UNICACHI",
+        "IDDIST": 211307.0
+      }
+    ]
+  },
+  "SAN MARTIN": {
+    "MOYOBAMBA": [
+      {
+        "NOMBDIST": "MOYOBAMBA",
+        "IDDIST": 220101.0
+      },
+      {
+        "NOMBDIST": "CALZADA",
+        "IDDIST": 220102.0
+      },
+      {
+        "NOMBDIST": "HABANA",
+        "IDDIST": 220103.0
+      },
+      {
+        "NOMBDIST": "JEPELACIO",
+        "IDDIST": 220104.0
+      },
+      {
+        "NOMBDIST": "SORITOR",
+        "IDDIST": 220105.0
+      },
+      {
+        "NOMBDIST": "YANTALO",
+        "IDDIST": 220106.0
+      }
+    ],
+    "BELLAVISTA": [
+      {
+        "NOMBDIST": "BELLAVISTA",
+        "IDDIST": 220201.0
+      },
+      {
+        "NOMBDIST": "ALTO BIAVO",
+        "IDDIST": 220202.0
+      },
+      {
+        "NOMBDIST": "BAJO BIAVO",
+        "IDDIST": 220203.0
+      },
+      {
+        "NOMBDIST": "HUALLAGA",
+        "IDDIST": 220204.0
+      },
+      {
+        "NOMBDIST": "SAN PABLO",
+        "IDDIST": 220205.0
+      },
+      {
+        "NOMBDIST": "SAN RAFAEL",
+        "IDDIST": 220206.0
+      }
+    ],
+    "EL DORADO": [
+      {
+        "NOMBDIST": "SAN JOSE DE SISA",
+        "IDDIST": 220301.0
+      },
+      {
+        "NOMBDIST": "AGUA BLANCA",
+        "IDDIST": 220302.0
+      },
+      {
+        "NOMBDIST": "SAN MARTIN",
+        "IDDIST": 220303.0
+      },
+      {
+        "NOMBDIST": "SANTA ROSA",
+        "IDDIST": 220304.0
+      },
+      {
+        "NOMBDIST": "SHATOJA",
+        "IDDIST": 220305.0
+      }
+    ],
+    "HUALLAGA": [
+      {
+        "NOMBDIST": "SAPOSOA",
+        "IDDIST": 220401.0
+      },
+      {
+        "NOMBDIST": "ALTO SAPOSOA",
+        "IDDIST": 220402.0
+      },
+      {
+        "NOMBDIST": "EL ESLABON",
+        "IDDIST": 220403.0
+      },
+      {
+        "NOMBDIST": "PISCOYACU",
+        "IDDIST": 220404.0
+      },
+      {
+        "NOMBDIST": "SACANCHE",
+        "IDDIST": 220405.0
+      },
+      {
+        "NOMBDIST": "TINGO DE SAPOSOA",
+        "IDDIST": 220406.0
+      }
+    ],
+    "LAMAS": [
+      {
+        "NOMBDIST": "LAMAS",
+        "IDDIST": 220501.0
+      },
+      {
+        "NOMBDIST": "ALONSO DE ALVARADO",
+        "IDDIST": 220502.0
+      },
+      {
+        "NOMBDIST": "BARRANQUITA",
+        "IDDIST": 220503.0
+      },
+      {
+        "NOMBDIST": "CAYNARACHI",
+        "IDDIST": 220504.0
+      },
+      {
+        "NOMBDIST": "CUÑUMBUQUI",
+        "IDDIST": 220505.0
+      },
+      {
+        "NOMBDIST": "PINTO RECODO",
+        "IDDIST": 220506.0
+      },
+      {
+        "NOMBDIST": "RUMISAPA",
+        "IDDIST": 220507.0
+      },
+      {
+        "NOMBDIST": "SAN ROQUE DE CUMBAZA",
+        "IDDIST": 220508.0
+      },
+      {
+        "NOMBDIST": "SHANAO",
+        "IDDIST": 220509.0
+      },
+      {
+        "NOMBDIST": "TABALOSOS",
+        "IDDIST": 220510.0
+      },
+      {
+        "NOMBDIST": "ZAPATERO",
+        "IDDIST": 220511.0
+      }
+    ],
+    "MARISCAL CACERES": [
+      {
+        "NOMBDIST": "JUANJUI",
+        "IDDIST": 220601.0
+      },
+      {
+        "NOMBDIST": "CAMPANILLA",
+        "IDDIST": 220602.0
+      },
+      {
+        "NOMBDIST": "HUICUNGO",
+        "IDDIST": 220603.0
+      },
+      {
+        "NOMBDIST": "PACHIZA",
+        "IDDIST": 220604.0
+      },
+      {
+        "NOMBDIST": "PAJARILLO",
+        "IDDIST": 220605.0
+      }
+    ],
+    "PICOTA": [
+      {
+        "NOMBDIST": "PICOTA",
+        "IDDIST": 220701.0
+      },
+      {
+        "NOMBDIST": "BUENOS AIRES",
+        "IDDIST": 220702.0
+      },
+      {
+        "NOMBDIST": "CASPISAPA",
+        "IDDIST": 220703.0
+      },
+      {
+        "NOMBDIST": "PILLUANA",
+        "IDDIST": 220704.0
+      },
+      {
+        "NOMBDIST": "PUCACACA",
+        "IDDIST": 220705.0
+      },
+      {
+        "NOMBDIST": "SAN CRISTOBAL",
+        "IDDIST": 220706.0
+      },
+      {
+        "NOMBDIST": "SAN HILARION",
+        "IDDIST": 220707.0
+      },
+      {
+        "NOMBDIST": "SHAMBOYACU",
+        "IDDIST": 220708.0
+      },
+      {
+        "NOMBDIST": "TINGO DE PONASA",
+        "IDDIST": 220709.0
+      },
+      {
+        "NOMBDIST": "TRES UNIDOS",
+        "IDDIST": 220710.0
+      }
+    ],
+    "RIOJA": [
+      {
+        "NOMBDIST": "RIOJA",
+        "IDDIST": 220801.0
+      },
+      {
+        "NOMBDIST": "AWAJUN",
+        "IDDIST": 220802.0
+      },
+      {
+        "NOMBDIST": "ELIAS SOPLIN VARGAS",
+        "IDDIST": 220803.0
+      },
+      {
+        "NOMBDIST": "NUEVA CAJAMARCA",
+        "IDDIST": 220804.0
+      },
+      {
+        "NOMBDIST": "PARDO MIGUEL",
+        "IDDIST": 220805.0
+      },
+      {
+        "NOMBDIST": "POSIC",
+        "IDDIST": 220806.0
+      },
+      {
+        "NOMBDIST": "SAN FERNANDO",
+        "IDDIST": 220807.0
+      },
+      {
+        "NOMBDIST": "YORONGOS",
+        "IDDIST": 220808.0
+      },
+      {
+        "NOMBDIST": "YURACYACU",
+        "IDDIST": 220809.0
+      }
+    ],
+    "SAN MARTIN": [
+      {
+        "NOMBDIST": "TARAPOTO",
+        "IDDIST": 220901.0
+      },
+      {
+        "NOMBDIST": "ALBERTO LEVEAU",
+        "IDDIST": 220902.0
+      },
+      {
+        "NOMBDIST": "CACATACHI",
+        "IDDIST": 220903.0
+      },
+      {
+        "NOMBDIST": "CHAZUTA",
+        "IDDIST": 220904.0
+      },
+      {
+        "NOMBDIST": "CHIPURANA",
+        "IDDIST": 220905.0
+      },
+      {
+        "NOMBDIST": "EL PORVENIR",
+        "IDDIST": 220906.0
+      },
+      {
+        "NOMBDIST": "HUIMBAYOC",
+        "IDDIST": 220907.0
+      },
+      {
+        "NOMBDIST": "JUAN GUERRA",
+        "IDDIST": 220908.0
+      },
+      {
+        "NOMBDIST": "LA BANDA DE SHILCAYO",
+        "IDDIST": 220909.0
+      },
+      {
+        "NOMBDIST": "MORALES",
+        "IDDIST": 220910.0
+      },
+      {
+        "NOMBDIST": "PAPAPLAYA",
+        "IDDIST": 220911.0
+      },
+      {
+        "NOMBDIST": "SAN ANTONIO",
+        "IDDIST": 220912.0
+      },
+      {
+        "NOMBDIST": "SAUCE",
+        "IDDIST": 220913.0
+      },
+      {
+        "NOMBDIST": "SHAPAJA",
+        "IDDIST": 220914.0
+      }
+    ],
+    "TOCACHE": [
+      {
+        "NOMBDIST": "TOCACHE",
+        "IDDIST": 221001.0
+      },
+      {
+        "NOMBDIST": "NUEVO PROGRESO",
+        "IDDIST": 221002.0
+      },
+      {
+        "NOMBDIST": "POLVORA",
+        "IDDIST": 221003.0
+      },
+      {
+        "NOMBDIST": "SHUNTE",
+        "IDDIST": 221004.0
+      },
+      {
+        "NOMBDIST": "UCHIZA",
+        "IDDIST": 221005.0
+      },
+      {
+        "NOMBDIST": "SANTA LUCIA",
+        "IDDIST": 221006.0
+      }
+    ]
+  },
+  "TACNA": {
+    "TACNA": [
+      {
+        "NOMBDIST": "TACNA",
+        "IDDIST": 230101.0
+      },
+      {
+        "NOMBDIST": "ALTO DE LA ALIANZA",
+        "IDDIST": 230102.0
+      },
+      {
+        "NOMBDIST": "CALANA",
+        "IDDIST": 230103.0
+      },
+      {
+        "NOMBDIST": "CIUDAD NUEVA",
+        "IDDIST": 230104.0
+      },
+      {
+        "NOMBDIST": "INCLAN",
+        "IDDIST": 230105.0
+      },
+      {
+        "NOMBDIST": "PACHIA",
+        "IDDIST": 230106.0
+      },
+      {
+        "NOMBDIST": "PALCA",
+        "IDDIST": 230107.0
+      },
+      {
+        "NOMBDIST": "POCOLLAY",
+        "IDDIST": 230108.0
+      },
+      {
+        "NOMBDIST": "SAMA",
+        "IDDIST": 230109.0
+      },
+      {
+        "NOMBDIST": "CORONEL GREGORIO ALBARRACIN LANCHIPA",
+        "IDDIST": 230110.0
+      },
+      {
+        "NOMBDIST": "LA YARADA LOS PALOS",
+        "IDDIST": 230111.0
+      }
+    ],
+    "CANDARAVE": [
+      {
+        "NOMBDIST": "CANDARAVE",
+        "IDDIST": 230201.0
+      },
+      {
+        "NOMBDIST": "CAIRANI",
+        "IDDIST": 230202.0
+      },
+      {
+        "NOMBDIST": "CAMILACA",
+        "IDDIST": 230203.0
+      },
+      {
+        "NOMBDIST": "CURIBAYA",
+        "IDDIST": 230204.0
+      },
+      {
+        "NOMBDIST": "HUANUARA",
+        "IDDIST": 230205.0
+      },
+      {
+        "NOMBDIST": "QUILAHUANI",
+        "IDDIST": 230206.0
+      }
+    ],
+    "JORGE BASADRE": [
+      {
+        "NOMBDIST": "LOCUMBA",
+        "IDDIST": 230301.0
+      },
+      {
+        "NOMBDIST": "ILABAYA",
+        "IDDIST": 230302.0
+      },
+      {
+        "NOMBDIST": "ITE",
+        "IDDIST": 230303.0
+      }
+    ],
+    "TARATA": [
+      {
+        "NOMBDIST": "TARATA",
+        "IDDIST": 230401.0
+      },
+      {
+        "NOMBDIST": "HEROES ALBARRACIN",
+        "IDDIST": 230402.0
+      },
+      {
+        "NOMBDIST": "ESTIQUE",
+        "IDDIST": 230403.0
+      },
+      {
+        "NOMBDIST": "ESTIQUE-PAMPA",
+        "IDDIST": 230404.0
+      },
+      {
+        "NOMBDIST": "SITAJARA",
+        "IDDIST": 230405.0
+      },
+      {
+        "NOMBDIST": "SUSAPAYA",
+        "IDDIST": 230406.0
+      },
+      {
+        "NOMBDIST": "TARUCACHI",
+        "IDDIST": 230407.0
+      },
+      {
+        "NOMBDIST": "TICACO",
+        "IDDIST": 230408.0
+      }
+    ]
+  },
+  "TUMBES": {
+    "TUMBES": [
+      {
+        "NOMBDIST": "TUMBES",
+        "IDDIST": 240101.0
+      },
+      {
+        "NOMBDIST": "CORRALES",
+        "IDDIST": 240102.0
+      },
+      {
+        "NOMBDIST": "LA CRUZ",
+        "IDDIST": 240103.0
+      },
+      {
+        "NOMBDIST": "PAMPAS DE HOSPITAL",
+        "IDDIST": 240104.0
+      },
+      {
+        "NOMBDIST": "SAN JACINTO",
+        "IDDIST": 240105.0
+      },
+      {
+        "NOMBDIST": "SAN JUAN DE LA VIRGEN",
+        "IDDIST": 240106.0
+      }
+    ],
+    "CONTRALMIRANTE VILLAR": [
+      {
+        "NOMBDIST": "ZORRITOS",
+        "IDDIST": 240201.0
+      },
+      {
+        "NOMBDIST": "CASITAS",
+        "IDDIST": 240202.0
+      },
+      {
+        "NOMBDIST": "CANOAS DE PUNTA SAL",
+        "IDDIST": 240203.0
+      }
+    ],
+    "ZARUMILLA": [
+      {
+        "NOMBDIST": "ZARUMILLA",
+        "IDDIST": 240301.0
+      },
+      {
+        "NOMBDIST": "AGUAS VERDES",
+        "IDDIST": 240302.0
+      },
+      {
+        "NOMBDIST": "MATAPALO",
+        "IDDIST": 240303.0
+      },
+      {
+        "NOMBDIST": "PAPAYAL",
+        "IDDIST": 240304.0
+      }
+    ]
+  },
+  "UCAYALI": {
+    "CORONEL PORTILLO": [
+      {
+        "NOMBDIST": "CALLERIA",
+        "IDDIST": 250101.0
+      },
+      {
+        "NOMBDIST": "CAMPOVERDE",
+        "IDDIST": 250102.0
+      },
+      {
+        "NOMBDIST": "IPARIA",
+        "IDDIST": 250103.0
+      },
+      {
+        "NOMBDIST": "MASISEA",
+        "IDDIST": 250104.0
+      },
+      {
+        "NOMBDIST": "YARINACOCHA",
+        "IDDIST": 250105.0
+      },
+      {
+        "NOMBDIST": "NUEVA REQUENA",
+        "IDDIST": 250106.0
+      },
+      {
+        "NOMBDIST": "MANANTAY",
+        "IDDIST": 250107.0
+      }
+    ],
+    "ATALAYA": [
+      {
+        "NOMBDIST": "RAIMONDI",
+        "IDDIST": 250201.0
+      },
+      {
+        "NOMBDIST": "SEPAHUA",
+        "IDDIST": 250202.0
+      },
+      {
+        "NOMBDIST": "TAHUANIA",
+        "IDDIST": 250203.0
+      },
+      {
+        "NOMBDIST": "YURUA",
+        "IDDIST": 250204.0
+      }
+    ],
+    "PADRE ABAD": [
+      {
+        "NOMBDIST": "PADRE ABAD",
+        "IDDIST": 250301.0
+      },
+      {
+        "NOMBDIST": "IRAZOLA",
+        "IDDIST": 250302.0
+      },
+      {
+        "NOMBDIST": "CURIMANA",
+        "IDDIST": 250303.0
+      },
+      {
+        "NOMBDIST": "NESHUYA",
+        "IDDIST": 250304.0
+      },
+      {
+        "NOMBDIST": "ALEXANDER VON HUMBOLDT",
+        "IDDIST": 250305.0
+      },
+      {
+        "NOMBDIST": "HUIPOCA",
+        "IDDIST": 250306.0
+      },
+      {
+        "NOMBDIST": "BOQUERON",
+        "IDDIST": 250307.0
+      }
+    ],
+    "PURUS": [
+      {
+        "NOMBDIST": "PURUS",
+        "IDDIST": 250401.0
+      }
+    ]
+  }
+}
