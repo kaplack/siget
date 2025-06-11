@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 // Rutas de API
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
+app.use("/api/activities", require("./routes/activityRoutes"));
 
 // Middleware de errores
 app.use(errorHandler);

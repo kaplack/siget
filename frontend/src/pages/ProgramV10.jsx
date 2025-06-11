@@ -23,9 +23,6 @@ import {
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { formatearFechaVisual } from "../utils/formatDate";
-import { DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
 
 let lastId = 8;
 
@@ -332,59 +329,14 @@ const Programacion = () => {
       {
         accessorKey: "fechaInicio",
         header: "Fecha Inicio",
-        enableEditing: true,
+        muiTableBodyCellEditTextFieldProps: { type: "date" },
         size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => {
-            console.log("🧪 DatePicker is rendering!");
-            return (
-              <DatePicker
-                format="DD-MM-YYYY"
-                value={cell.getValue() ? dayjs(cell.getValue()) : null}
-                onChange={(newValue) => {
-                  const iso = newValue?.format("YYYY-MM-DD");
-                  table.setEditingCell(null); // exit edit mode
-                  handleSaveCell({
-                    cell,
-                    row,
-                    value: iso,
-                  });
-                }}
-                slotProps={{
-                  textField: { size: "small", fullWidth: true },
-                }}
-              />
-            );
-          },
-        },
       },
       {
         accessorKey: "fechaFin",
         header: "Fecha Fin",
-        enableEditing: true,
+        muiTableBodyCellEditTextFieldProps: { type: "date" },
         size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => (
-            <DatePicker
-              format="DD-MM-YYYY"
-              value={cell.getValue() ? dayjs(cell.getValue()) : null}
-              onChange={(newValue) => {
-                const iso = newValue?.format("YYYY-MM-DD");
-                table.setEditingCell(null);
-                handleSaveCell({
-                  cell,
-                  row,
-                  value: iso,
-                });
-              }}
-              slotProps={{
-                textField: { size: "small", fullWidth: true },
-              }}
-            />
-          ),
-        },
       },
       { accessorKey: "responsable", header: "Responsable", size: 150 },
       {
@@ -477,6 +429,9 @@ const Programacion = () => {
       },
     }),
 
+    defaultColumn: {
+      muiTableBodyEditTextFieldProps: { autoFocus: true },
+    },
     renderCellActionMenuItems: ({ row, closeMenu }) => [
       <Divider key="divider" />,
       <MRT_ActionMenuItem

@@ -23,9 +23,6 @@ import {
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { formatearFechaVisual } from "../utils/formatDate";
-import { DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
 
 let lastId = 8;
 
@@ -41,20 +38,6 @@ const initialData = [
     avance: 0,
     plazo: 10,
     sustento: "",
-    orden: 1,
-  },
-  {
-    id: 4,
-    parentId: 0,
-    nombre: "Ejecución",
-    fechaInicio: "2025-06-15",
-    fechaFin: "2025-07-15",
-    responsable: "Marta Ruiz",
-    predecesorId: null,
-    avance: 0,
-    plazo: 30,
-    sustento: "",
-    orden: 2,
   },
   {
     id: 2,
@@ -67,7 +50,6 @@ const initialData = [
     avance: 0,
     plazo: 5,
     sustento: "",
-    orden: 1,
   },
   {
     id: 3,
@@ -80,7 +62,18 @@ const initialData = [
     avance: 0,
     plazo: 3,
     sustento: "",
-    orden: 1,
+  },
+  {
+    id: 4,
+    parentId: 0,
+    nombre: "Ejecución",
+    fechaInicio: "2025-06-15",
+    fechaFin: "2025-07-15",
+    responsable: "Marta Ruiz",
+    predecesorId: null,
+    avance: 0,
+    plazo: 30,
+    sustento: "",
   },
   {
     id: 5,
@@ -93,7 +86,6 @@ const initialData = [
     avance: 0,
     plazo: 10,
     sustento: "",
-    orden: 1,
   },
   {
     id: 6,
@@ -106,7 +98,6 @@ const initialData = [
     avance: 0,
     plazo: 3,
     sustento: "",
-    orden: 2,
   },
   {
     id: 7,
@@ -119,7 +110,6 @@ const initialData = [
     avance: 0,
     plazo: 4,
     sustento: "",
-    orden: 1,
   },
   {
     id: 8,
@@ -132,7 +122,6 @@ const initialData = [
     avance: 0,
     plazo: 5,
     sustento: "",
-    orden: 2,
   },
 ];
 
@@ -189,26 +178,6 @@ const Programacion = () => {
       value = parsed;
     }
 
-    if (columnId === "fechaInicio" || columnId === "fechaFin") {
-      const nuevaFecha = new Date(value);
-      const otraFecha =
-        columnId === "fechaInicio"
-          ? new Date(row.original.fechaFin)
-          : new Date(row.original.fechaInicio);
-
-      if (
-        row.original.fechaInicio &&
-        row.original.fechaFin &&
-        ((columnId === "fechaInicio" && nuevaFecha > otraFecha) ||
-          (columnId === "fechaFin" && nuevaFecha < otraFecha))
-      ) {
-        alert(
-          "La fecha de inicio no puede ser posterior a la fecha de fin, ni viceversa."
-        );
-        return;
-      }
-    }
-
     const updateRow = (rows) =>
       rows.map((item) =>
         item.id === row.original.id
@@ -226,15 +195,6 @@ const Programacion = () => {
   const handleAddActivity = (parentId = 0) => {
     lastId += 1;
     const flatData = flattenTree(data);
-
-    // Find the highest `orden` among siblings
-    const ordenMax = Math.max(
-      0,
-      ...flatData
-        .filter((item) => item.parentId === parentId)
-        .map((item) => item.orden ?? 0)
-    );
-
     flatData.push({
       id: lastId,
       parentId,
@@ -246,28 +206,14 @@ const Programacion = () => {
       avance: 0,
       plazo: 0,
       sustento: "",
-      orden: ordenMax + 1,
     });
-
     const newTree = actualizarArbolConEDT(flatData);
     setData(newTree);
   };
 
   const handleDelete = (id) => {
     const flatData = flattenTree(data);
-
-    // Buscar IDs de todos los descendientes del nodo
-    const collectDescendants = (parentId) => {
-      const children = flatData.filter((item) => item.parentId === parentId);
-      return children.flatMap((child) => [
-        child.id,
-        ...collectDescendants(child.id),
-      ]);
-    };
-
-    const idsToDelete = [id, ...collectDescendants(id)];
-
-    const filtered = flatData.filter((item) => !idsToDelete.includes(item.id));
+    const filtered = flatData.filter((item) => item.id !== id);
     const newTree = actualizarArbolConEDT(filtered);
     setData(newTree);
   };
@@ -332,59 +278,14 @@ const Programacion = () => {
       {
         accessorKey: "fechaInicio",
         header: "Fecha Inicio",
-        enableEditing: true,
+        muiTableBodyCellEditTextFieldProps: { type: "date" },
         size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => {
-            console.log("🧪 DatePicker is rendering!");
-            return (
-              <DatePicker
-                format="DD-MM-YYYY"
-                value={cell.getValue() ? dayjs(cell.getValue()) : null}
-                onChange={(newValue) => {
-                  const iso = newValue?.format("YYYY-MM-DD");
-                  table.setEditingCell(null); // exit edit mode
-                  handleSaveCell({
-                    cell,
-                    row,
-                    value: iso,
-                  });
-                }}
-                slotProps={{
-                  textField: { size: "small", fullWidth: true },
-                }}
-              />
-            );
-          },
-        },
       },
       {
         accessorKey: "fechaFin",
         header: "Fecha Fin",
-        enableEditing: true,
+        muiTableBodyCellEditTextFieldProps: { type: "date" },
         size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => (
-            <DatePicker
-              format="DD-MM-YYYY"
-              value={cell.getValue() ? dayjs(cell.getValue()) : null}
-              onChange={(newValue) => {
-                const iso = newValue?.format("YYYY-MM-DD");
-                table.setEditingCell(null);
-                handleSaveCell({
-                  cell,
-                  row,
-                  value: iso,
-                });
-              }}
-              slotProps={{
-                textField: { size: "small", fullWidth: true },
-              }}
-            />
-          ),
-        },
       },
       { accessorKey: "responsable", header: "Responsable", size: 150 },
       {
@@ -477,6 +378,9 @@ const Programacion = () => {
       },
     }),
 
+    defaultColumn: {
+      muiTableBodyEditTextFieldProps: { autoFocus: true },
+    },
     renderCellActionMenuItems: ({ row, closeMenu }) => [
       <Divider key="divider" />,
       <MRT_ActionMenuItem
@@ -506,89 +410,51 @@ const Programacion = () => {
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = (event) => {
-    const { active, over, activatorEvent } = event;
+    const { active, over } = event;
 
     if (!over || active.id === over.id) return;
 
-    const shiftPressed = activatorEvent?.shiftKey;
     const flat = flattenTree(data);
     const draggedItem = flat.find((item) => item.id === parseInt(active.id));
     const targetItem = flat.find((item) => item.id === parseInt(over.id));
 
     if (!draggedItem || !targetItem) return;
 
-    const updated = flat.map((item) => ({ ...item }));
+    // ❌ Verificamos si el target está dentro del subtree del dragged
+    const tree = buildTree(flat);
 
-    const sameParent = draggedItem.parentId === targetItem.parentId;
-
-    if (!shiftPressed && sameParent) {
-      // 🔁 Reorder among siblings
-      const siblings = updated.filter(
-        (i) => i.parentId === draggedItem.parentId
-      );
-
-      siblings.sort((a, b) => a.orden - b.orden);
-      const fromIndex = siblings.findIndex((i) => i.id === draggedItem.id);
-      const toIndex = siblings.findIndex((i) => i.id === targetItem.id);
-
-      const [moved] = siblings.splice(fromIndex, 1);
-      siblings.splice(toIndex, 0, moved);
-
-      siblings.forEach((item, index) => {
-        const ref = updated.find((i) => i.id === item.id);
-        if (ref) ref.orden = index + 1;
-      });
-    } else {
-      // 🔽 Move dragged item to be a child of targetItem
-
-      // 🚫 Check for cycles
-      const tree = buildTree(flat);
-      const findNode = (nodes, id) => {
-        for (let n of nodes) {
-          if (n.id === id) return n;
-          if (n.children) {
-            const found = findNode(n.children, id);
-            if (found) return found;
-          }
+    const findNode = (nodes, id) => {
+      for (let n of nodes) {
+        if (n.id === id) return n;
+        if (n.children) {
+          const found = findNode(n.children, id);
+          if (found) return found;
         }
-        return null;
-      };
-
-      const draggedNode = findNode(tree, draggedItem.id);
-      const containsTarget = (node, targetId) => {
-        if (!node) return false;
-        if (node.id === targetId) return true;
-        if (!node.children) return false;
-        return node.children.some(
-          (child) =>
-            containsTarget(child, targetId) ||
-            containsTarget(child.children, targetId)
-        );
-      };
-
-      if (containsTarget(draggedNode, targetItem.id)) {
-        alert(
-          "No puedes mover una actividad dentro de su propia subactividad."
-        );
-        return;
       }
+      return null;
+    };
 
-      // ✅ Change parentId and assign new orden at end of sibling list
-      const newParentId = targetItem.id;
-      const maxOrden = Math.max(
-        0,
-        ...updated
-          .filter((i) => i.parentId === newParentId)
-          .map((i) => i.orden ?? 0)
+    const draggedNode = findNode(tree, draggedItem.id);
+    const containsTarget = (node, targetId) => {
+      if (!node) return false;
+      if (node.id === targetId) return true;
+      if (!node.children) return false;
+      return node.children.some(
+        (child) =>
+          containsTarget(child, targetId) ||
+          containsTarget(child.children, targetId)
       );
+    };
 
-      updated.forEach((item) => {
-        if (item.id === draggedItem.id) {
-          item.parentId = newParentId;
-          item.orden = maxOrden + 1;
-        }
-      });
+    if (containsTarget(draggedNode, targetItem.id)) {
+      alert("No puedes mover una actividad dentro de su propia subactividad.");
+      return;
     }
+
+    // ✅ Si pasa validación, ahora sí cambiamos el parentId
+    const updated = flat.map((item) =>
+      item.id === draggedItem.id ? { ...item, parentId: targetItem.id } : item
+    );
 
     const newTree = actualizarArbolConEDT(updated);
     setData(newTree);

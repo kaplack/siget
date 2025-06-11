@@ -8,15 +8,18 @@ import Register from "./pages/Register";
 import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import NewProject from "./pages/NewProject";
-import ListaProyectos from "./pages/ListaProyectos"; // lo agrego como ejemplo
-import Dashboard from "./pages/Dashboard"; // lo agrego como ejemplo
+import ListaProyectos from "./pages/ListaProyectos";
+import Dashboard from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Program from "./pages/Program"; // lo agrego como ejemplo
-import Admin from "./pages/Admin"; // lo agrego como ejemplo
+import Program from "./pages/Program";
+import Admin from "./pages/Admin";
+
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function App() {
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -40,7 +43,7 @@ function App() {
         </Routes>
       </Router>
       <ToastContainer />
-    </>
+    </LocalizationProvider>
   );
 }
 

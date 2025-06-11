@@ -289,7 +289,7 @@ function SidebarItemWithSubmenu({
             position: "fixed",
             top: `${positionTop}px`,
             left: "60px",
-            backgroundColor: "#343a40",
+            backgroundColor: "white",
             padding: "10px",
             borderRadius: "4px",
             boxShadow: "0 0 5px rgba(0,0,0,0.3)",
