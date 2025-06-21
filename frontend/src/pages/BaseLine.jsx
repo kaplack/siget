@@ -26,115 +26,18 @@ import { CSS } from "@dnd-kit/utilities";
 import { formatearFechaVisual } from "../utils/formatDate";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-
-let lastId = 8;
-
-const initialData = [
-  {
-    id: 1,
-    parentId: 0,
-    nombre: "Formulación",
-    fechaInicio: "2025-06-01",
-    fechaFin: "2025-06-10",
-    responsable: "Juan Pérez",
-    predecesorId: null,
-    avance: 0,
-    plazo: 10,
-    sustento: "",
-    orden: 1,
-  },
-  {
-    id: 4,
-    parentId: 0,
-    nombre: "Ejecución",
-    fechaInicio: "2025-06-15",
-    fechaFin: "2025-07-15",
-    responsable: "Marta Ruiz",
-    predecesorId: null,
-    avance: 0,
-    plazo: 30,
-    sustento: "",
-    orden: 2,
-  },
-  {
-    id: 2,
-    parentId: 1,
-    nombre: "Revisión técnica",
-    fechaInicio: "2025-06-02",
-    fechaFin: "2025-06-05",
-    responsable: "Ana Gómez",
-    predecesorId: 1,
-    avance: 0,
-    plazo: 5,
-    sustento: "",
-    orden: 1,
-  },
-  {
-    id: 3,
-    parentId: 2,
-    nombre: "Validación presupuesto",
-    fechaInicio: "2025-06-06",
-    fechaFin: "2025-06-08",
-    responsable: "Carlos Díaz",
-    predecesorId: 2,
-    avance: 0,
-    plazo: 3,
-    sustento: "",
-    orden: 1,
-  },
-  {
-    id: 5,
-    parentId: 4,
-    nombre: "Licitación de obra",
-    fechaInicio: "2025-06-15",
-    fechaFin: "2025-06-25",
-    responsable: "Luis Torres",
-    predecesorId: 4,
-    avance: 0,
-    plazo: 10,
-    sustento: "",
-    orden: 1,
-  },
-  {
-    id: 6,
-    parentId: 4,
-    nombre: "Firma de contrato",
-    fechaInicio: "2025-06-26",
-    fechaFin: "2025-06-28",
-    responsable: "Laura Méndez",
-    predecesorId: 5,
-    avance: 0,
-    plazo: 3,
-    sustento: "",
-    orden: 2,
-  },
-  {
-    id: 7,
-    parentId: 5,
-    nombre: "Publicación de bases",
-    fechaInicio: "2025-06-15",
-    fechaFin: "2025-06-18",
-    responsable: "Equipo Legal",
-    predecesorId: 5,
-    avance: 0,
-    plazo: 4,
-    sustento: "",
-    orden: 1,
-  },
-  {
-    id: 8,
-    parentId: 5,
-    nombre: "Evaluación de propuestas",
-    fechaInicio: "2025-06-19",
-    fechaFin: "2025-06-24",
-    responsable: "Comité Técnico",
-    predecesorId: 7,
-    avance: 0,
-    plazo: 5,
-    sustento: "",
-    orden: 2,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getActivitiesByProject,
+  createActivity,
+  updateDraftActivity,
+  deleteDraftActivity,
+  setBaselineForProject,
+  resetActivityState,
+} from "../features/activities/activitySlice";
+import { getProject } from "../features/projects/projectSlice";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -151,8 +54,11 @@ const generarEDTs = (nodes, parentId = 0, prefix = "") => {
   });
 };
 
-const Programacion = () => {
+const ProjectBaseLine = () => {
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const { projectId } = useParams();
+  //console.log("Project ID:", projectId);
 
   const flattenTree = (tree) => {
     const result = [];
@@ -174,11 +80,33 @@ const Programacion = () => {
   };
 
   useEffect(() => {
-    const treeData = actualizarArbolConEDT(initialData);
+    setData([]);
+    dispatch(resetActivityState());
+    dispatch(getProject(projectId));
+    dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+  }, [dispatch, projectId]);
+
+  const rawActivities = useSelector((state) => state.activities.activities);
+  const currentProject = useSelector((state) => state.project.project);
+
+  console.log(currentProject);
+
+  useEffect(() => {
+    console.log("🔄 rawActivities actualizadas:", rawActivities);
+    const treeData = rawActivities.length
+      ? actualizarArbolConEDT(rawActivities)
+      : [];
     setData(treeData);
-  }, []);
+  }, [rawActivities]);
 
   const handleSaveCell = ({ cell, row, value }) => {
+    //console.log("🧠 handleSaveCell ejecutado", { cell, row, value });
+
+    if (currentProject.estado !== "borrador") {
+      toast.warning("⚠️ No se puede editar una línea base ya establecida.");
+      return;
+    }
+
     const columnId = cell.column.id;
     if (columnId === "avance") {
       const parsed = parseInt(value);
@@ -221,13 +149,35 @@ const Programacion = () => {
     const updatedTree = updateRow(data);
     const newTree = actualizarArbolConEDT(flattenTree(updatedTree));
     setData(newTree);
+    // ☁️ Guardar en backend
+    console.log(row.original.id, columnId, value);
+    dispatch(
+      updateDraftActivity({
+        activityId: row.original.id,
+        data: { [columnId]: value },
+      })
+    )
+      .unwrap()
+      .then(() => {
+        console.log("✅ Guardado correctamente en la versión base.");
+        dispatch(getActivitiesByProject(projectId)); // recarga tras guardar
+      })
+      .catch((err) => {
+        alert(err.message || "❌ No se pudo actualizar la versión base.");
+      });
   };
 
-  const handleAddActivity = (parentId = 0) => {
-    lastId += 1;
+  const handleAddActivity = async (parentId = 0) => {
+    if (currentProject.estado !== "borrador") {
+      toast.warning(
+        "⚠️ No se puede agregar actividades una vez establecida la línea base."
+      );
+      return;
+    }
+
     const flatData = flattenTree(data);
 
-    // Find the highest `orden` among siblings
+    // Obtener el mayor orden de los hermanos
     const ordenMax = Math.max(
       0,
       ...flatData
@@ -235,28 +185,58 @@ const Programacion = () => {
         .map((item) => item.orden ?? 0)
     );
 
-    flatData.push({
-      id: lastId,
-      parentId,
+    // Preparar nueva versión
+    const version = {
       nombre: "Nueva Actividad",
-      fechaInicio: "",
-      fechaFin: "",
+      parentId,
+      orden: ordenMax + 1,
+      fechaInicio: null,
+      fechaFin: null,
       responsable: "",
-      predecesorId: null,
       avance: 0,
       plazo: 0,
       sustento: "",
-      orden: ordenMax + 1,
-    });
+    };
 
-    const newTree = actualizarArbolConEDT(flatData);
-    setData(newTree);
+    // Enviar al backend
+    const resultAction = await dispatch(createActivity({ projectId, version }));
+
+    // Verifica si fue exitoso y actualiza el árbol
+    if (createActivity.fulfilled.match(resultAction)) {
+      const { activity, version } = resultAction.payload;
+
+      const newItem = {
+        id: activity.id,
+        parentId: version.parentId,
+        nombre: version.nombre,
+        fechaInicio: version.fechaInicio,
+        fechaFin: version.fechaFin,
+        responsable: version.responsable,
+        avance: version.avance,
+        plazo: version.plazo,
+        sustento: version.sustento,
+        orden: version.orden,
+      };
+
+      const updatedFlatData = [...flatData, newItem];
+      const newTree = actualizarArbolConEDT(updatedFlatData);
+      setData(newTree);
+    } else {
+      console.error("Error creating activity:", resultAction.payload);
+    }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    if (currentProject.estado !== "borrador") {
+      toast.warning(
+        "⚠️ No se puede eliminar actividades una vez establecida la línea base."
+      );
+      return;
+    }
+
     const flatData = flattenTree(data);
 
-    // Buscar IDs de todos los descendientes del nodo
+    // Get all descendant IDs recursively
     const collectDescendants = (parentId) => {
       const children = flatData.filter((item) => item.parentId === parentId);
       return children.flatMap((child) => [
@@ -267,6 +247,17 @@ const Programacion = () => {
 
     const idsToDelete = [id, ...collectDescendants(id)];
 
+    // Eliminate all from backend first
+    for (const actId of idsToDelete) {
+      try {
+        await dispatch(deleteDraftActivity(actId)).unwrap();
+      } catch (err) {
+        alert(`❌ No se pudo eliminar la actividad ID ${actId}: ${err}`);
+        return; // stop here if any deletion fails
+      }
+    }
+
+    // Then remove from frontend state
     const filtered = flatData.filter((item) => !idsToDelete.includes(item.id));
     const newTree = actualizarArbolConEDT(filtered);
     setData(newTree);
@@ -316,25 +307,55 @@ const Programacion = () => {
       {
         accessorKey: "nombre",
         header: "Actividad",
+        enableEditing: currentProject.estado === "borrador",
+
         Cell: ({ row, cell }) => (
           <div style={{ paddingLeft: `${(row.original.level - 1) * 10}px` }}>
             {cell.getValue()}
           </div>
         ),
         muiTableBodyCellEditTextFieldProps: { required: true },
+        muiEditTextFieldProps: ({ cell, row, table }) => ({
+          onBlur: (event) => {
+            const value = event.target.value;
+            // Solo guardar si hay cambio real
+            if (value !== row.original.nombre) {
+              handleSaveCell({ cell, row, value });
+            }
+          },
+        }),
       },
       {
         accessorKey: "plazo",
         header: "Plazo (días)",
+        enableEditing: currentProject.estado === "borrador",
         muiTableBodyCellEditTextFieldProps: { type: "number" },
         size: 40,
+        muiEditTextFieldProps: ({ cell, row, table }) => ({
+          onBlur: (event) => {
+            const value = event.target.value;
+            // Solo guardar si hay cambio real
+            if (value !== row.original.nombre) {
+              handleSaveCell({ cell, row, value });
+            }
+          },
+        }),
       },
       {
         accessorKey: "fechaInicio",
         header: "Fecha Inicio",
-        enableEditing: true,
+        enableEditing: currentProject.estado === "borrador",
         size: 80,
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
+        muiEditTextFieldProps: ({ cell, row, table }) => ({
+          onBlur: (event) => {
+            const value = event.target.value;
+            // Solo guardar si hay cambio real
+            if (value !== row.original.nombre) {
+              handleSaveCell({ cell, row, value });
+            }
+          },
+        }),
         muiTableBodyCellEditProps: {
           renderEditCell: ({ cell, row, table }) => {
             console.log("🧪 DatePicker is rendering!");
@@ -362,9 +383,18 @@ const Programacion = () => {
       {
         accessorKey: "fechaFin",
         header: "Fecha Fin",
-        enableEditing: true,
+        enableEditing: currentProject.estado === "borrador",
         size: 80,
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
+        muiEditTextFieldProps: ({ cell, row, table }) => ({
+          onBlur: (event) => {
+            const value = event.target.value;
+            // Solo guardar si hay cambio real
+            if (value !== row.original.nombre) {
+              handleSaveCell({ cell, row, value });
+            }
+          },
+        }),
         muiTableBodyCellEditProps: {
           renderEditCell: ({ cell, row, table }) => (
             <DatePicker
@@ -391,29 +421,57 @@ const Programacion = () => {
         accessorKey: "predecesorId",
         header: "Predecesor",
         muiTableBodyCellEditTextFieldProps: { type: "number" },
+        enableEditing: currentProject.estado === "borrador",
         size: 80,
+        muiEditTextFieldProps: ({ cell, row, table }) => ({
+          onBlur: (event) => {
+            const value = event.target.value;
+            // Solo guardar si hay cambio real
+            if (value !== row.original.nombre) {
+              handleSaveCell({ cell, row, value });
+            }
+          },
+        }),
       },
-      {
-        accessorKey: "avance",
-        header: "Avance (%)",
-        muiTableBodyCellEditTextFieldProps: { type: "number" },
-        size: 80,
-      },
-      {
-        accessorKey: "sustento",
-        header: "Sustento (URL)",
-        muiTableBodyCellEditTextFieldProps: { type: "url" },
-        size: 80,
-        Cell: ({ cell }) => {
-          const url = cell.getValue();
-          if (!url) return null;
-          return (
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              Ver Sustento
-            </a>
-          );
-        },
-      },
+      // {
+      //   accessorKey: "avance",
+      //   header: "Avance (%)",
+      //   muiTableBodyCellEditTextFieldProps: { type: "number" },
+      //   size: 80,
+      //   muiEditTextFieldProps: ({ cell, row, table }) => ({
+      //     onBlur: (event) => {
+      //       const value = event.target.value;
+      //       // Solo guardar si hay cambio real
+      //       if (value !== row.original.nombre) {
+      //         handleSaveCell({ cell, row, value });
+      //       }
+      //     },
+      //   }),
+      // },
+      // {
+      //   accessorKey: "sustento",
+      //   header: "Sustento (URL)",
+      //   muiTableBodyCellEditTextFieldProps: { type: "url" },
+      //   size: 80,
+      //   muiEditTextFieldProps: ({ cell, row, table }) => ({
+      //     onBlur: (event) => {
+      //       const value = event.target.value;
+      //       // Solo guardar si hay cambio real
+      //       if (value !== row.original.nombre) {
+      //         handleSaveCell({ cell, row, value });
+      //       }
+      //     },
+      //   }),
+      //   Cell: ({ cell }) => {
+      //     const url = cell.getValue();
+      //     if (!url) return null;
+      //     return (
+      //       <a href={url} target="_blank" rel="noopener noreferrer">
+      //         Ver Sustento
+      //       </a>
+      //     );
+      //   },
+      // },
     ],
     []
   );
@@ -467,11 +525,14 @@ const Programacion = () => {
           : {},
       // style: { cursor: "grab" },
       onKeyDown: (event) => {
-        if (event.key.toLowerCase() === "a") {
-          const newParentId = event.shiftKey ? 0 : row.original.parentId ?? 0;
+        // Agregar actividad al mismo nivel con Ctrl+A
+        if (event.key.toLowerCase() === "h" && event.ctrlKey) {
+          const newParentId = row.original.parentId ?? 0;
           handleAddActivity(newParentId);
         }
-        if (event.key.toLowerCase() === "s") {
+
+        // Agregar subactividad con Ctrl+S
+        if (event.key.toLowerCase() === "j" && event.ctrlKey) {
           handleAddActivity(row.original.id);
         }
       },
@@ -500,12 +561,20 @@ const Programacion = () => {
         table={table}
       />,
     ],
-    onEditingCellSave: handleSaveCell,
+    //onEditingCellSave: handleSaveCell,
+    onEditingCellBlur: handleSaveCell,
   });
 
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = (event) => {
+    if (currentProject.estado !== "borrador") {
+      toast.warning(
+        "No se puede reorganizar actividades una vez establecida la línea base."
+      );
+      return;
+    }
+
     const { active, over, activatorEvent } = event;
 
     if (!over || active.id === over.id) return;
@@ -526,8 +595,8 @@ const Programacion = () => {
       const siblings = updated.filter(
         (i) => i.parentId === draggedItem.parentId
       );
-
       siblings.sort((a, b) => a.orden - b.orden);
+
       const fromIndex = siblings.findIndex((i) => i.id === draggedItem.id);
       const toIndex = siblings.findIndex((i) => i.id === targetItem.id);
 
@@ -536,13 +605,24 @@ const Programacion = () => {
 
       siblings.forEach((item, index) => {
         const ref = updated.find((i) => i.id === item.id);
-        if (ref) ref.orden = index + 1;
+        if (ref && ref.orden !== index + 1) {
+          ref.orden = index + 1;
+
+          // ☁️ Actualizar orden en backend
+          dispatch(
+            updateDraftActivity({
+              activityId: ref.id,
+              data: { orden: ref.orden },
+            })
+          ).catch((err) => {
+            console.error(`❌ Error updating orden for id ${ref.id}:`, err);
+          });
+        }
       });
     } else {
-      // 🔽 Move dragged item to be a child of targetItem
-
-      // 🚫 Check for cycles
+      // 🔽 Move as child
       const tree = buildTree(flat);
+
       const findNode = (nodes, id) => {
         for (let n of nodes) {
           if (n.id === id) return n;
@@ -573,7 +653,6 @@ const Programacion = () => {
         return;
       }
 
-      // ✅ Change parentId and assign new orden at end of sibling list
       const newParentId = targetItem.id;
       const maxOrden = Math.max(
         0,
@@ -584,8 +663,30 @@ const Programacion = () => {
 
       updated.forEach((item) => {
         if (item.id === draggedItem.id) {
+          const changedParent = item.parentId !== newParentId;
+          const changedOrden = item.orden !== maxOrden + 1;
+
           item.parentId = newParentId;
           item.orden = maxOrden + 1;
+
+          if (changedParent || changedOrden) {
+            dispatch(
+              updateDraftActivity({
+                activityId: item.id,
+                data: {
+                  parentId: newParentId,
+                  orden: item.orden,
+                },
+              })
+            )
+              .unwrap()
+              .catch((err) => {
+                toast.error(
+                  `❌ Error updating parentId/orden for id ${item.id}: ${err}`
+                );
+                console.error("❌ Error updating parentId/orden:", err);
+              });
+          }
         }
       });
     }
@@ -596,17 +697,9 @@ const Programacion = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">
-        Programación WBS (SIGET PRO v5.2)
-      </h2>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleAddActivity(0)}
-        sx={{ mb: 2 }}
-      >
-        + Agregar Actividad Principal
-      </Button>
+      <h2 className="text-2xl font-bold mb-4">Linea Base del Proyecto</h2>
+      <h4>{currentProject.nombreConvenio}</h4>
+      <p>CUI: {currentProject.cui}</p>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -619,8 +712,46 @@ const Programacion = () => {
           <MaterialReactTable table={table} />
         </SortableContext>
       </DndContext>
+      {currentProject.estado === "borrador" && (
+        <>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleAddActivity(0)}
+            sx={{ mb: 2 }}
+            style={{ marginTop: "1rem" }}
+          >
+            + Agregar Actividad Principal
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              if (
+                window.confirm(
+                  "¿Estás seguro de que deseas establecer la línea base?"
+                )
+              ) {
+                dispatch(setBaselineForProject(projectId))
+                  .unwrap()
+                  .then((res) => {
+                    alert(res.message);
+                  })
+                  .catch((err) => alert("Error: " + err));
+                console.log(
+                  "Establecer línea base para el proyecto:",
+                  projectId
+                );
+              }
+            }}
+            style={{ marginLeft: "1rem" }}
+          >
+            Establecer Línea Base
+          </Button>
+        </>
+      )}
     </div>
   );
 };
 
-export default Programacion;
+export default ProjectBaseLine;

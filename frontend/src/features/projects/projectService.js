@@ -13,15 +13,32 @@ const createProject = async (projectData, token) => {
   return response.data;
 };
 
-// Get projects
-const getProjects = async () => {
-  const response = await axios.get(API_URL);
+// Get user projects
+const getUserProjects = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + "/user", config);
+  return response.data;
+};
+
+// Get project by Id
+const getProject = async (projectId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + "/project/" + projectId, config);
   return response.data;
 };
 
 const projectService = {
   createProject,
-  getProjects,
+  getUserProjects,
+  getProject,
 };
 export default projectService;
-export { createProject, getProjects };
+export { createProject, getUserProjects };

@@ -3,6 +3,8 @@ import { createProject } from "../features/projects/projectSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import ubigeoData from "../data/ubigeoData.json";
+import { useNavigate } from "react-router-dom";
+import { FaFolderPlus } from "react-icons/fa";
 
 function NewProject({ onSuccess }) {
   const [form, setForm] = useState({
@@ -20,12 +22,14 @@ function NewProject({ onSuccess }) {
     inicioConvenio: "",
     numeroBeneficiarios: "",
     montoInversion: "",
+    estado: "",
   });
 
   const [provincias, setProvincias] = useState([]);
   const [distritos, setDistritos] = useState([]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,9 +76,15 @@ function NewProject({ onSuccess }) {
       return;
     }
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    setForm((prev) => ({ ...prev, userId: user.id, estado: "borrador" }));
+
     try {
+      console.log("project form ", form);
       dispatch(createProject(form));
       toast.success("Proyecto registrado con éxito");
+      navigate("/app/project-list");
       if (onSuccess) onSuccess();
     } catch (err) {
       toast.error("Error al registrar el proyecto");
@@ -100,7 +110,10 @@ function NewProject({ onSuccess }) {
 
   return (
     <div className="container my-4 pt-4 pb-5">
-      <h2 className="mb-4">Registro de Proyecto</h2>
+      <h2 className="mb-4 d-flex align-items-center">
+        <FaFolderPlus size={50} style={{ marginRight: "1rem" }} />
+        Registro de Proyecto
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Nombre del Convenio</label>

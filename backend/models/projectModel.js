@@ -9,6 +9,14 @@ const Project = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
     nombreConvenio: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -64,6 +72,16 @@ const Project = sequelize.define(
     montoInversion: {
       type: DataTypes.DECIMAL(15, 2), // más preciso para montos
       allowNull: false,
+    },
+    estado: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "borrador",
+    },
+    avance: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      defaultValue: 0,
     },
   },
   {

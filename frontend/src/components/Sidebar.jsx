@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   FaProjectDiagram,
-  FaCalendarPlus,
+  FaPlus,
+  FaFolderPlus,
   FaHome,
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
@@ -12,12 +13,13 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
+import { GoProjectRoadmap } from "react-icons/go";
 import logo from "../assets/images/Logo_OEDI.png";
 import isotipo from "../assets/images/isotipo_OEDI.svg";
 import { logout, reset } from "../features/auth/authSlice";
 
 function Sidebar({ collapsed, toggleCollapse }) {
-  const sidebarWidth = collapsed ? 80 : 250;
+  const sidebarWidth = collapsed ? 80 : 260;
   const [showLabels, setShowLabels] = useState(!collapsed);
   const [openSubmenu, setOpenSubmenu] = useState(false);
 
@@ -96,7 +98,7 @@ function Sidebar({ collapsed, toggleCollapse }) {
 
           <SidebarItemWithSubmenu
             icon={<FaProjectDiagram />}
-            label="Nuevo Proyecto"
+            label="Gestión de Proyectos"
             showLabels={showLabels}
             collapsed={collapsed}
             open={openSubmenu}
@@ -104,22 +106,15 @@ function Sidebar({ collapsed, toggleCollapse }) {
             submenuItems={[
               {
                 to: "/app/project/new",
-                icon: <FaProjectDiagram />,
-                label: "Registrar Proyecto",
+                icon: <FaFolderPlus />,
+                label: "Proyecto",
               },
               {
-                to: "/app/project/program",
-                icon: <FaCalendarPlus />,
-                label: "Programación",
+                to: "/app/project-list",
+                icon: <GoProjectRoadmap />,
+                label: "Proyectos activos",
               },
             ]}
-          />
-
-          <SidebarItem
-            to="/app/proyectos"
-            icon={<FaCalendarPlus />}
-            label="Lista de Proyectos"
-            showLabels={showLabels}
           />
         </ul>
       </div>

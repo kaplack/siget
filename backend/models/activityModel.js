@@ -1,3 +1,4 @@
+// models/Activity.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
 
@@ -13,27 +14,14 @@ const Activity = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "projects", // nombre de tabla referenciada
+        model: "projects", // tabla referenciada
         key: "id",
       },
-    },
-    nombre: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    parentId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    orden: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 0,
     },
   },
   {
     tableName: "activities",
-    timestamps: true,
+    timestamps: true, // createdAt y updatedAt
   }
 );
 

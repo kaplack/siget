@@ -29,11 +29,32 @@ export const createProject = createAsyncThunk(
   }
 );
 
-export const getProjects = createAsyncThunk(
+export const getUserProjects = createAsyncThunk(
   "projects/getAll",
   async (_, thunkAPI) => {
     try {
-      return await projectService.getProjects();
+      //console.log("Fetching projects...");
+      const token = thunkAPI.getState().auth.user.token;
+      return await projectService.getUserProjects(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getProject = createAsyncThunk(
+  "projects/getProject",
+  async (projectId, thunkAPI) => {
+    try {
+      //console.log("Fetching projects...");
+      const token = thunkAPI.getState().auth.user.token;
+      return await projectService.getProject(projectId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -75,19 +96,35 @@ export const projectSlice = createSlice({
       })
 
       //Get all projects
-      .addCase(getProjects.pending, (state) => {
+      .addCase(getUserProjects.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getProjects.fulfilled, (state, action) => {
+      .addCase(getUserProjects.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.projects = action.payload;
       })
-      .addCase(getProjects.rejected, (state, action) => {
+      .addCase(getUserProjects.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.projects = null;
+      })
+
+      //Get project by Id
+      .addCase(getProject.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProject.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.project = action.payload;
+      })
+      .addCase(getProject.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.project = null;
       });
   },
 });

@@ -1,6 +1,6 @@
+// models/ActivityVersion.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
-const Activity = require("./activityModel");
 
 const ActivityVersion = sequelize.define(
   "ActivityVersion",
@@ -14,58 +14,67 @@ const ActivityVersion = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: Activity,
+        model: "activities",
         key: "id",
       },
-      onDelete: "CASCADE",
-    },
-    tipo: {
-      type: DataTypes.ENUM("base", "seguimiento"),
-      allowNull: false,
     },
     nroVersion: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    tipo: {
+      type: DataTypes.ENUM("borrador", "base", "seguimiento"),
+      allowNull: false,
+    },
+    vigente: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    parentId: {
+      type: DataTypes.INTEGER,
+      allowNull: true, // puede ser null si es raíz
+    },
+    orden: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
     fechaInicio: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
     fechaFin: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
     plazo: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     avance: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       defaultValue: 0,
     },
     responsable: {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    predecesorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     sustento: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    vigente: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
   },
   {
     tableName: "activity_versions",
-    timestamps: true, // createdAt, updatedAt
-    indexes: [
-      {
-        unique: false,
-        fields: ["activityId", "tipo", "nroVersion"],
-      },
-    ],
+    timestamps: true,
   }
 );
 
