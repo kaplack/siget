@@ -82,8 +82,11 @@ export const setBaselineForProject = createAsyncThunk(
   async (projectId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      await activityService.setBaselineForProject(projectId, token);
-      return projectId; // Return the ID of the deleted activity
+      const response = await activityService.setBaselineForProject(
+        projectId,
+        token
+      );
+      return response; // Return the ID of the deleted activity
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message

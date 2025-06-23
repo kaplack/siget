@@ -24,7 +24,7 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { formatearFechaVisual } from "../utils/formatDate";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -38,6 +38,12 @@ import {
 import { getProject } from "../features/projects/projectSlice";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  recalcularFechasPadres,
+  calcularTerceraVariable,
+} from "../utils/workingDay";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -58,7 +64,6 @@ const ProjectBaseLine = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const { projectId } = useParams();
-  //console.log("Project ID:", projectId);
 
   const flattenTree = (tree) => {
     const result = [];
@@ -75,11 +80,13 @@ const ProjectBaseLine = () => {
 
   const actualizarArbolConEDT = (listaPlana) => {
     const tree = buildTree(listaPlana);
-    generarEDTs(tree); // Mutación en sitio
+    generarEDTs(tree);
+    recalcularFechasPadres(tree); // <-- esta línea nueva
     return tree;
   };
 
   useEffect(() => {
+    if (!projectId) return; // 👈 asegura que projectId esté definido
     setData([]);
     dispatch(resetActivityState());
     dispatch(getProject(projectId));
@@ -89,10 +96,10 @@ const ProjectBaseLine = () => {
   const rawActivities = useSelector((state) => state.activities.activities);
   const currentProject = useSelector((state) => state.project.project);
 
-  console.log(currentProject);
+  //console.log(currentProject);
 
   useEffect(() => {
-    console.log("🔄 rawActivities actualizadas:", rawActivities);
+    //console.log("🔄 rawActivities actualizadas:", rawActivities);
     const treeData = rawActivities.length
       ? actualizarArbolConEDT(rawActivities)
       : [];
@@ -100,67 +107,75 @@ const ProjectBaseLine = () => {
   }, [rawActivities]);
 
   const handleSaveCell = ({ cell, row, value }) => {
-    //console.log("🧠 handleSaveCell ejecutado", { cell, row, value });
-
     if (currentProject.estado !== "borrador") {
       toast.warning("⚠️ No se puede editar una línea base ya establecida.");
       return;
     }
 
     const columnId = cell.column.id;
-    if (columnId === "avance") {
-      const parsed = parseInt(value);
-      if (isNaN(parsed) || parsed < 0 || parsed > 100) {
-        alert("El avance debe ser un número entre 0 y 100.");
-        return;
-      }
-      value = parsed;
-    }
+    const original = row.original;
 
-    if (columnId === "fechaInicio" || columnId === "fechaFin") {
-      const nuevaFecha = new Date(value);
-      const otraFecha =
-        columnId === "fechaInicio"
-          ? new Date(row.original.fechaFin)
-          : new Date(row.original.fechaInicio);
+    // Base updated entry
+    let entrada = {
+      ...original,
+      [columnId]: value,
+    };
 
-      if (
-        row.original.fechaInicio &&
-        row.original.fechaFin &&
-        ((columnId === "fechaInicio" && nuevaFecha > otraFecha) ||
-          (columnId === "fechaFin" && nuevaFecha < otraFecha))
-      ) {
-        alert(
-          "La fecha de inicio no puede ser posterior a la fecha de fin, ni viceversa."
-        );
-        return;
-      }
-    }
+    // Detect if it's a scheduling field
+    const esCampoFecha =
+      columnId === "fechaInicio" ||
+      columnId === "fechaFin" ||
+      columnId === "plazo";
 
-    const updateRow = (rows) =>
-      rows.map((item) =>
-        item.id === row.original.id
-          ? { ...item, [columnId]: value }
-          : item.children?.length > 0
-          ? { ...item, children: updateRow(item.children) }
-          : item
+    // Apply working day logic if needed
+    if (esCampoFecha) {
+      const campos = calcularTerceraVariable(
+        {
+          fechaInicio: entrada.fechaInicio,
+          fechaFin: entrada.fechaFin,
+          plazo: entrada.plazo,
+        },
+        [], // optional holidays
+        columnId
       );
+      entrada = { ...entrada, ...campos };
+    }
+
+    // Local tree update
+    const updateRow = (rows) =>
+      rows.map((item) => {
+        if (item.id === original.id) {
+          return entrada;
+        }
+        if (item.children?.length > 0) {
+          return { ...item, children: updateRow(item.children) };
+        }
+        return item;
+      });
 
     const updatedTree = updateRow(data);
     const newTree = actualizarArbolConEDT(flattenTree(updatedTree));
     setData(newTree);
-    // ☁️ Guardar en backend
-    console.log(row.original.id, columnId, value);
+
+    // Data to persist
+    const datosAGuardar = esCampoFecha
+      ? {
+          fechaInicio: entrada.fechaInicio,
+          fechaFin: entrada.fechaFin,
+          plazo: entrada.plazo,
+        }
+      : { [columnId]: value };
+
+    // Dispatch DB update
     dispatch(
       updateDraftActivity({
-        activityId: row.original.id,
-        data: { [columnId]: value },
+        activityId: original.id,
+        data: datosAGuardar,
       })
     )
       .unwrap()
       .then(() => {
-        console.log("✅ Guardado correctamente en la versión base.");
-        dispatch(getActivitiesByProject(projectId)); // recarga tras guardar
+        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
       })
       .catch((err) => {
         alert(err.message || "❌ No se pudo actualizar la versión base.");
@@ -263,218 +278,220 @@ const ProjectBaseLine = () => {
     setData(newTree);
   };
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "drag",
-        header: "",
-        enableColumnActions: false,
-        enableSorting: false,
-        size: 20,
-        enableEditing: false,
-        Cell: ({ row }) => {
-          const { attributes, listeners, setNodeRef, transform, transition } =
-            useSortable({ id: row.original.id.toString() });
+  // Custom editor for fechaInicio
+  const EditFechaInicioCell = ({ cell, row, table }) => {
+    const [dpValue, setDpValue] = useState(
+      cell.getValue() ? dayjs(cell.getValue()) : null
+    );
 
-          const style = {
-            transform: CSS.Transform.toString(transform),
-            transition,
-            cursor: "grab",
-            display: "flex",
-            alignItems: "center",
-          };
+    console.log("🧠 EditFechaInicioCell renderizado");
 
-          return (
-            <span
-              ref={setNodeRef}
-              {...attributes}
-              {...listeners}
-              style={style}
-              title="Arrastrar"
-            >
-              <DragIndicatorIcon fontSize="small" />
-            </span>
-          );
+    const handleChange = (newValue) => {
+      const iso = newValue?.format("YYYY-MM-DD");
+      if (iso && iso !== row.original[cell.column.id]) {
+        table.setEditingCell(null); // exit edit mode
+        handleSaveCell({
+          cell,
+          row,
+          value: iso,
+        });
+      } else {
+        table.setEditingCell(null); // just exit if no change
+      }
+    };
+
+    return (
+      <DatePicker
+        value={dpValue}
+        onChange={handleChange}
+        format="DD-MM-YYYY"
+        slotProps={{
+          textField: { size: "small", fullWidth: true },
+        }}
+      />
+    );
+  };
+
+  const columns = [
+    {
+      accessorKey: "drag",
+      header: "",
+      enableColumnActions: false,
+      enableSorting: false,
+      size: 20,
+      enableEditing: false,
+      Cell: ({ row }) => {
+        const { attributes, listeners, setNodeRef, transform, transition } =
+          useSortable({ id: row.original.id.toString() });
+
+        const style = {
+          transform: CSS.Transform.toString(transform),
+          transition,
+          cursor: "grab",
+          display: "flex",
+          alignItems: "center",
+        };
+
+        return (
+          <span
+            ref={setNodeRef}
+            {...attributes}
+            {...listeners}
+            style={style}
+            title="Arrastrar"
+          >
+            <DragIndicatorIcon fontSize="small" />
+          </span>
+        );
+      },
+    },
+
+    {
+      accessorKey: "edt",
+      header: "EDT",
+      size: 60,
+      enableEditing: false,
+    },
+    {
+      accessorKey: "nombre",
+      header: "Actividad",
+      enableEditing: currentProject?.estado === "borrador",
+
+      Cell: ({ row, cell }) => (
+        <div style={{ paddingLeft: `${(row.original.level - 1) * 10}px` }}>
+          {cell.getValue()}
+        </div>
+      ),
+      muiTableBodyCellEditTextFieldProps: { required: true },
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        onBlur: (event) => {
+          const value = event.target.value;
+          // Solo guardar si hay cambio real
+          if (value !== row.original[cell.column.id]) {
+            handleSaveCell({ cell, row, value });
+          }
         },
-      },
+      }),
+    },
+    {
+      accessorKey: "plazo",
+      header: "Plazo (días)",
+      enableEditing: currentProject.estado === "borrador",
+      muiTableBodyCellEditTextFieldProps: { type: "number" },
+      size: 40,
 
-      {
-        accessorKey: "edt",
-        header: "EDT",
-        size: 60,
-        enableEditing: false,
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        onBlur: (event) => {
+          const value = event.target.value;
+          // Solo guardar si hay cambio real
+          if (Number(value) !== Number(row.original[cell.column.id])) {
+            handleSaveCell({ cell, row, value });
+          }
+        },
+      }),
+    },
+    {
+      accessorKey: "fechaInicio",
+      header: "Fecha Inicio",
+      enableEditing: currentProject.estado === "borrador",
+      size: 80,
+      Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
+      muiTableBodyCellEditTextFieldProps: {
+        type: "date",
       },
-      {
-        accessorKey: "nombre",
-        header: "Actividad",
-        enableEditing: currentProject.estado === "borrador",
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        defaultValue: cell.getValue(),
+        onBlur: (event) => {
+          const value = event.target.value;
 
-        Cell: ({ row, cell }) => (
-          <div style={{ paddingLeft: `${(row.original.level - 1) * 10}px` }}>
-            {cell.getValue()}
-          </div>
-        ),
-        muiTableBodyCellEditTextFieldProps: { required: true },
-        muiEditTextFieldProps: ({ cell, row, table }) => ({
-          onBlur: (event) => {
-            const value = event.target.value;
-            // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
-              handleSaveCell({ cell, row, value });
-            }
-          },
-        }),
-      },
-      {
-        accessorKey: "plazo",
-        header: "Plazo (días)",
-        enableEditing: currentProject.estado === "borrador",
-        muiTableBodyCellEditTextFieldProps: { type: "number" },
-        size: 40,
-        muiEditTextFieldProps: ({ cell, row, table }) => ({
-          onBlur: (event) => {
-            const value = event.target.value;
-            // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
-              handleSaveCell({ cell, row, value });
-            }
-          },
-        }),
-      },
-      {
-        accessorKey: "fechaInicio",
-        header: "Fecha Inicio",
-        enableEditing: currentProject.estado === "borrador",
-        size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiEditTextFieldProps: ({ cell, row, table }) => ({
-          onBlur: (event) => {
-            const value = event.target.value;
-            // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
-              handleSaveCell({ cell, row, value });
-            }
-          },
-        }),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => {
-            console.log("🧪 DatePicker is rendering!");
-            return (
-              <DatePicker
-                format="DD-MM-YYYY"
-                value={cell.getValue() ? dayjs(cell.getValue()) : null}
-                onChange={(newValue) => {
-                  const iso = newValue?.format("YYYY-MM-DD");
-                  table.setEditingCell(null); // exit edit mode
-                  handleSaveCell({
-                    cell,
-                    row,
-                    value: iso,
-                  });
-                }}
-                slotProps={{
-                  textField: { size: "small", fullWidth: true },
-                }}
-              />
-            );
-          },
+          if (!value || value === null) {
+            console.log("⛔ Fecha vacía o null, no se guarda");
+            return;
+          }
+
+          if (value !== row.original[cell.column.id]) {
+            console.log("💾 Guardando fechaInicio:", value);
+            handleSaveCell({ cell, row, value });
+          }
         },
+      }),
+    },
+
+    {
+      accessorKey: "fechaFin",
+      header: "Fecha Fin",
+      enableEditing: currentProject.estado === "borrador",
+      size: 80,
+      Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
+      muiTableBodyCellEditTextFieldProps: {
+        type: "date",
       },
-      {
-        accessorKey: "fechaFin",
-        header: "Fecha Fin",
-        enableEditing: currentProject.estado === "borrador",
-        size: 80,
-        Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-        muiEditTextFieldProps: ({ cell, row, table }) => ({
-          onBlur: (event) => {
-            const value = event.target.value;
-            // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
-              handleSaveCell({ cell, row, value });
-            }
-          },
-        }),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => (
-            <DatePicker
-              format="DD-MM-YYYY"
-              value={cell.getValue() ? dayjs(cell.getValue()) : null}
-              onChange={(newValue) => {
-                const iso = newValue?.format("YYYY-MM-DD");
-                table.setEditingCell(null);
-                handleSaveCell({
-                  cell,
-                  row,
-                  value: iso,
-                });
-              }}
-              slotProps={{
-                textField: { size: "small", fullWidth: true },
-              }}
-            />
-          ),
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        defaultValue: cell.getValue(),
+        onBlur: (event) => {
+          const value = event.target.value;
+
+          if (!value || value === null) {
+            console.log("⛔ Fecha vacía o null, no se guarda");
+            return;
+          }
+
+          if (value !== row.original[cell.column.id]) {
+            console.log("💾 Guardando fechaInicio:", value);
+            handleSaveCell({ cell, row, value });
+          }
         },
-      },
-      { accessorKey: "responsable", header: "Responsable", size: 150 },
-      {
-        accessorKey: "predecesorId",
-        header: "Predecesor",
-        muiTableBodyCellEditTextFieldProps: { type: "number" },
-        enableEditing: currentProject.estado === "borrador",
-        size: 80,
-        muiEditTextFieldProps: ({ cell, row, table }) => ({
-          onBlur: (event) => {
-            const value = event.target.value;
-            // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
-              handleSaveCell({ cell, row, value });
-            }
-          },
-        }),
-      },
-      // {
-      //   accessorKey: "avance",
-      //   header: "Avance (%)",
-      //   muiTableBodyCellEditTextFieldProps: { type: "number" },
-      //   size: 80,
-      //   muiEditTextFieldProps: ({ cell, row, table }) => ({
-      //     onBlur: (event) => {
-      //       const value = event.target.value;
-      //       // Solo guardar si hay cambio real
-      //       if (value !== row.original.nombre) {
-      //         handleSaveCell({ cell, row, value });
-      //       }
-      //     },
-      //   }),
-      // },
-      // {
-      //   accessorKey: "sustento",
-      //   header: "Sustento (URL)",
-      //   muiTableBodyCellEditTextFieldProps: { type: "url" },
-      //   size: 80,
-      //   muiEditTextFieldProps: ({ cell, row, table }) => ({
-      //     onBlur: (event) => {
-      //       const value = event.target.value;
-      //       // Solo guardar si hay cambio real
-      //       if (value !== row.original.nombre) {
-      //         handleSaveCell({ cell, row, value });
-      //       }
-      //     },
-      //   }),
-      //   Cell: ({ cell }) => {
-      //     const url = cell.getValue();
-      //     if (!url) return null;
-      //     return (
-      //       <a href={url} target="_blank" rel="noopener noreferrer">
-      //         Ver Sustento
-      //       </a>
-      //     );
+      }),
+      // muiEditTextFieldProps: ({ cell, row, table }) => ({
+      //   onBlur: (event) => {
+      //     const value = event.target.value;
+      //     // Solo guardar si hay cambio real
+      //     if (value !== row.original[cell.column.id]) {
+      //       handleSaveCell({ cell, row, value });
+      //     }
       //   },
+      // }),
+      // muiTableBodyCellEditProps: {
+      //   renderEditCell: ({ cell, row, table }) => (
+      //     <DatePicker
+      //       format="DD-MM-YYYY"
+      //       value={cell.getValue() ? dayjs(cell.getValue()) : null}
+      //       onChange={(newValue) => {
+      //         const iso = newValue?.format("YYYY-MM-DD");
+      //         table.setEditingCell(null);
+      //         handleSaveCell({
+      //           cell,
+      //           row,
+      //           value: iso,
+      //         });
+      //       }}
+      //       slotProps={{
+      //         textField: { size: "small", fullWidth: true },
+      //       }}
+      //     />
+      //   ),
       // },
-    ],
-    []
-  );
+    },
+    { accessorKey: "responsable", header: "Responsable", size: 150 },
+    {
+      accessorKey: "predecesorId",
+      header: "Predecesor",
+      muiTableBodyCellEditTextFieldProps: { type: "number" },
+      enableEditing: currentProject.estado === "borrador",
+      size: 80,
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        onBlur: (event) => {
+          const value = event.target.value;
+          // Solo guardar si hay cambio real
+          if (value !== row.original[cell.column.id]) {
+            handleSaveCell({ cell, row, value });
+          }
+        },
+      }),
+    },
+  ];
+  // [currentProject]
+  //);
 
   const table = useMaterialReactTable({
     columns,
@@ -485,7 +502,7 @@ const ProjectBaseLine = () => {
     getSubRows: (row) => row.children,
     enableRowActions: true,
     positionActionsColumn: "last",
-    displayColumnDefOptions: { "mrt-row-actions": { enableEditing: false } },
+    // displayColumnDefOptions: { "mrt-row-actions": { enableEditing: false } },
     enableCellActions: true,
     initialState: {
       columnVisibility: { id: false, responsable: false, predecesorId: false },
@@ -561,8 +578,6 @@ const ProjectBaseLine = () => {
         table={table}
       />,
     ],
-    //onEditingCellSave: handleSaveCell,
-    onEditingCellBlur: handleSaveCell,
   });
 
   const sensors = useSensors(useSensor(PointerSensor));
@@ -696,61 +711,63 @@ const ProjectBaseLine = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Linea Base del Proyecto</h2>
-      <h4>{currentProject.nombreConvenio}</h4>
-      <p>CUI: {currentProject.cui}</p>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext
-          items={flattenTree(data).map((item) => item.id.toString())}
-          strategy={verticalListSortingStrategy}
+    <>
+      <div className="p-4">
+        <h2 className="text-2xl font-bold mb-4">Linea Base del Proyecto</h2>
+        <h4>{currentProject.nombreConvenio}</h4>
+        <p>CUI: {currentProject.cui}</p>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
         >
-          <MaterialReactTable table={table} />
-        </SortableContext>
-      </DndContext>
-      {currentProject.estado === "borrador" && (
-        <>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleAddActivity(0)}
-            sx={{ mb: 2 }}
-            style={{ marginTop: "1rem" }}
+          <SortableContext
+            items={flattenTree(data).map((item) => item.id.toString())}
+            strategy={verticalListSortingStrategy}
           >
-            + Agregar Actividad Principal
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => {
-              if (
-                window.confirm(
-                  "¿Estás seguro de que deseas establecer la línea base?"
-                )
-              ) {
-                dispatch(setBaselineForProject(projectId))
-                  .unwrap()
-                  .then((res) => {
-                    alert(res.message);
-                  })
-                  .catch((err) => alert("Error: " + err));
-                console.log(
-                  "Establecer línea base para el proyecto:",
-                  projectId
-                );
-              }
-            }}
-            style={{ marginLeft: "1rem" }}
-          >
-            Establecer Línea Base
-          </Button>
-        </>
-      )}
-    </div>
+            <MaterialReactTable table={table} />
+          </SortableContext>
+        </DndContext>
+        {currentProject.estado === "borrador" && (
+          <>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleAddActivity(0)}
+              sx={{ mb: 2 }}
+              style={{ marginTop: "1rem" }}
+            >
+              + Agregar Actividad Principal
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "¿Estás seguro de que deseas establecer la línea base?"
+                  )
+                ) {
+                  dispatch(setBaselineForProject(projectId))
+                    .unwrap()
+                    .then((res) => {
+                      alert(res.message);
+                    })
+                    .catch((err) => alert("Error: " + err));
+                  console.log(
+                    "Establecer línea base para el proyecto:",
+                    projectId
+                  );
+                }
+              }}
+              style={{ marginLeft: "1rem" }}
+            >
+              Establecer Línea Base
+            </Button>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

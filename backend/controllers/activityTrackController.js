@@ -8,19 +8,14 @@ const addTrackingVersion = async (req, res) => {
   try {
     const { activityId } = req.params;
     const {
-      nombre,
-      parentId = 0,
-      orden = 0,
       fechaInicio,
       fechaFin,
       plazo,
       avance = 0,
-      predecesorId = 0,
-      responsable = null,
       sustento = null,
     } = req.body;
 
-    //baseline check
+    // Validate that baseline exists
     const baseline = await ActivityVersion.findOne({
       where: { activityId, tipo: "base", nroVersion: 1 },
     });
@@ -29,39 +24,56 @@ const addTrackingVersion = async (req, res) => {
       return res.status(400).json({ message: "Baseline version not found." });
     }
 
-    // Check
+    // Get current seguimiento count
     const count = await ActivityVersion.count({
       where: { activityId, tipo: "seguimiento" },
     });
 
+    // Mark all previous seguimiento versions as not vigente
     await ActivityVersion.update(
       { vigente: false },
       { where: { activityId, tipo: "seguimiento" } }
     );
+
     const nroVersion = count + 1;
 
-    const newTracking = await ActivityVersion.create({
-      activityId,
-      nombre,
-      parentId,
-      orden,
-      tipo: "seguimiento",
-      nroVersion,
-      fechaInicio,
-      fechaFin,
-      plazo,
-      avance,
-      responsable,
-      sustento,
-      predecesorId,
-      vigente: true,
+    // Get the last vigente version (base or seguimiento)
+    const lastVersion = await ActivityVersion.findOne({
+      where: { activityId, vigente: false },
+      order: [["nroVersion", "DESC"]],
     });
 
-    // Get projectId from activity
+    const trackingData = {
+      activityId,
+      nombre: lastVersion?.nombre ?? "Sin nombre",
+      parentId: lastVersion?.parentId ?? 0,
+      orden: lastVersion?.orden ?? 0,
+      predecesorId: lastVersion?.predecesorId ?? null,
+      responsable: lastVersion?.responsable ?? null,
+      sustento: req.body.hasOwnProperty("sustento")
+        ? sustento
+        : lastVersion?.sustento ?? null,
+      fechaInicio: req.body.hasOwnProperty("fechaInicio")
+        ? fechaInicio
+        : lastVersion?.fechaInicio,
+      fechaFin: req.body.hasOwnProperty("fechaFin")
+        ? fechaFin
+        : lastVersion?.fechaFin,
+      plazo: req.body.hasOwnProperty("plazo") ? plazo : lastVersion?.plazo,
+      avance: req.body.hasOwnProperty("avance")
+        ? avance
+        : lastVersion?.avance ?? 0,
+      tipo: "seguimiento",
+      nroVersion,
+      vigente: true,
+    };
+
+    const newTracking = await ActivityVersion.create(trackingData);
+
+    // Update project to 'ejecucion' if conditions are met
     const activity = await Activity.findByPk(activityId);
     const projectId = activity?.projectId;
 
-    // 🟠 Si esta es la segunda (o más) versión de seguimiento Y el avance es real → cambiar estado a 'ejecucion'
     if (nroVersion >= 2 && avance > 0 && projectId) {
       const proyecto = await Project.findByPk(projectId);
       if (proyecto?.estado === "linea_base") {
@@ -71,7 +83,7 @@ const addTrackingVersion = async (req, res) => {
 
     res.status(201).json({ version: newTracking });
   } catch (error) {
-    console.error("Error adding tracking version:", error);
+    console.error("❌ Error adding tracking version:", error);
     res.status(500).json({ message: "Error adding tracking version." });
   }
 };

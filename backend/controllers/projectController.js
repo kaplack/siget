@@ -20,10 +20,10 @@ const createProject = asyncHandler(async (req, res) => {
     inicioConvenio,
     numeroBeneficiarios,
     montoInversion,
-    userId,
   } = req.body;
 
   console.log(req.body);
+  const userId = req.user.id; // Asumiendo que el usuario está autenticado y su ID está disponible
 
   // Validación básica
   if (

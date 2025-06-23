@@ -19,41 +19,47 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ProjectSchedule from "./pages/ProjectSchedule";
 import ProjectBaseLine from "./pages/BaseLine";
 import ProjectList from "./pages/ProjectList";
+import MRTPrueba from "./pages/MRTPrueba";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 function App() {
+  const theme = createTheme();
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/register" element={<Register />} />
+    <ThemeProvider theme={theme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/register" element={<Register />} />
 
-          <Route
-            path="/app"
-            element={
-              <PrivateRoute>
-                <Layout />
-              </PrivateRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="project/new" element={<NewProject />} />
             <Route
-              path="project-list/:projectId/tracking"
-              element={<ProjectSchedule />}
-            />
-            <Route
-              path="project-list/:projectId/base-line"
-              element={<ProjectBaseLine />}
-            />
-            <Route path="admin" element={<Admin />} />
-            <Route path="project-list" element={<ProjectList />} />
-          </Route>
-        </Routes>
-      </Router>
-      <ToastContainer />
-    </LocalizationProvider>
+              path="/app"
+              element={
+                <PrivateRoute>
+                  <Layout />
+                </PrivateRoute>
+              }
+            >
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="project/new" element={<NewProject />} />
+              <Route
+                path="project-list/:projectId/tracking"
+                element={<ProjectSchedule />}
+              />
+              <Route
+                path="project-list/:projectId/base-line"
+                element={<ProjectBaseLine />}
+              />
+              <Route path="admin" element={<Admin />} />
+              <Route path="project-list" element={<ProjectList />} />
+              <Route path="prueba-mrt" element={<MRTPrueba />} />
+            </Route>
+          </Routes>
+        </Router>
+        <ToastContainer />
+      </LocalizationProvider>
+    </ThemeProvider>
   );
 }
 

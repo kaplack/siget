@@ -38,6 +38,10 @@ import { getProject } from "../features/projects/projectSlice";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaRegSave } from "react-icons/fa";
+import {
+  recalcularFechasPadres,
+  calcularTerceraVariable,
+} from "../utils/workingDay";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -56,26 +60,46 @@ const generarEDTs = (nodes, parentId = 0, prefix = "") => {
 
 const ProjectSchedule = () => {
   const [data, setData] = useState([]);
+  const dataRef = useRef([]);
   const dispatch = useDispatch();
   const { projectId } = useParams();
   //console.log("Project ID:", projectId);
 
-  useEffect(() => {
-    setData([]);
-    dispatch(resetActivityState());
-    dispatch(getProject(projectId)); // Cargar proyecto actual
-    dispatch(getActivitiesByProject({ projectId, tipoVersion: "seguimiento" }));
-  }, [dispatch, projectId]);
-
   const rawActivities = useSelector((state) => state.activities.activities);
   const currentProject = useSelector((state) => state.project.project);
 
+  // Solo al montar: carga inicial de proyecto y actividades de seguimiento
   useEffect(() => {
-    console.log("🔄 rawActivities actualizadas:", rawActivities);
-    const treeData = rawActivities.length
-      ? actualizarArbolConEDT(rawActivities)
-      : [];
-    setData(treeData);
+    if (!projectId) return;
+
+    dispatch(getProject(projectId));
+    dispatch(getActivitiesByProject({ projectId, tipoVersion: "seguimiento" }));
+  }, []);
+
+  // Cada vez que cambian las actividades, reconstruye el árbol y aplica cambios locales pendientes
+  useEffect(() => {
+    if (!rawActivities || rawActivities.length === 0) return;
+
+    const treeData = actualizarArbolConEDT(rawActivities);
+
+    const aplicarCambiosLocales = (nodos) =>
+      nodos.map((nodo) => {
+        const cambios = unsavedChangesRef.current[nodo.id];
+        const actualizado = cambios ? { ...nodo, ...cambios } : nodo;
+
+        if (nodo.children?.length > 0) {
+          return {
+            ...actualizado,
+            children: aplicarCambiosLocales(nodo.children),
+          };
+        }
+
+        return actualizado;
+      });
+
+    const treeConCambios = aplicarCambiosLocales(treeData);
+    setData(treeConCambios);
+    dataRef.current = treeConCambios; // 👈 sincroniza ref
   }, [rawActivities]);
 
   const flattenTree = (tree) => {
@@ -101,7 +125,8 @@ const ProjectSchedule = () => {
 
   const actualizarArbolConEDT = (listaPlana) => {
     const tree = buildTree(listaPlana);
-    generarEDTs(tree); // Mutación en sitio
+    generarEDTs(tree);
+    recalcularFechasPadres(tree); // se actualizan fechas de padres
     return tree;
   };
 
@@ -127,7 +152,7 @@ const ProjectSchedule = () => {
   // Manual save of all pending changes
   const handleGuardarTodo = () => {
     Object.entries(unsavedChangesRef.current).forEach(([rowId, data]) => {
-      dispatch(updateDraftActivity({ activityId: rowId, data }))
+      dispatch(addTrackingVersion({ activityId: rowId, versionData: data }))
         .unwrap()
         .then(() => {
           dispatch(
@@ -149,18 +174,23 @@ const ProjectSchedule = () => {
     const tipo = row.original.tipo;
     const rowId = row.original.id;
 
-    // Allow editing only for permitted fields in 'seguimiento' type
-    if (
-      tipo === "seguimiento" &&
-      !camposPermitidosSeguimiento.includes(columnId)
-    ) {
+    const camposPermitidos = [
+      "plazo",
+      "fechaInicio",
+      "fechaFin",
+      "avance",
+      "sustento",
+    ];
+
+    // ⛔ Solo permitir edición de campos permitidos
+    if (tipo === "seguimiento" && !camposPermitidos.includes(columnId)) {
       alert(
         "Este campo no puede ser editado en seguimiento. Solo: plazo, fechas, avance, sustento."
       );
       return;
     }
 
-    // Parse and validate 'avance'
+    // 🧮 Validación de avance
     if (columnId === "avance") {
       const parsed = parseInt(value);
       if (isNaN(parsed) || parsed < 0 || parsed > 100) {
@@ -170,67 +200,93 @@ const ProjectSchedule = () => {
       value = parsed;
     }
 
-    // Validate start/end dates
+    // ⛔ Validar fecha
     if (columnId === "fechaInicio" || columnId === "fechaFin") {
+      if (value === "Invalid date") return;
       const nuevaFecha = new Date(value);
-      const otraFecha =
-        columnId === "fechaInicio"
-          ? new Date(row.original.fechaFin)
-          : new Date(row.original.fechaInicio);
-
-      if (
-        row.original.fechaInicio &&
-        row.original.fechaFin &&
-        ((columnId === "fechaInicio" && nuevaFecha > otraFecha) ||
-          (columnId === "fechaFin" && nuevaFecha < otraFecha))
-      ) {
-        alert(
-          "La fecha de inicio no puede ser posterior a la fecha de fin, ni viceversa."
-        );
-        return;
-      }
+      if (isNaN(nuevaFecha.getTime())) return;
     }
 
-    // Skip update if value hasn't changed
+    // ⛔ Evitar guardar si no cambió
     if (row.original[columnId] === value) return;
 
-    // Update local table state
-    const updateRow = (rows) =>
-      rows.map((item) =>
-        item.id === rowId
-          ? { ...item, [columnId]: value }
-          : item.children?.length > 0
-          ? { ...item, children: updateRow(item.children) }
-          : item
+    // 🧠 Aplicar lógica de fechas si corresponde
+    let entrada = { ...row.original, [columnId]: value };
+    const esFecha = ["fechaInicio", "fechaFin", "plazo"].includes(columnId);
+
+    if (esFecha) {
+      const resultado = calcularTerceraVariable(
+        {
+          fechaInicio: entrada.fechaInicio,
+          fechaFin: entrada.fechaFin,
+          plazo: entrada.plazo,
+        },
+        [], // feriados si se usan
+        columnId
       );
-    const updatedTree = updateRow(data);
-    const newTree = actualizarArbolConEDT(flattenTree(updatedTree));
+      entrada = { ...entrada, ...resultado };
+    }
+
+    // 🧱 Actualizar árbol local
+    const updateRow = (rows) =>
+      rows.map((item) => {
+        const esEditado = item.id === row.original.id;
+        if (esEditado) {
+          console.log("✏️ Actualizando nodo:", item);
+          console.log("➡️ Nuevo estado:", entrada);
+          return { ...item, ...entrada };
+        }
+
+        if (item.children?.length > 0) {
+          const updatedChildren = updateRow(item.children);
+          console.log("🔁 Nodo padre:", item.id, "→ hijos:", updatedChildren);
+          return { ...item, children: updatedChildren };
+        }
+
+        return item;
+      });
+
+    console.log("como entra data al updateRow:", data);
+    const updatedTree = updateRow(dataRef.current);
+    //console.log("🔎 Árbol actualizado antes de flatten:", updatedTree);
+    const flattened = flattenTree(updatedTree);
+    //console.log("📉 Lista plana:", flattened);
+    const newTree = actualizarArbolConEDT(flattened);
+    //console.log("🌳 Árbol final para setData:", newTree);
     setData(newTree);
 
-    // Store field change in unsavedChangesRef
+    // 💾 Guardar en buffer
     if (!unsavedChangesRef.current[rowId]) {
       unsavedChangesRef.current[rowId] = {};
     }
-    unsavedChangesRef.current[rowId][columnId] = value;
 
-    // Reset timeout if already running for this row
+    if (esFecha) {
+      unsavedChangesRef.current[rowId] = {
+        ...unsavedChangesRef.current[rowId],
+        fechaInicio: entrada.fechaInicio,
+        fechaFin: entrada.fechaFin,
+        plazo: entrada.plazo,
+      };
+    } else {
+      unsavedChangesRef.current[rowId][columnId] = value;
+    }
+
+    // 🕓 Reiniciar timeout de autosave
     if (saveTimeoutsRef.current[rowId]) {
       clearTimeout(saveTimeoutsRef.current[rowId]);
     }
 
-    // Schedule auto-save after 5 minutes
     saveTimeoutsRef.current[rowId] = setTimeout(() => {
-      const pendingData = unsavedChangesRef.current[rowId];
-      const originalData = row.original;
+      const cambios = unsavedChangesRef.current[rowId];
+      const originales = row.original;
 
-      // Check for actual changes
-      const hasRealChanges = Object.entries(pendingData).some(
-        ([key, newValue]) => newValue !== originalData[key]
+      const hayCambios = Object.entries(cambios).some(
+        ([clave, nuevoValor]) => nuevoValor !== originales[clave]
       );
 
-      if (hasRealChanges) {
+      if (hayCambios) {
         dispatch(
-          addTrackingVersion({ activityId: rowId, versionData: pendingData })
+          addTrackingVersion({ activityId: rowId, versionData: cambios })
         )
           .unwrap()
           .then(() => {
@@ -245,9 +301,10 @@ const ProjectSchedule = () => {
 
       delete unsavedChangesRef.current[rowId];
       delete saveTimeoutsRef.current[rowId];
-    }, 5 * 60 * 1000); // 5 minutes
+    }, 10 * 1000); // 10 segundos por ahora
   };
 
+  // 5 minutes 5 * 60 * 1000
   const columns = useMemo(
     () => [
       {
@@ -303,7 +360,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -318,8 +375,22 @@ const ProjectSchedule = () => {
         muiEditTextFieldProps: ({ cell, row, table }) => ({
           onBlur: (event) => {
             const value = event.target.value;
+            console.log(
+              "value:",
+              value,
+              typeof value,
+              "new value:",
+              typeof row.original[cell.column.id],
+              row.original[cell.column.id]
+            );
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
+              console.log(
+                "value:",
+                value,
+                "new value:",
+                row.original[cell.column.id]
+              );
               handleSaveCell({ cell, row, value });
             }
           },
@@ -335,7 +406,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -348,13 +419,18 @@ const ProjectSchedule = () => {
                 format="DD-MM-YYYY"
                 value={cell.getValue() ? dayjs(cell.getValue()) : null}
                 onChange={(newValue) => {
-                  const iso = newValue?.format("YYYY-MM-DD");
-                  table.setEditingCell(null); // exit edit mode
-                  handleSaveCell({
-                    cell,
-                    row,
-                    value: iso,
-                  });
+                  if (!newValue?.isValid?.()) return; // 🚫 Invalid or null date → exit early
+
+                  const iso = newValue.format("YYYY-MM-DD");
+                  const original = row.original.fechaInicio ?? "";
+
+                  // 👇 Only update if different
+                  if (String(original) !== iso) {
+                    table.setEditingCell(null); // exit edit mode
+                    handleSaveCell({ cell, row, value: iso });
+                  } else {
+                    table.setEditingCell(null); // still exit edit mode
+                  }
                 }}
                 slotProps={{
                   textField: { size: "small", fullWidth: true },
@@ -374,7 +450,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -411,7 +487,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -427,7 +503,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -443,7 +519,7 @@ const ProjectSchedule = () => {
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
-            if (value !== row.original.nombre) {
+            if (value !== row.original[cell.column.id]) {
               handleSaveCell({ cell, row, value });
             }
           },
@@ -459,7 +535,7 @@ const ProjectSchedule = () => {
         },
       },
     ],
-    []
+    [currentProject]
   );
 
   const table = useMaterialReactTable({
