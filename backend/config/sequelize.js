@@ -5,7 +5,7 @@ let sequelize;
 
 if (process.env.NODE_ENV === "production") {
   // ✅ Conexión para producción (Vercel + Neon)
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize(process.env.POSTGRES_URI, {
     dialect: "postgres",
     protocol: "postgres",
     logging: false,
