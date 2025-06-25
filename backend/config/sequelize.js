@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
       host: process.env.POSTGRES_HOST,
       port: process.env.POSTGRES_PORT || 5432,
       dialect: "postgres",
-      logging: true,
+      logging: false,
     }
   );
 }

@@ -1,6 +1,10 @@
 const Activity = require("../models/activityModel");
 const ActivityVersion = require("../models/activityVersionModel");
 const Project = require("../models/projectModel");
+const {
+  updateParentProgress,
+  updateProjectProgress,
+} = require("../utils/avanceUtils");
 
 // POST /api/activities/:activityId/tracking
 // Adds a new tracking version if a baseline exists
@@ -88,6 +92,43 @@ const addTrackingVersion = async (req, res) => {
   }
 };
 
+const updateActivityProgress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { avance } = req.body;
+
+    const activityVersion = await ActivityVersion.findOne({
+      where: {
+        id,
+        tipo: "seguimiento",
+        vigente: true,
+      },
+    });
+
+    if (!activityVersion) {
+      return res
+        .status(404)
+        .json({
+          message:
+            "Actividad no válida o no editable (requiere versión seguimiento vigente).",
+        });
+    }
+
+    await activityVersion.update({ avance });
+
+    // Recalculate parents
+    await updateParentProgress(id);
+
+    // Update project
+    await updateProjectProgress(activityVersion);
+
+    res.json({ message: "Avance actualizado correctamente." });
+  } catch (error) {
+    console.error("Error al actualizar avance:", error);
+    res.status(500).json({ message: "Error interno del servidor." });
+  }
+};
 module.exports = {
   addTrackingVersion,
+  updateActivityProgress,
 };

@@ -1,5 +1,5 @@
 // Programacion.jsx con EDT dinámico y preparación para drag and drop
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MaterialReactTable,
   MRT_ActionMenuItem,
@@ -24,8 +24,7 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { formatearFechaVisual } from "../utils/formatDate";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   getActivitiesByProject,
@@ -36,14 +35,16 @@ import {
   resetActivityState,
 } from "../features/activities/activitySlice";
 import { getProject } from "../features/projects/projectSlice";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   recalcularFechasPadres,
   calcularTerceraVariable,
 } from "../utils/workingDay";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import {
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleDensePaddingButton,
+} from "material-react-table";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -62,7 +63,9 @@ const generarEDTs = (nodes, parentId = 0, prefix = "") => {
 
 const ProjectBaseLine = () => {
   const [data, setData] = useState([]);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { projectId } = useParams();
 
   const flattenTree = (tree) => {
@@ -278,40 +281,6 @@ const ProjectBaseLine = () => {
     setData(newTree);
   };
 
-  // Custom editor for fechaInicio
-  const EditFechaInicioCell = ({ cell, row, table }) => {
-    const [dpValue, setDpValue] = useState(
-      cell.getValue() ? dayjs(cell.getValue()) : null
-    );
-
-    console.log("🧠 EditFechaInicioCell renderizado");
-
-    const handleChange = (newValue) => {
-      const iso = newValue?.format("YYYY-MM-DD");
-      if (iso && iso !== row.original[cell.column.id]) {
-        table.setEditingCell(null); // exit edit mode
-        handleSaveCell({
-          cell,
-          row,
-          value: iso,
-        });
-      } else {
-        table.setEditingCell(null); // just exit if no change
-      }
-    };
-
-    return (
-      <DatePicker
-        value={dpValue}
-        onChange={handleChange}
-        format="DD-MM-YYYY"
-        slotProps={{
-          textField: { size: "small", fullWidth: true },
-        }}
-      />
-    );
-  };
-
   const columns = [
     {
       accessorKey: "drag",
@@ -349,7 +318,7 @@ const ProjectBaseLine = () => {
     {
       accessorKey: "edt",
       header: "EDT",
-      size: 60,
+      size: 30,
       enableEditing: false,
     },
     {
@@ -396,10 +365,8 @@ const ProjectBaseLine = () => {
       enableEditing: currentProject.estado === "borrador",
       size: 80,
       Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-      muiTableBodyCellEditTextFieldProps: {
-        type: "date",
-      },
       muiEditTextFieldProps: ({ cell, row, table }) => ({
+        type: "date",
         defaultValue: cell.getValue(),
         onBlur: (event) => {
           const value = event.target.value;
@@ -423,10 +390,9 @@ const ProjectBaseLine = () => {
       enableEditing: currentProject.estado === "borrador",
       size: 80,
       Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
-      muiTableBodyCellEditTextFieldProps: {
-        type: "date",
-      },
+
       muiEditTextFieldProps: ({ cell, row, table }) => ({
+        type: "date",
         defaultValue: cell.getValue(),
         onBlur: (event) => {
           const value = event.target.value;
@@ -442,35 +408,6 @@ const ProjectBaseLine = () => {
           }
         },
       }),
-      // muiEditTextFieldProps: ({ cell, row, table }) => ({
-      //   onBlur: (event) => {
-      //     const value = event.target.value;
-      //     // Solo guardar si hay cambio real
-      //     if (value !== row.original[cell.column.id]) {
-      //       handleSaveCell({ cell, row, value });
-      //     }
-      //   },
-      // }),
-      // muiTableBodyCellEditProps: {
-      //   renderEditCell: ({ cell, row, table }) => (
-      //     <DatePicker
-      //       format="DD-MM-YYYY"
-      //       value={cell.getValue() ? dayjs(cell.getValue()) : null}
-      //       onChange={(newValue) => {
-      //         const iso = newValue?.format("YYYY-MM-DD");
-      //         table.setEditingCell(null);
-      //         handleSaveCell({
-      //           cell,
-      //           row,
-      //           value: iso,
-      //         });
-      //       }}
-      //       slotProps={{
-      //         textField: { size: "small", fullWidth: true },
-      //       }}
-      //     />
-      //   ),
-      // },
     },
     { accessorKey: "responsable", header: "Responsable", size: 150 },
     {
@@ -496,17 +433,49 @@ const ProjectBaseLine = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    enableStickyHeader: true,
     enableEditing: true,
     editDisplayMode: "cell",
     enableExpanding: true,
     getSubRows: (row) => row.children,
-    enableRowActions: true,
+    enableSorting: false,
+    enableColumnActions: false,
+    //enableRowActions: true,
     positionActionsColumn: "last",
     // displayColumnDefOptions: { "mrt-row-actions": { enableEditing: false } },
     enableCellActions: true,
+    displayColumnDefOptions: {
+      "mrt-row-expand": {
+        size: 30, // ancho deseado en px (ajústalo a lo que necesites)
+        maxSize: 35,
+        minSize: 25,
+      },
+    },
     initialState: {
       columnVisibility: { id: false, responsable: false, predecesorId: false },
+      density: "compact",
+      pagination: { pageSize: 100 },
+      expanded: true, // expand all rows by default
     },
+    renderToolbarInternalActions: ({ table }) => (
+      <>
+        <MRT_ShowHideColumnsButton table={table} />
+        <MRT_ToggleDensePaddingButton table={table} />
+      </>
+    ),
+    renderTopToolbarCustomActions: () =>
+      currentProject.estado !== "borrador" ? (
+        <div className="d-flex align-items-center gap-2">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate(`/app/project-list/${projectId}/tracking`)}
+          >
+            Ir a Seguimiento
+          </Button>
+        </div>
+      ) : null,
+
     muiTableBodyCellProps: ({ cell, row }) => ({
       onKeyDown: (event) => {
         if (event.key === "F2") {
@@ -752,6 +721,7 @@ const ProjectBaseLine = () => {
                     .unwrap()
                     .then((res) => {
                       alert(res.message);
+                      navigate("/app/project-list");
                     })
                     .catch((err) => alert("Error: " + err));
                   console.log(

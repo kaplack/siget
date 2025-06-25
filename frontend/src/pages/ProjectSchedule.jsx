@@ -5,9 +5,8 @@ import {
   useMaterialReactTable,
 } from "material-react-table";
 import { buildTree } from "../utils/buildTree";
-import { Button, Divider } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Button } from "@mui/material";
+
 import {
   DndContext,
   PointerSensor,
@@ -23,25 +22,25 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { formatearFechaVisual } from "../utils/formatDate";
-import { DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   getActivitiesByProject,
-  createActivity,
   updateDraftActivity,
-  deleteDraftActivity,
-  resetActivityState,
   addTrackingVersion,
 } from "../features/activities/activitySlice";
 import { getProject } from "../features/projects/projectSlice";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaRegSave } from "react-icons/fa";
 import {
   recalcularFechasPadres,
   calcularTerceraVariable,
 } from "../utils/workingDay";
+import {
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleDensePaddingButton,
+} from "material-react-table";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -62,6 +61,7 @@ const ProjectSchedule = () => {
   const [data, setData] = useState([]);
   const dataRef = useRef([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { projectId } = useParams();
   //console.log("Project ID:", projectId);
 
@@ -403,6 +403,8 @@ const ProjectSchedule = () => {
         size: 80,
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
         muiEditTextFieldProps: ({ cell, row, table }) => ({
+          type: "date",
+          defaultValue: cell.getValue(),
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
@@ -411,42 +413,17 @@ const ProjectSchedule = () => {
             }
           },
         }),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => {
-            console.log("🧪 DatePicker is rendering!");
-            return (
-              <DatePicker
-                format="DD-MM-YYYY"
-                value={cell.getValue() ? dayjs(cell.getValue()) : null}
-                onChange={(newValue) => {
-                  if (!newValue?.isValid?.()) return; // 🚫 Invalid or null date → exit early
-
-                  const iso = newValue.format("YYYY-MM-DD");
-                  const original = row.original.fechaInicio ?? "";
-
-                  // 👇 Only update if different
-                  if (String(original) !== iso) {
-                    table.setEditingCell(null); // exit edit mode
-                    handleSaveCell({ cell, row, value: iso });
-                  } else {
-                    table.setEditingCell(null); // still exit edit mode
-                  }
-                }}
-                slotProps={{
-                  textField: { size: "small", fullWidth: true },
-                }}
-              />
-            );
-          },
-        },
       },
       {
         accessorKey: "fechaFin",
         header: "Fecha Fin",
         enableEditing: (row) => row.original.tipo === "seguimiento",
         size: 80,
+
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
         muiEditTextFieldProps: ({ cell, row, table }) => ({
+          type: "date",
+          defaultValue: cell.getValue(),
           onBlur: (event) => {
             const value = event.target.value;
             // Solo guardar si hay cambio real
@@ -455,26 +432,6 @@ const ProjectSchedule = () => {
             }
           },
         }),
-        muiTableBodyCellEditProps: {
-          renderEditCell: ({ cell, row, table }) => (
-            <DatePicker
-              format="DD-MM-YYYY"
-              value={cell.getValue() ? dayjs(cell.getValue()) : null}
-              onChange={(newValue) => {
-                const iso = newValue?.format("YYYY-MM-DD");
-                table.setEditingCell(null);
-                handleSaveCell({
-                  cell,
-                  row,
-                  value: iso,
-                });
-              }}
-              slotProps={{
-                textField: { size: "small", fullWidth: true },
-              }}
-            />
-          ),
-        },
       },
       { accessorKey: "responsable", header: "Responsable", size: 150 },
       {
@@ -541,22 +498,51 @@ const ProjectSchedule = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    enableStickyHeader: true,
     enableEditing: true,
     editDisplayMode: "cell",
     enableExpanding: true,
     getSubRows: (row) => row.children,
-    enableRowActions: true,
+    enableSorting: false,
+    enableColumnActions: false,
+    //enableRowActions: true,
     positionActionsColumn: "last",
     displayColumnDefOptions: { "mrt-row-actions": { enableEditing: false } },
     enableCellActions: true,
+    displayColumnDefOptions: {
+      "mrt-row-expand": {
+        size: 30, // ancho deseado en px (ajústalo a lo que necesites)
+        maxSize: 35,
+        minSize: 25,
+      },
+    },
     initialState: {
       columnVisibility: { id: false, responsable: false, predecesorId: false },
+      density: "compact",
+      pagination: { pageSize: 100 },
+      expanded: true, // Expande todas las filas por defecto
     },
-    renderTopToolbarCustomActions: () => (
-      <Button variant="contained" color="primary" onClick={handleGuardarTodo}>
-        <FaRegSave size={23} />
-      </Button>
+    renderToolbarInternalActions: ({ table }) => (
+      <>
+        <MRT_ShowHideColumnsButton table={table} />
+        <MRT_ToggleDensePaddingButton table={table} />
+      </>
     ),
+    renderTopToolbarCustomActions: () => (
+      <div className="d-flex align-items-center gap-2">
+        <Button variant="contained" color="primary" onClick={handleGuardarTodo}>
+          <FaRegSave size={23} />
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate(`/app/project-list/${projectId}/base-line`)}
+        >
+          Ver Linea Base
+        </Button>
+      </div>
+    ),
+
     muiTableBodyCellProps: ({ cell, row }) => ({
       onKeyDown: (event) => {
         if (event.key === "F2") {

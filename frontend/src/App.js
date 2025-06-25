@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import NewProject from "./pages/NewProject";
-import ListaProyectos from "./pages/ListaProyectos";
+
 import Dashboard from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,8 +19,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ProjectSchedule from "./pages/ProjectSchedule";
 import ProjectBaseLine from "./pages/BaseLine";
 import ProjectList from "./pages/ProjectList";
-import MRTPrueba from "./pages/MRTPrueba";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import EditProject from "./pages/EditProject";
 
 function App() {
   const theme = createTheme();
@@ -43,6 +44,7 @@ function App() {
             >
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="project/new" element={<NewProject />} />
+              <Route path="project/edit/:id" element={<EditProject />} />
               <Route
                 path="project-list/:projectId/tracking"
                 element={<ProjectSchedule />}
@@ -53,7 +55,6 @@ function App() {
               />
               <Route path="admin" element={<Admin />} />
               <Route path="project-list" element={<ProjectList />} />
-              <Route path="prueba-mrt" element={<MRTPrueba />} />
             </Route>
           </Routes>
         </Router>

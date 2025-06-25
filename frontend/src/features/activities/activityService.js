@@ -86,6 +86,26 @@ const addTrackingVersion = async (activityId, versionData, token) => {
   return response.data;
 };
 
+/*********************************************/
+/*  PROGRESS                                 */
+/*********************************************/
+
+const updateActivityProgress = async (id, avance, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(
+    `${API_URL}${id}/progress`,
+    {
+      avance,
+    },
+    config
+  );
+  return response.data;
+};
+
 const activityService = {
   getActivitiesByProject,
   createActivity,
@@ -94,6 +114,7 @@ const activityService = {
   deleteDraftActivity,
   setBaselineForProject,
   addTrackingVersion,
+  updateActivityProgress,
 };
 
 export default activityService;

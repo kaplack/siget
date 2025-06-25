@@ -12,6 +12,7 @@ const {
 
 const {
   addTrackingVersion,
+  updateActivityProgress,
 } = require("../controllers/activityTrackController");
 
 // POST /api/activities/
@@ -49,5 +50,13 @@ router.get(
 // POST /api/activities/:activityId/tracking
 // Add a new tracking version for an activity
 router.post("/:activityId/tracking", addTrackingVersion);
+
+/**********************************************/
+// ADVACE UTILS
+/**********************************************/
+
+// PUT /api/activities/:id/progress
+// Add a new tracking version for an activity
+router.put("/:id/progress", updateActivityProgress);
 
 module.exports = router;

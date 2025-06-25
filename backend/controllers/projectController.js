@@ -35,10 +35,6 @@ const createProject = asyncHandler(async (req, res) => {
     !ubigeo ||
     !servicioPriorizado ||
     !nombreIdeaProyecto ||
-    !cui ||
-    !ci ||
-    !firmaConvenio ||
-    !inicioConvenio ||
     !numeroBeneficiarios ||
     !montoInversion ||
     !userId
@@ -112,8 +108,56 @@ const getProject = async (req, res) => {
   }
 };
 
+// @desc    Actualizar datos de un proyecto existente
+// @route   PUT /api/projects/project/:id
+// @access  Private
+const updateProject = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const project = await Project.findByPk(id);
+
+  if (!project) {
+    res.status(404);
+    throw new Error("Proyecto no encontrado");
+  }
+
+  // Lista de campos permitidos para actualizar
+  const fieldsToUpdate = [
+    "nombreConvenio",
+    "contraparte",
+    "departamento",
+    "provincia",
+    "distrito",
+    "ubigeo",
+    "servicioPriorizado",
+    "nombreIdeaProyecto",
+    "cui",
+    "ci",
+    "firmaConvenio",
+    "inicioConvenio",
+    "numeroBeneficiarios",
+    "montoInversion",
+    "estado",
+    "avance",
+    "plazo",
+    "plazoSeguimiento",
+  ];
+
+  // Actualiza solo los campos enviados en el request
+  fieldsToUpdate.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      project[field] = req.body[field];
+    }
+  });
+
+  await project.save();
+
+  res.status(200).json(project);
+});
+
 module.exports = {
   createProject,
   getUserProjects,
   getProject,
+  updateProject,
 };

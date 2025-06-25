@@ -38,7 +38,7 @@ const Project = sequelize.define(
       allowNull: false,
     },
     ubigeo: {
-      type: DataTypes.BIGINT, // Para mantener ceros a la izquierda si es necesario usa STRING
+      type: DataTypes.STRING, // Para mantener ceros a la izquierda si es necesario usa STRING
       allowNull: false,
     },
     servicioPriorizado: {
@@ -50,20 +50,20 @@ const Project = sequelize.define(
       allowNull: false,
     },
     cui: {
-      type: DataTypes.BIGINT, // Puede ser muy largo, mejor usar BIGINT o STRING si no haces cálculos
-      allowNull: false,
+      type: DataTypes.STRING, // Puede ser muy largo, mejor usar BIGINT o STRING si no haces cálculos
+      allowNull: true,
     },
     ci: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     firmaConvenio: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
     inicioConvenio: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
     numeroBeneficiarios: {
       type: DataTypes.INTEGER,
@@ -82,6 +82,14 @@ const Project = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 0,
+    },
+    plazo: {
+      type: DataTypes.INTEGER,
+      allowNull: true, // o false si quieres que sea obligatorio desde el principio
+    },
+    plazoSeguimiento: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {

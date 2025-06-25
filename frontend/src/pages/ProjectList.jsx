@@ -4,6 +4,13 @@ import { getUserProjects } from "../features/projects/projectSlice";
 import { MaterialReactTable } from "material-react-table";
 import { Chip, Button, CircularProgress, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import {
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleDensePaddingButton,
+} from "material-react-table";
+import { BsArrowsCollapse } from "react-icons/bs";
+import { FaCalendarCheck } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -19,6 +26,17 @@ const ProjectList = () => {
 
   if (isLoading) return <CircularProgress />;
   if (isError) return <p>Error: {message}</p>;
+
+  if (!projects || projects.length === 0) {
+    return (
+      <div>
+        <Typography variant="h4" gutterBottom>
+          Lista de Proyectos
+        </Typography>
+        <Typography variant="body1">No hay proyectos registrados.</Typography>
+      </div>
+    );
+  }
 
   const columns = [
     {
@@ -43,35 +61,13 @@ const ProjectList = () => {
         );
       },
     },
-    // {
-    //   accessorKey: "departamento",
-    //   header: "Departamento",
-    // },
-    // {
-    //   accessorKey: "provincia",
-    //   header: "Provincia",
-    // },
-    // {
-    //   accessorKey: "distrito",
-    //   header: "Distrito",
-    // },
-    // {
-    //   accessorKey: "montoInversion",
-    //   header: "Inversión (S/.)",
-    // },
-    // {
-    //   accessorKey: "numeroBeneficiarios",
-    //   header: "N° Beneficiarios",
-    // },
-    {
-      accessorKey: "servicioPriorizado",
-      header: "Servicio Priorizado",
-    },
+
     {
       accessorKey: "actions",
       header: "Acciones",
       enableSorting: false,
       enableColumnFilter: false,
+      minSize: 200,
       Cell: ({ row }) => {
         const id = row.original.id;
 
@@ -80,17 +76,32 @@ const ProjectList = () => {
             <Button
               variant="outlined"
               size="small"
-              onClick={() => navigate(`${id}/base-line`)}
+              onClick={() => navigate(`/app/project/edit/${id}`)}
+              style={{ display: "flex", alignItems: "center" }}
             >
-              Línea Base
+              <FaEdit size={18} style={{ marginRight: ".3rem" }} />
+              <span>Proyecto</span>
             </Button>
             <Button
               variant="outlined"
               size="small"
-              onClick={() => navigate(`${id}/tracking`)}
+              onClick={() => navigate(`${id}/base-line`)}
+              style={{ display: "flex", alignItems: "center" }}
             >
-              Seguimiento
+              <BsArrowsCollapse size={18} style={{ marginRight: ".3rem" }} />
+              <span>Línea Base</span>
             </Button>
+            {row.original.estado !== "borrador" && (
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={() => navigate(`${id}/tracking`)}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <FaCalendarCheck style={{ marginRight: ".3rem" }} />
+                <span>Seguimiento</span>
+              </Button>
+            )}
           </div>
         );
       },
@@ -98,7 +109,7 @@ const ProjectList = () => {
   ];
 
   const estadoLabels = {
-    borrador: "Borrador",
+    borrador: "Planificación",
     linea_base: "Línea Base",
     ejecucion: "En Ejecución",
     finalizado: "Finalizado",
@@ -122,11 +133,19 @@ const ProjectList = () => {
       <MaterialReactTable
         columns={columns}
         data={projects}
-        enableColumnOrdering
+        enableSorting={false}
+        enableColumnActions={false}
         enableRowNumbers
         initialState={{
-          pagination: { pageSize: 10, pageIndex: 0 },
+          pagination: { pageSize: 20, pageIndex: 0 },
+          //density: "compact",
         }}
+        renderToolbarInternalActions={({ table }) => (
+          <>
+            <MRT_ShowHideColumnsButton table={table} />
+            <MRT_ToggleDensePaddingButton table={table} />
+          </>
+        )}
       />
     </div>
   );
