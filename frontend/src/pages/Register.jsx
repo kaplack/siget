@@ -38,21 +38,26 @@ function Register() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== password2) {
       toast.error("Las contraseñas no coinciden");
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-      };
+      return;
+    }
 
-      dispatch(register(userData)).catch((error) => {
-        toast.error(error.message);
-      });
+    const userData = {
+      name,
+      email: email.toLowerCase(), // Normalize email to lowercase
+      password,
+    };
+
+    try {
+      // Unwrap lets you handle errors with try/catch instead of .catch()
+      await dispatch(register(userData)).unwrap();
+      toast.success("Usuario registrado exitosamente");
+    } catch (error) {
+      toast.error(error.message || "Error al registrar usuario");
     }
   };
 

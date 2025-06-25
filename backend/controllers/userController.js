@@ -8,15 +8,23 @@ const User = require("../models/userModel");
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  let { name, email, password } = req.body;
+
+  console.log("Registering user:", req.body);
 
   if (!name || !email || !password) {
+    console.log("Missing fields in registration:", req.body);
     res.status(400);
     throw new Error("Ingresa todos los campos");
   }
 
+  // Normalize the email to lowercase
+  email = email.toLowerCase();
+  console.log("Normalized email:", email);
   // Verificar si ya existe el usuario
   const userExist = await User.findOne({ where: { email } });
+
+  console.log("userExist", userExist);
 
   if (userExist) {
     res.status(400);
@@ -28,6 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   // Crear el usuario
+
   const user = await User.create({
     name,
     email,
