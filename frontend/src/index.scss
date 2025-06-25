@@ -7,6 +7,12 @@
 
 @use "./sass/components/utils" as *;
 
+html,
+body {
+  overflow: auto;
+  width: 100%;
+}
+
 // .heading {
 //   font-size: 2rem;
 //   font-weight: 700;

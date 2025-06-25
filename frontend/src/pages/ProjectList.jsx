@@ -79,8 +79,15 @@ const ProjectList = () => {
               onClick={() => navigate(`/app/project/edit/${id}`)}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <FaEdit size={18} style={{ marginRight: ".3rem" }} />
-              <span>Proyecto</span>
+              <FaEdit
+                size={18}
+                style={
+                  window.innerWidth >= 768
+                    ? { marginRight: ".3rem" }
+                    : undefined
+                }
+              />
+              <span className="d-none d-md-inline">Proyecto</span>
             </Button>
             <Button
               variant="outlined"
@@ -88,8 +95,15 @@ const ProjectList = () => {
               onClick={() => navigate(`${id}/base-line`)}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <BsArrowsCollapse size={18} style={{ marginRight: ".3rem" }} />
-              <span>Línea Base</span>
+              <BsArrowsCollapse
+                size={18}
+                style={
+                  window.innerWidth >= 768
+                    ? { marginRight: ".3rem" }
+                    : undefined
+                }
+              />
+              <span className="d-none d-md-inline">Línea Base</span>
             </Button>
             {row.original.estado !== "borrador" && (
               <Button
@@ -98,8 +112,14 @@ const ProjectList = () => {
                 onClick={() => navigate(`${id}/tracking`)}
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <FaCalendarCheck style={{ marginRight: ".3rem" }} />
-                <span>Seguimiento</span>
+                <FaCalendarCheck
+                  style={
+                    window.innerWidth >= 768
+                      ? { marginRight: ".3rem" }
+                      : undefined
+                  }
+                />
+                <span className="d-none d-md-inline">Seguimiento</span>
               </Button>
             )}
           </div>
@@ -129,24 +149,27 @@ const ProjectList = () => {
       <Typography variant="h4" gutterBottom>
         Lista de Proyectos
       </Typography>
-
-      <MaterialReactTable
-        columns={columns}
-        data={projects}
-        enableSorting={false}
-        enableColumnActions={false}
-        enableRowNumbers
-        initialState={{
-          pagination: { pageSize: 20, pageIndex: 0 },
-          //density: "compact",
-        }}
-        renderToolbarInternalActions={({ table }) => (
-          <>
-            <MRT_ShowHideColumnsButton table={table} />
-            <MRT_ToggleDensePaddingButton table={table} />
-          </>
-        )}
-      />
+      <div style={{ overflow: "auto", marginBottom: "80px" }}>
+        <div style={{ minWidth: "700px" }}>
+          <MaterialReactTable
+            columns={columns}
+            data={projects}
+            enableSorting={false}
+            enableColumnActions={false}
+            enableRowNumbers
+            initialState={{
+              pagination: { pageSize: 20, pageIndex: 0 },
+              //density: "compact",
+            }}
+            renderToolbarInternalActions={({ table }) => (
+              <>
+                <MRT_ShowHideColumnsButton table={table} />
+                <MRT_ToggleDensePaddingButton table={table} />
+              </>
+            )}
+          />
+        </div>
+      </div>
     </div>
   );
 };

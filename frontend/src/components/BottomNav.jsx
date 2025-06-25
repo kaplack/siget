@@ -1,8 +1,19 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { FaHome, FaPlusCircle, FaList } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaHome, FaPlusCircle, FaList, FaSignOutAlt } from "react-icons/fa";
+import { AiFillDashboard } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
 
 function BottomNav() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
   const location = useLocation();
 
   return (
@@ -16,7 +27,7 @@ function BottomNav() {
           location.pathname === "/app/dashboard" ? "fw-bold" : ""
         }`}
       >
-        <FaHome size={20} />
+        <AiFillDashboard size={25} />
       </Link>
 
       <Link
@@ -29,21 +40,20 @@ function BottomNav() {
       </Link>
 
       <Link
-        to="/app/proyectos"
+        to="/app/project-list"
         className={`text-white ${
-          location.pathname === "/app/proyectos" ? "fw-bold" : ""
+          location.pathname === "/app/project-list" ? "fw-bold" : ""
         }`}
       >
         <FaList size={20} />
       </Link>
-      <Link
-        to="/app/proyectos"
-        className={`text-white ${
-          location.pathname === "/app/proyectos" ? "fw-bold" : ""
-        }`}
+      <button
+        onClick={onLogout}
+        className="text-white bg-transparent border-0"
+        style={{ padding: 0 }}
       >
-        <FaList size={20} />
-      </Link>
+        <FaSignOutAlt size={20} />
+      </button>
     </div>
   );
 }
