@@ -5,7 +5,7 @@ function Admin() {
     <div className="container mt-4">
       <div className="card shadow p-4">
         <h1 className="mb-4">Panel de Administración</h1>
-
+        <p>ESTA SECCION ES SOLO DE MUESTRA</p>
         <div className="row">
           <div className="col-md-6 mb-3">
             <div className="card p-3 h-100 shadow-sm">

@@ -147,7 +147,7 @@ const ProjectList = () => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Lista de Proyectos
+        Proyectos Activos
       </Typography>
       <div style={{ overflow: "auto", marginBottom: "80px" }}>
         <div style={{ minWidth: "700px" }}>
