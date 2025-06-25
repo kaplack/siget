@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <div>
       <h2 className="mb-4">Bienvenido al Sistema SIGET</h2>
-      <p>ESTA SECCION ES SOLO DE MUESTRA</p>
+      <p>ESTA SECCION ESTÁ POR IMPLEMENTARSE</p>
       <div className="row">
         <div className="col-md-4 mb-3">
           <div className="card shadow-sm">
