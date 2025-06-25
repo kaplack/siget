@@ -4,7 +4,7 @@
   "description": "Proyecto de Tesis - Logistica",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js",
+    "start": "node index.js",
     "server": "nodemon backend/index.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
