@@ -31,7 +31,7 @@ const getDashboard = async (req, res) => {
       group: ["estado"],
     });
 
-    const totalActividadesEjecutables = await ActivityVersion.count({
+    const hojast = await ActivityVersion.findAll({
       where: {
         tipo: "seguimiento",
         vigente: true,
@@ -43,7 +43,10 @@ const getDashboard = async (req, res) => {
       )`),
         },
       },
+      attributes: ["activityId"],
+      group: ["activityId"],
     });
+    const totalActividadesEjecutables = hojast.length;
 
     // Total number of activities
     const totalActivities = await Activity.count();
