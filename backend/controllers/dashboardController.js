@@ -31,7 +31,6 @@ const getDashboard = async (req, res) => {
       group: ["estado"],
     });
 
-    // Count of real (leaf) activity versions of type 'seguimiento' and vigente = true
     const totalActividadesEjecutables = await ActivityVersion.count({
       where: {
         tipo: "seguimiento",
@@ -40,7 +39,7 @@ const getDashboard = async (req, res) => {
           [Op.notIn]: Sequelize.literal(`(
         SELECT DISTINCT "parentId"
         FROM activity_versions
-        WHERE "parentId" IS NOT NULL
+        WHERE "parentId" > 0
       )`),
         },
       },
