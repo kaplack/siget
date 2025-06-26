@@ -59,21 +59,20 @@ const getDashboard = async (req, res) => {
       where: {
         tipo: "seguimiento",
         vigente: true,
-        id: {
-          [Sequelize.Op.notIn]: Sequelize.literal(`(
+        activityId: {
+          [Op.notIn]: Sequelize.literal(`(
         SELECT DISTINCT "parentId"
         FROM activity_versions
-        WHERE "parentId" IS NOT NULL
+        WHERE "parentId" IS NOT NULL AND "parentId" > 0
       )`),
         },
         plazo: {
-          [Sequelize.Op.gt]: 0, // only consider plazo > 0
+          [Op.gt]: 0,
         },
       },
       attributes: ["plazo", "avance"],
     });
 
-    // Sum weighted progress
     let totalPeso = 0;
     let totalAvancePonderado = 0;
 
