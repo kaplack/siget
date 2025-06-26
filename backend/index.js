@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/activities", require("./routes/activityRoutes"));
+app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 
 // Error middleware
 app.use(errorHandler);

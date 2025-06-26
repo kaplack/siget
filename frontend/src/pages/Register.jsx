@@ -102,7 +102,7 @@ function Register() {
               name="name"
               value={name}
               onChange={onChange}
-              placeholder="Ingresa tu nombre"
+              placeholder="Juan Pérez"
               required
             />
           </div>
@@ -118,7 +118,7 @@ function Register() {
               name="email"
               value={email}
               onChange={onChange}
-              placeholder="Ingresa tu email"
+              placeholder="ejemplo@oedi.gob.pe"
               required
             />
           </div>
@@ -134,7 +134,7 @@ function Register() {
               name="password"
               value={password}
               onChange={onChange}
-              placeholder="Ingresa tu contraseña"
+              placeholder="contraseña123"
               required
             />
           </div>
@@ -150,7 +150,7 @@ function Register() {
               name="password2"
               value={password2}
               onChange={onChange}
-              placeholder="Confirma tu contraseña"
+              placeholder="contraseña123"
               required
             />
           </div>

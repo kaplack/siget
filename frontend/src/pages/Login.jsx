@@ -95,7 +95,7 @@ function Login() {
               name="email"
               value={email}
               onChange={onChange}
-              placeholder="Ingrese su email"
+              placeholder="ejemplo@oedi.gob.pe"
               required
             />
           </div>
@@ -110,7 +110,7 @@ function Login() {
               name="password"
               value={password}
               onChange={onChange}
-              placeholder="Ingrese su contraseña"
+              placeholder="contraseña123"
               required
             />
           </div>

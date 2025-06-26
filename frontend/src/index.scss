@@ -13,6 +13,10 @@ body {
   width: 100%;
 }
 
+input.form-control::placeholder {
+  color: #c3c3c3;
+}
+
 // .heading {
 //   font-size: 2rem;
 //   font-weight: 700;
