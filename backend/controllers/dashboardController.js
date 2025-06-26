@@ -31,22 +31,24 @@ const getDashboard = async (req, res) => {
       group: ["estado"],
     });
 
-    const hojast = await ActivityVersion.findAll({
+    const totalActividadesEjecutablesData = await ActivityVersion.findAll({
       where: {
         tipo: "seguimiento",
         vigente: true,
-        id: {
+        activityId: {
           [Op.notIn]: Sequelize.literal(`(
         SELECT DISTINCT "parentId"
         FROM activity_versions
-        WHERE "parentId" > 0
+        WHERE "parentId" IS NOT NULL
+          AND "parentId" > 0
       )`),
         },
       },
       attributes: ["activityId"],
       group: ["activityId"],
     });
-    const totalActividadesEjecutables = hojast.length;
+
+    const totalActividadesEjecutables = totalActividadesEjecutablesData.length;
 
     // Total number of activities
     const totalActivities = await Activity.count();
