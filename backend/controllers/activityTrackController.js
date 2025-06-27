@@ -8,6 +8,7 @@ const {
 
 // POST /api/activities/:activityId/tracking
 // Adds a new tracking version if a baseline exists
+// POST /api/activities/:activityId/tracking
 const addTrackingVersion = async (req, res) => {
   try {
     const { activityId } = req.params;
@@ -28,12 +29,23 @@ const addTrackingVersion = async (req, res) => {
       return res.status(400).json({ message: "Baseline version not found." });
     }
 
-    // Get current seguimiento count
+    // Get activity and project
+    const activity = await Activity.findByPk(activityId);
+    const project = await Project.findByPk(activity.projectId);
+
+    // Validate project has required dates
+    if (!project.firmaConvenio || !project.inicioConvenio) {
+      return res.status(400).json({
+        message:
+          "El proyecto debe tener registradas la fecha de firma e inicio de convenio antes de continuar.",
+      });
+    }
+
+    // Continue with seguimiento creation
     const count = await ActivityVersion.count({
       where: { activityId, tipo: "seguimiento" },
     });
 
-    // Mark all previous seguimiento versions as not vigente
     await ActivityVersion.update(
       { vigente: false },
       { where: { activityId, tipo: "seguimiento" } }
@@ -41,7 +53,6 @@ const addTrackingVersion = async (req, res) => {
 
     const nroVersion = count + 1;
 
-    // Get the last vigente version (base or seguimiento)
     const lastVersion = await ActivityVersion.findOne({
       where: { activityId, vigente: false },
       order: [["nroVersion", "DESC"]],
@@ -75,13 +86,9 @@ const addTrackingVersion = async (req, res) => {
     const newTracking = await ActivityVersion.create(trackingData);
 
     // Update project to 'ejecucion' if conditions are met
-    const activity = await Activity.findByPk(activityId);
-    const projectId = activity?.projectId;
-
-    if (nroVersion >= 2 && avance > 0 && projectId) {
-      const proyecto = await Project.findByPk(projectId);
-      if (proyecto?.estado === "linea_base") {
-        await proyecto.update({ estado: "ejecucion" });
+    if (nroVersion >= 2 && avance > 0 && project) {
+      if (project.estado === "linea_base") {
+        await project.update({ estado: "ejecucion" });
       }
     }
 
@@ -103,23 +110,33 @@ const updateActivityProgress = async (req, res) => {
         tipo: "seguimiento",
         vigente: true,
       },
+      include: {
+        model: Activity,
+        include: Project,
+      },
     });
 
     if (!activityVersion) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Actividad no válida o no editable (requiere versión seguimiento vigente).",
-        });
+      return res.status(404).json({
+        message:
+          "Actividad no válida o no editable (requiere versión seguimiento vigente).",
+      });
+    }
+
+    const project = activityVersion.activity?.Project;
+
+    // Validate project dates
+    if (!project?.firmaConvenio || !project?.inicioConvenio) {
+      return res.status(400).json({
+        message:
+          "El proyecto debe tener registradas la fecha de firma e inicio de convenio antes de registrar avance.",
+      });
     }
 
     await activityVersion.update({ avance });
 
-    // Recalculate parents
+    // Recalculate parents and update project
     await updateParentProgress(id);
-
-    // Update project
     await updateProjectProgress(activityVersion);
 
     res.json({ message: "Avance actualizado correctamente." });
@@ -128,6 +145,7 @@ const updateActivityProgress = async (req, res) => {
     res.status(500).json({ message: "Error interno del servidor." });
   }
 };
+
 module.exports = {
   addTrackingVersion,
   updateActivityProgress,

@@ -2,6 +2,99 @@ const { Project, Activity, ActivityVersion } = require("../models");
 const { Sequelize } = require("sequelize");
 const { Op } = require("sequelize");
 
+const getHojasEjecutables = async () => {
+  return await ActivityVersion.findAll({
+    where: {
+      tipo: "seguimiento",
+      vigente: true,
+      activityId: {
+        [Op.notIn]: Sequelize.literal(`(
+          SELECT DISTINCT "parentId"
+          FROM activity_versions
+          WHERE "parentId" IS NOT NULL AND "parentId" > 0
+        )`),
+      },
+      plazo: {
+        [Op.gt]: 0,
+      },
+    },
+    attributes: ["plazo", "avance", "activityId"],
+    include: [
+      {
+        model: Activity,
+        as: "activity",
+        attributes: ["projectId"],
+        include: [
+          {
+            model: Project,
+            as: "project",
+            attributes: ["nombreConvenio"],
+          },
+        ],
+      },
+    ],
+  });
+};
+
+const calcularAvanceGlobal = (hojas) => {
+  let totalPeso = 0;
+  let totalAvancePonderado = 0;
+
+  for (const actividad of hojas) {
+    const plazo = actividad.plazo;
+    const avance = actividad.avance || 0;
+    totalPeso += plazo;
+    totalAvancePonderado += avance * plazo;
+  }
+
+  if (totalPeso > 0) {
+    return {
+      avanceGlobal: +(totalAvancePonderado / totalPeso).toFixed(2),
+      mensajeAvanceGlobal: null,
+    };
+  } else {
+    return {
+      avanceGlobal: null,
+      mensajeAvanceGlobal: "Plazos no definidos",
+    };
+  }
+};
+
+const getAvancePorProyecto = (hojas) => {
+  const avancePorProyecto = {};
+  // Debugging line to check the structure of hojas
+
+  for (const hoja of hojas) {
+    const projectId = hoja.activity?.projectId;
+    const nombreConvenio = hoja.activity?.project?.nombreConvenio;
+    if (!projectId || !nombreConvenio) continue; // skip if projectId is missing
+
+    const plazo = hoja.plazo;
+    const avance = hoja.avance || 0;
+
+    if (!avancePorProyecto[projectId]) {
+      avancePorProyecto[projectId] = {
+        nombreConvenio,
+        totalPeso: 0,
+        avancePonderado: 0,
+      };
+    }
+
+    avancePorProyecto[projectId].totalPeso += plazo;
+    avancePorProyecto[projectId].avancePonderado += avance * plazo;
+  }
+
+  return Object.entries(avancePorProyecto).map(([projectId, datos]) => ({
+    projectId: Number(projectId),
+    nombreConvenio: datos.nombreConvenio,
+    avance:
+      datos.totalPeso > 0
+        ? +(datos.avancePonderado / datos.totalPeso).toFixed(2)
+        : null,
+    mensaje: datos.totalPeso === 0 ? "Plazos no definidos" : null,
+  }));
+};
+
 const getDashboard = async (req, res) => {
   try {
     // Total number of projects
@@ -31,67 +124,14 @@ const getDashboard = async (req, res) => {
       group: ["estado"],
     });
 
-    const totalActividadesEjecutablesData = await ActivityVersion.findAll({
-      where: {
-        tipo: "seguimiento",
-        vigente: true,
-        activityId: {
-          [Op.notIn]: Sequelize.literal(`(
-        SELECT DISTINCT "parentId"
-        FROM activity_versions
-        WHERE "parentId" IS NOT NULL
-          AND "parentId" > 0
-      )`),
-        },
-      },
-      attributes: ["activityId"],
-      group: ["activityId"],
-    });
+    const hojas = await getHojasEjecutables();
 
-    const totalActividadesEjecutables = totalActividadesEjecutablesData.length;
+    const { avanceGlobal, mensajeAvanceGlobal } = calcularAvanceGlobal(hojas);
 
-    // Total number of activities
-    const totalActivities = await Activity.count();
+    const totalActividadesEjecutables = new Set(hojas.map((h) => h.activityId))
+      .size;
 
-    // global progress of all activities
-    // Get all real (leaf) activity versions of type 'seguimiento' and vigente = true
-    const hojas = await ActivityVersion.findAll({
-      where: {
-        tipo: "seguimiento",
-        vigente: true,
-        activityId: {
-          [Op.notIn]: Sequelize.literal(`(
-        SELECT DISTINCT "parentId"
-        FROM activity_versions
-        WHERE "parentId" IS NOT NULL AND "parentId" > 0
-      )`),
-        },
-        plazo: {
-          [Op.gt]: 0,
-        },
-      },
-      attributes: ["plazo", "avance"],
-    });
-
-    let totalPeso = 0;
-    let totalAvancePonderado = 0;
-
-    for (const actividad of hojas) {
-      const plazo = actividad.plazo;
-      const avance = actividad.avance || 0;
-
-      totalPeso += plazo;
-      totalAvancePonderado += avance * plazo;
-    }
-
-    let avanceGlobal = null;
-    let mensajeAvanceGlobal = null;
-
-    if (totalPeso > 0) {
-      avanceGlobal = +(totalAvancePonderado / totalPeso).toFixed(2);
-    } else {
-      mensajeAvanceGlobal = "Plazos no definidos";
-    }
+    const avancePorProyecto = getAvancePorProyecto(hojas);
 
     res.json({
       totalProjects,
@@ -100,11 +140,11 @@ const getDashboard = async (req, res) => {
       totalInversion,
 
       proyectosPorEstado,
-      totalActivities,
       totalActividadesEjecutables,
 
       avanceGlobal,
       mensajeAvanceGlobal,
+      avancePorProyecto,
     });
   } catch (error) {
     console.error("Error in getDashboard:", error);

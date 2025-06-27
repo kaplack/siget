@@ -1,5 +1,6 @@
 require("./userModel");
 
+const User = require("./userModel");
 const Project = require("./projectModel");
 const Activity = require("./activityModel");
 const ActivityVersion = require("./activityVersionModel");
@@ -11,6 +12,7 @@ Project.hasMany(Activity, {
 });
 Activity.belongsTo(Project, {
   foreignKey: "projectId",
+  as: "project",
 });
 
 // Relaciones entre Actividades y sus Versiones

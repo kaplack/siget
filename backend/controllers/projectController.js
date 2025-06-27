@@ -5,64 +5,73 @@ const Project = require("../models/projectModel");
 // @route   POST /api/projects
 // @access  Public (puedes cambiarlo si usas auth)
 const createProject = asyncHandler(async (req, res) => {
-  const {
-    nombreConvenio,
-    contraparte,
-    departamento,
-    provincia,
-    distrito,
-    ubigeo,
-    servicioPriorizado,
-    nombreIdeaProyecto,
-    cui,
-    ci,
-    firmaConvenio,
-    inicioConvenio,
-    numeroBeneficiarios,
-    montoInversion,
-  } = req.body;
+  try {
+    const {
+      nombreConvenio,
+      contraparte,
+      departamento,
+      provincia,
+      distrito,
+      ubigeo,
+      servicioPriorizado,
+      nombreIdeaProyecto,
+      cui,
+      ci,
+      firmaConvenio,
+      inicioConvenio,
+      numeroBeneficiarios,
+      montoInversion,
+    } = req.body;
 
-  console.log(req.body);
-  const userId = req.user.id; // Asumiendo que el usuario está autenticado y su ID está disponible
+    console.log("Datos recibidos:", req.body);
+    const userId = req.user.id; // Assumes user is authenticated and ID is available
 
-  // Validación básica
-  if (
-    !nombreConvenio ||
-    !contraparte ||
-    !departamento ||
-    !provincia ||
-    !distrito ||
-    !ubigeo ||
-    !servicioPriorizado ||
-    !nombreIdeaProyecto ||
-    !numeroBeneficiarios ||
-    !montoInversion ||
-    !userId
-  ) {
-    res.status(400);
-    throw new Error("Todos los campos son obligatorios");
+    // Basic validation
+    if (
+      !nombreConvenio ||
+      !contraparte ||
+      !departamento ||
+      !provincia ||
+      !distrito ||
+      !ubigeo ||
+      !servicioPriorizado ||
+      !nombreIdeaProyecto ||
+      !numeroBeneficiarios ||
+      !montoInversion ||
+      !userId
+    ) {
+      console.log("Todos los campos son obligatorios");
+      res.status(400);
+      throw new Error("Todos los campos son obligatorios");
+    }
+
+    const newProject = await Project.create({
+      nombreConvenio,
+      contraparte,
+      departamento,
+      provincia,
+      distrito,
+      ubigeo,
+      servicioPriorizado,
+      nombreIdeaProyecto,
+      cui,
+      ci,
+      firmaConvenio,
+      inicioConvenio,
+      numeroBeneficiarios,
+      montoInversion,
+      userId,
+      estado: "borrador",
+    });
+
+    res.status(201).json(newProject);
+  } catch (error) {
+    console.error("Error al crear proyecto:", error);
+    res.status(500).json({
+      message: "Error al crear el proyecto",
+      error: error.message,
+    });
   }
-
-  const newProject = await Project.create({
-    nombreConvenio,
-    contraparte,
-    departamento,
-    provincia,
-    distrito,
-    ubigeo,
-    servicioPriorizado,
-    nombreIdeaProyecto,
-    cui,
-    ci,
-    firmaConvenio,
-    inicioConvenio,
-    numeroBeneficiarios,
-    montoInversion,
-    userId,
-    estado: "borrador",
-  });
-
-  res.status(201).json(newProject);
 });
 
 // GET /api/projects/user
