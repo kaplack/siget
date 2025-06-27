@@ -37,7 +37,7 @@ function Dashboard() {
         <div className="col-md-3 mb-3">
           <div className="siget-card shadow-sm mb-3">
             <div className="siget-card__header">
-              <FaClipboardList size={100} className="icon text-primary" />
+              <FaClipboardList className="icon text-primary" />
               <div className="siget-card__header--content">
                 <h2>{data.totalFirmados}</h2>
                 <p>Convenios Firmados</p>{" "}
@@ -48,7 +48,7 @@ function Dashboard() {
         <div className="col-md-3 mb-3">
           <div className="siget-card shadow-sm mb-3">
             <div className="siget-card__header">
-              <FaChartLine size={100} className="icon text-primary" />
+              <FaChartLine className="icon text-primary" />
               <div className="siget-card__header--content">
                 <h2>{data.avanceGlobal}%</h2>
                 <p>Avance Global</p>{" "}
@@ -59,7 +59,7 @@ function Dashboard() {
         <div className="col-md-3 mb-3">
           <div className="siget-card shadow-sm mb-3">
             <div className="siget-card__header">
-              <FaUserGroup size={100} className="icon text-primary" />
+              <FaUserGroup className="icon text-primary" />
               <div className="siget-card__header--content">
                 <h2>{formatearAMillones(data.totalBeneficiarios)}</h2>
                 <p>Personas Beneficiadas</p>{" "}
@@ -70,7 +70,7 @@ function Dashboard() {
         <div className="col-md-3 mb-3">
           <div className="siget-card shadow-sm mb-3">
             <div className="siget-card__header">
-              <GrMoney size={100} className="icon text-primary" />
+              <GrMoney className="icon text-primary" />
               <div className="siget-card__header--content">
                 <h2>{formatearAMillones(data.totalInversion)}</h2>
                 <p>Inversion Total</p>{" "}

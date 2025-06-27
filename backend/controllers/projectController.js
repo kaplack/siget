@@ -64,6 +64,8 @@ const createProject = asyncHandler(async (req, res) => {
       estado: "borrador",
     });
 
+    console.log("Proyecto creado:", newProject);
+
     res.status(201).json(newProject);
   } catch (error) {
     console.error("Error al crear proyecto:", error);
