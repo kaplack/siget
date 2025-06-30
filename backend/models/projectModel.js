@@ -17,6 +17,22 @@ const Project = sequelize.define(
         key: "id",
       },
     },
+    direccion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    modeloConvenio: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    nivelGobierno: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    alias: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     nombreConvenio: {
       type: DataTypes.STRING,
       allowNull: false,

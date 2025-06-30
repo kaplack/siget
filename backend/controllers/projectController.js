@@ -21,6 +21,10 @@ const createProject = asyncHandler(async (req, res) => {
       inicioConvenio,
       numeroBeneficiarios,
       montoInversion,
+      direccion,
+      modeloConvenio,
+      nivelGobierno,
+      alias,
     } = req.body;
 
     console.log("Datos recibidos:", req.body);
@@ -31,8 +35,6 @@ const createProject = asyncHandler(async (req, res) => {
       !nombreConvenio ||
       !contraparte ||
       !departamento ||
-      !provincia ||
-      !distrito ||
       !ubigeo ||
       !servicioPriorizado ||
       !nombreIdeaProyecto ||
@@ -62,6 +64,10 @@ const createProject = asyncHandler(async (req, res) => {
       montoInversion,
       userId,
       estado: "borrador",
+      direccion,
+      modeloConvenio,
+      nivelGobierno,
+      alias,
     });
 
     console.log("Proyecto creado:", newProject);
@@ -90,7 +96,7 @@ const getUserProjects = async (req, res) => {
     if (!projects || projects.length === 0) {
       return res
         .status(404)
-        .json({ message: "No projects found for this user." });
+        .json({ message: "Este usuario no tiene convenios registrados." });
     }
 
     res.status(200).json([...projects]);
@@ -152,6 +158,10 @@ const updateProject = asyncHandler(async (req, res) => {
     "avance",
     "plazo",
     "plazoSeguimiento",
+    "direccion",
+    "modeloConvenio",
+    "nivelGobierno",
+    "alias",
   ];
 
   // Actualiza solo los campos enviados en el request

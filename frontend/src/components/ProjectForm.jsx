@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import ubigeoData from "../data/ubigeoData.json";
@@ -8,6 +8,7 @@ import {
   createProject,
   updateProject,
 } from "../features/projects/projectSlice";
+import modeloConvenioData from "../data/modeloConvenioData";
 
 function ProjectForm({
   modo = "crear",
@@ -42,19 +43,148 @@ function ProjectForm({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //Load provincias
   useEffect(() => {
-    if (form.departamento) {
+    if (
+      form.departamento &&
+      form.nivelGobierno !== "regional" &&
+      ubigeoData[form.departamento]
+    ) {
       const provs = Object.keys(ubigeoData[form.departamento]);
       setProvincias(provs);
+    } else {
+      setProvincias([]);
     }
-  }, [form.departamento]);
+  }, [form.departamento, form.nivelGobierno]);
 
+  //Load distritos
   useEffect(() => {
-    if (form.provincia) {
+    if (
+      form.departamento &&
+      form.provincia &&
+      form.nivelGobierno === "local" &&
+      ubigeoData[form.departamento]?.[form.provincia]
+    ) {
       const dists = ubigeoData[form.departamento][form.provincia];
       setDistritos(dists);
+    } else {
+      setDistritos([]);
     }
-  }, [form.provincia]);
+  }, [form.departamento, form.provincia, form.nivelGobierno]);
+
+  //ubigeo logic
+  useEffect(() => {
+    const { nivelGobierno, departamento, provincia, distrito } = form;
+
+    if (!nivelGobierno || !departamento) {
+      setForm((prev) => ({ ...prev, ubigeo: "" }));
+      return;
+    }
+
+    if (nivelGobierno === "regional") {
+      const primeraProvincia = ubigeoData[departamento]
+        ? Object.values(ubigeoData[departamento])[0]
+        : null;
+      const primerDistrito = primeraProvincia?.[0];
+      if (primerDistrito?.IDDIST) {
+        const codigoDep = primerDistrito.IDDIST.slice(0, 2);
+        setForm((prev) => ({
+          ...prev,
+          ubigeo: `${codigoDep}0000`,
+          contraparte: `Gobierno Regional de ${departamento}`,
+        }));
+      }
+      return;
+    }
+
+    if (nivelGobierno === "local") {
+      // Si hay provincia (y no hay distrito todavía), generar XXYY00
+      if (provincia && !distrito) {
+        const primerDistrito = ubigeoData[departamento]?.[provincia]?.[0];
+        if (primerDistrito?.IDDIST) {
+          const codigoDep = primerDistrito.IDDIST.slice(0, 2);
+          const codigoProv = primerDistrito.IDDIST.slice(2, 4);
+          setForm((prev) => ({
+            ...prev,
+            ubigeo: `${codigoDep}${codigoProv}00`,
+            contraparte: `Municipalidad Provincial de ${provincia}`,
+          }));
+        }
+      }
+
+      // Si hay provincia y distrito, usar IDDIST completo
+      if (provincia && distrito) {
+        const distritoData = ubigeoData[departamento]?.[provincia]?.find(
+          (d) => d.NOMBDIST === distrito
+        );
+        setForm((prev) => ({
+          ...prev,
+          ubigeo: distritoData?.IDDIST || "",
+          contraparte: `Municipalidad Distrital de ${distrito}`,
+        }));
+      }
+
+      // Si no hay provincia, limpiar
+      if (!provincia) {
+        setForm((prev) => ({ ...prev, ubigeo: "" }));
+      }
+    }
+  }, [form.nivelGobierno, form.departamento, form.provincia, form.distrito]);
+
+  // Clear provincia and distrito
+
+  useEffect(() => {
+    if (form.nivelGobierno === "regional") {
+      setForm((prev) => ({
+        ...prev,
+        provincia: "",
+        distrito: "",
+      }));
+    }
+  }, [form.nivelGobierno]);
+
+  useEffect(() => {
+    const { ubigeo, contraparte, nombreIdeaProyecto, modeloConvenio } = form;
+
+    if (
+      ubigeo &&
+      contraparte?.trim() &&
+      nombreIdeaProyecto?.trim() &&
+      modeloConvenio
+    ) {
+      const modelo = modeloConvenioData.find(
+        (m) => m.modelo === Number(modeloConvenio)
+      );
+
+      if (!modelo || !modelo.conv1 || !modelo.conv2) return;
+
+      const contraparteLower = contraparte.toLowerCase();
+      const articulo = contraparteLower.includes("municipalidad") ? "la" : "el";
+
+      const nombreGenerado = `${modelo.conv1} ${articulo} ${contraparte} ${modelo.conv2} “${nombreIdeaProyecto}”`;
+
+      setForm((prev) => ({
+        ...prev,
+        nombreConvenio: nombreGenerado,
+      }));
+    }
+  }, [
+    form.ubigeo,
+    form.contraparte,
+    form.nombreIdeaProyecto,
+    form.modeloConvenio,
+  ]);
+
+  const modeloSeleccionado = useMemo(() => {
+    return modeloConvenioData.find(
+      (m) => m.modelo === Number(form.modeloConvenio)
+    );
+  }, [form.modeloConvenio]);
+
+  const direccionInvalida =
+    modeloSeleccionado &&
+    form.direccion &&
+    !modeloSeleccionado.uso.includes(form.direccion);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -143,26 +273,114 @@ function ProjectForm({
       </h2>
 
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Nombre del Convenio</label>
-          <textarea
-            name="nombreConvenio"
-            required
-            value={form.nombreConvenio}
-            onChange={handleChange}
-            className="form-control"
-          />
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <label className="form-label">
+              Alias del Convenio (Nombre corto)
+            </label>
+            {/* <p className="text-secondary">
+              <small>Nombre corto del convenio.</small>
+            </p> */}
+            <input
+              name="alias"
+              required
+              value={form.alias}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="col-md-6">
+            <label className="form-label">Dirección de Línea</label>
+            <select
+              name="direccion"
+              required
+              value={form.direccion}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="">-- Selecciona una dirección --</option>
+              <option value="DATEC">DATEC</option>
+              <option value="DEP">DEP</option>
+              <option value="DET">DET</option>
+            </select>
+          </div>
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Contraparte</label>
-          <input
-            name="contraparte"
-            required
-            value={form.contraparte}
-            onChange={handleChange}
-            className="form-control"
-          />
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <label className="form-label">Modelo de Convenio</label>
+            <select
+              name="modeloConvenio"
+              required
+              value={form.modeloConvenio}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="">-- Selecciona un modelo --</option>
+              {modeloConvenioData.map((item) => (
+                <option key={item.modelo} value={item.modelo}>
+                  Modelo {item.modelo} - {item.tipo}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-md-6">
+            {modeloSeleccionado ? (
+              <>
+                <div className="alert alert-info small mt-3">
+                  <strong>Descripción:</strong> {modeloSeleccionado.descripcion}
+                  <br />
+                  <strong>Direcciones aplicables:</strong>{" "}
+                  {modeloSeleccionado.uso.join(", ")}
+                </div>
+                {direccionInvalida && (
+                  <div className="alert alert-warning small mt-2">
+                    ⚠️ Este modelo no aplica para la dirección seleccionada:{" "}
+                    <strong>{form.direccion}</strong>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="alert alert-info small mt-3">
+                <p className="text-muted mb-0">
+                  Selecciona un modelo para ver la descripción
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <label className="form-label">Nivel de Gobierno</label>
+            <select
+              name="nivelGobierno"
+              required
+              value={form.nivelGobierno}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="">-- Selecciona nivel --</option>
+              <option value="local">Local</option>
+              <option value="regional">Regional</option>
+            </select>
+          </div>
+          <div className="col-md-6 h-100 ">
+            {form.ubigeo ? (
+              <>
+                <div className="alert alert-info mb-0 small mt-3 ">
+                  <strong>Ubigeo:</strong> {form.ubigeo}
+                  <br />
+                  <strong>Contraparte:</strong> {form.contraparte}
+                </div>
+              </>
+            ) : (
+              <div className="alert alert-info small mt-3">
+                <p className="text-muted mb-0">
+                  Aquí se mostrará el ubigeo y la contraparte.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="row mb-3">
@@ -183,82 +401,47 @@ function ProjectForm({
               ))}
             </select>
           </div>
+          {form.nivelGobierno === "local" && (
+            <>
+              <div className="col-md-4">
+                <label className="form-label">Provincia</label>
+                <select
+                  name="provincia"
+                  required
+                  value={form.provincia}
+                  onChange={handleChange}
+                  disabled={!provincias.length}
+                  className="form-select"
+                >
+                  <option value="">Selecciona...</option>
+                  {provincias.map((prov) => (
+                    <option key={prov} value={prov}>
+                      {prov}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <div className="col-md-4">
-            <label className="form-label">Provincia</label>
-            <select
-              name="provincia"
-              required
-              value={form.provincia}
-              onChange={handleChange}
-              disabled={!provincias.length}
-              className="form-select"
-            >
-              <option value="">Selecciona...</option>
-              {provincias.map((prov) => (
-                <option key={prov} value={prov}>
-                  {prov}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="col-md-4">
-            <label className="form-label">Distrito</label>
-            <select
-              name="distrito"
-              required
-              value={form.distrito}
-              onChange={handleDistritoChange}
-              disabled={!distritos.length}
-              className="form-select"
-            >
-              <option value="">Selecciona...</option>
-              {distritos.map((dist) => (
-                <option key={dist.IDDIST} value={dist.NOMBDIST}>
-                  {dist.NOMBDIST}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Ubigeo</label>
-          <input
-            name="ubigeo"
-            value={form.ubigeo}
-            readOnly
-            className="form-control"
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Tipo de Servicio</label>
-          <select
-            name="servicioPriorizado"
-            value={form.servicioPriorizado}
-            onChange={handleChange}
-            className="form-select"
-          >
-            <option value="">-- Selecciona un servicio --</option>
-            {servicios.map((servicio, index) => (
-              <option key={index} value={servicio}>
-                {servicio}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Nombre de la Idea de Proyecto</label>
-          <input
-            name="nombreIdeaProyecto"
-            required
-            value={form.nombreIdeaProyecto}
-            onChange={handleChange}
-            className="form-control"
-          />
+              <div className="col-md-4">
+                <label className="form-label">Distrito</label>
+                <select
+                  name="distrito"
+                  required
+                  value={form.distrito}
+                  onChange={handleDistritoChange}
+                  disabled={!distritos.length}
+                  className="form-select"
+                >
+                  <option value="">Selecciona...</option>
+                  {distritos.map((dist) => (
+                    <option key={dist.IDDIST} value={dist.NOMBDIST}>
+                      {dist.NOMBDIST}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="row mb-3">
@@ -283,6 +466,45 @@ function ProjectForm({
               className="form-control"
             />
           </div>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Nombre de la Idea de Proyecto</label>
+          <input
+            name="nombreIdeaProyecto"
+            required
+            value={form.nombreIdeaProyecto}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Nombre del Convenio</label>
+          <textarea
+            name="nombreConvenio"
+            required
+            value={form.nombreConvenio}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Tipo de Servicio</label>
+          <select
+            name="servicioPriorizado"
+            value={form.servicioPriorizado}
+            onChange={handleChange}
+            className="form-select"
+          >
+            <option value="">-- Selecciona un servicio --</option>
+            {servicios.map((servicio, index) => (
+              <option key={index} value={servicio}>
+                {servicio}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="row mb-3">
