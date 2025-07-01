@@ -21,15 +21,15 @@ router.post("/", protect, createActivity);
 
 // PATCH /api/activities/draft/:activityId
 // Update draft version of an activity
-router.patch("/draft/:activityId", updateDraftActivity);
+router.patch("/draft/:activityId", protect, updateDraftActivity);
 
 // POST /api/activities/project/:projectId/set-baseline
 // Establish baseline versions for all draft activities in a project
-router.post("/project/:projectId/set-baseline", setBaselineForProject);
+router.post("/project/:projectId/set-baseline", protect, setBaselineForProject);
 
 // DELETE /api/activities/:id
 // Delete activity if no versions exist
-router.delete("/:id", deleteActivity);
+router.delete("/:id", protect, deleteActivity);
 
 /**********************************************/
 // FLEXIBLE FUNCTION
@@ -49,7 +49,7 @@ router.get(
 
 // POST /api/activities/:activityId/tracking
 // Add a new tracking version for an activity
-router.post("/:activityId/tracking", addTrackingVersion);
+router.post("/:activityId/tracking", protect, addTrackingVersion);
 
 /**********************************************/
 // ADVACE UTILS
@@ -57,6 +57,6 @@ router.post("/:activityId/tracking", addTrackingVersion);
 
 // PUT /api/activities/:id/progress
 // Add a new tracking version for an activity
-router.put("/:id/progress", updateActivityProgress);
+// router.put("/:id/progress", updateActivityProgress);
 
 module.exports = router;

@@ -380,7 +380,7 @@ const ProjectSchedule = () => {
 
       delete unsavedChangesRef.current[rowId];
       delete saveTimeoutsRef.current[rowId];
-    }, 10 * 1000); // 10 segundos por ahora
+    }, 30 * 1000); // 30 segundos por ahora
   };
 
   // 5 minutes 5 * 60 * 1000

@@ -34,7 +34,7 @@ const Project = sequelize.define(
       allowNull: true,
     },
     nombreConvenio: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1500),
       allowNull: false,
     },
     contraparte: {
