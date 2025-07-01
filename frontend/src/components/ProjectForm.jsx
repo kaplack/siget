@@ -206,6 +206,11 @@ function ProjectForm({
     e.preventDefault();
 
     if (isSubmitting) return;
+    if (direccionInvalida) {
+      return toast.error(
+        "El modelo de convenio no es compatible con la dirección de línea seleccionada"
+      );
+    }
     setIsSubmitting(true);
 
     if (
@@ -251,6 +256,7 @@ function ProjectForm({
       if (onSuccess) onSuccess();
     } catch (err) {
       toast.error("Error al guardar el proyecto");
+      setIsSubmitting(false);
     }
   };
 
