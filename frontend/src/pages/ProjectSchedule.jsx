@@ -29,7 +29,7 @@ import {
   updateDraftActivity,
   addTrackingVersion,
 } from "../features/activities/activitySlice";
-import { getProject } from "../features/projects/projectSlice";
+import { getProject, updateProject } from "../features/projects/projectSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaRegSave } from "react-icons/fa";
@@ -123,10 +123,89 @@ const ProjectSchedule = () => {
     "sustento",
   ];
 
+  // Recursively calculate progress for a node using weighted average
+  const calcularAvanceRecursivo = (nodo) => {
+    if (!nodo.children || nodo.children.length === 0) {
+      return nodo.avance || 0;
+    }
+
+    const avances = [];
+    const pesos = [];
+
+    nodo.children.forEach((child) => {
+      const avanceHijo = calcularAvanceRecursivo(child);
+      const peso = child.plazo || 0;
+      if (peso > 0) {
+        avances.push(avanceHijo);
+        pesos.push(peso);
+      }
+    });
+
+    const totalPeso = pesos.reduce((sum, p) => sum + p, 0);
+    if (totalPeso === 0) return 0;
+
+    const avancePonderado =
+      avances.reduce((sum, a, i) => sum + a * pesos[i], 0) / totalPeso;
+
+    nodo.avance = Math.round(avancePonderado);
+    return nodo.avance;
+  };
+
+  // Calculates total duration from leaf nodes only
+  // Calculates total plazo from true leaves (no children)
+  const calcularPlazoSeguimientoSoloHojas = (nodos) => {
+    const hojas = [];
+
+    const buscarHojas = (nodo) => {
+      if (!nodo.children || nodo.children.length === 0) {
+        if (nodo.tipo === "seguimiento" && nodo.plazo > 0) {
+          hojas.push(nodo);
+        }
+      } else {
+        nodo.children.forEach(buscarHojas);
+      }
+    };
+
+    nodos.forEach(buscarHojas);
+    return hojas.reduce((sum, h) => sum + h.plazo, 0);
+  };
+
   const actualizarArbolConEDT = (listaPlana) => {
     const tree = buildTree(listaPlana);
     generarEDTs(tree);
-    recalcularFechasPadres(tree); // se actualizan fechas de padres
+    recalcularFechasPadres(tree); // actualiza fechas
+
+    // 1. Calcular avance recursivo en cada raíz
+    tree.forEach(calcularAvanceRecursivo);
+
+    // 2. Calcular suma de plazos de hojas de seguimiento
+    const hojas = flattenTree(tree).filter(
+      (n) =>
+        (!n.children || n.children.length === 0) &&
+        n.tipo === "seguimiento" &&
+        n.plazo > 0
+    );
+    const totalPlazo = calcularPlazoSeguimientoSoloHojas(tree);
+
+    // 3. Calcular avance total del proyecto
+    const avanceProyecto = calcularAvanceRecursivo({ children: tree });
+
+    // 4. Actualizar proyecto con los nuevos valores
+    dispatch(
+      updateProject({
+        id: projectId,
+        updatedData: {
+          avance: avanceProyecto,
+          plazoSeguimiento: totalPlazo,
+        },
+      })
+    );
+    console.log("✔ Proyecto actualizado:", {
+      id: projectId,
+      avance: avanceProyecto,
+      plazoSeguimiento: totalPlazo,
+    });
+
     return tree;
   };
 
@@ -369,7 +448,9 @@ const ProjectSchedule = () => {
       {
         accessorKey: "plazo",
         header: "Plazo (días)",
-        enableEditing: (row) => row.original.tipo === "seguimiento",
+        enableEditing: (row) =>
+          row.original.tipo === "seguimiento" &&
+          (!row.original.children || row.original.children.length === 0),
         muiTableBodyCellEditTextFieldProps: { type: "number" },
         size: 40,
         muiEditTextFieldProps: ({ cell, row, table }) => ({
@@ -399,7 +480,9 @@ const ProjectSchedule = () => {
       {
         accessorKey: "fechaInicio",
         header: "Fecha Inicio",
-        enableEditing: (row) => row.original.tipo === "seguimiento",
+        enableEditing: (row) =>
+          row.original.tipo === "seguimiento" &&
+          (!row.original.children || row.original.children.length === 0),
         size: 80,
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
         muiEditTextFieldProps: ({ cell, row, table }) => ({
@@ -417,7 +500,9 @@ const ProjectSchedule = () => {
       {
         accessorKey: "fechaFin",
         header: "Fecha Fin",
-        enableEditing: (row) => row.original.tipo === "seguimiento",
+        enableEditing: (row) =>
+          row.original.tipo === "seguimiento" &&
+          (!row.original.children || row.original.children.length === 0),
         size: 80,
 
         Cell: ({ cell }) => formatearFechaVisual(cell.getValue()),
@@ -454,7 +539,9 @@ const ProjectSchedule = () => {
         accessorKey: "avance",
         header: "Avance (%)",
         muiTableBodyCellEditTextFieldProps: { type: "number" },
-        enableEditing: (row) => row.original.tipo === "seguimiento",
+        enableEditing: (row) =>
+          row.original.tipo === "seguimiento" &&
+          (!row.original.children || row.original.children.length === 0),
         size: 80,
         muiEditTextFieldProps: ({ cell, row, table }) => ({
           onBlur: (event) => {

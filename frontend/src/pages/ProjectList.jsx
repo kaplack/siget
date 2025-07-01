@@ -40,13 +40,16 @@ const ProjectList = () => {
 
   const columns = [
     {
-      accessorKey: "nombreConvenio",
-      header: "Nombre del Convenio",
+      accessorKey: "alias",
+      header: "Nombre corto",
+      size: 50,
     },
     {
-      accessorKey: "nombreIdeaProyecto",
-      header: "Nombre del Proyecto",
+      accessorKey: "nombreConvenio",
+      header: "Nombre del Convenio",
+      size: 350,
     },
+
     {
       accessorKey: "estado",
       header: "Estado del proyecto",
@@ -67,7 +70,7 @@ const ProjectList = () => {
       header: "Acciones",
       enableSorting: false,
       enableColumnFilter: false,
-      minSize: 200,
+      minSize: 360,
       Cell: ({ row }) => {
         const id = row.original.id;
 

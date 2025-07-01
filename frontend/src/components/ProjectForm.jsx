@@ -274,7 +274,7 @@ function ProjectForm({
 
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
-          <div className="col-md-6">
+          <div className="col-md-6 ">
             <label className="form-label">
               Alias del Convenio (Nombre corto)
             </label>
@@ -349,7 +349,7 @@ function ProjectForm({
             )}
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-3 ">
           <div className="col-md-6">
             <label className="form-label">Nivel de Gobierno</label>
             <select
@@ -383,7 +383,7 @@ function ProjectForm({
           </div>
         </div>
 
-        <div className="row mb-3">
+        <div className="row mb-3 ">
           <div className="col-md-4">
             <label className="form-label">Departamento</label>
             <select
@@ -444,7 +444,7 @@ function ProjectForm({
           )}
         </div>
 
-        <div className="row mb-3">
+        <div className="row mb-3 ">
           <div className="col-md-6">
             <label className="form-label">CUI</label>
             <input
@@ -507,7 +507,7 @@ function ProjectForm({
           </select>
         </div>
 
-        <div className="row mb-3">
+        <div className="row mb-3 ">
           <div className="col-md-6">
             <label className="form-label">Número de Beneficiarios</label>
             <input
@@ -536,7 +536,7 @@ function ProjectForm({
           </div>
         </div>
 
-        <div className="row mb-3">
+        <div className="row mb-3 ">
           <div className="col-md-6">
             <label className="form-label">Firma de Convenio</label>
             <input
@@ -559,7 +559,7 @@ function ProjectForm({
             />
           </div>
         </div>
-        <div className="text-end d-flex justify-content-end gap-2">
+        <div className="text-end d-flex justify-content-end gap-2 my-3">
           <button
             type="button"
             className="btn btn-secondary"
