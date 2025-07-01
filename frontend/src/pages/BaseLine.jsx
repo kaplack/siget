@@ -683,8 +683,11 @@ const ProjectBaseLine = () => {
     <>
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-4">Linea Base del Proyecto</h2>
-        <h4>{currentProject.nombreConvenio}</h4>
-        <p>CUI: {currentProject.cui}</p>
+        <h4>{currentProject?.alias}</h4>
+        <p>
+          {currentProject?.cui && `CUI: ${currentProject.cui} `}
+          {currentProject?.ci && `CI: ${currentProject.ci}`}
+        </p>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
