@@ -176,9 +176,35 @@ const updateProject = asyncHandler(async (req, res) => {
   res.status(200).json(project);
 });
 
+// @desc    Delete a project by ID
+// @route   DELETE /api/projects/delete/:id
+// @access  Private
+const delUserProject = asyncHandler(async (req, res) => {
+  const projectId = req.params.id;
+
+  const project = await Project.findOne({
+    where: {
+      id: projectId,
+      userId: req.user.id, // ensures user owns the project
+    },
+  });
+
+  if (!project) {
+    res.status(404);
+    throw new Error("Proyecto no encontrado o no autorizado.");
+  }
+
+  await project.destroy(); // triggers cascade delete
+
+  res
+    .status(200)
+    .json({ id: projectId, message: "Proyecto eliminado correctamente." });
+});
+
 module.exports = {
   createProject,
   getUserProjects,
   getProject,
   updateProject,
+  delUserProject,
 };

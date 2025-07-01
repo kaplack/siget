@@ -5,6 +5,7 @@ const {
   getUserProjects,
   getProject,
   updateProject,
+  delUserProject,
 } = require("../controllers/projectController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -19,7 +20,9 @@ router.get("/project/:id", protect, getProject);
 // This route is used to update an existing project
 router.put("/project/:id", protect, updateProject);
 
-// router.post("/login", loginUser);
-// router.get("/me", protect, getMe);
+// delete project by ID
+// DELETE /api/projects/delete/:id
+// This route is used to delete an existing project
+router.delete("/delete/:id", protect, delUserProject);
 
 module.exports = router;

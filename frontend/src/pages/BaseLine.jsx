@@ -682,7 +682,7 @@ const ProjectBaseLine = () => {
   return (
     <>
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">Linea Base del Proyecto</h2>
+        <h2 className="text-2xl font-bold mb-4">Linea Base del Convenio</h2>
         <h4>{currentProject?.alias}</h4>
         <p>
           {currentProject?.cui && `CUI: ${currentProject.cui} `}

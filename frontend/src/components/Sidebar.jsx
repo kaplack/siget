@@ -98,7 +98,7 @@ function Sidebar({ collapsed, toggleCollapse }) {
 
           <SidebarItemWithSubmenu
             icon={<FaProjectDiagram />}
-            label="Gestión de Proyectos"
+            label="Gestión de Convenios"
             showLabels={showLabels}
             collapsed={collapsed}
             open={openSubmenu}
@@ -107,12 +107,12 @@ function Sidebar({ collapsed, toggleCollapse }) {
               {
                 to: "/app/project/new",
                 icon: <FaFolderPlus />,
-                label: "Proyecto",
+                label: "Crear Convenio",
               },
               {
                 to: "/app/project-list",
                 icon: <GoProjectRoadmap />,
-                label: "Proyectos activos",
+                label: "Convenios activos",
               },
             ]}
           />

@@ -281,7 +281,7 @@ function ProjectForm({
     <div className="container my-4 pt-4 pb-5">
       <h2 className="mb-4 d-flex align-items-center">
         <FaFolderPlus size={50} style={{ marginRight: "1rem" }} />
-        {modo === "crear" ? "Registro de Proyecto" : "Editar Proyecto"}
+        {modo === "crear" ? "Crear Convenio" : "Editar Convenio"}
       </h2>
 
       <form onSubmit={handleSubmit}>
@@ -481,7 +481,7 @@ function ProjectForm({
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Nombre de la Idea de Proyecto</label>
+          <label className="form-label">Nombre de Idea Proyecto</label>
           <input
             name="nombreIdeaProyecto"
             required
@@ -577,7 +577,7 @@ function ProjectForm({
             className="btn btn-secondary"
             onClick={() => navigate("/app/project-list")}
           >
-            {modo === "crear" ? "Lista de Proyectos" : "Cancelar"}
+            {modo === "crear" ? "Convenios Activos" : "Cancelar"}
           </button>
           <button
             type="submit"
@@ -594,7 +594,7 @@ function ProjectForm({
                 Guardando...
               </>
             ) : modo === "crear" ? (
-              "Crear Proyecto"
+              "Crear Convenio"
             ) : (
               "Guardar Cambios"
             )}
