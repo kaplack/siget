@@ -39,6 +39,7 @@ function ProjectForm({
 
   const [provincias, setProvincias] = useState([]);
   const [distritos, setDistritos] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -204,6 +205,9 @@ function ProjectForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
     if (
       form.firmaConvenio &&
       form.inicioConvenio &&
@@ -212,11 +216,13 @@ function ProjectForm({
       toast.error(
         "La fecha de inicio no puede ser anterior a la firma del convenio"
       );
+      setIsSubmitting(false);
       return;
     }
 
     if (form.numeroBeneficiarios < 0 || form.montoInversion < 0) {
       toast.error("Los valores no pueden ser negativos");
+      setIsSubmitting(false);
       return;
     }
 
@@ -567,8 +573,25 @@ function ProjectForm({
           >
             {modo === "crear" ? "Lista de Proyectos" : "Cancelar"}
           </button>
-          <button type="submit" className="btn btn-primary">
-            {modo === "crear" ? "Crear Proyecto" : "Guardar Cambios"}
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Guardando...
+              </>
+            ) : modo === "crear" ? (
+              "Crear Proyecto"
+            ) : (
+              "Guardar Cambios"
+            )}
           </button>
         </div>
       </form>
