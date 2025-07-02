@@ -36,28 +36,28 @@ const getHojasEjecutables = async () => {
   });
 };
 
-const calcularAvanceGlobal = (hojas) => {
+const calcularAvanceGlobal = (proyectos) => {
   let totalPeso = 0;
-  let totalAvancePonderado = 0;
+  let avancePonderado = 0;
 
-  for (const actividad of hojas) {
-    const plazo = actividad.plazo;
-    const avance = actividad.avance || 0;
-    totalPeso += plazo;
-    totalAvancePonderado += avance * plazo;
+  for (const p of proyectos) {
+    if (p.avance !== null && p.totalPeso > 0) {
+      totalPeso += p.totalPeso;
+      avancePonderado += p.avance * p.totalPeso;
+    }
   }
 
-  if (totalPeso > 0) {
-    return {
-      avanceGlobal: +(totalAvancePonderado / totalPeso).toFixed(2),
-      mensajeAvanceGlobal: null,
-    };
-  } else {
+  if (totalPeso === 0) {
     return {
       avanceGlobal: null,
       mensajeAvanceGlobal: "Plazos no definidos",
     };
   }
+
+  return {
+    avanceGlobal: +(avancePonderado / totalPeso).toFixed(2),
+    mensajeAvanceGlobal: null,
+  };
 };
 
 const getAvancePorProyecto = (hojas) => {
@@ -87,6 +87,7 @@ const getAvancePorProyecto = (hojas) => {
   return Object.entries(avancePorProyecto).map(([projectId, datos]) => ({
     projectId: Number(projectId),
     nombreConvenio: datos.nombreConvenio,
+    totalPeso: datos.totalPeso,
     avance:
       datos.totalPeso > 0
         ? +(datos.avancePonderado / datos.totalPeso).toFixed(2)
@@ -126,12 +127,12 @@ const getDashboard = async (req, res) => {
 
     const hojas = await getHojasEjecutables();
 
-    const { avanceGlobal, mensajeAvanceGlobal } = calcularAvanceGlobal(hojas);
-
     const totalActividadesEjecutables = new Set(hojas.map((h) => h.activityId))
       .size;
 
     const avancePorProyecto = getAvancePorProyecto(hojas);
+    const { avanceGlobal, mensajeAvanceGlobal } =
+      calcularAvanceGlobal(avancePorProyecto);
 
     res.json({
       totalProjects,
