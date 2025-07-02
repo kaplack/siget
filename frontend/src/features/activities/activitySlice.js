@@ -82,6 +82,7 @@ export const setBaselineForProject = createAsyncThunk(
   async (projectId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      console.log("sliceToken", token);
       const response = await activityService.setBaselineForProject(
         projectId,
         token

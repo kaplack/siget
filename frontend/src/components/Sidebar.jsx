@@ -12,6 +12,8 @@ import {
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
+  FaChartPie,
+  FaTasks,
 } from "react-icons/fa";
 import { GoProjectRoadmap } from "react-icons/go";
 import logo from "../assets/images/Logo_OEDI.png";
@@ -91,7 +93,7 @@ function Sidebar({ collapsed, toggleCollapse }) {
         <ul className="nav flex-column">
           <SidebarItem
             to="/app/dashboard"
-            icon={<FaHome />}
+            icon={<FaChartPie />}
             label="Dashboard"
             showLabels={showLabels}
           />
@@ -111,7 +113,7 @@ function Sidebar({ collapsed, toggleCollapse }) {
               },
               {
                 to: "/app/project-list",
-                icon: <GoProjectRoadmap />,
+                icon: <FaTasks />,
                 label: "Convenios activos",
               },
             ]}

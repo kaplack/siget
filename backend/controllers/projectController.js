@@ -93,12 +93,6 @@ const getUserProjects = async (req, res) => {
       order: [["createdAt", "DESC"]],
     });
 
-    if (!projects || projects.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Este usuario no tiene convenios registrados." });
-    }
-
     res.status(200).json([...projects]);
   } catch (error) {
     console.error("Error fetching user projects:", error);

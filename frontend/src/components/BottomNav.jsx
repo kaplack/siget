@@ -1,6 +1,15 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaHome, FaPlusCircle, FaList, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaPlusCircle,
+  FaList,
+  FaSignOutAlt,
+  FaChartPie,
+  FaFolderPlus,
+  FaTasks,
+} from "react-icons/fa";
+import { GoProjectRoadmap } from "react-icons/go";
 import { AiFillDashboard } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
@@ -27,7 +36,7 @@ function BottomNav() {
           location.pathname === "/app/dashboard" ? "fw-bold" : ""
         }`}
       >
-        <AiFillDashboard size={25} />
+        <FaChartPie size={23} />
       </Link>
 
       <Link
@@ -36,7 +45,7 @@ function BottomNav() {
           location.pathname === "/app/project/new" ? "fw-bold" : ""
         }`}
       >
-        <FaPlusCircle size={20} />
+        <FaFolderPlus size={23} />
       </Link>
 
       <Link
@@ -45,14 +54,14 @@ function BottomNav() {
           location.pathname === "/app/project-list" ? "fw-bold" : ""
         }`}
       >
-        <FaList size={20} />
+        <FaTasks size={23} />
       </Link>
       <button
         onClick={onLogout}
         className="text-white bg-transparent border-0"
         style={{ padding: 0 }}
       >
-        <FaSignOutAlt size={20} />
+        <FaSignOutAlt size={23} />
       </button>
     </div>
   );

@@ -116,7 +116,7 @@ const setBaselineForProject = async (req, res) => {
     );
 
     res.status(201).json({
-      message: "Baseline established and tracking version created.",
+      message: "Linea base establecida correctamente.",
       seguimientoVersions,
     });
   } catch (error) {

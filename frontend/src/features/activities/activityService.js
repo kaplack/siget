@@ -55,6 +55,7 @@ export const deleteDraftActivity = async (activityId, token) => {
 };
 
 export const setBaselineForProject = async (projectId, token) => {
+  console.log("Service Token", token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -62,6 +63,7 @@ export const setBaselineForProject = async (projectId, token) => {
   };
   const res = await axios.post(
     `${API_URL}project/${projectId}/set-baseline`,
+    {},
     config
   );
   return res.data;
