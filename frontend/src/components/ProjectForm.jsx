@@ -303,7 +303,7 @@ function ProjectForm({
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Dirección de Línea</label>
+            <label className="form-label">Dirección</label>
             <select
               name="direccion"
               required
