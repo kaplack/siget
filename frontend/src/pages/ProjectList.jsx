@@ -29,7 +29,9 @@ const ProjectList = () => {
   if (isLoading)
     return (
       <>
-        <div className="d-flex vh-100 justify-content-center align-items-center">
+        <div className="d-flex flex-column  vh-100 justify-content-center align-items-center">
+          <p>Cargando convenios</p>
+          <br />
           <CircularProgress />
         </div>
       </>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDashboard } from "../features/dashboard/dashboardSlice";
 import AvancePorProyectoChart from "../components/dashboard/AvancePorProyecto";
 import EstadoPorProyectoPieChart from "../components/dashboard/EstadoPorProyecto";
+import { CircularProgress } from "@mui/material";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -16,7 +17,16 @@ function Dashboard() {
     dispatch(getDashboard());
   }, [dispatch]);
 
-  if (loading) return <p>Cargando dashboard...</p>;
+  if (loading)
+    return (
+      <>
+        <div className="d-flex flex-column  vh-100 justify-content-center align-items-center">
+          <p>Cargando dashboard</p>
+          <br />
+          <CircularProgress />
+        </div>
+      </>
+    );
   if (error) return <p>Error: {error.error || "Error desconocido"}</p>;
 
   if (!data) return null;
