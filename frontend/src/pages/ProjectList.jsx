@@ -26,7 +26,14 @@ const ProjectList = () => {
     dispatch(getUserProjects());
   }, [dispatch]);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <>
+        <div className="d-flex vh-100 justify-content-center align-items-center">
+          <CircularProgress />
+        </div>
+      </>
+    );
   if (isError) return <p>Error: {message}</p>;
 
   // if (!projects || projects.length === 0) {
