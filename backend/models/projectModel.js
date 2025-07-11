@@ -62,7 +62,7 @@ const Project = sequelize.define(
       allowNull: false,
     },
     nombreIdeaProyecto: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     cui: {
