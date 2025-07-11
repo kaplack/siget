@@ -133,5 +133,18 @@ export function getColumns(handleSaveCell) {
         );
       },
     },
+    {
+      accessorKey: "comentario",
+      header: "Comentario",
+      size: 120,
+      enableEditing: (row) => row.original.tipo === "seguimiento",
+
+      muiEditTextFieldProps: ({ cell, row }) => ({
+        onBlur: (e) => {
+          const value = e.target.value;
+          handleSaveCell({ cell, row, value });
+        },
+      }),
+    },
   ];
 }

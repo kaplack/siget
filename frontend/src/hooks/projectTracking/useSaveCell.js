@@ -23,6 +23,7 @@ export function useSaveCell({ data, localChanges, setLocalChanges }) {
         "fechaFin",
         "avance",
         "sustento",
+        "comentario",
       ];
       if (!allowed.includes(columnId)) return;
 

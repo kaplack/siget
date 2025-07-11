@@ -28,7 +28,7 @@ const ActivityTracking = sequelize.define(
     avance: { type: DataTypes.INTEGER, defaultValue: 0 },
     responsable: { type: DataTypes.STRING },
     predecesorId: { type: DataTypes.STRING },
-    comentario: { type: DataTypes.STRING },
+    comentario: { type: DataTypes.TEXT },
     sustento: { type: DataTypes.STRING },
   },
   {

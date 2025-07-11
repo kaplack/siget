@@ -71,9 +71,9 @@ const importActivitiesFromExcel = async (req, res) => {
 
       if (fechaFin && !esDiaHabil(fechaFin)) {
         const ajustada = ajustarAProximoDiaHabil(fechaFin);
-        console.log(
-          `⚠️ Fecha no laborable (${fechaFin}) → ajustada a ${ajustada}`
-        );
+        // console.log(
+        //   `⚠️ Fecha no laborable (${fechaFin}) → ajustada a ${ajustada}`
+        // );
         fechaFin = ajustada;
       }
 
@@ -180,7 +180,7 @@ const importActivitiesFromExcel = async (req, res) => {
 
         const predRow = rowsWithDBIds.find((r) => r.Id === idStr);
         const predActivityId = predRow?.dbActivityId;
-        console.log("     ID en base de datos:", predActivityId);
+        //console.log("     ID en base de datos:", predActivityId);
 
         if (!predActivityId) {
           console.warn("     ⚠️ No se encontró el activityId correspondiente");

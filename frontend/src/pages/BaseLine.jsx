@@ -6,7 +6,8 @@ import {
   useMaterialReactTable,
 } from "material-react-table";
 import { buildTree } from "../utils/buildTree";
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, CircularProgress } from "@mui/material";
+
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
@@ -100,6 +101,7 @@ const ProjectBaseLine = () => {
     dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
   }, [dispatch, projectId]);
 
+  const { isLoading } = useSelector((state) => state.activities);
   const rawActivities = useSelector((state) => state.activities.activities);
   const currentProject = useSelector((state) => state.project.project);
 
@@ -522,26 +524,34 @@ const ProjectBaseLine = () => {
       ) : (
         <div className="d-flex align-items-center gap-2">
           <label htmlFor="excel-upload">
+            {/* Disable file input while loading */}
             <input
               type="file"
               accept=".xlsx,.xls"
               id="excel-upload"
               hidden
+              disabled={isLoading}
               onChange={handleImportExcel}
             />
+            {/* Show spinner inside the button when loading */}
             <Button
               variant="outlined"
               color="primary"
               component="span"
-              startIcon={<UploadFileIcon />}
+              startIcon={
+                isLoading ? <CircularProgress size={20} /> : <UploadFileIcon />
+              }
+              disabled={isLoading}
             >
-              Importar Excel
+              {isLoading ? "Importando..." : "Importar Excel"}
             </Button>
           </label>
+
           <Button
             variant="outlined"
             color="error"
             onClick={handleEliminarTodas}
+            disabled={isLoading} // also disable delete-all while importing
             startIcon={<DeleteIcon />}
           >
             Actividades
