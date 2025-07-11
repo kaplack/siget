@@ -36,7 +36,7 @@ const addTrackingVersion = async (req, res) => {
     const project = await Project.findByPk(activity.projectId);
 
     // Validate project has required dates
-    if (!project.firmaConvenio || !project.inicioConvenio) {
+    if (!project.firmaConvenio) {
       return res.status(400).json({
         message:
           "El proyecto debe tener registradas la fecha de firma e inicio de convenio antes de continuar.",
