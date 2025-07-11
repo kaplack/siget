@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { MaterialReactTable } from "material-react-table";
 import { Button, Box } from "@mui/material";
 
-function AvanceTable({ data }) {
+function AvanceTable({ data = [] }) {
   const [filtroDireccion, setFiltroDireccion] = useState("TODOS");
   const [dataTabla, setDataTabla] = useState([]);
 
