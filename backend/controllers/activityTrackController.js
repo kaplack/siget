@@ -1,5 +1,6 @@
 const Activity = require("../models/activityModel");
-const ActivityVersion = require("../models/activityVersionModel");
+const { ActivityBaseline, ActivityTracking } = require("../models");
+
 const Project = require("../models/projectModel");
 const {
   updateParentProgress,
@@ -18,11 +19,12 @@ const addTrackingVersion = async (req, res) => {
       plazo,
       avance = 0,
       sustento = null,
+      comentario = null,
     } = req.body;
 
     // Validate that baseline exists
-    const baseline = await ActivityVersion.findOne({
-      where: { activityId, tipo: "base", nroVersion: 1 },
+    const baseline = await ActivityBaseline.findOne({
+      where: { activityId, nroVersion: 1 },
     });
 
     if (!baseline) {
@@ -42,29 +44,32 @@ const addTrackingVersion = async (req, res) => {
     }
 
     // Continue with seguimiento creation
-    const count = await ActivityVersion.count({
-      where: { activityId, tipo: "seguimiento" },
+    const count = await ActivityTracking.count({
+      where: { activityId },
     });
 
-    await ActivityVersion.update(
+    await ActivityTracking.update(
       { vigente: false },
-      { where: { activityId, tipo: "seguimiento" } }
+      { where: { activityId } }
     );
 
     const nroVersion = count + 1;
 
-    const lastVersion = await ActivityVersion.findOne({
-      where: { activityId, vigente: false },
+    const lastVersion = await ActivityTracking.findOne({
+      where: { activityId },
       order: [["nroVersion", "DESC"]],
     });
 
-    const trackingData = {
+    const newTracking = await ActivityTracking.create({
       activityId,
       nombre: lastVersion?.nombre ?? "Sin nombre",
       parentId: lastVersion?.parentId ?? 0,
       orden: lastVersion?.orden ?? 0,
       predecesorId: lastVersion?.predecesorId ?? null,
       responsable: lastVersion?.responsable ?? null,
+      comentario: req.body.hasOwnProperty("comentario")
+        ? req.body.comentario
+        : lastVersion?.comentario ?? null,
       sustento: req.body.hasOwnProperty("sustento")
         ? sustento
         : lastVersion?.sustento ?? null,
@@ -78,12 +83,9 @@ const addTrackingVersion = async (req, res) => {
       avance: req.body.hasOwnProperty("avance")
         ? avance
         : lastVersion?.avance ?? 0,
-      tipo: "seguimiento",
       nroVersion,
       vigente: true,
-    };
-
-    const newTracking = await ActivityVersion.create(trackingData);
+    });
 
     // Update project to 'ejecucion' if conditions are met
     if (nroVersion >= 2 && avance > 0 && project) {
@@ -99,15 +101,15 @@ const addTrackingVersion = async (req, res) => {
   }
 };
 
+// NO SE UTILIZA POR EL MOMENTO 09/07/2025
 const updateActivityProgress = async (req, res) => {
   try {
     const { id } = req.params;
     const { avance } = req.body;
 
-    const activityVersion = await ActivityVersion.findOne({
+    const activityVersion = await ActivityTracking.findOne({
       where: {
         id,
-        tipo: "seguimiento",
         vigente: true,
       },
       include: {
@@ -125,7 +127,6 @@ const updateActivityProgress = async (req, res) => {
 
     const project = activityVersion.activity?.Project;
 
-    // Validate project dates
     if (!project?.firmaConvenio || !project?.inicioConvenio) {
       return res.status(400).json({
         message:
@@ -133,9 +134,8 @@ const updateActivityProgress = async (req, res) => {
       });
     }
 
-    await activityVersion.update({ avance });
+    await ActivityTracking.update({ avance });
 
-    // Recalculate parents and update project
     await updateParentProgress(id);
     await updateProjectProgress(activityVersion);
 

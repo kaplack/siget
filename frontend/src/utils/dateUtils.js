@@ -1,4 +1,19 @@
-// utils/dateUtils.js
+import dayjs from "dayjs";
+import "dayjs/locale/es"; // Import
+
+// Establece el locale a español
+dayjs.locale("es");
+
+// Establece los dias laborables y feriados
+export const calendarioConfig = {
+  diasLaborables: [1, 2, 3, 4, 5], // lunes a viernes (0 = domingo)
+  feriados: [
+    "2025-01-01",
+    "2025-07-28",
+    "2025-12-25",
+    // agregar más feriados aquí o cargar desde DB
+  ],
+};
 
 // Checks if a date is a working day (Monday to Friday)
 export const isWorkingDay = (date, holidays = []) => {
@@ -32,3 +47,19 @@ export const addBusinessDays = (start, daysToAdd, holidays = []) => {
 
   return date;
 };
+
+export const formatearFechaLarga = (fechaStr) => {
+  return dayjs(fechaStr).format("D [de] MMMM [de] YYYY");
+};
+
+export const formatearFechaCorta = (fechaStr) => {
+  return dayjs(fechaStr).format("DD/MM/YYYY");
+};
+
+export function ordenarPorFirmaReciente(data = []) {
+  return [...data].sort((a, b) => {
+    const fechaA = a.firmaConvenio ? dayjs(a.firmaConvenio) : dayjs(0); // Epoch
+    const fechaB = b.firmaConvenio ? dayjs(b.firmaConvenio) : dayjs(0);
+    return fechaB.diff(fechaA); // más reciente primero
+  });
+}

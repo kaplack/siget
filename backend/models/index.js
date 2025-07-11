@@ -3,7 +3,17 @@ require("./userModel");
 const User = require("./userModel");
 const Project = require("./projectModel");
 const Activity = require("./activityModel");
-const ActivityVersion = require("./activityVersionModel");
+const ActivityBaseline = require("./activityBaselineModel");
+const ActivityTracking = require("./activityTrackingModel");
+
+//Realcion entre Usuario y Proyecto
+User.hasMany(Project, {
+  foreignKey: "userId",
+});
+Project.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
 
 // Relaciones entre Proyecto y Actividades
 Project.hasMany(Activity, {
@@ -15,20 +25,34 @@ Activity.belongsTo(Project, {
   as: "project",
 });
 
-// Relaciones entre Actividades y sus Versiones
-Activity.hasMany(ActivityVersion, {
+// Relaciones entre Actividades y linea base
+Activity.hasMany(ActivityBaseline, {
   foreignKey: "activityId",
   onDelete: "CASCADE",
-  as: "versions",
+  as: "baselines",
 });
-ActivityVersion.belongsTo(Activity, {
+ActivityBaseline.belongsTo(Activity, {
+  foreignKey: "activityId",
+  as: "activity",
+});
+
+// Relaciones entre Actividades y seguimiento
+
+Activity.hasMany(ActivityTracking, {
+  foreignKey: "activityId",
+  onDelete: "CASCADE",
+  as: "trackings",
+});
+ActivityTracking.belongsTo(Activity, {
   foreignKey: "activityId",
   as: "activity",
 });
 
 // Puedes exportarlos si estás usando este archivo como loader
 module.exports = {
+  User,
   Project,
   Activity,
-  ActivityVersion,
+  ActivityBaseline,
+  ActivityTracking,
 };

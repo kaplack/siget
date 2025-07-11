@@ -8,8 +8,15 @@ const getDashboard = async () => {
   return response.data;
 };
 
+// Fetch dashboard data from backend
+const getAgreements = async () => {
+  const response = await axios.get(API_URL + "/agreement");
+  return response.data;
+};
+
 const dashboardService = {
   getDashboard,
+  getAgreements,
 };
 
 export default dashboardService;

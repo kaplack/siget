@@ -175,6 +175,7 @@ const updateProject = asyncHandler(async (req, res) => {
 // @access  Private
 const delUserProject = asyncHandler(async (req, res) => {
   const projectId = req.params.id;
+  console.log("proyecto a eliminar: ", projectId);
 
   const project = await Project.findOne({
     where: {
@@ -185,10 +186,12 @@ const delUserProject = asyncHandler(async (req, res) => {
 
   if (!project) {
     res.status(404);
+    console.log("Proyecto no encontrado o no autorizado.");
     throw new Error("Proyecto no encontrado o no autorizado.");
   }
 
   await project.destroy(); // triggers cascade delete
+  console.log("✅ Proyecto eliminado en DB");
 
   res
     .status(200)

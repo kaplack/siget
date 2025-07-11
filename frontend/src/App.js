@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,6 +15,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import NewProject from "./pages/NewProject";
 
 import Dashboard from "./pages/Dashboard";
+import Convenios from "./components/dashboard/Convenios";
+import Avance from "./components/dashboard/Avance";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Admin from "./pages/Admin";
@@ -42,7 +49,12 @@ function App() {
                 </PrivateRoute>
               }
             >
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="dashboard/*" element={<Dashboard />}>
+                <Route path="convenios" element={<Convenios />} />
+                <Route path="avance" element={<Avance />} />
+                <Route index element={<Navigate to="convenios" />} />
+              </Route>
+
               <Route path="project/new" element={<NewProject />} />
               <Route path="project/edit/:id" element={<EditProject />} />
               <Route

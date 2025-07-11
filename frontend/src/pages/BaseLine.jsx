@@ -9,6 +9,8 @@ import { buildTree } from "../utils/buildTree";
 import { Button, Divider } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+
 import {
   DndContext,
   PointerSensor,
@@ -33,6 +35,8 @@ import {
   deleteDraftActivity,
   setBaselineForProject,
   resetActivityState,
+  importarActividadesExcel,
+  deleteAllActivitiesByProject,
 } from "../features/activities/activitySlice";
 import { getProject } from "../features/projects/projectSlice";
 import { useParams, useNavigate } from "react-router-dom";
@@ -281,6 +285,46 @@ const ProjectBaseLine = () => {
     setData(newTree);
   };
 
+  // Importar actividades desde Excel
+  const handleImportExcel = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (
+      !window.confirm("¿Deseas importar actividades desde este archivo Excel?")
+    )
+      return;
+
+    dispatch(importarActividadesExcel({ projectId, file }))
+      .unwrap()
+      .then((res) => {
+        toast.success(res.message);
+        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+      })
+      .catch((err) => {
+        toast.error("❌ " + err);
+      });
+  };
+
+  const handleEliminarTodas = () => {
+    if (
+      !window.confirm(
+        "¿Estás seguro de que deseas eliminar todas las actividades del proyecto?"
+      )
+    )
+      return;
+
+    dispatch(deleteAllActivitiesByProject(projectId))
+      .unwrap()
+      .then((res) => {
+        toast.success(res.message);
+        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
+
   const columns = [
     {
       accessorKey: "drag",
@@ -440,6 +484,7 @@ const ProjectBaseLine = () => {
     getSubRows: (row) => row.children,
     enableSorting: false,
     enableColumnActions: false,
+    //enablePagination: false,
     //enableRowActions: true,
     positionActionsColumn: "last",
     // displayColumnDefOptions: { "mrt-row-actions": { enableEditing: false } },
@@ -453,8 +498,8 @@ const ProjectBaseLine = () => {
     },
     initialState: {
       columnVisibility: { id: false, responsable: false, predecesorId: false },
-      density: "compact",
-      pagination: { pageSize: 100 },
+      //density: "compact",
+      pagination: { pageSize: 250 },
       expanded: true, // expand all rows by default
     },
     renderToolbarInternalActions: ({ table }) => (
@@ -474,7 +519,35 @@ const ProjectBaseLine = () => {
             Ir a Seguimiento
           </Button>
         </div>
-      ) : null,
+      ) : (
+        <div className="d-flex align-items-center gap-2">
+          <label htmlFor="excel-upload">
+            <input
+              type="file"
+              accept=".xlsx,.xls"
+              id="excel-upload"
+              hidden
+              onChange={handleImportExcel}
+            />
+            <Button
+              variant="outlined"
+              color="primary"
+              component="span"
+              startIcon={<UploadFileIcon />}
+            >
+              Importar Excel
+            </Button>
+          </label>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleEliminarTodas}
+            startIcon={<DeleteIcon />}
+          >
+            Actividades
+          </Button>
+        </div>
+      ),
 
     muiTableBodyCellProps: ({ cell, row }) => ({
       onKeyDown: (event) => {

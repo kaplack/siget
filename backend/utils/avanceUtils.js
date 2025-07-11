@@ -1,17 +1,17 @@
 // utils/avanceUtils.js
 
-const { ActivityVersion, Activity, Project } = require("../models");
+const { ActivityTracking, Activity, Project } = require("../models");
 
 /**
  * Recursively updates the progress of all parent activities
  */
 async function updateParentProgress(activityVersionId) {
   // Get the updated activity version
-  const activity = await ActivityVersion.findByPk(activityVersionId);
+  const activity = await ActivityTracking.findByPk(activityVersionId);
   if (!activity || !activity.parentId) return;
 
   // Get all siblings of this activity
-  const siblings = await ActivityVersion.findAll({
+  const siblings = await ActivityTracking.findAll({
     where: {
       parentId: activity.parentId,
       tipo: activity.tipo,
@@ -29,7 +29,7 @@ async function updateParentProgress(activityVersionId) {
     totalPlazo > 0 ? Math.round(weightedSum / totalPlazo) : 0;
 
   // Update parent activity
-  await ActivityVersion.update(
+  await ActivityTracking.update(
     { avance: parentProgress },
     { where: { id: activity.parentId } }
   );
@@ -45,7 +45,7 @@ async function updateProjectProgress(activityVersion) {
   const activity = await Activity.findByPk(activityVersion.activityId);
   if (!activity) return;
 
-  const rootActivities = await ActivityVersion.findAll({
+  const rootActivities = await ActivityTracking.findAll({
     where: {
       tipo: activityVersion.tipo,
       nroVersion: activityVersion.nroVersion,

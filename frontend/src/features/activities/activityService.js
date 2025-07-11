@@ -108,6 +108,60 @@ const updateActivityProgress = async (id, avance, token) => {
   return response.data;
 };
 
+/*********************************************/
+/*  EXCEL IMPORT                                 */
+/*********************************************/
+
+// Import activities from Excel file
+const importActivitiesFromExcel = async (projectId, file, token) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      `${API_URL}project/${projectId}/import-excel`,
+      formData,
+      config
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Error al importar actividades."
+    );
+  }
+};
+
+// Delete all activities by projectId
+// DELTE /api/activities/project/:projectId/all
+const deleteAllActivitiesByProject = async (projectId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.delete(
+      `${API_URL}project/${projectId}/all`,
+      config
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "Error al eliminar las actividades del proyecto."
+    );
+  }
+};
+
 const activityService = {
   getActivitiesByProject,
   createActivity,
@@ -117,6 +171,8 @@ const activityService = {
   setBaselineForProject,
   addTrackingVersion,
   updateActivityProgress,
+  importActivitiesFromExcel,
+  deleteAllActivitiesByProject,
 };
 
 export default activityService;

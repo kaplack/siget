@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/authMiddleware");
+const { upload } = require("../middleware/uploadMiddleware");
+const {
+  importActivitiesFromExcel,
+} = require("../controllers/projectImportController");
 
 const {
   createActivity,
@@ -8,6 +12,7 @@ const {
   setBaselineForProject,
   getActivitiesByProject,
   deleteActivity,
+  deleteAllActivitiesByProject,
 } = require("../controllers/activityController");
 
 const {
@@ -31,6 +36,10 @@ router.post("/project/:projectId/set-baseline", protect, setBaselineForProject);
 // Delete activity if no versions exist
 router.delete("/:id", protect, deleteActivity);
 
+// DELETE /api/activities/project/:projectId/all
+// Delete all activities for a project
+router.delete("/project/:projectId/all", protect, deleteAllActivitiesByProject);
+
 /**********************************************/
 // FLEXIBLE FUNCTION
 /**********************************************/
@@ -52,11 +61,16 @@ router.get(
 router.post("/:activityId/tracking", protect, addTrackingVersion);
 
 /**********************************************/
-// ADVACE UTILS
+// EXCEL IMPORT
 /**********************************************/
 
-// PUT /api/activities/:id/progress
-// Add a new tracking version for an activity
-// router.put("/:id/progress", updateActivityProgress);
+// POST /api/activities/project/:projectId/import-excel
+// Import activities from Excel file
+router.post(
+  "/project/:projectId/import-excel",
+  protect,
+  upload.single("file"),
+  importActivitiesFromExcel
+);
 
 module.exports = router;

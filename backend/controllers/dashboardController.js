@@ -1,40 +1,7 @@
-const { Project, Activity, ActivityVersion } = require("../models");
+const { Project, Activity, ActivityBaseline } = require("../models");
 const { Sequelize } = require("sequelize");
 const { Op } = require("sequelize");
-
-const getHojasEjecutables = async () => {
-  return await ActivityVersion.findAll({
-    where: {
-      tipo: "seguimiento",
-      vigente: true,
-      activityId: {
-        [Op.notIn]: Sequelize.literal(`(
-          SELECT DISTINCT "parentId"
-          FROM activity_versions
-          WHERE "parentId" IS NOT NULL AND "parentId" > 0
-        )`),
-      },
-      plazo: {
-        [Op.gt]: 0,
-      },
-    },
-    attributes: ["plazo", "avance", "activityId"],
-    include: [
-      {
-        model: Activity,
-        as: "activity",
-        attributes: ["projectId"],
-        include: [
-          {
-            model: Project,
-            as: "project",
-            attributes: ["nombreConvenio"],
-          },
-        ],
-      },
-    ],
-  });
-};
+const { calcularAvancePlanificado } = require("../utils/dashboardHelper");
 
 const calcularAvanceGlobal = (proyectos) => {
   let totalPeso = 0;
@@ -60,48 +27,13 @@ const calcularAvanceGlobal = (proyectos) => {
   };
 };
 
-const getAvancePorProyecto = (hojas) => {
-  const avancePorProyecto = {};
-  // Debugging line to check the structure of hojas
-
-  for (const hoja of hojas) {
-    const projectId = hoja.activity?.projectId;
-    const nombreConvenio = hoja.activity?.project?.nombreConvenio;
-    if (!projectId || !nombreConvenio) continue; // skip if projectId is missing
-
-    const plazo = hoja.plazo;
-    const avance = hoja.avance || 0;
-
-    if (!avancePorProyecto[projectId]) {
-      avancePorProyecto[projectId] = {
-        nombreConvenio,
-        totalPeso: 0,
-        avancePonderado: 0,
-      };
-    }
-
-    avancePorProyecto[projectId].totalPeso += plazo;
-    avancePorProyecto[projectId].avancePonderado += avance * plazo;
-  }
-
-  return Object.entries(avancePorProyecto).map(([projectId, datos]) => ({
-    projectId: Number(projectId),
-    nombreConvenio: datos.nombreConvenio,
-    totalPeso: datos.totalPeso,
-    avance:
-      datos.totalPeso > 0
-        ? +(datos.avancePonderado / datos.totalPeso).toFixed(2)
-        : null,
-    mensaje: datos.totalPeso === 0 ? "Plazos no definidos" : null,
-  }));
-};
-
 const getDashboard = async (req, res) => {
+  console.log("entregando datos del getDashboard controller");
   try {
-    // Total number of projects
+    // 1 Total number of projects
     const totalProjects = await Project.count();
 
-    // Total of signed projects (firmaConvenio is not null)
+    // 2 Total of signed projects (firmaConvenio is not null)
     const totalFirmados = await Project.count({
       where: {
         firmaConvenio: {
@@ -110,13 +42,35 @@ const getDashboard = async (req, res) => {
       },
     });
 
-    // Total sum of beneficiaries
+    // 3 Total sum of beneficiaries
     const totalBeneficiarios = await Project.sum("numeroBeneficiarios");
 
-    // Total investment amount
+    // 4 Total investment amount
     const totalInversion = await Project.sum("montoInversion");
 
-    // Projects grouped by status
+    // 5 Avance por Proyecto
+
+    const proyectosConAvance = await Project.findAll({
+      attributes: ["id", "alias", "avance", "plazoSeguimiento"],
+      where: {
+        estado: {
+          [Op.notIn]: ["borrador", "linea_base"],
+        },
+      },
+    });
+
+    const avancePorProyecto = proyectosConAvance.map((p) => ({
+      projectId: p.id,
+      alias: p.alias,
+      avance: p.avance,
+      totalPeso: p.plazoSeguimiento || 0,
+    }));
+
+    // 6 Avance Global
+    const { avanceGlobal, mensajeAvanceGlobal } =
+      calcularAvanceGlobal(avancePorProyecto);
+
+    // 7 Projects grouped by status
     const proyectosPorEstado = await Project.findAll({
       attributes: [
         "estado",
@@ -125,27 +79,103 @@ const getDashboard = async (req, res) => {
       group: ["estado"],
     });
 
-    const hojas = await getHojasEjecutables();
+    // 8 Acuerdos
+    const agreements = await Project.findAll({
+      attributes: [
+        "id",
+        "alias",
+        "firmaConvenio",
+        "contraparte",
+        "nombreConvenio",
+        "servicioPriorizado",
+        "estado",
+        "direccion",
+      ],
+    });
 
-    const totalActividadesEjecutables = new Set(hojas.map((h) => h.activityId))
-      .size;
+    // 9 AVANCE PLANIFICADO
+    const actividadesBase = await ActivityBaseline.findAll({
+      where: {
+        nroVersion: 1, // usamos solo línea base establecida
+        vigente: true,
+      },
+      include: {
+        model: Activity,
+        as: "activity",
+        include: {
+          model: Project,
+          as: "project",
+          attributes: ["id", "direccion", "alias"],
+          where: {
+            estado: {
+              [Op.notIn]: ["borrador", "linea_base"],
+            },
+          },
+        },
+      },
+      attributes: ["fechaInicio", "fechaFin", "plazo"],
+    });
 
-    const avancePorProyecto = getAvancePorProyecto(hojas);
-    const { avanceGlobal, mensajeAvanceGlobal } =
-      calcularAvanceGlobal(avancePorProyecto);
+    // Mapear datos a formato plano
+    const actividades = actividadesBase.map((av) => ({
+      fechaInicio: av.fechaInicio,
+      fechaFin: av.fechaFin,
+      plazo: av.plazo,
+      direccion: av.activity?.project?.direccion || "Sin Dirección",
+      proyecto: av.activity?.project?.alias || "Sin Nombre",
+      projectId: av.activity?.project?.id || null,
+    }));
+
+    const avancePlanificado = calcularAvancePlanificado(actividades);
+
+    // 10
+
+    const avanceTabla = avancePlanificado.avancePorProyecto.map(
+      (planificado) => {
+        const real = avancePorProyecto.find(
+          (r) => r.projectId === planificado.projectId
+        );
+
+        const avancePlan = planificado.avancePonderado ?? 0;
+        const avanceReal = real?.avance ?? 0;
+
+        const desviacion = +(avanceReal - avancePlan).toFixed(2);
+
+        let semaforo = "verde";
+        if (desviacion < -15) semaforo = "rojo";
+        else if (desviacion < -5) semaforo = "amarillo";
+
+        return {
+          projectId: planificado.projectId,
+          alias: planificado.alias,
+          direccion: planificado.direccion,
+          estado:
+            agreements.find((a) => a.id === planificado.projectId)?.estado ??
+            "sin seguimiento",
+          avancePlanificado: +avancePlan.toFixed(2),
+          avanceReal: +avanceReal.toFixed(2),
+          desviacion,
+          semaforo,
+        };
+      }
+    );
+
+    // RESULTADO FINAL
 
     res.json({
       totalProjects,
       totalFirmados,
       totalBeneficiarios,
       totalInversion,
-
-      proyectosPorEstado,
-      totalActividadesEjecutables,
-
       avanceGlobal,
       mensajeAvanceGlobal,
       avancePorProyecto,
+
+      proyectosPorEstado,
+      agreements,
+
+      avancePlanificado,
+      avanceTabla,
     });
   } catch (error) {
     console.error("Error in getDashboard:", error);
@@ -153,4 +183,10 @@ const getDashboard = async (req, res) => {
   }
 };
 
-module.exports = { getDashboard };
+const getAgreement = async (req, res) => {
+  res.json({
+    msn: "hola",
+  });
+};
+
+module.exports = { getDashboard, getAgreement };

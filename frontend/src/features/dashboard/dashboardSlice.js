@@ -15,10 +15,25 @@ export const getDashboard = createAsyncThunk(
   }
 );
 
+// Async thunk to fetch dashboard data
+export const getAgreements = createAsyncThunk(
+  "dashboard/getAgreements",
+  async (_, thunkAPI) => {
+    try {
+      return await dashboardService.getAgreements();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "Error desconocido"
+      );
+    }
+  }
+);
+
 const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: {
     data: null,
+    dinamicData: null,
     loading: false,
     error: null,
   },
@@ -31,6 +46,7 @@ const dashboardSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //DASHBOARD HEADER
       .addCase(getDashboard.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -40,6 +56,20 @@ const dashboardSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getDashboard.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Error al cargar el dashboard";
+      })
+
+      //DINAMIC DATA
+      .addCase(getAgreements.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAgreements.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dinamicData = action.payload;
+      })
+      .addCase(getAgreements.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Error al cargar el dashboard";
       });

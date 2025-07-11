@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Siget",
+  "name": "Sistema de Gestión de Convenios",
   "icons": [
     {
       "src": "favicon.ico",

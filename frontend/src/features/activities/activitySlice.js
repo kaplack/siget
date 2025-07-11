@@ -113,6 +113,39 @@ export const addTrackingVersion = createAsyncThunk(
   }
 );
 
+// import activities from Excel file
+export const importarActividadesExcel = createAsyncThunk(
+  "activities/importarExcel",
+  async ({ projectId, file }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await activityService.importActivitiesFromExcel(
+        projectId,
+        file,
+        token
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// delete all activities by projectId
+export const deleteAllActivitiesByProject = createAsyncThunk(
+  "activities/deleteAllActivitiesByProject",
+  async (projectId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await activityService.deleteAllActivitiesByProject(
+        projectId,
+        token
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 const initialState = {
   activities: [],
   activity: null,
@@ -192,6 +225,30 @@ const activitySlice = createSlice({
       })
       .addCase(updateDraftActivity.rejected, (state, action) => {
         state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      // IMPORT ACTIVITIES FROM EXCEL
+      .addCase(importarActividadesExcel.pending, (state) => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(importarActividadesExcel.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(importarActividadesExcel.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      // DELETE AL ACTIVITIES BY PROJECT
+      .addCase(deleteAllActivitiesByProject.fulfilled, (state, action) => {
+        state.message = action.payload.message;
+      })
+      .addCase(deleteAllActivitiesByProject.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
       });

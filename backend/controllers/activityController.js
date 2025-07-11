@@ -1,6 +1,9 @@
-const Activity = require("../models/activityModel");
-const ActivityVersion = require("../models/activityVersionModel");
-const Project = require("../models/projectModel");
+const {
+  Project,
+  Activity,
+  ActivityBaseline,
+  ActivityTracking,
+} = require("../models");
 
 // POST /api/activities
 // Creates a new activity and its initial draft version
@@ -14,19 +17,18 @@ const createActivity = async (req, res) => {
 
     const activity = await Activity.create({ projectId });
 
-    const draftVersion = await ActivityVersion.create({
+    const draftVersion = await ActivityBaseline.create({
       activityId: activity.id,
       nombre: version.nombre,
       parentId: version.parentId ?? 0,
       orden: version.orden ?? 0,
-      tipo: "base",
       nroVersion: 0,
       fechaInicio: version.fechaInicio,
       fechaFin: version.fechaFin,
       plazo: version.plazo,
-      avance: version.avance ?? 0,
       responsable: version.responsable || null,
-      sustento: version.sustento || null,
+      comentario: version.comentario || null,
+      predecesorId: version.predecesorId || null,
       vigente: true,
     });
 
@@ -45,10 +47,9 @@ const updateDraftActivity = async (req, res) => {
     const { activityId } = req.params;
     const updates = req.body;
 
-    const draft = await ActivityVersion.findOne({
+    const draft = await ActivityBaseline.findOne({
       where: {
         activityId,
-        tipo: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -79,10 +80,9 @@ const setBaselineForProject = async (req, res) => {
     const { projectId } = req.params;
 
     // Fetch all draft versions for the project
-    const drafts = await ActivityVersion.findAll({
+    const drafts = await ActivityBaseline.findAll({
       include: [{ model: Activity, as: "activity", where: { projectId } }],
       where: {
-        tipo: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -92,24 +92,34 @@ const setBaselineForProject = async (req, res) => {
       return res.status(400).json({ message: "No draft versions found." });
     }
 
-    const seguimientoVersions = [];
+    const trackingVersions = [];
 
     for (const draft of drafts) {
-      // Step 1: Update draft to become the baseline
+      // Step 1: Update draft to become baseline (nroVersion = 1)
       await draft.update({ nroVersion: 1 });
 
-      // Step 2: Clone the new baseline into a tracking version
-      const seguimiento = await ActivityVersion.create({
-        ...draft.toJSON(),
-        id: undefined, // prevent Sequelize from reusing the ID
-        tipo: "seguimiento",
+      // Step 2: Clone baseline into tracking table (tipo: seguimiento)
+      const tracking = await ActivityTracking.create({
+        activityId: draft.activityId,
         nroVersion: 1,
         vigente: true,
+        nombre: draft.nombre,
+        parentId: draft.parentId,
+        orden: draft.orden,
+        fechaInicio: draft.fechaInicio,
+        fechaFin: draft.fechaFin,
+        plazo: draft.plazo,
+        avance: 0, // initial progress
+        responsable: draft.responsable,
+        comentario: draft.comentario,
+        predecesorId: draft.predecesorId,
+        sustento: null,
       });
 
-      seguimientoVersions.push(seguimiento);
+      trackingVersions.push(tracking);
     }
 
+    // Update project state
     await Project.update(
       { estado: "linea_base" },
       { where: { id: projectId } }
@@ -117,7 +127,7 @@ const setBaselineForProject = async (req, res) => {
 
     res.status(201).json({
       message: "Linea base establecida correctamente.",
-      seguimientoVersions,
+      seguimientoVersions: trackingVersions,
     });
   } catch (error) {
     console.error("Error setting baseline:", error);
@@ -131,17 +141,23 @@ const getActivitiesByProject = async (req, res) => {
   try {
     const { projectId, tipoVersion } = req.params;
 
-    const versionFilter = tipoVersion
-      ? { tipo: tipoVersion, vigente: true }
-      : { vigente: true };
+    console.log(projectId, tipoVersion);
+    // Select table and alias depending on tipoVersion
+    let includeModel = ActivityBaseline;
+    let alias = "baselines";
+
+    if (tipoVersion === "seguimiento") {
+      includeModel = ActivityTracking;
+      alias = "trackings";
+    }
 
     const activities = await Activity.findAll({
       where: { projectId },
       include: [
         {
-          model: ActivityVersion,
-          as: "versions",
-          where: versionFilter,
+          model: includeModel,
+          as: alias,
+          where: { vigente: true },
           required: false,
         },
       ],
@@ -149,9 +165,9 @@ const getActivitiesByProject = async (req, res) => {
     });
 
     const result = activities
-      .filter((activity) => activity.versions.length > 0)
+      .filter((activity) => activity[alias].length > 0)
       .map((activity) => {
-        const version = activity.versions[0];
+        const version = activity[alias][0];
 
         return {
           id: activity.id,
@@ -164,8 +180,9 @@ const getActivitiesByProject = async (req, res) => {
           responsable: version.responsable ?? "",
           avance: version.avance ?? 0,
           plazo: version.plazo ?? 0,
-          sustento: version.sustento ?? "",
-          tipo: version.tipo ?? "",
+          sustento: version.sustento ?? "", // will only exist in seguimiento
+          tipo: tipoVersion ?? "",
+          comentario: version.comentario ?? null,
         };
       });
 
@@ -182,10 +199,10 @@ const deleteActivity = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const version = await ActivityVersion.findOne({
+    // Check if the baseline draft version exists
+    const version = await ActivityBaseline.findOne({
       where: {
         activityId: id,
-        tipo: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -194,11 +211,15 @@ const deleteActivity = async (req, res) => {
     if (!version) {
       return res.status(400).json({
         message:
-          "Cannot delete: only base version (type 'base', version 0, vigente) is allowed.",
+          "Cannot delete: only baseline draft version (nroVersion = 0, vigente) is allowed.",
       });
     }
 
-    await ActivityVersion.destroy({ where: { activityId: id } });
+    // Delete all baselines and tracking versions related to this activity
+    await ActivityBaseline.destroy({ where: { activityId: id } });
+    await ActivityTracking.destroy({ where: { activityId: id } });
+
+    // Delete the activity itself
     await Activity.destroy({ where: { id } });
 
     res.status(200).json({ message: "Activity deleted successfully." });
@@ -208,10 +229,30 @@ const deleteActivity = async (req, res) => {
   }
 };
 
+const deleteAllActivitiesByProject = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+
+    // Elimina todas las actividades del proyecto (versions se eliminan en cascada)
+    await Activity.destroy({ where: { projectId } });
+
+    res.status(200).json({
+      message:
+        "Todas las actividades del proyecto fueron eliminadas correctamente.",
+    });
+  } catch (err) {
+    console.error("❌ Error al eliminar actividades del proyecto:", err);
+    res.status(500).json({
+      message: "Error interno al eliminar actividades del proyecto.",
+    });
+  }
+};
+
 module.exports = {
   createActivity,
   updateDraftActivity,
   setBaselineForProject,
   getActivitiesByProject,
   deleteActivity,
+  deleteAllActivitiesByProject,
 };

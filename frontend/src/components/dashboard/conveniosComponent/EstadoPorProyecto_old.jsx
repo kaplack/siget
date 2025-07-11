@@ -8,7 +8,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"];
+const estadoColoresHex = {
+  "En Planificación": "#e0e0e0",
+  "Línea Base Establecida": "#0288d1",
+  "En ejecución": "#ff9800",
+  finalizado: "#4caf50",
+  cancelado: "#f44336",
+};
 
 const ProyectosPorEstadoPieChart = ({ data }) => {
   if (!data || data.length === 0) {
@@ -28,8 +34,11 @@ const ProyectosPorEstadoPieChart = ({ data }) => {
   }));
 
   return (
-    <div style={{ width: "100%", height: 500 }}>
-      <h3>Convenios por Estado</h3>
+    <div
+      className="siget-card-style  shadow-sm"
+      style={{ width: "100%", height: 500 }}
+    >
+      <h4 className="m-0">Convenios por Estado</h4>
       <ResponsiveContainer>
         <PieChart>
           <Pie
@@ -44,7 +53,7 @@ const ProyectosPorEstadoPieChart = ({ data }) => {
             {dataTransformada.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={estadoColoresHex[entry.estado] || "#8884d8"} // fallback
               />
             ))}
           </Pie>
