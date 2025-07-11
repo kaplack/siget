@@ -788,6 +788,7 @@ const ProjectBaseLine = () => {
             <Button
               variant="contained"
               color="primary"
+              disabled={isLoading}
               onClick={() => handleAddActivity(0)}
               sx={{ mb: 2 }}
               style={{ marginTop: "1rem" }}
@@ -797,6 +798,7 @@ const ProjectBaseLine = () => {
             <Button
               variant="outlined"
               color="secondary"
+              disabled={isLoading}
               onClick={() => {
                 if (
                   window.confirm(
