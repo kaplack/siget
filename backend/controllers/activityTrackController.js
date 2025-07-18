@@ -1,5 +1,5 @@
 const Activity = require("../models/activityModel");
-const { ActivityBaseline, ActivityTracking } = require("../models");
+const { ActivityVersion } = require("../models");
 
 const Project = require("../models/projectModel");
 const {
@@ -18,13 +18,13 @@ const addTrackingVersion = async (req, res) => {
       fechaFin,
       plazo,
       avance = 0,
-      sustento = null,
-      comentario = null,
+      sustento = "",
+      comentario = "",
     } = req.body;
 
     // Validate that baseline exists
-    const baseline = await ActivityBaseline.findOne({
-      where: { activityId, nroVersion: 1 },
+    const baseline = await ActivityVersion.findOne({
+      where: { activityId, tipoVersion: "base", nroVersion: 1, vigente: true },
     });
 
     if (!baseline) {
@@ -39,47 +39,50 @@ const addTrackingVersion = async (req, res) => {
     if (!project.firmaConvenio) {
       return res.status(400).json({
         message:
-          "El proyecto debe tener registradas la fecha de firma e inicio de convenio antes de continuar.",
+          "El proyecto debe tener registradas la fecha de firma de convenio antes de continuar.",
       });
     }
 
-    // Continue with seguimiento creation
-    const count = await ActivityTracking.count({
-      where: { activityId },
-    });
-
-    await ActivityTracking.update(
+    await ActivityVersion.update(
       { vigente: false },
-      { where: { activityId } }
+      { where: { activityId, tipoVersion: "seguimiento" } }
     );
+
+    // Continue with seguimiento creation
+    const count = await ActivityVersion.count({
+      where: { activityId, tipoVersion: "seguimiento" },
+    });
 
     const nroVersion = count + 1;
 
-    const lastVersion = await ActivityTracking.findOne({
-      where: { activityId },
+    const lastVersion = await ActivityVersion.findOne({
+      where: { activityId, tipoVersion: "seguimiento" },
       order: [["nroVersion", "DESC"]],
     });
 
-    const newTracking = await ActivityTracking.create({
+    const newTracking = await ActivityVersion.create({
       activityId,
-      nombre: lastVersion?.nombre ?? "Sin nombre",
-      parentId: lastVersion?.parentId ?? 0,
-      orden: lastVersion?.orden ?? 0,
-      predecesorId: lastVersion?.predecesorId ?? null,
-      responsable: lastVersion?.responsable ?? null,
+      tipoVersion: "seguimiento",
+      nombre: lastVersion?.nombre ?? baseline.nombre,
+      parentId: lastVersion?.parentId ?? baseline.parentId,
+      orden: lastVersion?.orden ?? baseline.orden,
+      predecesorId: lastVersion?.predecesorId ?? baseline.predecesorId,
+      responsable: lastVersion?.responsable ?? baseline.responsable,
       comentario: req.body.hasOwnProperty("comentario")
-        ? req.body.comentario
-        : lastVersion?.comentario ?? null,
+        ? comentario
+        : lastVersion?.comentario ?? baseline.comentario,
       sustento: req.body.hasOwnProperty("sustento")
         ? sustento
-        : lastVersion?.sustento ?? null,
+        : lastVersion?.sustento ?? "",
       fechaInicio: req.body.hasOwnProperty("fechaInicio")
         ? fechaInicio
-        : lastVersion?.fechaInicio,
+        : lastVersion?.fechaInicio ?? baseline.fechaInicio,
       fechaFin: req.body.hasOwnProperty("fechaFin")
         ? fechaFin
-        : lastVersion?.fechaFin,
-      plazo: req.body.hasOwnProperty("plazo") ? plazo : lastVersion?.plazo,
+        : lastVersion?.fechaFin ?? baseline.fechaFin,
+      plazo: req.body.hasOwnProperty("plazo")
+        ? plazo
+        : lastVersion?.plazo ?? baseline.plazo,
       avance: req.body.hasOwnProperty("avance")
         ? avance
         : lastVersion?.avance ?? 0,
@@ -101,52 +104,6 @@ const addTrackingVersion = async (req, res) => {
   }
 };
 
-// NO SE UTILIZA POR EL MOMENTO 09/07/2025
-const updateActivityProgress = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { avance } = req.body;
-
-    const activityVersion = await ActivityTracking.findOne({
-      where: {
-        id,
-        vigente: true,
-      },
-      include: {
-        model: Activity,
-        include: Project,
-      },
-    });
-
-    if (!activityVersion) {
-      return res.status(404).json({
-        message:
-          "Actividad no válida o no editable (requiere versión seguimiento vigente).",
-      });
-    }
-
-    const project = activityVersion.activity?.Project;
-
-    if (!project?.firmaConvenio || !project?.inicioConvenio) {
-      return res.status(400).json({
-        message:
-          "El proyecto debe tener registradas la fecha de firma e inicio de convenio antes de registrar avance.",
-      });
-    }
-
-    await ActivityTracking.update({ avance });
-
-    await updateParentProgress(id);
-    await updateProjectProgress(activityVersion);
-
-    res.json({ message: "Avance actualizado correctamente." });
-  } catch (error) {
-    console.error("Error al actualizar avance:", error);
-    res.status(500).json({ message: "Error interno del servidor." });
-  }
-};
-
 module.exports = {
   addTrackingVersion,
-  updateActivityProgress,
 };

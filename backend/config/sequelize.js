@@ -3,18 +3,23 @@ const { Sequelize } = require("sequelize");
 
 let sequelize;
 
+const loggingEnabled = process.env.SEQUELIZE_LOGGING === "true";
+const sslRequired = process.env.DB_SSL === "true";
+
 if (process.env.NODE_ENV === "production") {
   // ✅ Conexión para producción (Vercel + Neon)
   sequelize = new Sequelize(process.env.POSTGRES_URI, {
     dialect: "postgres",
     protocol: "postgres",
-    logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false, // necesario para Neon
-      },
-    },
+    logging: loggingEnabled,
+    dialectOptions: sslRequired
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        }
+      : {},
   });
 } else {
   // ✅ Conexión local (desarrollo con variables separadas)

@@ -85,6 +85,7 @@ const createProject = asyncHandler(async (req, res) => {
 // GET /api/projects/user
 // Retrieves all projects assigned to the logged-in user
 const getUserProjects = async (req, res) => {
+  //console.log(req.user);
   try {
     const userId = req.user.id;
 
@@ -198,10 +199,25 @@ const delUserProject = asyncHandler(async (req, res) => {
     .json({ id: projectId, message: "Proyecto eliminado correctamente." });
 });
 
+// @desc get all projects for admin
+// @route /api/projects/delete/:id
+// @access PRIVATE
+
+const getAllProjects = async (req, res) => {
+  try {
+    const projects = await Project.findAll(); // o .find({}) si usas Mongoose
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener todos los proyectos" });
+  }
+};
+
 module.exports = {
   createProject,
   getUserProjects,
   getProject,
   updateProject,
   delUserProject,
+  getAllProjects,
 };

@@ -89,26 +89,6 @@ const addTrackingVersion = async (activityId, versionData, token) => {
 };
 
 /*********************************************/
-/*  PROGRESS                                 */
-/*********************************************/
-
-const updateActivityProgress = async (id, avance, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.put(
-    `${API_URL}${id}/progress`,
-    {
-      avance,
-    },
-    config
-  );
-  return response.data;
-};
-
-/*********************************************/
 /*  EXCEL IMPORT                                 */
 /*********************************************/
 
@@ -170,7 +150,7 @@ const activityService = {
   deleteDraftActivity,
   setBaselineForProject,
   addTrackingVersion,
-  updateActivityProgress,
+
   importActivitiesFromExcel,
   deleteAllActivitiesByProject,
 };

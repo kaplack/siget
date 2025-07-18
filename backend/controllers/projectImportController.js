@@ -1,5 +1,5 @@
 const xlsx = require("xlsx");
-const { Project, Activity, ActivityBaseline } = require("../models");
+const { Project, Activity, ActivityVersion } = require("../models");
 const {
   parseDias,
   parseFecha,
@@ -34,22 +34,11 @@ const importActivitiesFromExcel = async (req, res) => {
     const data = xlsx.utils.sheet_to_json(sheet);
     const idMap = new Map(); // Excel ID → DB activity ID
 
-    // data.forEach((row, index) => {
-    //   const excelId = row["Id"];
-    //   // Mapear con placeholder por ahora
-    //   idMap.set(excelId, null);
-    // });
-
     // Paso 1: Crear todas las actividades
     const actividades = data.map(() => ({ projectId }));
     const actividadesCreadas = await Activity.bulkCreate(actividades, {
       returning: true,
     });
-
-    // data.forEach((row, index) => {
-    //   const excelId = row["Id"];
-    //   idMap.set(excelId, actividadesCreadas[index].id);
-    // });
 
     // Paso 2: Crear todas las versiones
     const versiones = data.map((row, index) => {
@@ -79,24 +68,25 @@ const importActivitiesFromExcel = async (req, res) => {
 
       return {
         activityId: actividadesCreadas[index].id,
+        tipoVersion: "base", // draft baseline
         nombre: row["Nombre"] || "Actividad sin nombre",
+        parentId: 0, // se asignará después
+        orden: 0, // se asignará después
+        nroVersion: 0,
         fechaInicio,
         fechaFin,
         plazo: parseDias(row["Duración"]),
-        parentId: null, // se asignará después
-        orden: 0, // se asignará después
-        tipo: "base",
-        nroVersion: 0,
         responsable: "",
+        comentario: "",
         avance: 0,
-        predecesorId: null, // se asignará después
+        predecesorId: "", // se asignará después
         sustento: "",
         vigente: true,
       };
     });
 
     //console.log("Primera versión a crear:", versiones[0]);
-    const versionesCreadas = await ActivityBaseline.bulkCreate(versiones, {
+    const versionesCreadas = await ActivityVersion.bulkCreate(versiones, {
       returning: true,
     });
 
@@ -126,7 +116,7 @@ const importActivitiesFromExcel = async (req, res) => {
             ?.dbActivityId || 0;
       }
 
-      await ActivityBaseline.update(
+      await ActivityVersion.update(
         { parentId: parentActivityId },
         { where: { id: versionId } }
       );
@@ -138,7 +128,7 @@ const importActivitiesFromExcel = async (req, res) => {
     const ordenPorPadre = new Map();
 
     for (const row of rowsWithDBIds) {
-      const version = await ActivityBaseline.findOne({
+      const version = await ActivityVersion.findOne({
         where: { id: row.versionId },
       });
 
@@ -146,7 +136,7 @@ const importActivitiesFromExcel = async (req, res) => {
       const hermanos = ordenPorPadre.get(parentKey) || [];
       const nuevoOrden = hermanos.length + 1;
 
-      await ActivityBaseline.update(
+      await ActivityVersion.update(
         { orden: nuevoOrden },
         { where: { id: row.versionId } }
       );
@@ -195,7 +185,7 @@ const importActivitiesFromExcel = async (req, res) => {
 
       const cadenaFinal = traducidas.join(",");
 
-      await ActivityBaseline.update(
+      await ActivityVersion.update(
         { predecesorId: cadenaFinal || null },
         { where: { id: row.versionId } }
       );

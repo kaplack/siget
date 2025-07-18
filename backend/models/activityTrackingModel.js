@@ -13,11 +13,12 @@ const ActivityTracking = sequelize.define(
       allowNull: false,
       references: { model: "activities", key: "id" },
     },
-    nroVersion: { type: DataTypes.INTEGER, allowNull: false },
-    vigente: { type: DataTypes.BOOLEAN, defaultValue: false },
+
     nombre: { type: DataTypes.STRING, allowNull: false },
     parentId: { type: DataTypes.INTEGER, allowNull: true },
     orden: { type: DataTypes.INTEGER, defaultValue: 0 },
+    nroVersion: { type: DataTypes.INTEGER, allowNull: false },
+
     fechaInicio: { type: DataTypes.DATEONLY },
     fechaFin: { type: DataTypes.DATEONLY },
     plazo: {
@@ -25,11 +26,14 @@ const ActivityTracking = sequelize.define(
       allowNull: false,
       defaultValue: 0,
     },
-    avance: { type: DataTypes.INTEGER, defaultValue: 0 },
+
     responsable: { type: DataTypes.STRING },
-    predecesorId: { type: DataTypes.STRING },
     comentario: { type: DataTypes.TEXT },
+    predecesorId: { type: DataTypes.STRING },
+    avance: { type: DataTypes.INTEGER, defaultValue: 0 },
+
     sustento: { type: DataTypes.STRING },
+    vigente: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
     tableName: "activity_trackings",

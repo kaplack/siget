@@ -38,17 +38,6 @@ const ProjectList = () => {
     );
   if (isError) return <p>Error: {message}</p>;
 
-  // if (!projects || projects.length === 0) {
-  //   return (
-  //     <div>
-  //       <Typography variant="h4" gutterBottom>
-  //         Convenios Activos
-  //       </Typography>
-  //       <Typography variant="body1">No hay proyectos registrados.</Typography>
-  //     </div>
-  //   );
-  // }
-
   const handleDelete = async (id) => {
     if (
       window.confirm(

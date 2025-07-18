@@ -242,10 +242,18 @@ const ProjectSchedule = () => {
         sx: {
           ...(row.original.level === 1
             ? {
-                backgroundColor: "#f0f4ff",
+                backgroundColor: "#e4ebfdff",
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+                color: "#1a237e",
+              }
+            : {}),
+          ...(row.original.level === 2
+            ? {
+                backgroundColor: "#f5f7ffff",
                 fontWeight: "bold",
                 fontSize: "1rem",
-                color: "#1a237e",
+                color: "#3b4080ff",
               }
             : {}),
           ...(isEdited && {

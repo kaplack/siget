@@ -17,7 +17,6 @@ const {
 
 const {
   addTrackingVersion,
-  updateActivityProgress,
 } = require("../controllers/activityTrackController");
 
 // POST /api/activities/

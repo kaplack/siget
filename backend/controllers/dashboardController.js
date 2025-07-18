@@ -1,4 +1,4 @@
-const { Project, Activity, ActivityBaseline } = require("../models");
+const { Project, Activity, ActivityVersion } = require("../models");
 const { Sequelize } = require("sequelize");
 const { Op } = require("sequelize");
 const { calcularAvancePlanificado } = require("../utils/dashboardHelper");
@@ -29,6 +29,7 @@ const calcularAvanceGlobal = (proyectos) => {
 
 const getDashboard = async (req, res) => {
   console.log("entregando datos del getDashboard controller");
+  //console.log(req.user);
   try {
     // 1 Total number of projects
     const totalProjects = await Project.count();
@@ -94,8 +95,9 @@ const getDashboard = async (req, res) => {
     });
 
     // 9 AVANCE PLANIFICADO
-    const actividadesBase = await ActivityBaseline.findAll({
+    const actividadesBase = await ActivityVersion.findAll({
       where: {
+        tipoVersion: "base",
         nroVersion: 1, // usamos solo línea base establecida
         vigente: true,
       },

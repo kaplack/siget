@@ -13,11 +13,12 @@ const ActivityBaseline = sequelize.define(
       allowNull: false,
       references: { model: "activities", key: "id" },
     },
-    nroVersion: { type: DataTypes.INTEGER, allowNull: false },
-    vigente: { type: DataTypes.BOOLEAN, defaultValue: false },
+
     nombre: { type: DataTypes.STRING, allowNull: false },
     parentId: { type: DataTypes.INTEGER, allowNull: true },
     orden: { type: DataTypes.INTEGER, defaultValue: 0 },
+    nroVersion: { type: DataTypes.INTEGER, allowNull: false },
+
     fechaInicio: { type: DataTypes.DATEONLY },
     fechaFin: { type: DataTypes.DATEONLY },
     plazo: { type: DataTypes.INTEGER },
@@ -25,6 +26,7 @@ const ActivityBaseline = sequelize.define(
     predecesorId: { type: DataTypes.STRING },
     comentario: { type: DataTypes.STRING },
     sustento: { type: DataTypes.STRING },
+    vigente: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
     tableName: "activity_baselines",

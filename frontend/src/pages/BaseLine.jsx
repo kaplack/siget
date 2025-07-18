@@ -136,21 +136,29 @@ const ProjectBaseLine = () => {
       columnId === "fechaFin" ||
       columnId === "plazo";
 
-    // Apply working day logic if needed
-    if (esCampoFecha) {
-      const campos = calcularTerceraVariable(
-        {
-          fechaInicio: entrada.fechaInicio,
-          fechaFin: entrada.fechaFin,
-          plazo: entrada.plazo,
-        },
+    // Prepare current values to evaluate scheduling logic
+    const camposActuales = {
+      fechaInicio: entrada.fechaInicio ?? original.fechaInicio,
+      fechaFin: entrada.fechaFin ?? original.fechaFin,
+      plazo: entrada.plazo ?? original.plazo,
+    };
+
+    // Count how many scheduling fields are filled
+    const filledCount = Object.values(camposActuales).filter(
+      (v) => v !== null && v !== undefined && v !== ""
+    ).length;
+
+    // Apply working day logic only if at least 2 fields are filled
+    if (esCampoFecha && filledCount >= 2) {
+      const camposCalculados = calcularTerceraVariable(
+        camposActuales,
         [], // optional holidays
         columnId
       );
-      entrada = { ...entrada, ...campos };
+      entrada = { ...entrada, ...camposCalculados };
     }
 
-    // Local tree update
+    // Update local tree
     const updateRow = (rows) =>
       rows.map((item) => {
         if (item.id === original.id) {
@@ -166,20 +174,24 @@ const ProjectBaseLine = () => {
     const newTree = actualizarArbolConEDT(flattenTree(updatedTree));
     setData(newTree);
 
-    // Data to persist
-    const datosAGuardar = esCampoFecha
-      ? {
-          fechaInicio: entrada.fechaInicio,
-          fechaFin: entrada.fechaFin,
-          plazo: entrada.plazo,
-        }
-      : { [columnId]: value };
+    // Prepare only the relevant data for persistence
+    const camposAGuardar = {};
+    camposAGuardar[columnId] = value;
 
-    // Dispatch DB update
+    if (esCampoFecha && filledCount >= 2) {
+      const camposCalculados = calcularTerceraVariable(
+        camposActuales,
+        [],
+        columnId
+      );
+      Object.assign(camposAGuardar, camposCalculados);
+    }
+
+    // Send to backend
     dispatch(
       updateDraftActivity({
         activityId: original.id,
-        data: datosAGuardar,
+        data: camposAGuardar,
       })
     )
       .unwrap()
@@ -218,7 +230,7 @@ const ProjectBaseLine = () => {
       fechaFin: null,
       responsable: "",
       avance: 0,
-      plazo: 0,
+      plazo: null,
       sustento: "",
     };
 

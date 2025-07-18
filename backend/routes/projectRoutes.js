@@ -6,9 +6,11 @@ const {
   getProject,
   updateProject,
   delUserProject,
+  getAllProjects,
 } = require("../controllers/projectController");
 
 const { protect } = require("../middleware/authMiddleware");
+const authorizeProfile = require("../middleware/authorizeProfile");
 
 //app.use("/api/projects", require("./routes/projectRoutes"));
 router.post("/", protect, createProject);
@@ -24,5 +26,10 @@ router.put("/project/:id", protect, updateProject);
 // DELETE /api/projects/delete/:id
 // This route is used to delete an existing project
 router.delete("/delete/:id", protect, delUserProject);
+
+// get all projects for admin
+// GET /api/projects/delete/:id
+// This route is used to get all projects to admins and supervisor
+router.get("/admin/all", protect, authorizeProfile, getAllProjects);
 
 module.exports = router;
