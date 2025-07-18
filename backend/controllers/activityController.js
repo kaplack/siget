@@ -1,9 +1,4 @@
-const {
-  Project,
-  Activity,
-  ActivityBaseline,
-  ActivityTracking,
-} = require("../models");
+const { Project, Activity, ActivityVersion } = require("../models");
 
 // POST /api/activities
 // Creates a new activity and its initial draft version
@@ -17,18 +12,34 @@ const createActivity = async (req, res) => {
 
     const activity = await Activity.create({ projectId });
 
-    const draftVersion = await ActivityBaseline.create({
+    const draftVersion = await ActivityVersion.create({
+      // 16 campos (inc id)
+      // activityId: activity.id,
+      // nombre: version.nombre,
+      // parentId: version.parentId ?? 0,
+      // orden: version.orden ?? 0,
+      // nroVersion: 0,
+      // fechaInicio: version.fechaInicio,
+      // fechaFin: version.fechaFin,
+      // plazo: version.plazo,
+      // responsable: version.responsable || null,
+      // comentario: version.comentario || null,
+      // predecesorId: version.predecesorId || null,
+      // vigente: true,
       activityId: activity.id,
       nombre: version.nombre,
       parentId: version.parentId ?? 0,
       orden: version.orden ?? 0,
-      nroVersion: 0,
+      nroVersion: 0, // draft = version 0
+      tipoVersion: "base", // now distinguishes baseline/tracking
       fechaInicio: version.fechaInicio,
       fechaFin: version.fechaFin,
       plazo: version.plazo,
-      responsable: version.responsable || null,
-      comentario: version.comentario || null,
-      predecesorId: version.predecesorId || null,
+      responsable: version.responsable || "", // no NULL
+      comentario: version.comentario || "",
+      predecesorId: version.predecesorId || "",
+      avance: 0, // baseline has 0 progress
+      sustento: "", // baseline has no justification
       vigente: true,
     });
 
@@ -47,9 +58,10 @@ const updateDraftActivity = async (req, res) => {
     const { activityId } = req.params;
     const updates = req.body;
 
-    const draft = await ActivityBaseline.findOne({
+    const draft = await ActivityVersion.findOne({
       where: {
         activityId,
+        tipoVersion: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -80,9 +92,10 @@ const setBaselineForProject = async (req, res) => {
     const { projectId } = req.params;
 
     // Fetch all draft versions for the project
-    const drafts = await ActivityBaseline.findAll({
+    const drafts = await ActivityVersion.findAll({
       include: [{ model: Activity, as: "activity", where: { projectId } }],
       where: {
+        tipoVersion: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -99,21 +112,37 @@ const setBaselineForProject = async (req, res) => {
       await draft.update({ nroVersion: 1 });
 
       // Step 2: Clone baseline into tracking table (tipo: seguimiento)
-      const tracking = await ActivityTracking.create({
+      const tracking = await ActivityVersion.create({
+        // activityId: draft.activityId,
+        // nroVersion: 1,
+        // vigente: true,
+        // nombre: draft.nombre,
+        // parentId: draft.parentId,
+        // orden: draft.orden,
+        // fechaInicio: draft.fechaInicio,
+        // fechaFin: draft.fechaFin,
+        // plazo: draft.plazo,
+        // avance: 0, // initial progress
+        // responsable: draft.responsable,
+        // comentario: draft.comentario,
+        // predecesorId: draft.predecesorId,
+        // sustento: null,
         activityId: draft.activityId,
-        nroVersion: 1,
-        vigente: true,
+
         nombre: draft.nombre,
         parentId: draft.parentId,
         orden: draft.orden,
+        nroVersion: 1,
+        tipoVersion: "seguimiento",
         fechaInicio: draft.fechaInicio,
         fechaFin: draft.fechaFin,
         plazo: draft.plazo,
-        avance: 0, // initial progress
         responsable: draft.responsable,
         comentario: draft.comentario,
         predecesorId: draft.predecesorId,
-        sustento: null,
+        avance: 0,
+        sustento: "", // default for new tracking records
+        vigente: true,
       });
 
       trackingVersions.push(tracking);
@@ -141,23 +170,23 @@ const getActivitiesByProject = async (req, res) => {
   try {
     const { projectId, tipoVersion } = req.params;
 
-    console.log(projectId, tipoVersion);
+    //console.log(projectId, tipoVersion);
     // Select table and alias depending on tipoVersion
-    let includeModel = ActivityBaseline;
-    let alias = "baselines";
+    // let includeModel = ActivityBaseline;
+    // let alias = "baselines";
 
-    if (tipoVersion === "seguimiento") {
-      includeModel = ActivityTracking;
-      alias = "trackings";
-    }
+    // if (tipoVersion === "seguimiento") {
+    //   includeModel = ActivityTracking;
+    //   alias = "trackings";
+    // }
 
     const activities = await Activity.findAll({
       where: { projectId },
       include: [
         {
-          model: includeModel,
-          as: alias,
-          where: { vigente: true },
+          model: ActivityVersion,
+          as: "versions",
+          where: { tipoVersion, vigente: true },
           required: false,
         },
       ],
@@ -165,12 +194,12 @@ const getActivitiesByProject = async (req, res) => {
     });
 
     const result = activities
-      .filter((activity) => activity[alias].length > 0)
-      .map((activity) => {
-        const version = activity[alias][0];
+      .filter((act) => act.versions.length > 0)
+      .map((act) => {
+        const version = act.versions[0];
 
         return {
-          id: activity.id,
+          id: act.id,
           parentId: version.parentId,
           orden: version.orden,
           predecesorId: version.predecesorId ?? null,
@@ -179,7 +208,7 @@ const getActivitiesByProject = async (req, res) => {
           fechaFin: version.fechaFin ?? null,
           responsable: version.responsable ?? "",
           avance: version.avance ?? 0,
-          plazo: version.plazo ?? 0,
+          plazo: version.plazo,
           sustento: version.sustento ?? "", // will only exist in seguimiento
           tipo: tipoVersion ?? "",
           comentario: version.comentario ?? null,
@@ -200,9 +229,10 @@ const deleteActivity = async (req, res) => {
     const { id } = req.params;
 
     // Check if the baseline draft version exists
-    const version = await ActivityBaseline.findOne({
+    const version = await ActivityVersion.findOne({
       where: {
         activityId: id,
+        tipoVersion: "base",
         nroVersion: 0,
         vigente: true,
       },
@@ -216,13 +246,12 @@ const deleteActivity = async (req, res) => {
     }
 
     // Delete all baselines and tracking versions related to this activity
-    await ActivityBaseline.destroy({ where: { activityId: id } });
-    await ActivityTracking.destroy({ where: { activityId: id } });
+    await ActivityVersion.destroy({ where: { activityId: id } });
 
     // Delete the activity itself
     await Activity.destroy({ where: { id } });
 
-    res.status(200).json({ message: "Activity deleted successfully." });
+    res.status(200).json({ message: "Actividad Eliminada." });
   } catch (error) {
     console.error("Error deleting activity:", error);
     res.status(500).json({ message: "Error deleting activity." });
