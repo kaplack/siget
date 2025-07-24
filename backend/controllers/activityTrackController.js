@@ -11,6 +11,7 @@ const {
 // Adds a new tracking version if a baseline exists
 // POST /api/activities/:activityId/tracking
 const addTrackingVersion = async (req, res) => {
+  console.log(req.body);
   try {
     const { activityId } = req.params;
     const {
@@ -20,6 +21,7 @@ const addTrackingVersion = async (req, res) => {
       avance = 0,
       sustento = "",
       comentario = "",
+      medidasCorrectivas,
     } = req.body;
 
     // Validate that baseline exists
@@ -74,6 +76,9 @@ const addTrackingVersion = async (req, res) => {
       sustento: req.body.hasOwnProperty("sustento")
         ? sustento
         : lastVersion?.sustento ?? "",
+      medidasCorrectivas: req.body.hasOwnProperty("medidasCorrectivas")
+        ? medidasCorrectivas
+        : lastVersion?.medidasCorrectivas ?? "",
       fechaInicio: req.body.hasOwnProperty("fechaInicio")
         ? fechaInicio
         : lastVersion?.fechaInicio ?? baseline.fechaInicio,
@@ -89,6 +94,8 @@ const addTrackingVersion = async (req, res) => {
       nroVersion,
       vigente: true,
     });
+
+    //console.log("new tracking: ", newTracking);
 
     // Update project to 'ejecucion' if conditions are met
     if (nroVersion >= 2 && avance > 0 && project) {

@@ -30,6 +30,6 @@ router.delete("/delete/:id", protect, delUserProject);
 // get all projects for admin
 // GET /api/projects/delete/:id
 // This route is used to get all projects to admins and supervisor
-router.get("/admin/all", protect, authorizeProfile, getAllProjects);
+router.get("/admin/all", protect, authorizeProfile("admin"), getAllProjects);
 
 module.exports = router;

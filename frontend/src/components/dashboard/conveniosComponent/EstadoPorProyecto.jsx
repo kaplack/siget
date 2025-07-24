@@ -5,7 +5,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const estadoColoresHex = {
-  "En Planificación": "#e0e0e0",
+  "En Programación": "#e0e0e0",
   "Línea Base Establecida": "#0288d1",
   "En ejecución": "#ff9800",
   finalizado: "#4caf50",
@@ -18,7 +18,7 @@ const ProyectosPorEstadoPieChart = ({ data }) => {
   }
 
   const estadosMapeados = {
-    borrador: "En Planificación",
+    borrador: "En Programación",
     ejecucion: "En ejecución",
     linea_base: "Línea Base Establecida",
   };

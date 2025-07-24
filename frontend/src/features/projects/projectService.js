@@ -35,6 +35,17 @@ const getProject = async (projectId, token) => {
   return response.data;
 };
 
+// Get all projects
+const getAllProjects = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + "/admin/all", config);
+  return response.data;
+};
+
 const updateProject = async (id, updatedData, token) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -55,6 +66,7 @@ const projectService = {
   createProject,
   getUserProjects,
   getProject,
+  getAllProjects,
   updateProject,
   deleteUserProject,
 };

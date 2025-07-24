@@ -9,6 +9,7 @@ import {
   updateProject,
 } from "../features/projects/projectSlice";
 import modeloConvenioData from "../data/modeloConvenioData";
+import { addBusinessDays, calendarioConfig } from "../utils/dateUtils";
 
 function ProjectForm({
   modo = "crear",
@@ -43,6 +44,28 @@ function ProjectForm({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Automatically set inicioConvenio to one business day after firmaConvenio (if not already set)
+  useEffect(() => {
+    // Only auto-fill if firmaConvenio exists and inicioConvenio is empty or null
+    if (form.firmaConvenio && !form.inicioConvenio) {
+      // Calculate the next business day after the signature date
+      // Normalize to local midnight to avoid UTC offset issues
+      const [year, month, day] = form.firmaConvenio.split("-").map(Number);
+      const signatureDate = new Date(year, month - 1, day);
+      const nextBusinessDate = addBusinessDays(
+        signatureDate,
+        1,
+        calendarioConfig.feriados
+      );
+      // Format as YYYY-MM-DD
+      const isoDate = nextBusinessDate.toISOString().split("T")[0];
+      setForm((prev) => ({
+        ...prev,
+        inicioConvenio: isoDate,
+      }));
+    }
+  }, [form.firmaConvenio, form.inicioConvenio]);
 
   //Load provincias
   useEffect(() => {
@@ -289,7 +312,7 @@ function ProjectForm({
         <div className="row mb-3">
           <div className="col-md-6 ">
             <label className="form-label">
-              Alias del Convenio (Nombre corto)
+              Alias del Convenio (Servicio - Ubicación - Entidad)
             </label>
             {/* <p className="text-secondary">
               <small>Nombre corto del convenio.</small>
@@ -420,7 +443,6 @@ function ProjectForm({
                 <label className="form-label">Provincia</label>
                 <select
                   name="provincia"
-                  required
                   value={form.provincia}
                   onChange={handleChange}
                   disabled={!provincias.length}
@@ -439,7 +461,6 @@ function ProjectForm({
                 <label className="form-label">Distrito</label>
                 <select
                   name="distrito"
-                  required
                   value={form.distrito}
                   onChange={handleDistritoChange}
                   disabled={!distritos.length}

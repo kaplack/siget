@@ -111,7 +111,7 @@ export function getColumns(handleSaveCell) {
     },
     {
       accessorKey: "sustento",
-      header: "Sustento (URL)",
+      header: "Medio de Verificación (URL)",
       size: 120,
       enableEditing: (row) => row.original.tipo === "seguimiento",
       muiTableBodyCellEditTextFieldProps: {
@@ -135,7 +135,20 @@ export function getColumns(handleSaveCell) {
     },
     {
       accessorKey: "comentario",
-      header: "Comentario",
+      header: "Motivo",
+      size: 120,
+      enableEditing: (row) => row.original.tipo === "seguimiento",
+
+      muiEditTextFieldProps: ({ cell, row }) => ({
+        onBlur: (e) => {
+          const value = e.target.value;
+          handleSaveCell({ cell, row, value });
+        },
+      }),
+    },
+    {
+      accessorKey: "medidasCorrectivas",
+      header: "Medidas Correctivas",
       size: 120,
       enableEditing: (row) => row.original.tipo === "seguimiento",
 

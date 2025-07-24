@@ -60,7 +60,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h2 className="mb-4">Dashboard SIGET</h2>
+      <h2 className="mb-4">Dashboard SIGEC</h2>
 
       <div className="row">
         <div className="col-md-3 mb-3">

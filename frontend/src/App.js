@@ -30,6 +30,8 @@ import ProjectList from "./pages/ProjectList";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import EditProject from "./pages/EditProject";
 
+import "leaflet/dist/leaflet.css";
+
 function App() {
   const theme = createTheme();
   return (

@@ -1,3 +1,4 @@
+// dateUtils.js
 import dayjs from "dayjs";
 import "dayjs/locale/es"; // Import
 
@@ -15,11 +16,13 @@ export const calendarioConfig = {
   ],
 };
 
-// Checks if a date is a working day (Monday to Friday)
-export const isWorkingDay = (date, holidays = []) => {
+// Checks if a date is a working day based on calendarioConfig (customizable laborable days y feriados)
+export const isWorkingDay = (date, holidays = calendarioConfig.feriados) => {
   const day = date.getDay();
   const formatted = date.toISOString().split("T")[0];
-  return day >= 1 && day <= 5 && !holidays.includes(formatted);
+  // Usamos diasLaborables de calendarioConfig en lugar de fixed weekdays
+  const isLaborableDay = calendarioConfig.diasLaborables.includes(day);
+  return isLaborableDay && !holidays.includes(formatted);
 };
 
 // Calculates number of business days between two dates
@@ -42,6 +45,7 @@ export const addBusinessDays = (start, daysToAdd, holidays = []) => {
 
   while (added < daysToAdd) {
     date.setDate(date.getDate() + 1);
+    console.log("while", date);
     if (isWorkingDay(date, holidays)) added++;
   }
 

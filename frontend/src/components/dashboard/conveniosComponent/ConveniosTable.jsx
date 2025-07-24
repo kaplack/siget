@@ -7,7 +7,7 @@ import {
 } from "../../../utils/dateUtils";
 
 const estadoLabels = {
-  borrador: "Planificación",
+  borrador: "Programación",
   linea_base: "Línea Base",
   ejecucion: "En Ejecución",
   finalizado: "Finalizado",

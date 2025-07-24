@@ -91,6 +91,8 @@ const getDashboard = async (req, res) => {
         "servicioPriorizado",
         "estado",
         "direccion",
+        "departamento",
+        "modeloConvenio",
       ],
     });
 

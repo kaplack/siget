@@ -205,7 +205,7 @@ const delUserProject = asyncHandler(async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.findAll(); // o .find({}) si usas Mongoose
+    const projects = await Project.findAll();
     res.status(200).json(projects);
   } catch (error) {
     console.error(error);

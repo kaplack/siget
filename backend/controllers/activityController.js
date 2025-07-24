@@ -40,6 +40,7 @@ const createActivity = async (req, res) => {
       predecesorId: version.predecesorId || "",
       avance: 0, // baseline has 0 progress
       sustento: "", // baseline has no justification
+      medidasCorrectivas: version.medidasCorrectivas || "",
       vigente: true,
     });
 
@@ -212,6 +213,7 @@ const getActivitiesByProject = async (req, res) => {
           sustento: version.sustento ?? "", // will only exist in seguimiento
           tipo: tipoVersion ?? "",
           comentario: version.comentario ?? null,
+          medidasCorrectivas: version.medidasCorrectivas ?? "",
         };
       });
 

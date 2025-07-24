@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/userModel");
+const { Profiler } = require("react");
 
 // @desc    Register a new user
 // @route   POST /api/users
@@ -49,6 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       token: generateToken(user.id),
+      Profiler: user.profile,
     });
   } else {
     res.status(400);
@@ -87,6 +89,7 @@ const loginUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       token: generateToken(user.id),
+      profile: user.profile,
     });
   } else {
     res.status(401);

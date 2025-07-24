@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getUserProjects,
   deleteUserProject,
+  getAllProjects,
 } from "../features/projects/projectSlice";
 import { MaterialReactTable } from "material-react-table";
 import { Chip, Button, CircularProgress, Typography } from "@mui/material";
@@ -21,10 +22,15 @@ const ProjectList = () => {
   const { projects, isLoading, isError, message } = useSelector(
     (state) => state.project
   );
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getUserProjects());
-  }, [dispatch]);
+    if (user?.profile === "admin") {
+      dispatch(getAllProjects());
+    } else {
+      dispatch(getUserProjects());
+    }
+  }, [dispatch, user]);
 
   if (isLoading)
     return (
@@ -168,7 +174,7 @@ const ProjectList = () => {
   ];
 
   const estadoLabels = {
-    borrador: "Planificación",
+    borrador: "Programación",
     linea_base: "Línea Base",
     ejecucion: "En Ejecución",
     finalizado: "Finalizado",

@@ -24,6 +24,7 @@ export function useSaveCell({ data, localChanges, setLocalChanges }) {
         "avance",
         "sustento",
         "comentario",
+        "medidasCorrectivas",
       ];
       if (!allowed.includes(columnId)) return;
 

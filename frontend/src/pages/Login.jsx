@@ -60,7 +60,6 @@ function Login() {
       style={{ minHeight: "100vh" }}
     >
       <div
-        class
         className="text-center mb-5"
         style={{
           width: "100%",
