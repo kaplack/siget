@@ -63,8 +63,8 @@ const ProjectSchedule = () => {
   // Cell-saving logic encapsulated in a custom hook
   const handleSaveCell = useSaveCell({
     data: baseTree,
+    localChanges,
     setLocalChanges,
-    calendarioConfig,
   });
 
   // Columns factory

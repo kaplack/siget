@@ -13,19 +13,6 @@ const createActivity = async (req, res) => {
     const activity = await Activity.create({ projectId });
 
     const draftVersion = await ActivityVersion.create({
-      // 16 campos (inc id)
-      // activityId: activity.id,
-      // nombre: version.nombre,
-      // parentId: version.parentId ?? 0,
-      // orden: version.orden ?? 0,
-      // nroVersion: 0,
-      // fechaInicio: version.fechaInicio,
-      // fechaFin: version.fechaFin,
-      // plazo: version.plazo,
-      // responsable: version.responsable || null,
-      // comentario: version.comentario || null,
-      // predecesorId: version.predecesorId || null,
-      // vigente: true,
       activityId: activity.id,
       nombre: version.nombre,
       parentId: version.parentId ?? 0,
@@ -114,20 +101,6 @@ const setBaselineForProject = async (req, res) => {
 
       // Step 2: Clone baseline into tracking table (tipo: seguimiento)
       const tracking = await ActivityVersion.create({
-        // activityId: draft.activityId,
-        // nroVersion: 1,
-        // vigente: true,
-        // nombre: draft.nombre,
-        // parentId: draft.parentId,
-        // orden: draft.orden,
-        // fechaInicio: draft.fechaInicio,
-        // fechaFin: draft.fechaFin,
-        // plazo: draft.plazo,
-        // avance: 0, // initial progress
-        // responsable: draft.responsable,
-        // comentario: draft.comentario,
-        // predecesorId: draft.predecesorId,
-        // sustento: null,
         activityId: draft.activityId,
 
         nombre: draft.nombre,

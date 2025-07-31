@@ -25,6 +25,12 @@ const ActivityVersion = sequelize.define(
       references: { model: "activities", key: "id" },
       comment: "Reference to parent Activity",
     },
+    edt: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "",
+      comment: "WBS code for the activity",
+    },
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
