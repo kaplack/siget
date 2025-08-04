@@ -1,4 +1,5 @@
 const { Project, Activity, ActivityVersion } = require("../models");
+const { Op } = require("sequelize");
 
 // POST /api/activities
 // Creates a new activity and its initial draft version
@@ -18,7 +19,7 @@ const createActivity = async (req, res) => {
       parentId: version.parentId ?? 0,
       orden: version.orden ?? 0,
       nroVersion: 0, // draft = version 0
-      tipoVersion: "base", // now distinguishes baseline/tracking
+      tipoVersion: version.tipoVersion || "base", // now distinguishes baseline/tracking
       fechaInicio: version.fechaInicio,
       fechaFin: version.fechaFin,
       plazo: version.plazo,
@@ -49,11 +50,13 @@ const updateDraftActivity = async (req, res) => {
     const draft = await ActivityVersion.findOne({
       where: {
         activityId,
-        tipoVersion: "base",
+        tipoVersion: { [Op.in]: ["base", "previous"] },
         nroVersion: 0,
         vigente: true,
       },
     });
+
+    //console.log("Draft found:", draft);
 
     if (!draft) {
       return res
@@ -207,7 +210,7 @@ const deleteActivity = async (req, res) => {
     const version = await ActivityVersion.findOne({
       where: {
         activityId: id,
-        tipoVersion: "base",
+        tipoVersion: { [Op.in]: ["base", "previous"] },
         nroVersion: 0,
         vigente: true,
       },
@@ -236,9 +239,33 @@ const deleteActivity = async (req, res) => {
 const deleteAllActivitiesByProject = async (req, res) => {
   try {
     const { projectId } = req.params;
-
+    const { tipoVersion } = req.body; // Get tipoVersion from request body
+    console.log("tipoVersion", tipoVersion);
     // Elimina todas las actividades del proyecto (versions se eliminan en cascada)
-    await Activity.destroy({ where: { projectId } });
+    // 1️⃣ Buscamos los activityIds que coinciden con el proyecto y ese tipoVersion
+    const versions = await ActivityVersion.findAll({
+      attributes: ["activityId"],
+      where: { tipoVersion },
+      include: [
+        {
+          model: Activity,
+          as: "activity",
+          attributes: [],
+          where: { projectId },
+        },
+      ],
+      group: ["activityId"],
+    });
+
+    const activityIds = versions.map((v) => v.activityId);
+    if (activityIds.length === 0) {
+      return res.status(200).json({
+        message: `No activities of type '${tipoVersion}' found for project ${projectId}.`,
+      });
+    }
+
+    // 2️⃣ Eliminamos esas actividades (y en cascada sus versiones)
+    await Activity.destroy({ where: { id: activityIds } });
 
     res.status(200).json({
       message:

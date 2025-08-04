@@ -116,12 +116,13 @@ export const addTrackingVersion = createAsyncThunk(
 // import activities from Excel file
 export const importarActividadesExcel = createAsyncThunk(
   "activities/importarExcel",
-  async ({ projectId, file }, thunkAPI) => {
+  async ({ projectId, file, tipoVersion }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await activityService.importActivitiesFromExcel(
         projectId,
         file,
+        tipoVersion,
         token
       );
     } catch (error) {
@@ -133,11 +134,12 @@ export const importarActividadesExcel = createAsyncThunk(
 // delete all activities by projectId
 export const deleteAllActivitiesByProject = createAsyncThunk(
   "activities/deleteAllActivitiesByProject",
-  async (projectId, thunkAPI) => {
+  async ({ projectId, tipoVersion }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await activityService.deleteAllActivitiesByProject(
         projectId,
+        tipoVersion,
         token
       );
     } catch (error) {

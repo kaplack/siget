@@ -55,7 +55,7 @@ const ActivityVersion = sequelize.define(
       comment: "Version number for baseline or tracking",
     },
     tipoVersion: {
-      type: DataTypes.ENUM("base", "seguimiento"),
+      type: DataTypes.ENUM("base", "seguimiento", "previous"),
       allowNull: false,
     },
     fechaInicio: {

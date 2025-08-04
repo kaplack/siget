@@ -13,7 +13,12 @@ import {
   MRT_ToggleDensePaddingButton,
 } from "material-react-table";
 import { BsArrowsCollapse } from "react-icons/bs";
-import { FaCalendarCheck, FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import {
+  FaCalendarCheck,
+  FaEdit,
+  FaRegTrashAlt,
+  FaRegCheckCircle,
+} from "react-icons/fa";
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -113,6 +118,24 @@ const ProjectList = () => {
                 style={{ marginLeft: "0.25rem" }}
               >
                 Convenio
+              </span>
+            </Button>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => navigate(`${id}/previous`)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textTransform: "none",
+              }}
+            >
+              <FaRegCheckCircle size={18} />
+              <span
+                className="d-none d-md-inline"
+                style={{ marginLeft: "0.25rem" }}
+              >
+                ActosPrevios
               </span>
             </Button>
             <Button

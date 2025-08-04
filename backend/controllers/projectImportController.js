@@ -11,6 +11,7 @@ const {
 const importActivitiesFromExcel = async (req, res) => {
   try {
     const { projectId } = req.params;
+    const { tipoVersion } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: "No se envió ningún archivo." });
@@ -68,7 +69,7 @@ const importActivitiesFromExcel = async (req, res) => {
 
       return {
         activityId: actividadesCreadas[index].id,
-        tipoVersion: "base", // draft baseline
+        tipoVersion: tipoVersion, // draft baseline
         nombre: row["Nombre"] || "Actividad sin nombre",
         parentId: 0, // se asignará después
         orden: 0, // se asignará después

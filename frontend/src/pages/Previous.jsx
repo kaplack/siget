@@ -50,6 +50,7 @@ import {
   MRT_ShowHideColumnsButton,
   MRT_ToggleDensePaddingButton,
 } from "material-react-table";
+import { calcularAvanceRecursivo } from "../utils/activityUtils";
 
 // Generate visual EDT from parentId structure
 const generarEDTs = (nodes, parentId = 0, prefix = "") => {
@@ -66,7 +67,7 @@ const generarEDTs = (nodes, parentId = 0, prefix = "") => {
   });
 };
 
-const ProjectBaseLine = () => {
+const Previous = () => {
   const [data, setData] = useState([]);
 
   const dispatch = useDispatch();
@@ -98,7 +99,7 @@ const ProjectBaseLine = () => {
     setData([]);
     dispatch(resetActivityState());
     dispatch(getProject(projectId));
-    dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+    dispatch(getActivitiesByProject({ projectId, tipoVersion: "previous" }));
   }, [dispatch, projectId]);
 
   const { isLoading } = useSelector((state) => state.activities);
@@ -117,77 +118,75 @@ const ProjectBaseLine = () => {
 
   const handleSaveCell = ({ cell, row, value }) => {
     if (currentProject.estado !== "borrador") {
-      toast.warning("⚠️ No se puede editar una línea base ya establecida.");
+      toast.warning("⚠️ Cannot edit once baseline is set.");
       return;
     }
 
     const columnId = cell.column.id;
     const original = row.original;
 
-    // Base updated entry
-    let entrada = {
-      ...original,
-      [columnId]: value,
-    };
+    // 1️⃣ Build the updated entry with the new value
+    let updatedEntry = { ...original, [columnId]: value };
 
-    // Detect if it's a scheduling field
-    const esCampoFecha =
+    // 2️⃣ If it's a scheduling field, calculate the third variable
+    const isScheduleField =
       columnId === "fechaInicio" ||
       columnId === "fechaFin" ||
       columnId === "plazo";
 
-    // Prepare current values to evaluate scheduling logic
-    const camposActuales = {
-      fechaInicio: entrada.fechaInicio ?? original.fechaInicio,
-      fechaFin: entrada.fechaFin ?? original.fechaFin,
-      plazo: entrada.plazo ?? original.plazo,
-    };
-
-    // Count how many scheduling fields are filled
-    const filledCount = Object.values(camposActuales).filter(
-      (v) => v !== null && v !== undefined && v !== ""
-    ).length;
-
-    // Apply working day logic only if at least 2 fields are filled
-    if (esCampoFecha && filledCount >= 2) {
-      const camposCalculados = calcularTerceraVariable(
-        camposActuales,
-        [], // optional holidays
+    if (isScheduleField) {
+      const currentValues = {
+        fechaInicio: updatedEntry.fechaInicio ?? original.fechaInicio,
+        fechaFin: updatedEntry.fechaFin ?? original.fechaFin,
+        plazo: updatedEntry.plazo ?? original.plazo,
+      };
+      // calculate the third field
+      const calculated = calcularTerceraVariable(
+        currentValues,
+        [], // holidays
         columnId
       );
-      entrada = { ...entrada, ...camposCalculados };
+      updatedEntry = { ...updatedEntry, ...calculated };
     }
 
-    // Update local tree
+    // 3️⃣ Determine exactly which fields changed
+    const camposAGuardar = {};
+    Object.keys(updatedEntry).forEach((key) => {
+      // skip metadata fields
+      if (["children", "level", "edt"].includes(key)) return;
+      const newVal = updatedEntry[key];
+      const oldVal = original[key];
+      // treat null/undefined/"" sensibly
+      if (newVal !== oldVal) {
+        camposAGuardar[key] = newVal;
+      }
+    });
+
+    // If nothing changed, bail out
+    if (Object.keys(camposAGuardar).length === 0) return;
+
+    // 4️⃣ Update local tree immediately
     const updateRow = (rows) =>
       rows.map((item) => {
-        if (item.id === original.id) {
-          return entrada;
-        }
-        if (item.children?.length > 0) {
+        if (item.id === original.id) return { ...item, ...camposAGuardar };
+        if (item.children) {
           return { ...item, children: updateRow(item.children) };
         }
         return item;
       });
+    let updatedTree = updateRow(data);
 
-    const updatedTree = updateRow(data);
-    const newTree = actualizarArbolConEDT(flattenTree(updatedTree));
-    setData(newTree);
-
-    // Prepare only the relevant data for persistence
-    const camposAGuardar = {};
-    camposAGuardar[columnId] = value;
-
-    if (esCampoFecha && filledCount >= 2) {
-      const camposCalculados = calcularTerceraVariable(
-        camposActuales,
-        [],
-        columnId
-      );
-      Object.assign(camposAGuardar, camposCalculados);
+    // 5️⃣ If we edited 'avance', recalculate recursively
+    if ("avance" in camposAGuardar) {
+      updatedTree.forEach((root) => calcularAvanceRecursivo(root));
     }
 
-    // Send to backend
+    // 6️⃣ Regenerate EDTs and parent dates, then update state
+    const flat = flattenTree(updatedTree);
+    const newTree = actualizarArbolConEDT(flat);
+    setData(newTree);
+
+    // 7️⃣ Dispatch one update for this node
     dispatch(
       updateDraftActivity({
         activityId: original.id,
@@ -196,12 +195,37 @@ const ProjectBaseLine = () => {
     )
       .unwrap()
       .then(() => {
-        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+        // 8️⃣ Optionally dispatch updates for parents if avance changed
+        if ("avance" in camposAGuardar) {
+          // find which nodes changed avance
+          const recalculados = flattenTree(newTree).filter((item) => {
+            const orig = rawActivities.find((r) => r.id === item.id);
+            return orig && orig.avance !== item.avance;
+          });
+          recalculados.forEach((nodo) => {
+            if (nodo.id !== original.id) {
+              dispatch(
+                updateDraftActivity({
+                  activityId: nodo.id,
+                  data: { avance: nodo.avance },
+                })
+              ).catch((e) =>
+                console.error(`❌ Error updating parent avance ${nodo.id}:`, e)
+              );
+            }
+          });
+        }
+        // 9️⃣ Finally, refresh from server if you prefer
+        dispatch(
+          getActivitiesByProject({ projectId, tipoVersion: "previous" })
+        );
       })
       .catch((err) => {
-        alert(err.message || "❌ No se pudo actualizar la versión base.");
+        alert(err.message || "❌ Could not update activity.");
       });
   };
+
+  //************ handleSaveCell end
 
   const handleAddActivity = async (parentId = 0) => {
     if (currentProject.estado !== "borrador") {
@@ -232,6 +256,7 @@ const ProjectBaseLine = () => {
       avance: 0,
       plazo: null,
       sustento: "",
+      tipoVersion: "previous",
     };
 
     // Enviar al backend
@@ -261,6 +286,7 @@ const ProjectBaseLine = () => {
       console.error("Error creating activity:", resultAction.payload);
     }
   };
+  //************ handleAddActivity end
 
   const handleDelete = async (id) => {
     if (currentProject.estado !== "borrador") {
@@ -299,6 +325,40 @@ const ProjectBaseLine = () => {
     setData(newTree);
   };
 
+  const downloadExcelAndImport = async () => {
+    try {
+      // Fetch file from public folder
+      const response = await fetch("/PlantillaActosPrevios.xlsx");
+      const blob = await response.blob();
+
+      // Convert to a File object (optional)
+      const file = new File([blob], "PlantillaActosPrevios.xlsx", {
+        type: blob.type,
+      });
+
+      console.log("Archivo cargado en memoria:", file);
+
+      // Aquí ya tienes el archivo en la variable file
+      // Puedes pasarlo a otra función que procese Excel
+
+      dispatch(
+        importarActividadesExcel({ projectId, file, tipoVersion: "previous" })
+      )
+        .unwrap()
+        .then((res) => {
+          toast.success(res.message);
+          dispatch(
+            getActivitiesByProject({ projectId, tipoVersion: "previous" })
+          );
+        })
+        .catch((err) => {
+          toast.error("❌ " + err);
+        });
+    } catch (error) {
+      console.error("Error al descargar el archivo:", error);
+    }
+  };
+
   // Importar actividades desde Excel
   const handleImportExcel = (e) => {
     const file = e.target.files[0];
@@ -309,16 +369,22 @@ const ProjectBaseLine = () => {
     )
       return;
 
-    dispatch(importarActividadesExcel({ projectId, file, tipoVersion: "base" }))
+    dispatch(
+      importarActividadesExcel({ projectId, file, tipoVersion: "previous" })
+    )
       .unwrap()
       .then((res) => {
         toast.success(res.message);
-        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+        dispatch(
+          getActivitiesByProject({ projectId, tipoVersion: "previous" })
+        );
       })
       .catch((err) => {
         toast.error("❌ " + err);
       });
   };
+
+  // Eliminar todas las actividades del proyecto
 
   const handleEliminarTodas = () => {
     if (
@@ -328,11 +394,15 @@ const ProjectBaseLine = () => {
     )
       return;
 
-    dispatch(deleteAllActivitiesByProject({ projectId, tipoVersion: "base" }))
+    dispatch(
+      deleteAllActivitiesByProject({ projectId, tipoVersion: "previous" })
+    )
       .unwrap()
       .then((res) => {
         toast.success(res.message);
-        dispatch(getActivitiesByProject({ projectId, tipoVersion: "base" }));
+        dispatch(
+          getActivitiesByProject({ projectId, tipoVersion: "previous" })
+        );
       })
       .catch((err) => {
         toast.error(err);
@@ -467,6 +537,20 @@ const ProjectBaseLine = () => {
         },
       }),
     },
+    {
+      accessorKey: "avance",
+      header: "Avance",
+      size: 150,
+      muiEditTextFieldProps: ({ cell, row, table }) => ({
+        onBlur: (event) => {
+          const value = event.target.value;
+          // Solo guardar si hay cambio real
+          if (Number(value) !== Number(row.original[cell.column.id])) {
+            handleSaveCell({ cell, row, value });
+          }
+        },
+      }),
+    },
     { accessorKey: "responsable", header: "Responsable", size: 150 },
     {
       accessorKey: "predecesorId",
@@ -513,7 +597,7 @@ const ProjectBaseLine = () => {
     initialState: {
       columnVisibility: { id: false, responsable: false, predecesorId: false },
       //density: "compact",
-      pagination: { pageSize: 250 },
+      pagination: { pageSize: 10 },
       expanded: true, // expand all rows by default
     },
     renderToolbarInternalActions: ({ table }) => (
@@ -537,25 +621,26 @@ const ProjectBaseLine = () => {
         <div className="d-flex align-items-center gap-2">
           <label htmlFor="excel-upload">
             {/* Disable file input while loading */}
-            <input
+            {/*<input
               type="file"
               accept=".xlsx,.xls"
               id="excel-upload"
               hidden
               disabled={isLoading}
-              onChange={handleImportExcel}
-            />
+              onChange={downloadExcelAndImport}
+            />*/}
             {/* Show spinner inside the button when loading */}
             <Button
               variant="outlined"
               color="primary"
               component="span"
+              onClick={downloadExcelAndImport}
               startIcon={
                 isLoading ? <CircularProgress size={20} /> : <UploadFileIcon />
               }
               disabled={isLoading}
             >
-              {isLoading ? "Importando..." : "Importar Excel"}
+              {isLoading ? "Cargando..." : "Cargar Actos Previos"}
             </Button>
           </label>
 
@@ -777,7 +862,7 @@ const ProjectBaseLine = () => {
   return (
     <>
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">Linea Base del Convenio</h2>
+        <h2 className="text-2xl font-bold mb-4">Actos Previos del Convenio</h2>
         <h4>{currentProject?.alias}</h4>
         <p>
           {currentProject?.cui && `CUI: ${currentProject.cui} `}
@@ -807,33 +892,6 @@ const ProjectBaseLine = () => {
             >
               + Agregar Actividad Principal
             </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              disabled={isLoading}
-              onClick={() => {
-                if (
-                  window.confirm(
-                    "¿Estás seguro de que deseas establecer la línea base?"
-                  )
-                ) {
-                  dispatch(setBaselineForProject(projectId))
-                    .unwrap()
-                    .then((res) => {
-                      alert(res.message);
-                      navigate("/app/project-list");
-                    })
-                    .catch((err) => alert("Error: " + err));
-                  console.log(
-                    "Establecer línea base para el proyecto:",
-                    projectId
-                  );
-                }
-              }}
-              style={{ marginLeft: "1rem" }}
-            >
-              Establecer Línea Base
-            </Button>
           </>
         )}
       </div>
@@ -841,4 +899,4 @@ const ProjectBaseLine = () => {
   );
 };
 
-export default ProjectBaseLine;
+export default Previous;

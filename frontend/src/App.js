@@ -26,6 +26,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ProjectSchedule from "./pages/ProjectSchedule";
 import ProjectBaseLine from "./pages/BaseLine";
 import ProjectList from "./pages/ProjectList";
+import Previous from "./pages/Previous";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import EditProject from "./pages/EditProject";
@@ -59,6 +60,10 @@ function App() {
 
               <Route path="project/new" element={<NewProject />} />
               <Route path="project/edit/:id" element={<EditProject />} />
+              <Route
+                path="project-list/:projectId/previous"
+                element={<Previous />}
+              />
               <Route
                 path="project-list/:projectId/tracking"
                 element={<ProjectSchedule />}

@@ -93,9 +93,15 @@ const addTrackingVersion = async (activityId, versionData, token) => {
 /*********************************************/
 
 // Import activities from Excel file
-const importActivitiesFromExcel = async (projectId, file, token) => {
+const importActivitiesFromExcel = async (
+  projectId,
+  file,
+  tipoVersion,
+  token
+) => {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("tipoVersion", tipoVersion);
 
   const config = {
     headers: {
@@ -121,10 +127,14 @@ const importActivitiesFromExcel = async (projectId, file, token) => {
 
 // Delete all activities by projectId
 // DELTE /api/activities/project/:projectId/all
-const deleteAllActivitiesByProject = async (projectId, token) => {
+const deleteAllActivitiesByProject = async (projectId, tipoVersion, token) => {
+  console.log("tipoVersion", tipoVersion);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
+    },
+    data: {
+      tipoVersion, // Pass tipoVersion to backend
     },
   };
 
