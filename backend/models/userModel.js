@@ -13,6 +13,10 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,9 +26,13 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    profile: {
-      type: DataTypes.STRING,
-      allowNull: true, // Puedes cambiar a false si es obligatorio
+    profileId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "profiles",
+        key: "id",
+      },
     },
   },
   {

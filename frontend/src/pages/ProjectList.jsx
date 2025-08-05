@@ -28,9 +28,10 @@ const ProjectList = () => {
     (state) => state.project
   );
   const { user } = useSelector((state) => state.auth);
+  console.log("User:", user);
 
   useEffect(() => {
-    if (user?.profile === "admin") {
+    if (user?.profileId === "admin") {
       dispatch(getAllProjects());
     } else {
       dispatch(getUserProjects());

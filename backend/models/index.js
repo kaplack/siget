@@ -4,6 +4,12 @@ const User = require("./userModel");
 const Project = require("./projectModel");
 const Activity = require("./activityModel");
 const ActivityVersion = require("./activityVersionModel");
+const Profile = require("./profileModel");
+
+// Profile → User
+Profile.hasMany(User, { foreignKey: "profileId" });
+// User → Profile (inverse)
+User.belongsTo(Profile, { foreignKey: "profileId", as: "profile" });
 
 // User → Project relationship
 User.hasMany(Project, { foreignKey: "userId", onDelete: "CASCADE" });
@@ -29,4 +35,5 @@ module.exports = {
   Project,
   Activity,
   ActivityVersion,
+  Profile,
 };

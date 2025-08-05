@@ -24,6 +24,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/activities", require("./routes/activityRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+app.use("/api/profiles", require("./routes/profileRoutes"));
 
 // Error middleware
 app.use(errorHandler);

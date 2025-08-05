@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,6 +28,7 @@ import ProjectSchedule from "./pages/ProjectSchedule";
 import ProjectBaseLine from "./pages/BaseLine";
 import ProjectList from "./pages/ProjectList";
 import Previous from "./pages/Previous";
+import ProfileList from "./pages/ProfileList";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import EditProject from "./pages/EditProject";
@@ -52,14 +54,18 @@ function App() {
                 </PrivateRoute>
               }
             >
+              {/* Dashboard nested under /app/dashboard */}
               <Route path="dashboard/*" element={<Dashboard />}>
                 <Route path="convenios" element={<Convenios />} />
                 <Route path="avance" element={<Avance />} />
                 <Route index element={<Navigate to="convenios" />} />
               </Route>
 
+              {/* Project creation & edit */}
               <Route path="project/new" element={<NewProject />} />
               <Route path="project/edit/:id" element={<EditProject />} />
+
+              {/* <Route path="project-list" element={<ProjectList />} />
               <Route
                 path="project-list/:projectId/previous"
                 element={<Previous />}
@@ -71,9 +77,24 @@ function App() {
               <Route
                 path="project-list/:projectId/base-line"
                 element={<ProjectBaseLine />}
-              />
+              /> */}
+
+              {/* Grouped Project-List routes */}
+              <Route path="project-list" element={<Outlet />}>
+                <Route index element={<ProjectList />} />
+                <Route path=":projectId/previous" element={<Previous />} />
+                <Route
+                  path=":projectId/tracking"
+                  element={<ProjectSchedule />}
+                />
+                <Route
+                  path=":projectId/base-line"
+                  element={<ProjectBaseLine />}
+                />
+              </Route>
+
               <Route path="admin" element={<Admin />} />
-              <Route path="project-list" element={<ProjectList />} />
+              <Route path="profiles" element={<ProfileList />} />
             </Route>
           </Routes>
         </Router>
