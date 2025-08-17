@@ -163,6 +163,7 @@ const getUsers = asyncHandler(async (req, res) => {
   const where = req.query.includeInactive ? {} : { isActive: true };
   const users = await User.findAll({
     where,
+    attributes: ["id", "name", "lastName", "email", "isActive", "profileId"],
     // Uncomment include if association exists
     include: [{ model: Profile, as: "profile", attributes: ["id", "name"] }],
     order: [["id", "ASC"]],
