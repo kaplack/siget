@@ -100,6 +100,12 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error("Usuario no encontrado");
   }
 
+  // English: block disabled accounts *before* password check
+  if (user.isActive === false) {
+    res.status(403);
+    throw new Error("Usuario desactivado. Contacte al administrador.");
+  }
+
   if (user && (await bcrypt.compare(password, user.password))) {
     res.status(200).json({
       id: user.id,
