@@ -29,6 +29,7 @@ import ProjectBaseLine from "./pages/BaseLine";
 import ProjectList from "./pages/ProjectList";
 import Previous from "./pages/Previous";
 import ProfileList from "./pages/ProfileList";
+import UserList from "./pages/UserList";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import EditProject from "./pages/EditProject";
@@ -95,6 +96,7 @@ function App() {
 
               <Route path="admin" element={<Admin />} />
               <Route path="profiles" element={<ProfileList />} />
+              <Route path="userlist" element={<UserList />} />
             </Route>
           </Routes>
         </Router>

@@ -21,6 +21,15 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+        // English comment: enforce @oedi.gob.pe domain
+        isOediDomain(value) {
+          if (!/^[a-z0-9._%+-]+@oedi\.gob\.pe$/i.test(String(value).trim())) {
+            throw new Error("Email must be @oedi.gob.pe");
+          }
+        },
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -34,6 +43,11 @@ const User = sequelize.define(
         key: "id",
       },
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true, // English: users are active by default
+    },
   },
   {
     tableName: "users",
@@ -42,3 +56,17 @@ const User = sequelize.define(
 );
 
 module.exports = User;
+
+// Assign default profile if none provided
+User.beforeCreate(async (user, options) => {
+  if (!user.profileId) {
+    // English comment: look up the “usuario” profile by name
+    const defaultProfile = await sequelize.models.Profile.findOne({
+      where: { name: "usuario" },
+    });
+    if (!defaultProfile) {
+      throw new Error('Default profile "usuario" not found');
+    }
+    user.profileId = defaultProfile.id;
+  }
+});

@@ -12,7 +12,7 @@ Profile.hasMany(User, { foreignKey: "profileId" });
 User.belongsTo(Profile, { foreignKey: "profileId", as: "profile" });
 
 // User → Project relationship
-User.hasMany(Project, { foreignKey: "userId", onDelete: "CASCADE" });
+User.hasMany(Project, { foreignKey: "userId" });
 Project.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 // Project → Activity relationship

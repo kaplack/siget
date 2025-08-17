@@ -111,7 +111,7 @@ const ActivityVersion = sequelize.define(
       comment: "Indicates if version is active",
     },
     medidasCorrectivas: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: "",
     },

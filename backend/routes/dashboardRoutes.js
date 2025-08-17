@@ -8,6 +8,6 @@ const {
 // Route to fetch general dashboard summary
 router.get("/", getDashboard);
 
-router.get("/agreement", getAgreement);
+//router.get("/agreement", getAgreement);
 
 module.exports = router;

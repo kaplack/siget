@@ -11,8 +11,8 @@ function Admin() {
           <div className="col-md-4 mb-3">
             <div className="card p-3 h-100 shadow-sm">
               <h5>Gestión de Usuarios</h5>
-              <p>Administrar usuarios, roles y permisos.</p>
-              <Link to="/users" className="btn btn-primary">
+              <p>Administrar usuarios y roles.</p>
+              <Link to="/app/userlist" className="btn btn-primary">
                 Ir a Usuarios
               </Link>
             </div>
