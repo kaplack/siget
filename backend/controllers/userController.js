@@ -25,7 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //console.log("Registering user:", req.body);
 
-  if (!name || lastName || !email || !password) {
+  if (!name || !lastName || !email || !password) {
     console.log("Missing fields in registration:", req.body);
     res.status(400);
     throw new Error("Ingresa todos los campos");
@@ -47,24 +47,38 @@ const registerUser = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  // Crear el usuario
-
-  const user = await User.create({
+  const newUser = {
     name,
     lastName,
-    profileId,
     email,
     password: hashedPassword,
-  });
+  };
+
+  console.log("Creating user with data:", newUser);
+  // Crear el usuario
+
+  try {
+    // English: attempt create (let DB constraints validate)
+    const user = await User.create(newUser);
+
+    // ✅ If we reached here, creation succeeded
+    console.log("User created:", user?.dataValues);
+    return res.status(201).json({ id: user.id });
+  } catch (err) {
+    // 🔎 Log everything helpful for debugging
+    throw new Error(`Error creating user: ${err.message}`);
+  }
+
+  console.log("User created:", user.dataValues);
 
   if (user) {
     res.status(201).json({
       id: user.id,
-      name: user.name,
-      lastName: user.lastName,
-      email: user.email,
-      token: generateToken(user.id),
-      profileId: user.profileId,
+      // name: user.name,
+      // lastName: user.lastName,
+      // email: user.email,
+      // token: generateToken(user.id),
+      // profileId: user.profileId,
     });
   } else {
     res.status(400);
@@ -93,7 +107,12 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error("Email y contraseña son obligatorios");
   }
 
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({
+    where: { email },
+    include: [{ model: Profile, as: "profile", attributes: ["id", "name"] }],
+  });
+
+  //console.log("login user", user.profile);
 
   if (!user) {
     res.status(401);
@@ -113,7 +132,7 @@ const loginUser = asyncHandler(async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       token: generateToken(user.id),
-      profileId: user.profileId,
+      profile: user.profile,
     });
   } else {
     res.status(401);

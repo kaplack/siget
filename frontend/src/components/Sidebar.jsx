@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FaProjectDiagram,
-  FaPlus,
   FaFolderPlus,
-  FaHome,
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
   FaCog,
@@ -15,7 +13,7 @@ import {
   FaChartPie,
   FaTasks,
 } from "react-icons/fa";
-import { GoProjectRoadmap } from "react-icons/go";
+
 import logo from "../assets/images/Logo_OEDI.png";
 import isotipo from "../assets/images/isotipo_OEDI.svg";
 import { logout, reset } from "../features/auth/authSlice";
@@ -24,6 +22,9 @@ function Sidebar({ collapsed, toggleCollapse }) {
   const sidebarWidth = collapsed ? 80 : 260;
   const [showLabels, setShowLabels] = useState(!collapsed);
   const [openSubmenu, setOpenSubmenu] = useState(false);
+
+  const { user } = useSelector((state) => state.auth);
+  const isAdmin = user?.profile?.name === "admin";
 
   useEffect(() => {
     let timer;
@@ -124,12 +125,15 @@ function Sidebar({ collapsed, toggleCollapse }) {
       {/* Footer */}
       <div className="p-2 border-top border-secondary">
         <ul className="nav flex-column">
-          <SidebarItem
-            to="/app/admin"
-            icon={<FaCog />}
-            label="Admin"
-            showLabels={showLabels}
-          />
+          {isAdmin && (
+            <SidebarItem
+              to="/app/admin"
+              icon={<FaCog />}
+              label="Admin"
+              showLabels={showLabels}
+            />
+          )}
+
           <li className="nav-item mb-2" style={{ position: "relative" }}>
             <button
               className="nav-link text-dark"

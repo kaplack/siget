@@ -5,16 +5,18 @@ import { FaUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../features/auth/authSlice";
 import logo from "../assets/images/Logo_OEDI.png";
+import { isValidOediEmail } from "../utils/authUtils";
 
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
+    lastName: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, lastName, email, password, password2 } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,8 +48,17 @@ function Register() {
       return;
     }
 
+    if (isValidOediEmail(email)) {
+      console.log("✅ Email válido");
+    } else {
+      console.log("❌ Debe ser un correo @oedi.gob.pe");
+      toast.error("El correo debe ser @oedi.gob.pe");
+      return;
+    }
+
     const userData = {
       name,
+      lastName,
       email: email.toLowerCase(), // Normalize email to lowercase
       password,
     };
@@ -55,6 +66,7 @@ function Register() {
     try {
       // Unwrap lets you handle errors with try/catch instead of .catch()
       await dispatch(register(userData)).unwrap();
+      navigate("/"); // Redirect to home after successful registration
       toast.success("Usuario registrado exitosamente");
     } catch (error) {
       toast.error(error.message || "Error al registrar usuario");
@@ -93,7 +105,7 @@ function Register() {
         <form onSubmit={onSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
-              Nombre de usuario
+              Nombre
             </label>
             <input
               type="text"
@@ -102,7 +114,23 @@ function Register() {
               name="name"
               value={name}
               onChange={onChange}
-              placeholder="Juan Pérez"
+              placeholder="Juan"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Apellido
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              onChange={onChange}
+              placeholder="Pérez"
               required
             />
           </div>
