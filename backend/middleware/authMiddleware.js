@@ -44,6 +44,7 @@ const protect = asyncHandler(async (req, res, next) => {
 
   // English: Hard block deactivated accounts even if token is valid
   if (user.isActive === false) {
+    console.warn(`Blocked access for deactivated user ${user.id}`);
     res.status(403);
     throw new Error("Usuario desactivado. Contacte al administrador.");
   }
