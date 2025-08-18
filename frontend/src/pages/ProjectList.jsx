@@ -6,7 +6,14 @@ import {
   getAllProjects,
 } from "../features/projects/projectSlice";
 import { MaterialReactTable } from "material-react-table";
-import { Chip, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Chip,
+  Button,
+  CircularProgress,
+  Typography,
+  Tooltip,
+  IconButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {
   MRT_ShowHideColumnsButton,
@@ -103,94 +110,49 @@ const ProjectList = () => {
 
         return (
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => navigate(`/app/project/edit/${id}`)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textTransform: "none",
-              }}
-            >
-              <FaEdit size={18} />
-              <span
-                className="d-none d-md-inline"
-                style={{ marginLeft: "0.25rem" }}
-              >
-                Convenio
-              </span>
-            </Button>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => navigate(`${id}/previous`)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textTransform: "none",
-              }}
-            >
-              <FaRegCheckCircle size={18} />
-              <span
-                className="d-none d-md-inline"
-                style={{ marginLeft: "0.25rem" }}
-              >
-                ActosPrevios
-              </span>
-            </Button>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => navigate(`${id}/base-line`)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textTransform: "none",
-              }}
-            >
-              <BsArrowsCollapse size={18} />
-              <span
-                className="d-none d-md-inline"
-                style={{ marginLeft: "0.25rem" }}
-              >
-                LíneaBase
-              </span>
-            </Button>
-            {row.original.estado !== "borrador" && (
-              <Button
-                variant="outlined"
+            <Tooltip title="Editar Convenio">
+              <IconButton
                 size="small"
-                onClick={() => navigate(`${id}/tracking`)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  textTransform: "none",
-                }}
+                onClick={() => navigate(`/app/project/edit/${id}`)}
               >
-                <FaCalendarCheck />
-                <span
-                  className="d-none d-md-inline"
-                  style={{ marginLeft: "0.25rem" }}
+                <FaEdit size={18} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Actos previos">
+              <IconButton
+                size="small"
+                onClick={() => navigate(`${id}/previous`)}
+              >
+                <FaRegCheckCircle size={18} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Línea Base">
+              <IconButton
+                size="small"
+                onClick={() => navigate(`${id}/base-line`)}
+              >
+                <BsArrowsCollapse size={18} />
+              </IconButton>
+            </Tooltip>
+            {row.original.estado !== "borrador" && (
+              <Tooltip title="Seguimiento del Convenio">
+                <IconButton
+                  size="small"
+                  onClick={() => navigate(`${id}/tracking`)}
                 >
-                  Seguimiento
-                </span>
-              </Button>
+                  <FaCalendarCheck />
+                </IconButton>
+              </Tooltip>
             )}
-            <Button
-              variant="outlined"
-              color="error"
-              size="small"
-              onClick={() => handleDelete(id)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textTransform: "none",
-              }}
-            >
-              <FaRegTrashAlt size={15} />
-              {/* <span className="d-none d-md-inline"></span> */}
-            </Button>
+            <Tooltip title="Eliminar Convenio">
+              <IconButton
+                size="small"
+                onClick={() => handleDelete(id)}
+                color="error"
+              >
+                <FaRegTrashAlt size={16} />
+              </IconButton>
+            </Tooltip>
           </div>
         );
       },

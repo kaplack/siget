@@ -3,7 +3,7 @@ import { MaterialReactTable } from "material-react-table";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfiles, deleteProfile } from "../features/profiles/profilesSlice";
 import ProfileFormModal from "../components/ProfileFormModal";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Tooltip, Box } from "@mui/material";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 
 import { toast } from "react-toastify";
@@ -37,17 +37,21 @@ const ProfileList = () => {
         header: "Acciones",
         Cell: ({ row }) => (
           <>
-            <IconButton
-              onClick={() => {
-                setEditProfile(row.original);
-                setOpenModal(true);
-              }}
-            >
-              <FaEdit size={16} />
-            </IconButton>
-            <IconButton onClick={() => handleDelete(row.original.id)}>
-              <FaRegTrashAlt size={16} />
-            </IconButton>
+            <Tooltip title="Editar perfil">
+              <IconButton
+                onClick={() => {
+                  setEditProfile(row.original);
+                  setOpenModal(true);
+                }}
+              >
+                <FaEdit size={16} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Eliminar perfil">
+              <IconButton onClick={() => handleDelete(row.original.id)}>
+                <FaRegTrashAlt size={16} />
+              </IconButton>
+            </Tooltip>
           </>
         ),
       },
