@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialReactTable } from "material-react-table";
 import { Button, IconButton, Chip, Tooltip } from "@mui/material";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { FaTrash, FaKey } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
@@ -120,6 +120,7 @@ const UserList = () => {
             </Tooltip>
             <Tooltip title="Eliminar">
               <IconButton
+                color="error"
                 onClick={async () => {
                   if (!window.confirm("¿Desactivar este usuario?")) return;
                   try {
@@ -132,7 +133,7 @@ const UserList = () => {
                 }}
                 size="small"
               >
-                <FaTrash size={16} />
+                <FaRegTrashAlt size={16} />
               </IconButton>
             </Tooltip>
           </>

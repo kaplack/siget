@@ -48,7 +48,10 @@ const ProfileList = () => {
               </IconButton>
             </Tooltip>
             <Tooltip title="Eliminar perfil">
-              <IconButton onClick={() => handleDelete(row.original.id)}>
+              <IconButton
+                color="error"
+                onClick={() => handleDelete(row.original.id)}
+              >
                 <FaRegTrashAlt size={16} />
               </IconButton>
             </Tooltip>
