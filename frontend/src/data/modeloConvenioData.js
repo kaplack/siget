@@ -1,6 +1,7 @@
 const modeloConvenioData = [
   {
     modelo: 1,
+    tipoCod: "DE",
     tipo: "Convenio de Delegación",
     descripcion:
       "Convenio de delegación para elaboración de estudios de preinversión y expedientes técnicos o documentos equivalentes del proyecto de inversión.",
@@ -11,6 +12,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 2,
+    tipoCod: "DE",
     tipo: "Convenio de Delegación",
     descripcion:
       "Convenio de delegación para elaboración de estudios de preinversión y expedientes técnicos o documentos equivalentes del proyecto de inversión, así como convenio de colaboración para la asistencia técnica desde los actos preparatorios hasta el perfeccionamiento del contrato para la contratación de la ejecución física del proyecto de inversión respecto de aspectos que deriven del expediente técnico.",
@@ -21,6 +23,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 3,
+    tipoCod: "DE",
     tipo: "Convenio de Delegación",
     descripcion:
       "Convenio de delegación para la elaboración de expedientes técnicos de saldo de obra del proyecto de inversión.",
@@ -31,6 +34,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 4,
+    tipoCod: "DE",
     tipo: "Convenio de Delegación",
     descripcion:
       "Convenio de delegación para la elaboración de expedientes técnicos de saldo de obra del proyecto de inversión, así como convenio de colaboración para la asistencia técnica desde los actos preparatorios hasta el perfeccionamiento del contrato para la contratación de la ejecución física del proyecto de inversión respecto de aspectos que deriven del expediente técnico.",
@@ -41,6 +45,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 5,
+    tipoCod: "CO",
     tipo: "Convenio de Colaboración",
     descripcion:
       "Convenio de colaboración para la asistencia técnica en la elaboración de estudios de preinversión.",
@@ -51,6 +56,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 6,
+    tipoCod: "CO",
     tipo: "Convenio de Colaboración",
     descripcion:
       "Convenio de colaboración para la asistencia técnica en la elaboración de estudios de preinversión, así como de asistencia técnica desde los actos preparatorios hasta el perfeccionamiento del contrato para la contratación de los estudios de preinversión.",
@@ -61,6 +67,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 7,
+    tipoCod: "CO",
     tipo: "Convenio de Colaboración",
     descripcion:
       "Convenio de colaboración para la asistencia técnica en la elaboración de estudios de preinversión y de expedientes técnicos o documentos equivalentes del proyecto de inversión.",
@@ -71,6 +78,7 @@ const modeloConvenioData = [
   },
   {
     modelo: 8,
+    tipoCod: "CO",
     tipo: "Convenio de Colaboración",
     descripcion:
       "Convenio de colaboración para la asistencia técnica en la elaboración de estudios de preinversión y de expedientes técnicos o documentos equivalentes del proyecto de inversión, así como de asistencia técnica desde los actos preparatorios hasta el perfeccionamiento del contrato para la contratación de la elaboración de los estudios de preinversión y de los expedientes técnicos o documentos equivalentes de los proyectos de inversión.",
@@ -78,6 +86,17 @@ const modeloConvenioData = [
     conv1: "Convenio de colaboración entre el OEDI y",
     conv2:
       "para la asistencia técnica en la elaboración de estudios de preinversión y de expedientes técnicos o documentos equivalentes del proyecto de inversión, así como de asistencia técnica desde los actos preparatorios hasta el perfeccionamiento del contrato para la contratación de la elaboración de los estudios de preinversión y de los expedientes técnicos o documentos equivalentes de los proyectos de inversión",
+  },
+  {
+    modelo: 9,
+    tipoCod: "CO",
+    tipo: "Convenio de Colaboración",
+    descripcion:
+      "Convenio de colaboración para la asistencia técnica en la actualización o elaboración de expedientes técnicos o documentos equivalentes del proyecto de inversión.",
+    uso: ["DATEC"],
+    conv1: "Convenio de colaboración entre el OEDI y",
+    conv2:
+      "para la asistencia técnica en la actualización o elaboración de expedientes técnicos o documentos equivalentes del proyecto de inversión",
   },
 ];
 

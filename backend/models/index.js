@@ -5,6 +5,7 @@ const Project = require("./projectModel");
 const Activity = require("./activityModel");
 const ActivityVersion = require("./activityVersionModel");
 const Profile = require("./profileModel");
+const Consecutive = require("./consecutiveModel");
 
 // Profile → User
 Profile.hasMany(User, { foreignKey: "profileId" });
@@ -36,4 +37,5 @@ module.exports = {
   Activity,
   ActivityVersion,
   Profile,
+  Consecutive,
 };

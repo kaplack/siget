@@ -1,85 +1,98 @@
 const asyncHandler = require("express-async-handler");
-const Project = require("../models/projectModel");
+const sequelize = require("../config/sequelize");
+const { Project, User, Consecutive } = require("../models");
+const { getNextCodigoOedi } = require("../utils/codigoOediUtils");
 
 // @desc    Crear nuevo proyecto
 // @route   POST /api/projects
 // @access  Public (puedes cambiarlo si usas auth)
 const createProject = asyncHandler(async (req, res) => {
-  try {
-    const {
-      nombreConvenio,
-      contraparte,
-      departamento,
-      provincia,
-      distrito,
-      ubigeo,
-      servicioPriorizado,
-      nombreIdeaProyecto,
-      cui,
-      ci,
-      firmaConvenio,
-      inicioConvenio,
-      numeroBeneficiarios,
-      montoInversion,
-      direccion,
-      modeloConvenio,
-      nivelGobierno,
-      alias,
-    } = req.body;
+  //try {
+  const {
+    nombreConvenio,
+    contraparte,
+    departamento,
+    provincia,
+    distrito,
+    ubigeo,
+    servicioPriorizado,
+    nombreIdeaProyecto,
+    cui,
+    ci,
+    firmaConvenio,
+    inicioConvenio,
+    numeroBeneficiarios,
+    montoInversion,
+    direccion,
+    modeloConvenio,
+    nivelGobierno,
+    alias,
+  } = req.body;
 
-    console.log("Datos recibidos:", req.body);
-    const userId = req.user.id; // Assumes user is authenticated and ID is available
+  //console.log("Datos recibidos:", req.body);
+  const userId = req.user?.id; // Assumes user is authenticated and ID is available
 
-    // Basic validation
-    if (
-      !nombreConvenio ||
-      !contraparte ||
-      !departamento ||
-      !ubigeo ||
-      !servicioPriorizado ||
-      !nombreIdeaProyecto ||
-      !numeroBeneficiarios ||
-      !montoInversion ||
-      !userId
-    ) {
-      console.log("Todos los campos son obligatorios");
-      res.status(400);
-      throw new Error("Todos los campos son obligatorios");
-    }
-
-    const newProject = await Project.create({
-      nombreConvenio,
-      contraparte,
-      departamento,
-      provincia,
-      distrito,
-      ubigeo,
-      servicioPriorizado,
-      nombreIdeaProyecto,
-      cui,
-      ci,
-      firmaConvenio,
-      inicioConvenio,
-      numeroBeneficiarios,
-      montoInversion,
-      userId,
-      estado: "borrador",
-      direccion,
-      modeloConvenio,
-      nivelGobierno,
-      alias,
-    });
-
-    console.log("Proyecto creado:", newProject);
-
-    res.status(201).json(newProject);
-  } catch (error) {
-    console.error("Error al crear proyecto:", error);
-    res.status(500).json({
-      message: "Error al crear el proyecto",
-      error: error.message,
-    });
+  // Basic validation
+  if (
+    !nombreConvenio ||
+    !contraparte ||
+    !departamento ||
+    !ubigeo ||
+    !servicioPriorizado ||
+    !nombreIdeaProyecto ||
+    !numeroBeneficiarios ||
+    !montoInversion ||
+    !userId
+  ) {
+    console.log("Todos los campos son obligatorios");
+    res.status(400);
+    throw new Error("Todos los campos son obligatorios");
   }
+
+  const project = await sequelize.transaction(async (t) => {
+    const { codigoOedi } = await getNextCodigoOedi({
+      modeloConvenio,
+      direccion,
+      transaction: t,
+    });
+
+    return await Project.create(
+      {
+        nombreConvenio,
+        contraparte,
+        departamento,
+        provincia,
+        distrito,
+        ubigeo,
+        servicioPriorizado,
+        nombreIdeaProyecto,
+        cui,
+        ci,
+        firmaConvenio,
+        inicioConvenio,
+        numeroBeneficiarios,
+        montoInversion,
+        userId,
+        estado: "borrador",
+        direccion,
+        modeloConvenio,
+        codigoOedi,
+        nivelGobierno,
+        alias,
+      },
+      { transaction: t }
+    );
+  });
+  console.log("Proyecto creado:", project);
+
+  res.status(201).json(project);
+  // } catch (error) {
+  //   console.error("Error al crear proyecto:", error);
+  //   res.status(500).json({
+  //     message: "Error al crear el proyecto",
+  //     error: error.message,
+  //   });
+  // }
 });
 
 // GET /api/projects/user
@@ -91,6 +104,38 @@ const getUserProjects = async (req, res) => {
 
     const projects = await Project.findAll({
       where: { userId },
+      atributes: [
+        "id",
+        "nombreConvenio",
+        "contraparte",
+        "departamento",
+        "provincia",
+        "distrito",
+        "ubigeo",
+        "servicioPriorizado",
+        "nombreIdeaProyecto",
+        "cui",
+        "ci",
+        "firmaConvenio",
+        "inicioConvenio",
+        "numeroBeneficiarios",
+        "montoInversion",
+        "estado",
+        "avance",
+        "plazo",
+        "plazoSeguimiento",
+        "direccion",
+        "modeloConvenio",
+        "nivelGobierno",
+        "alias",
+      ],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "lastName"],
+        },
+      ],
       order: [["createdAt", "DESC"]],
     });
 
@@ -155,6 +200,7 @@ const updateProject = asyncHandler(async (req, res) => {
     "plazoSeguimiento",
     "direccion",
     "modeloConvenio",
+    "codigoOedi",
     "nivelGobierno",
     "alias",
   ];
@@ -205,7 +251,41 @@ const delUserProject = asyncHandler(async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+      atributes: [
+        "id",
+        "nombreConvenio",
+        "contraparte",
+        "departamento",
+        "provincia",
+        "distrito",
+        "ubigeo",
+        "servicioPriorizado",
+        "nombreIdeaProyecto",
+        "cui",
+        "ci",
+        "firmaConvenio",
+        "inicioConvenio",
+        "numeroBeneficiarios",
+        "montoInversion",
+        "estado",
+        "avance",
+        "plazo",
+        "plazoSeguimiento",
+        "direccion",
+        "modeloConvenio",
+        "codigoOedi",
+        "nivelGobierno",
+        "alias",
+      ],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "lastName"],
+        },
+      ],
+    });
     res.status(200).json(projects);
   } catch (error) {
     console.error(error);

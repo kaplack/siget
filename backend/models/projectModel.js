@@ -25,6 +25,10 @@ const Project = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    codigoOedi: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     nivelGobierno: {
       type: DataTypes.STRING,
       allowNull: true,

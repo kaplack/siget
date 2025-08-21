@@ -307,7 +307,9 @@ function ProjectForm({
         <FaFolderPlus size={50} style={{ marginRight: "1rem" }} />
         {modo === "crear" ? "Crear Convenio" : "Editar Convenio"}
       </h2>
-
+      {modo === "editar" && (
+        <p className="text-secondary mb-4">Código: {form?.codigoOedi}</p>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
           <div className="col-md-6 ">
@@ -385,6 +387,7 @@ function ProjectForm({
             )}
           </div>
         </div>
+
         <div className="row mb-3 ">
           <div className="col-md-6">
             <label className="form-label">Nivel de Gobierno</label>
