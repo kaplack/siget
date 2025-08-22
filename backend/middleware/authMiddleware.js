@@ -12,6 +12,7 @@ const User = require("../models/userModel");
 const protect = asyncHandler(async (req, res, next) => {
   // English: Extract token from "Authorization: Bearer <token>"
   const authHeader = req.headers.authorization || "";
+  //console.log("Auth header:", authHeader);
   const token = authHeader.startsWith("Bearer ")
     ? authHeader.split(" ")[1]
     : null;

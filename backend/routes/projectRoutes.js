@@ -5,7 +5,7 @@ const {
   getUserProjects,
   getProject,
   updateProject,
-  delUserProject,
+  annulUserProject,
   getAllProjects,
 } = require("../controllers/projectController");
 
@@ -25,7 +25,11 @@ router.put("/project/:id", protect, updateProject);
 // delete project by ID
 // DELETE /api/projects/delete/:id
 // This route is used to delete an existing project
-router.delete("/delete/:id", protect, delUserProject);
+//router.delete("/delete/:id", protect, delUserProject);
+
+// annul project by ID
+// PATCH /api/projects/delete/:id
+router.patch("/annul/:id", protect, annulUserProject);
 
 // get all projects for admin
 // GET /api/projects/delete/:id

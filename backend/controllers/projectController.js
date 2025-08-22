@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { Op } = require("sequelize");
 const sequelize = require("../config/sequelize");
 const { Project, User, Consecutive } = require("../models");
 const { getNextCodigoOedi } = require("../utils/codigoOediUtils");
@@ -101,10 +102,15 @@ const getUserProjects = async (req, res) => {
   //console.log(req.user);
   try {
     const userId = req.user.id;
+    const includeAnnulled = req.query.includeAnnulled === "true";
+
+    const where = includeAnnulled
+      ? { userId }
+      : { userId, estado: { [Op.ne]: "anulado" } };
 
     const projects = await Project.findAll({
-      where: { userId },
-      atributes: [
+      where,
+      attributes: [
         "id",
         "nombreConvenio",
         "contraparte",
@@ -217,42 +223,18 @@ const updateProject = asyncHandler(async (req, res) => {
   res.status(200).json(project);
 });
 
-// @desc    Delete a project by ID
-// @route   DELETE /api/projects/delete/:id
-// @access  Private
-const delUserProject = asyncHandler(async (req, res) => {
-  const projectId = req.params.id;
-  console.log("proyecto a eliminar: ", projectId);
-
-  const project = await Project.findOne({
-    where: {
-      id: projectId,
-      userId: req.user.id, // ensures user owns the project
-    },
-  });
-
-  if (!project) {
-    res.status(404);
-    console.log("Proyecto no encontrado o no autorizado.");
-    throw new Error("Proyecto no encontrado o no autorizado.");
-  }
-
-  await project.destroy(); // triggers cascade delete
-  console.log("✅ Proyecto eliminado en DB");
-
-  res
-    .status(200)
-    .json({ id: projectId, message: "Proyecto eliminado correctamente." });
-});
-
 // @desc get all projects for admin
 // @route /api/projects/delete/:id
 // @access PRIVATE
 
 const getAllProjects = async (req, res) => {
+  const includeAnnulled = req.query.includeAnnulled === "true";
+  const where = includeAnnulled ? {} : { estado: { [Op.ne]: "anulado" } };
+
   try {
     const projects = await Project.findAll({
-      atributes: [
+      where,
+      attributes: [
         "id",
         "nombreConvenio",
         "contraparte",
@@ -285,6 +267,7 @@ const getAllProjects = async (req, res) => {
           attributes: ["id", "name", "lastName"],
         },
       ],
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json(projects);
   } catch (error) {
@@ -293,11 +276,77 @@ const getAllProjects = async (req, res) => {
   }
 };
 
+// @desc    Delete a project by ID
+// @route   DELETE /api/projects/delete/:id
+// @access  Private
+const delUserProject = asyncHandler(async (req, res) => {
+  const projectId = req.params.id;
+  console.log("proyecto a eliminar: ", projectId);
+
+  const project = await Project.findOne({
+    where: {
+      id: projectId,
+      userId: req.user.id, // ensures user owns the project
+    },
+  });
+
+  if (!project) {
+    res.status(404);
+    console.log("Proyecto no encontrado o no autorizado.");
+    throw new Error("Proyecto no encontrado o no autorizado.");
+  }
+
+  await project.destroy(); // triggers cascade delete
+  console.log("✅ Proyecto eliminado en DB");
+
+  res
+    .status(200)
+    .json({ id: projectId, message: "Proyecto eliminado correctamente." });
+});
+
+/**
+ * Annul a project instead of deleting it (logical delete).
+ * - Keeps codigoOedi history intact.
+ * - Only owner can annul (as per current logic).
+ */
+const annulUserProject = asyncHandler(async (req, res) => {
+  const projectId = req.params.id;
+  //console.log("Proyecto a anular: ", projectId);
+
+  const project = await Project.findOne({
+    where: { id: projectId, userId: req.user.id },
+  });
+
+  if (!project) {
+    res.status(404);
+    throw new Error("Proyecto no encontrado o no autorizado.");
+  }
+
+  if (project.estado === "anulado") {
+    // English: idempotent response if already annulled
+    return res.status(200).json({
+      id: projectId,
+      estado: project.estado,
+      message: "Proyecto ya se encontraba anulado.",
+    });
+  }
+
+  project.estado = "anulado";
+  await project.save();
+
+  res.status(200).json({
+    id: projectId,
+    estado: project.estado,
+    message: "Proyecto anulado correctamente.",
+  });
+});
+
 module.exports = {
   createProject,
   getUserProjects,
   getProject,
   updateProject,
   delUserProject,
+  annulUserProject,
   getAllProjects,
 };

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserProjects,
-  deleteUserProject,
+  annulUserProject,
   getAllProjects,
 } from "../features/projects/projectSlice";
 import { MaterialReactTable } from "material-react-table";
@@ -35,7 +35,7 @@ const ProjectList = () => {
     (state) => state.project
   );
   const { user } = useSelector((state) => state.auth);
-  console.log("User:", user);
+  //console.log("User:", user);
 
   useEffect(() => {
     if (user?.profileId === "admin") {
@@ -64,7 +64,7 @@ const ProjectList = () => {
       )
     ) {
       try {
-        await dispatch(deleteUserProject(id)).unwrap(); // <- espera a que termine
+        await dispatch(annulUserProject(id)).unwrap(); // <- espera a que termine
         dispatch(getUserProjects()); // <- actualiza la lista completa
       } catch (err) {
         console.error("Error al eliminar:", err);

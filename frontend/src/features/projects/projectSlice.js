@@ -118,6 +118,22 @@ export const deleteUserProject = createAsyncThunk(
   }
 );
 
+// Delete a project by id
+export const annulUserProject = createAsyncThunk(
+  "project/annulProject",
+  async (projectId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      //console.log("token: ", token);
+      //console.log("Anulando proyecto con ID:", projectId);
+      const response = await projectService.annulUserProject(projectId, token);
+      return response; // puede retornar projectId si es suficiente
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const projectSlice = createSlice({
   name: "projects",
   initialState,
@@ -222,6 +238,21 @@ export const projectSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload || "Error al eliminar proyecto";
+      })
+
+      // annul project
+      .addCase(annulUserProject.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(annulUserProject.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.message = "Proyecto anulado correctamente";
+      })
+      .addCase(annulUserProject.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || "Error al anular proyecto";
       });
   },
 });
