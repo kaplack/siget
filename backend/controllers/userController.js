@@ -10,7 +10,7 @@ const Profile = require("../models/profileModel");
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  let { name, lastName, email, password, profileId } = req.body;
+  let { name, lastName, direccion, email, password, profileId } = req.body;
 
   if (!profileId) {
     const defaultProfile = await Profile.findOne({
@@ -25,7 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //console.log("Registering user:", req.body);
 
-  if (!name || !lastName || !email || !password) {
+  if (!name || !lastName || !direccion || !email || !password) {
     console.log("Missing fields in registration:", req.body);
     res.status(400);
     throw new Error("Ingresa todos los campos");
@@ -51,10 +51,12 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     lastName,
     email,
+    direccion,
+    profileId,
     password: hashedPassword,
   };
 
-  console.log("Creating user with data:", newUser);
+  //console.log("Creating user with data:", newUser);
   // Crear el usuario
 
   try {
@@ -67,22 +69,6 @@ const registerUser = asyncHandler(async (req, res) => {
   } catch (err) {
     // 🔎 Log everything helpful for debugging
     throw new Error(`Error creating user: ${err.message}`);
-  }
-
-  console.log("User created:", user.dataValues);
-
-  if (user) {
-    res.status(201).json({
-      id: user.id,
-      // name: user.name,
-      // lastName: user.lastName,
-      // email: user.email,
-      // token: generateToken(user.id),
-      // profileId: user.profileId,
-    });
-  } else {
-    res.status(400);
-    throw new Error("No se pudo crear el usuario");
   }
 });
 

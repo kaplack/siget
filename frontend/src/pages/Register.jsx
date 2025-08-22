@@ -11,12 +11,13 @@ function Register() {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
+    direccion: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, lastName, email, password, password2 } = formData;
+  const { name, lastName, email, direccion, password, password2 } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ function Register() {
     const userData = {
       name,
       lastName,
+      direccion,
       email: email.toLowerCase(), // Normalize email to lowercase
       password,
     };
@@ -149,6 +151,31 @@ function Register() {
               placeholder="ejemplo@oedi.gob.pe"
               required
             />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="direccion" className="form-label">
+              Dirección
+            </label>
+            <select
+              className="form-select"
+              id="direccion"
+              name="direccion"
+              value={direccion}
+              onChange={onChange}
+              required
+            >
+              <option value="">-- Selecciona una dirección --</option>
+              <option value="DET">DET - Dirección de Estudios Técnicos</option>
+              <option value="DATEC">
+                DATEC - Dirección de Asistencia Técnica
+              </option>
+              <option value="DEP">
+                DEP - Dirección de Ejecución de Proyectos
+              </option>
+              <option value="OPPM">
+                OPPM - Oficina de Planeamiento y Presupuesto
+              </option>
+            </select>
           </div>
 
           <div className="mb-3">
