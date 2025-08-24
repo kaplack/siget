@@ -158,7 +158,15 @@ const getProject = async (req, res) => {
   const { id } = req.params;
   try {
     // por ejemplo, buscar en base de datos
-    const project = await Project.findByPk(id);
+    const project = await Project.findByPk(id, {
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "lastName"],
+        },
+      ],
+    });
 
     if (!project) {
       return res.status(404).json({ message: "Proyecto no encontrado" });
@@ -341,6 +349,44 @@ const annulUserProject = asyncHandler(async (req, res) => {
   });
 });
 
+/**
+ * Assign project to a user
+ * - Only admin or coordinator can assign
+ * - Updates the userId of the project
+ */
+
+const assignProject = asyncHandler(async (req, res) => {
+  const projectId = req.params.id;
+  const { userId } = req.body;
+
+  if (!userId) {
+    res.status(400);
+    throw new Error("userId is required in the request body.");
+  }
+
+  const project = await Project.findByPk(projectId);
+  if (!project) {
+    res.status(404);
+    throw new Error("Proyecto no encontrado.");
+  }
+
+  // Optionally, verify that the userId exists in the User table
+  const user = await User.findByPk(userId);
+  if (!user) {
+    res.status(404);
+    throw new Error("Usuario no encontrado.");
+  }
+
+  project.userId = userId;
+  await project.save();
+
+  res.status(200).json({
+    id: projectId,
+    userId: project.userId,
+    message: "Proyecto asignado correctamente.",
+  });
+});
+
 module.exports = {
   createProject,
   getUserProjects,
@@ -349,4 +395,5 @@ module.exports = {
   delUserProject,
   annulUserProject,
   getAllProjects,
+  assignProject,
 };

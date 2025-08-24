@@ -27,7 +27,7 @@ const login = async (userData) => {
 // Logout user
 const logout = () => localStorage.removeItem("user");
 
-const getUsers = async (token, thunkAPI) => {
+const getUsers = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

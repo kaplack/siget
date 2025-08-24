@@ -16,6 +16,7 @@ function authorizeProfile(...allowedProfiles) {
   );
 
   return async (req, res, next) => {
+    //console.log("req.user", req.user);
     try {
       // English: must be authenticated first (protect should set req.user)
       if (!req.user) {
@@ -30,7 +31,7 @@ function authorizeProfile(...allowedProfiles) {
       let { profileId, profile } = req.user;
 
       // English: if profile data is missing in req.user, fetch it from DB
-      if (!profileId && !profile) {
+      if (!profileId || !profile) {
         const dbUser = await User.findByPk(req.user.id, {
           include: [
             { model: Profile, as: "profile", attributes: ["id", "name"] },

@@ -75,6 +75,19 @@ const annulUserProject = async (projectId, token) => {
   return response.data;
 };
 
+const assignResponsable = async (projectId, userId, token) => {
+  const config = {
+    headers: { authorization: `Bearer ${token}` },
+  };
+  //console.log("token: ", token);
+  const response = await axios.patch(
+    `${API_URL}/${projectId}/responsable`,
+    { userId },
+    config
+  );
+  return response.data;
+};
+
 const projectService = {
   createProject,
   getUserProjects,
@@ -83,6 +96,7 @@ const projectService = {
   updateProject,
   deleteUserProject,
   annulUserProject,
+  assignResponsable,
 };
 export default projectService;
 export { createProject, getUserProjects };

@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserProjects,
   annulUserProject,
   getAllProjects,
+  assignResponsable,
 } from "../features/projects/projectSlice";
+import { getUsers } from "../features/auth/authSlice";
 import { MaterialReactTable } from "material-react-table";
 import {
   Chip,
@@ -13,6 +15,12 @@ import {
   Typography,
   Tooltip,
   IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {
@@ -25,6 +33,7 @@ import {
   FaEdit,
   FaRegTrashAlt,
   FaRegCheckCircle,
+  FaUserEdit,
 } from "react-icons/fa";
 
 const ProjectList = () => {
@@ -35,13 +44,20 @@ const ProjectList = () => {
     (state) => state.project
   );
   const { user } = useSelector((state) => state.auth);
-  //console.log("User:", user);
+  const { users } = useSelector((state) => state.auth || { users: [] });
+
+  // English: local UI state for the assignment modal
+  const [openAssign, setOpenAssign] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState("");
 
   useEffect(() => {
-    if (user?.profileId === "admin") {
+    if (user?.profile?.name === "admin") {
       dispatch(getAllProjects());
+      dispatch(getUsers());
     } else {
       dispatch(getUserProjects());
+      dispatch(getUsers());
     }
   }, [dispatch, user]);
 
@@ -56,6 +72,15 @@ const ProjectList = () => {
       </>
     );
   if (isError) return <p>Error: {message}</p>;
+
+  // English: refresh list depending on role
+  const refreshProjects = () => {
+    if (user?.profile?.name === "admin") {
+      dispatch(getAllProjects());
+    } else {
+      dispatch(getUserProjects());
+    }
+  };
 
   const handleDelete = async (id) => {
     if (
@@ -72,6 +97,30 @@ const ProjectList = () => {
     }
   };
 
+  // English: open modal and prefill with current responsible if exists
+  const openAssignModal = (row) => {
+    setSelectedProjectId(row.original.id);
+    setSelectedUserId(row.original?.user?.id ?? "");
+    setOpenAssign(true);
+  };
+
+  const onConfirmAssign = async () => {
+    try {
+      await dispatch(
+        assignResponsable({
+          projectId: selectedProjectId,
+          userId: selectedUserId,
+        })
+      ).unwrap();
+      setOpenAssign(false);
+      refreshProjects();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const canAssign = ["admin", "coordinador"].includes(user?.profile?.name);
+
   const columns = [
     {
       accessorKey: "alias",
@@ -83,7 +132,16 @@ const ProjectList = () => {
       header: "Nombre del Convenio",
       size: 350,
     },
-
+    {
+      id: "responsable",
+      header: "Responsable",
+      // English: Provide a computed value so it can be sorted/filtered
+      accessorFn: (row) =>
+        `${row?.user?.name ?? ""} ${row?.user?.lastName ?? ""}`.trim(),
+      size: 160,
+      minSize: 120,
+      maxSize: 250,
+    },
     {
       accessorKey: "estado",
       header: "Estado del convenio",
@@ -144,6 +202,14 @@ const ProjectList = () => {
                 </IconButton>
               </Tooltip>
             )}
+            {/* English: assign responsible */}
+            {canAssign && (
+              <Tooltip title="Asignar responsable">
+                <IconButton size="small" onClick={() => openAssignModal(row)}>
+                  <FaUserEdit size={18} />
+                </IconButton>
+              </Tooltip>
+            )}
             <Tooltip title="Eliminar Convenio">
               <IconButton
                 size="small"
@@ -201,6 +267,42 @@ const ProjectList = () => {
           />
         </div>
       </div>
+      {/* English: Assign Responsible Modal */}
+      <Dialog
+        open={openAssign}
+        onClose={() => setOpenAssign(false)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle>Asignar responsable</DialogTitle>
+        <DialogContent>
+          <Select
+            fullWidth
+            value={selectedUserId}
+            onChange={(e) => setSelectedUserId(e.target.value)}
+            displayEmpty
+          >
+            <MenuItem value="" disabled>
+              Selecciona un usuario
+            </MenuItem>
+            {users?.map((u) => (
+              <MenuItem key={u.id} value={u.id}>
+                {u.name} {u.lastName} — {u?.profile?.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenAssign(false)}>Cancelar</Button>
+          <Button
+            onClick={onConfirmAssign}
+            variant="contained"
+            disabled={!selectedUserId}
+          >
+            Asignar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

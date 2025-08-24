@@ -118,7 +118,7 @@ export const deleteUserProject = createAsyncThunk(
   }
 );
 
-// Delete a project by id
+// Annul a project by id
 export const annulUserProject = createAsyncThunk(
   "project/annulProject",
   async (projectId, thunkAPI) => {
@@ -127,6 +127,26 @@ export const annulUserProject = createAsyncThunk(
       //console.log("token: ", token);
       //console.log("Anulando proyecto con ID:", projectId);
       const response = await projectService.annulUserProject(projectId, token);
+      return response; // puede retornar projectId si es suficiente
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//
+export const assignResponsable = createAsyncThunk(
+  "project/assignResponsable",
+  async ({ projectId, userId }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      //console.log("token: ", token);
+      //console.log("Anulando proyecto con ID:", projectId);
+      const response = await projectService.assignResponsable(
+        projectId,
+        userId,
+        token
+      );
       return response; // puede retornar projectId si es suficiente
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -250,6 +270,21 @@ export const projectSlice = createSlice({
         state.message = "Proyecto anulado correctamente";
       })
       .addCase(annulUserProject.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || "Error al anular proyecto";
+      })
+
+      // assign project
+      .addCase(assignResponsable.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(assignResponsable.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.message = "Proyecto anulado correctamente";
+      })
+      .addCase(assignResponsable.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload || "Error al anular proyecto";
